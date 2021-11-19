@@ -31,9 +31,8 @@ namespace Assets.Scripts.Gameplay
         private void CameraSetup(Transform t)
         {
             _airCraftCamera.Activate();
-            _airCraftCamera.SetParent(t);
-            _airCraftCamera.ResetSettings();
-            _airCraftCamera.SetupCameraSettings();
+            _airCraftCamera.SetParent(_airCraftCamera.FindSlotForCamera(t));
+            _airCraftCamera.SetPositionAndRotaion();
         }
 
         private int GetRandomIndex(Transform[] array) => UnityEngine.Random.Range(0, array.Length);

@@ -15,10 +15,12 @@ namespace Assets.Scripts.Network.Rooms
         private byte _maxPlayers;
         private PhotonView _photonView;
 
+        #region UNITY
         private void Awake()
         {
             _photonView = photonView.GetComponent<PhotonView>();
         }
+        #endregion
 
         #region PUN CALLBACKS
         public override void OnJoinedRoom()

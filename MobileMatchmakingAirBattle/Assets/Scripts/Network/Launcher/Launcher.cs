@@ -5,7 +5,7 @@ namespace Assets.Scripts.Network.Launcher
     public class Launcher : MonoBehaviourPunCallbacks
     {
 
-        #region MONOBEH Callbacks
+        #region UNITY
 
         private void Awake()
         {
@@ -14,12 +14,13 @@ namespace Assets.Scripts.Network.Launcher
 
         #endregion
 
-        #region PUN Callbacks
+        #region PUN CALLBACKS
         #endregion
 
+        #region PUBLIC METHODS
         public void StartMatching() => PhotonNetwork.ConnectUsingSettings();
 
         public void StopMatching() => PhotonNetwork.Disconnect();
-
+        #endregion
     }
 }

@@ -28,6 +28,8 @@ namespace Assets.Scripts.Network.Lobby
                 settings.ExpandMMRBoundaries(UtilsConst.Difference);
             }
 
+            //reset MMR to initial
+
             JoinRandomRoom();
         }
 

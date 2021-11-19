@@ -49,7 +49,7 @@ namespace Assets.Scripts.Network.Lobby
         private RoomCreator _roomCreator;
         #endregion
 
-        #region MONOBEH CALLBACKS
+        #region UNITY
         private void Awake()
         {
             _roomListUpdater = new RoomListUpdater();
@@ -78,7 +78,6 @@ namespace Assets.Scripts.Network.Lobby
                  { UtilsConst.UpperBound, _settings.MMR + UtilsConst.Difference }
              };
             #endregion
-
         }
 
         public override void OnLeftLobby() => MessagesUtilities.LeftLobbyMessage();
@@ -89,13 +88,15 @@ namespace Assets.Scripts.Network.Lobby
 
             _rooms = _roomListUpdater.UpdateCachedRoomList(roomList, _rooms);
 
-            if (_rooms != null && _rooms.Count != 0)
+            if (_rooms != null && _rooms.Count > 0)
                 _matchMaker.MatchPlayers(_rooms, _settings);
             else
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message) => _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
+
+        public override void OnCreatedRoom() { }
 
         public override void OnCreateRoomFailed(short returnCode, string message) => print($"{returnCode} / Message: {message}");
 
