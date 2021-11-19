@@ -7,7 +7,7 @@ namespace Assets.Scripts.Utils
         public const string LowerBound = "low";
         public const string UpperBound = "up";
 
-        public const string Battle = "TestBattleField";
+        public const string Battle = "Battle";
 
         public const int Difference = 125;
         public const int SearchDepth = 5;
