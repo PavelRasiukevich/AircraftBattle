@@ -10,25 +10,23 @@ namespace Assets.Scripts.Network.Lobby
     {
         public void MatchPlayers(Dictionary<string, RoomInfo> avaliableRooms, PlayerSettings settings)
         {
-
-            for (int t = UtilsConst.SearchDepth - 1; t >= 0; t--)
+            for (int t = UtilsConst.SearchWidth - 1; t >= 0; t--)
             {
                 foreach (var value in avaliableRooms.Values)
                 {
                     var room = value;
 
-                    if (CheckRoomConnectionConditions(room, settings))
-                    {
-                        settings.ResetChangedMMR();
-                        PhotonNetwork.JoinRoom(room.Name);
-                        return;
-                    }
+                    if (!CheckRoomConnectionConditions(room, settings)) continue;
+
+                    settings.ResetChangedMMR();
+                    PhotonNetwork.JoinRoom(room.Name);
+                    return;
                 }
 
                 settings.ExpandMMRBoundaries(UtilsConst.Difference);
             }
 
-            //reset MMR to initial
+            //reset MMR to initial?
 
             JoinRandomRoom();
         }

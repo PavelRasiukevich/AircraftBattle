@@ -2,6 +2,7 @@ using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +28,7 @@ namespace Assets.Scripts.Network.Rooms
         {
             MessagesUtilities.JoinRoomMessage();
 
-            GetAllPlayersInCurrentRoom();
+            _playersInRoom = GetAllPlayersInCurrentRoom();
             _maxPlayers = PhotonNetwork.CurrentRoom.MaxPlayers;
         }
 
@@ -71,10 +72,18 @@ namespace Assets.Scripts.Network.Rooms
         #region PRIVATE METHODS
         private void ClearListOfPlayers() => _playersInRoom.Clear();
 
-        private void GetAllPlayersInCurrentRoom()
+        private List<Player> GetAllPlayersInCurrentRoom()
         {
-            _playersInRoom = new List<Player>();
-            _playersInRoom.AddRange(PhotonNetwork.PlayerList);
+            #region Cached Values
+            Player[] cachedPlayersArray = PhotonNetwork.PlayerList;
+            #endregion
+
+            var players = new List<Player>();
+
+            foreach (var player in cachedPlayersArray)
+                players.Add(player);
+
+            return players;
         }
 
         private void CheckForExtraPlayers(List<Player> players)

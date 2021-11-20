@@ -15,6 +15,9 @@ namespace Assets.Scripts.Network.Lobby
                 CustomRoomProperties = _customPropeties.PTSRange,
                 IsOpen = true,
                 IsVisible = true,
+                PlayerTtl = 12000,
+                EmptyRoomTtl = 5000,
+                // CleanupCacheOnLeave = false
             };
 
             PhotonNetwork.CreateRoom(null, roomOptions);

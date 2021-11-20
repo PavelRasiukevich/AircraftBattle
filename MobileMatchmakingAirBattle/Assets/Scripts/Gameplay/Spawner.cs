@@ -28,6 +28,7 @@ namespace Assets.Scripts.Gameplay
             CameraSetup(p.transform);
         }
 
+        #region PRIVATE METHODS
         private void CameraSetup(Transform t)
         {
             _airCraftCamera.Activate();
@@ -45,5 +46,12 @@ namespace Assets.Scripts.Gameplay
 
             return _spawnPoint[index];
         }
+                        
+        private object[] GetInitData()
+        {
+            return new object[1];
+        }
+
+        #endregion
     }
 }
