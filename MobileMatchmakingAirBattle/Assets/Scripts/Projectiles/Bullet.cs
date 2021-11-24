@@ -17,21 +17,17 @@ namespace Assets.Scripts.Projectiles
             print(data[0]);
         }
 
+        
+
         private void Awake() => Destroy(this.gameObject, 5.0f);
 
-        private void Update() 
+        private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                TestStuff();
             }
 
-        transform.position += _speed * Time.deltaTime * transform.forward;
-        }
-
-        private void TestStuff()
-        {
-            
+            transform.position += _speed * Time.deltaTime * transform.forward;
         }
     }
 }

@@ -10,6 +10,8 @@ namespace Assets.Scripts.Network.Launcher
         private void Awake()
         {
             PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.SendRate = 20;
+            PhotonNetwork.SerializationRate = 10;
         }
 
         #endregion
