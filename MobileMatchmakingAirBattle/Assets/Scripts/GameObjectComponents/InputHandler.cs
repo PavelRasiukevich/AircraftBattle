@@ -7,7 +7,7 @@ namespace Assets.Scripts.GameObjectComponents
         public float Horizontal { get; private set; }
         public float Vertical { get; private set; }
 
-        public Vector3 Velocity { get; set; }
+        public Vector3 PlayersInput { get; private set; }
 
         private void Update()
         {
@@ -19,7 +19,9 @@ namespace Assets.Scripts.GameObjectComponents
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
 
-            //Velocity = //todo velocity
+            //Test version
+            //optimize for reliable controlls
+            PlayersInput = new Vector3(Horizontal, 0, Vertical);
         }
     }
 }

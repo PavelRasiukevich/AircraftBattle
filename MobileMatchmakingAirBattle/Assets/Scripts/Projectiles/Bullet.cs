@@ -1,33 +1,36 @@
-using Photon.Pun;
-using System;
+using Assets.Scripts.Interfaces;
+using Photon.Realtime;
 using UnityEngine;
 
 namespace Assets.Scripts.Projectiles
 {
-    public class Bullet : MonoBehaviour, IPunInstantiateMagicCallback
+    public class Bullet : MonoBehaviour
     {
+        public Player Owner { get; set; }
+        public float Lag { get; set; }
 
         [SerializeField] private int _speed;
 
-        public void OnPhotonInstantiate(PhotonMessageInfo info)
+        private Rigidbody _rigidBody;
+
+        private void Awake()
         {
-            print($"{info.Sender.ActorNumber}");
-            info.Sender.TagObject = this.gameObject;
-            var data = info.photonView.InstantiationData;
-            print(data[0]);
+            _rigidBody = GetComponent<Rigidbody>();
+
+            Destroy(gameObject, 5.0f);
         }
 
-        
-
-        private void Awake() => Destroy(this.gameObject, 5.0f);
-
-        private void Update()
+        private void FixedUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-            }
+            _rigidBody.AddRelativeForce(Vector3.forward * _speed, ForceMode.Impulse);
+        }
 
-            transform.position += _speed * Time.deltaTime * transform.forward;
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.GetComponent<IDamageable>() != null)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

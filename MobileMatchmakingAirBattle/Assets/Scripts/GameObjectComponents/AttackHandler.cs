@@ -1,29 +1,22 @@
 using Assets.Scripts.Projectiles;
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
 {
     public class AttackHandler : MonoBehaviour
     {
-        [SerializeField] private Transform _fireSpot;
         [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private Transform _fireSpot;
 
-        private PhotonView _photonView;
-
-        private void Awake()
-        {
-            _photonView = GetComponent<PhotonView>();
-        }
+        public PhotonView PhotonView { get; set; }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                if (_photonView.IsMine)
-                    _photonView.RPC(nameof(Attack), RpcTarget.All);
+                if (PhotonView.IsMine)
+                    PhotonView.RPC(nameof(Attack), RpcTarget.All);
             }
         }
 
@@ -32,8 +25,12 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
-            print($"Info -> {info}");
-            var b = Instantiate(_bulletPrefab, _fireSpot.position, Quaternion.identity);
+           // float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTimestamp));
+
+            // info.photonView.Owner
+            var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
+            bullet.Owner = PhotonView.Owner;
+            //bullet.Lag = lag;
         }
 
         #endregion

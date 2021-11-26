@@ -1,45 +1,119 @@
 fileFormatVersion: 2
 guid: c98e3e55370b6eb4baa9896fa03e8926
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: Circle.003
-    100004: Cube.007
-    100006: Cube.008
-    100008: Cylinder.027
-    100010: Plane
-    400000: //RootNode
-    400002: Circle.003
-    400004: Cube.007
-    400006: Cube.008
-    400008: Cylinder.027
-    400010: Plane
-    2100000: DarkRed
-    2100002: Brown
-    2100004: DarkBrown
-    2100006: Yellow
-    2100008: Blue
-    2100010: LightGrey
-    2100012: Grey
-    2100014: DarkGrey
-    2100016: LightBrown
-    2100018: White
-    2300000: Circle.003
-    2300002: Cube.007
-    2300004: Cube.008
-    2300006: Cylinder.027
-    2300008: Plane
-    3300000: Circle.003
-    3300002: Cube.007
-    3300004: Cube.008
-    3300006: Cylinder.027
-    3300008: Plane
-    4300000: Cylinder.027
-    4300002: Plane
-    4300004: Cube.007
-    4300006: Cube.008
-    4300008: Circle.003
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: Circle.003
+  - first:
+      1: 100004
+    second: Cube.007
+  - first:
+      1: 100006
+    second: Cube.008
+  - first:
+      1: 100008
+    second: Cylinder.027
+  - first:
+      1: 100010
+    second: Plane
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: Circle.003
+  - first:
+      4: 400004
+    second: Cube.007
+  - first:
+      4: 400006
+    second: Cube.008
+  - first:
+      4: 400008
+    second: Cylinder.027
+  - first:
+      4: 400010
+    second: Plane
+  - first:
+      21: 2100000
+    second: DarkRed
+  - first:
+      21: 2100002
+    second: Brown
+  - first:
+      21: 2100004
+    second: DarkBrown
+  - first:
+      21: 2100006
+    second: Yellow
+  - first:
+      21: 2100008
+    second: Blue
+  - first:
+      21: 2100010
+    second: LightGrey
+  - first:
+      21: 2100012
+    second: Grey
+  - first:
+      21: 2100014
+    second: DarkGrey
+  - first:
+      21: 2100016
+    second: LightBrown
+  - first:
+      21: 2100018
+    second: White
+  - first:
+      23: 2300000
+    second: Circle.003
+  - first:
+      23: 2300002
+    second: Cube.007
+  - first:
+      23: 2300004
+    second: Cube.008
+  - first:
+      23: 2300006
+    second: Cylinder.027
+  - first:
+      23: 2300008
+    second: Plane
+  - first:
+      33: 3300000
+    second: Circle.003
+  - first:
+      33: 3300002
+    second: Cube.007
+  - first:
+      33: 3300004
+    second: Cube.008
+  - first:
+      33: 3300006
+    second: Cylinder.027
+  - first:
+      33: 3300008
+    second: Plane
+  - first:
+      43: 4300000
+    second: Cylinder.027
+  - first:
+      43: 4300002
+    second: Plane
+  - first:
+      43: 4300004
+    second: Cube.007
+  - first:
+      43: 4300006
+    second: Cube.008
+  - first:
+      43: 4300008
+    second: Circle.003
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -92,7 +166,7 @@ ModelImporter:
       name: Yellow
     second: {fileID: 2100000, guid: 24620a2f936eafd4f9aa143575733c2d, type: 2}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 0
     materialLocation: 1
@@ -125,25 +199,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
-    hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -152,10 +233,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -165,13 +246,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 0.01
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 0
   humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

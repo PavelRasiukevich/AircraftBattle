@@ -1,5 +1,5 @@
 using Assets.Scripts.GameObjectComponents;
-using Assets.Scripts.Utils;
+using Assets.Scripts.Interfaces;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
@@ -8,9 +8,9 @@ using UnityEngine;
 namespace Assets.Scripts.AirCrafts
 {
     [DisallowMultipleComponent]
-    public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
+    public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable
     {
-        [SerializeField] private float _speed;
+        [SerializeField] private AircraftDataModel _dataModel;
 
         #region COMPONENTS
 
@@ -20,6 +20,7 @@ namespace Assets.Scripts.AirCrafts
         private LagCompensator _lagCompensator;
         private PhotonView _photonView;
         private Rigidbody _rigidBody;
+        private AircraftCollisionDetector _collisionDetector;
 
         #endregion
 
@@ -30,54 +31,44 @@ namespace Assets.Scripts.AirCrafts
             //to actornumber
         }
 
+        #region UNITY
+
         private void Awake()
         {
+
             _inputHandler = GetComponent<InputHandler>();
-            _moveHandler = new MoveHandler();
+            _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _lagCompensator = GetComponent<LagCompensator>();
             _photonView = GetComponent<PhotonView>();
             _rigidBody = GetComponent<Rigidbody>();
+            _collisionDetector = GetComponent<AircraftCollisionDetector>();
 
-            _lagCompensator.Init(_rigidBody);
-        }
+            _lagCompensator.Rigidbody = _rigidBody;
+            _attackHandler.PhotonView = _photonView;
+            _collisionDetector.AirCraft = this;
 
-        private void Update()
-        {
         }
 
         private void FixedUpdate()
         {
-            
-
             if (_photonView.IsMine)
-                _moveHandler.Move(_rigidBody, _inputHandler);
-            else
-                _moveHandler.MoveRemote(_rigidBody, _lagCompensator.NetworkPosition);
+                _moveHandler.MoveWithVelocity(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+
+           /* else
+                _moveHandler.MoveCompensate(_rigidBody, _lagCompensator.NetworkPosition);*/
         }
 
-        private object[] GetInitData()
-        {
-            object[] data = new object[1];
-            data[0] = PhotonNetwork.LocalPlayer.UserId;
-            return data;
-        }
-
-        #region TEST
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
-        {
-            base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-        }
-
-        private void TestStuff()
-        {
-            print(_photonView.ViewID);
-            print(_photonView.OwnerActorNr);
-            print(_photonView.ControllerActorNr);
-            print(_photonView.CreatorActorNr);
-            _photonView.TransferOwnership(2001);
-        }
         #endregion
 
+        public void TakeDamage(int value, Player owner)
+        {
+            _dataModel.CurrentHp = _dataModel.CurrentHp <= value ? 0 : _dataModel.CurrentHp - value;
+
+            if (_dataModel.CurrentHp != 0) return;
+
+            print($"Player: {_photonView.Owner.ActorNumber} destroyed.");
+            print($"Add points to player: {owner.ActorNumber}.");
+        }
     }
 }
