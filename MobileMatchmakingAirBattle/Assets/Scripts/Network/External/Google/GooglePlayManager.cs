@@ -15,6 +15,7 @@ namespace Network.External.Google
 
         private void ActivateGoogle()
         {
+#if UNITY_ANDROID || PLATFORM_ANDROID
             PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
                 .AddOauthScope("profile")
                 .RequestServerAuthCode(false)
@@ -24,6 +25,7 @@ namespace Network.External.Google
             PlayGamesPlatform.InitializeInstance(config);
             PlayGamesPlatform.DebugLogEnabled = true;
             PlayGamesPlatform.Activate();
+#endif
         }
 
         public void SignIn()
