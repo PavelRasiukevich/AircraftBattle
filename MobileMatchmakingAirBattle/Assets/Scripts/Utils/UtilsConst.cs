@@ -13,5 +13,14 @@ namespace Assets.Scripts.Utils
         public const int SearchWidth = 5;
 
         public const string UICameraBattle = "UICameraBattle";
+
+        /*
+         * PlayFab
+         */
+        public static string TitleId = "36AB7";
+
+        /*
+         *  Google Play
+         */
     }
 }
