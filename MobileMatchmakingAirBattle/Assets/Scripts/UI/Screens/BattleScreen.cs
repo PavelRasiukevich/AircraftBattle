@@ -1,5 +1,6 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
+using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens
 {

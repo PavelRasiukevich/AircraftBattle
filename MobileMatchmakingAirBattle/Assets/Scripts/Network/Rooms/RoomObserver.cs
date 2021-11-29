@@ -1,8 +1,7 @@
+using System.Collections.Generic;
 using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
