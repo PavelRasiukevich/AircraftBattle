@@ -1,5 +1,5 @@
-using Assets.Scripts.Utils;
 using UnityEngine;
+using Utils.Enums;
 
 namespace Assets.Scripts.Core
 {

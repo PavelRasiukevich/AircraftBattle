@@ -3,6 +3,7 @@ using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using Utils.Enums;
 
 namespace Assets.Scripts.Network.MasterServer
 {
