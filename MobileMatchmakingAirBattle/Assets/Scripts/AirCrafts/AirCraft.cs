@@ -35,7 +35,7 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-
+            
             _inputHandler = GetComponent<InputHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
