@@ -39,12 +39,10 @@ namespace Assets.Scripts.AirCrafts
             _inputHandler = GetComponent<InputHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
-            _lagCompensator = GetComponent<LagCompensator>();
             _photonView = GetComponent<PhotonView>();
             _rigidBody = GetComponent<Rigidbody>();
             _collisionDetector = GetComponent<AircraftCollisionDetector>();
 
-            _lagCompensator.Rigidbody = _rigidBody;
             _attackHandler.PhotonView = _photonView;
             _collisionDetector.AirCraft = this;
 
