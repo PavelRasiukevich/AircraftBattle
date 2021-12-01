@@ -1,3 +1,4 @@
+using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
 using Photon.Realtime;
 using UnityEngine;
@@ -6,15 +7,20 @@ namespace Assets.Scripts.Projectiles
 {
     public class Bullet : MonoBehaviour
     {
-        public Player Owner { get; set; }
-        public float Lag { get; set; }
+        #region DATA
+        [SerializeField] private ProjectileDataModel _bulletDataModel;
+        #endregion
 
-        [SerializeField] private int _speed;
-
+        #region COMPONENTS
         private Rigidbody _rigidBody;
+        #endregion
+
+        public ProjectileDataModel BulletDataModel => _bulletDataModel;
 
         private void Awake()
         {
+            BulletDataModel.Init();
+
             _rigidBody = GetComponent<Rigidbody>();
 
             Destroy(gameObject, 5.0f);
@@ -22,7 +28,8 @@ namespace Assets.Scripts.Projectiles
 
         private void FixedUpdate()
         {
-            _rigidBody.AddRelativeForce(Vector3.forward * _speed, ForceMode.Impulse);
+            _rigidBody.AddRelativeForce(Vector3.forward * BulletDataModel.Speed, ForceMode.Impulse);
+            _rigidBody.velocity += _rigidBody.velocity * BulletDataModel.Lag;
         }
 
         private void OnCollisionEnter(Collision collision)

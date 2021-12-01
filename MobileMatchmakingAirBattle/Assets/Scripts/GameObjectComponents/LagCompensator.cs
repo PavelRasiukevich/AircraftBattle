@@ -24,7 +24,7 @@ namespace Assets.Scripts.GameObjectComponents
                 Rigidbody.rotation = (Quaternion)stream.ReceiveNext();
                 Rigidbody.velocity = (Vector3)stream.ReceiveNext();
 
-                float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTimestamp));
+                float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTime));
                 NetworkPosition += Rigidbody.velocity * lag;
             }
         }

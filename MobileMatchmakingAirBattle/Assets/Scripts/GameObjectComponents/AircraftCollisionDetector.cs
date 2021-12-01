@@ -14,7 +14,7 @@ namespace Assets.Scripts.GameObjectComponents
 
             if(bullet != null)
             {
-                AirCraft.TakeDamage(10, bullet.Owner);
+                AirCraft.TakeDamage(bullet.BulletDataModel.Damage, bullet.BulletDataModel.Owner);
             }
         }
     }

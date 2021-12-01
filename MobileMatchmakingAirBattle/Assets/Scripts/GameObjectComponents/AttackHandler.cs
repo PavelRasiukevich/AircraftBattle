@@ -25,12 +25,12 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
-           // float lag = Mathf.Abs((float)(PhotonNetwork.Time - info.SentServerTimestamp));
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
-            // info.photonView.Owner
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
-            bullet.Owner = PhotonView.Owner;
-            //bullet.Lag = lag;
+
+            bullet.BulletDataModel.Owner = PhotonView.Owner;
+            bullet.BulletDataModel.Lag = Mathf.Abs(lag);
         }
 
         #endregion

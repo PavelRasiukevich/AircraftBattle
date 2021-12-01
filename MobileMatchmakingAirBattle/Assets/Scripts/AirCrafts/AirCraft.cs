@@ -17,7 +17,6 @@ namespace Assets.Scripts.AirCrafts
         private InputHandler _inputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
-        private LagCompensator _lagCompensator;
         private PhotonView _photonView;
         private Rigidbody _rigidBody;
         private AircraftCollisionDetector _collisionDetector;
@@ -35,7 +34,6 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-            
             _inputHandler = GetComponent<InputHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
@@ -45,16 +43,13 @@ namespace Assets.Scripts.AirCrafts
 
             _attackHandler.PhotonView = _photonView;
             _collisionDetector.AirCraft = this;
-
         }
 
         private void FixedUpdate()
         {
-            if (_photonView.IsMine)
-                _moveHandler.MoveWithVelocity(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+            if (!_photonView.IsMine) return;
 
-           /* else
-                _moveHandler.MoveCompensate(_rigidBody, _lagCompensator.NetworkPosition);*/
+            _moveHandler.MoveWithVelocity(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
         }
 
         #endregion

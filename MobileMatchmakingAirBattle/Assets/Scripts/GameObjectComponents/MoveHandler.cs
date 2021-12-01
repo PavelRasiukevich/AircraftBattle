@@ -10,7 +10,7 @@ namespace Assets.Scripts.GameObjectComponents
         /// <param name="remoteBody"></param>
         /// <param name="networkPosition"></param>
         public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition) 
-            => remoteBody.position = Vector3.MoveTowards(remoteBody.position, networkPosition, 0);
+            => remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
 
         public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
             => bodyToMove.velocity = velocityVector * speed;
