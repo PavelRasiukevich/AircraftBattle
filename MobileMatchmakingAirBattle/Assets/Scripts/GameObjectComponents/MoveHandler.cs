@@ -12,11 +12,15 @@ namespace Assets.Scripts.GameObjectComponents
         public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition) 
             => remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
 
-        public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
+        public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed) 
             => bodyToMove.velocity = velocityVector * speed;
-        
+
         public void MoveWithInputAxes(Rigidbody bodyToMove, InputHandler handler)
             => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
 
+        public void MoveWithJoystick()
+        {
+
+        }
     }
 }

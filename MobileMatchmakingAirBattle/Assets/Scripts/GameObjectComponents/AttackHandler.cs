@@ -25,6 +25,10 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
+            var timeOnServer = PhotonNetwork.Time;
+
+            print($"ServerTime: {timeOnServer}");
+
             float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);

@@ -7,9 +7,10 @@ namespace Assets.Scripts.Network.Launcher
     {
         #region UNITY
 
-        private void Awake()
+        protected override void Awake()
         {
             base.Awake();
+
             PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.SendRate = 20;
             PhotonNetwork.SerializationRate = 10;
