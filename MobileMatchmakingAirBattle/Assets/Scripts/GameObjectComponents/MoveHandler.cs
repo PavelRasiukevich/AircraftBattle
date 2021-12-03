@@ -18,9 +18,15 @@ namespace Assets.Scripts.GameObjectComponents
         public void MoveWithInputAxes(Rigidbody bodyToMove, InputHandler handler)
             => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
 
-        public void MoveWithJoystick()
+        public void MoveWithJoystickSimple(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
         {
+            print(velocityVector);
+            bodyToMove.velocity = velocityVector * speed;
+            print(bodyToMove.velocity);
+        }
 
+        public void MoveWithJoystickSimulated()
+        {
         }
     }
 }

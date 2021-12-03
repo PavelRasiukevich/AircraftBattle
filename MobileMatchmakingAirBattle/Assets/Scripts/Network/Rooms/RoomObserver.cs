@@ -29,6 +29,21 @@ namespace Assets.Scripts.Network.Rooms
 
             _playersInRoom = GetAllPlayersInCurrentRoom();
             _maxPlayers = PhotonNetwork.CurrentRoom.MaxPlayers;
+
+            #region DELETE AFTER TEST
+            if (_playersInRoom.Count < _maxPlayers) return;
+
+            _button.interactable = false;
+
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+
+            CheckForExtraPlayers(_playersInRoom);
+
+            if (!PhotonNetwork.IsMasterClient) return;
+
+            PhotonNetwork.LoadLevel(UtilsConst.Battle);
+            #endregion
         }
 
         public override void OnLeftRoom()

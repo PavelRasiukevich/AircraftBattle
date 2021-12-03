@@ -49,7 +49,7 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
 
-            _moveHandler.MoveWithVelocity(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+            _moveHandler.MoveWithJoystickSimple(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
         }
 
         #endregion

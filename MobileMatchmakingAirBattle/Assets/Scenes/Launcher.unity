@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialMMR: 500
   _customRoomProperties:
-    _maxPlayers: 2
+    _maxPlayers: 1
     _playerMMR: 500
 --- !u!1 &1875038986
 GameObject:

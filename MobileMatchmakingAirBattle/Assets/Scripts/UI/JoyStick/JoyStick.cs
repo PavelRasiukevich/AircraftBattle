@@ -8,50 +8,30 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private InnerCircle _innerCircle;
         [SerializeField] private Transform _center;
 
-        [SerializeField] private Vector2 position;
-        [SerializeField] private Vector2 offset;
-        [SerializeField] Vector2 direction;
+        public static Vector3 VVN => InnerCircle.VelocityVectorNorm;
+
+        public OuterCircle OuterCircle => _outerCircle;
+        public InnerCircle InnerCircle => _innerCircle;
+        public Transform Center => _center;
 
         private Camera _camera;
-
-        public bool Touched { get; set; }
-
-        public Vector2 ScreenPixelsPoint { get; set; }
-        public Vector2 WorldPoints { get; set; }
 
         private void Awake()
         {
             _camera = GameObject.FindGameObjectWithTag("UICameraBattle").GetComponent<Camera>();
+
+            _innerCircle.Camera = _camera;
+            _innerCircle.Origin = _center;
+
+            _innerCircle.OuterCircleRadius = CalculateOuterCircleRadius(_outerCircle.transform);
+            _innerCircle.InnerCircleRadius = CalculateOuterCircleRadius(_innerCircle.transform);
+
         }
 
-        private void Update()
+        private float CalculateOuterCircleRadius(Transform circle)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                Touched = true;
-
-                ScreenPixelsPoint = Input.mousePosition;
-                WorldPoints = _camera.ScreenToWorldPoint(ScreenPixelsPoint);
-            }
-            else
-            {
-                Touched = false;
-            }
-
-
-
-            if (Touched)
-            {
-                offset = WorldPoints - (Vector2)_center.transform.position;
-                direction = offset.normalized;
-
-                _innerCircle.transform.position = new Vector3(_center.transform.position.x + direction.x, _center.transform.position.y + direction.y, _camera.nearClipPlane + 1.0f);
-
-                print($"World Coordinates: {WorldPoints}");
-                print($"Offset: {offset}");
-                print($"Direction: {direction.normalized}");
-                print($"InnerCirclePosition After : {_innerCircle.transform.position}");
-            }
+            var w = circle.GetComponent<RectTransform>().rect.width;
+            return w / w;
         }
     }
 }
