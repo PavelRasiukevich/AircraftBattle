@@ -3,14 +3,12 @@ using Network.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils;
 using Utils.Enums;
 
 namespace UI.Screens
 {
     public class LoadScreen : BaseScreen
     {
-        [SerializeField] private Rotator _loadIcon;
         [SerializeField] private TMP_Text _authErrorText;
         [SerializeField] private Button _exitGameButton;
         [SerializeField] private Button _shareScreenButton;
@@ -19,7 +17,7 @@ namespace UI.Screens
 
         #region UNITY
 
-        private void Start() => ExternalServicesManager.Instance.Authentication();
+        private void Start() => ExternalServices.Instance.Authentication();
 
         #endregion
 
@@ -27,7 +25,7 @@ namespace UI.Screens
 
         public void GoogleAuthError(string errorText)
         {
-            _loadIcon.gameObject.SetActive(false);
+            PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _shareScreenButton.gameObject.SetActive(true);
             _exitGameButton.gameObject.SetActive(true);
             _authErrorText.gameObject.SetActive(true);

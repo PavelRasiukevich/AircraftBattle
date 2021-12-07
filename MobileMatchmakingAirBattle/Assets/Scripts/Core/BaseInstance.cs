@@ -13,7 +13,7 @@ namespace Core
 
         protected override void Awake()
         {
-      //      if (Instance == null)
+            if (Instance == null)
                 Instance = this as T;
         }
     }

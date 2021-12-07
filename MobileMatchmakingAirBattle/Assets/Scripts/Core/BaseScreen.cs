@@ -10,5 +10,7 @@ namespace Assets.Scripts.Core
         public void ShowScreen() => gameObject.SetActive(true);
 
         public void HideScreen() => gameObject.SetActive(false);
+        
+        public virtual BaseScreen Config(LeaderboardType leaderboardType) => this;
     }
 }
