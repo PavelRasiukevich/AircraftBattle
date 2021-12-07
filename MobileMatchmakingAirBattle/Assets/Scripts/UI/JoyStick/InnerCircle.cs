@@ -8,7 +8,6 @@ namespace Assets.Scripts.UI.JoyStick
     {
         public Transform Origin { get; set; }
         public float Radius { get; set; }
-        public float InnerCircleRadius { get; set; }
 
         public static Vector3 VelocityVectorNorm { get; set; }
 
@@ -26,22 +25,31 @@ namespace Assets.Scripts.UI.JoyStick
 
         private void Update()
         {
-            delta = Vector3.Distance(transform.position, Origin.position) / Radius;
-            VelocityVectorNorm = (transform.position - Origin.position).normalized * delta;
+            if (!IsJoystickTouching)
+            {
+                delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
+            }
+
+            VelocityVectorNorm = (transform.position - transform.parent.position).normalized * delta;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             var pixelScreenPosition = Input.mousePosition;
 
-            print($"Inner Circle Position IN PIXELS: {pixelScreenPosition}");
-
-
             if (IsJoystickTouching)
             {
                 transform.position = pixelScreenPosition;
 
-              //  print($"Inner Circle Position: {transform.position}");
+                var distance = Vector3.Distance(transform.position, transform.parent.position);
+
+                if (distance > Radius)
+                {
+                    var diff = transform.position - transform.parent.position;
+                    diff = (diff * Radius) / distance;
+
+                    transform.position = transform.parent.position + diff;
+                }
             }
         }
 
@@ -55,11 +63,11 @@ namespace Assets.Scripts.UI.JoyStick
         {
             while (true)
             {
-                transform.position = Vector3.Lerp(transform.position, Origin.position, Time.deltaTime * 10.0f);
+                transform.position = Vector3.Lerp(transform.position, transform.parent.position, Time.deltaTime * 10.0f);
 
-                if (Vector3.Distance(Origin.position, transform.position) < 0.1f)
+                if (Vector3.Distance(transform.parent.position, transform.position) < 0.1f)
                 {
-                    transform.position = Origin.position;
+                    transform.position = transform.parent.position;
                     StopCoroutine(nameof(ReturnToOriginRoutine));
                 }
                 yield return null;

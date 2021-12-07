@@ -21,11 +21,11 @@ namespace Assets.Scripts.AirCrafts
 
         private void SetOverlayCameraToStack()
         {
-            GetComponent<UniversalAdditionalCameraData>()
+           /* GetComponent<UniversalAdditionalCameraData>()
                 .cameraStack
                 .Add(GameObject
                 .FindWithTag(UtilsConst.UICameraBattle)
-                .GetComponent<Camera>());
+                .GetComponent<Camera>());*/
         }
     }
 }

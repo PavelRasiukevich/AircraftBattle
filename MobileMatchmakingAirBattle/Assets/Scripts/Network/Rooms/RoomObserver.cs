@@ -9,8 +9,6 @@ namespace Assets.Scripts.Network.Rooms
 {
     public class RoomObserver : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private Button _button;
-
         private List<Player> _playersInRoom;
         private byte _maxPlayers;
         private PhotonView _photonView;
@@ -32,8 +30,6 @@ namespace Assets.Scripts.Network.Rooms
 
             #region DELETE AFTER TEST
             if (_playersInRoom.Count < _maxPlayers) return;
-
-            _button.interactable = false;
 
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;
@@ -59,8 +55,6 @@ namespace Assets.Scripts.Network.Rooms
             _playersInRoom.Add(newPlayer);
 
             if (_playersInRoom.Count < _maxPlayers) return;
-
-            _button.interactable = false;
 
             PhotonNetwork.CurrentRoom.IsOpen = false;
             PhotonNetwork.CurrentRoom.IsVisible = false;

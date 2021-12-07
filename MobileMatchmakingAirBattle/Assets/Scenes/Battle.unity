@@ -951,10 +951,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 313931245}
     m_Modifications:
-    - target: {fileID: 3834229824220890775, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1754946005}
     - target: {fileID: 8298477127153294810, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
       propertyPath: m_Name
       value: BattleScreen
@@ -1002,14 +998,6 @@ PrefabInstance:
     - target: {fileID: 8298477127153294811, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8447989829306224446, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8447989829306224446, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6bc1c86ecb9cd149a6dab488a19964e, type: 3}
