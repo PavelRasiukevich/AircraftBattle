@@ -7,6 +7,10 @@ namespace Assets.Scripts.UI.Screens
     {
         public override ScreenType Type => ScreenType.Shop;
 
+        #region OnClick
+
         public void Exit() => ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
+
+        #endregion
     }
 }

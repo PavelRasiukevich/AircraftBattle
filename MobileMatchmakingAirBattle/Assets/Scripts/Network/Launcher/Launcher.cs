@@ -17,7 +17,7 @@ namespace Assets.Scripts.Network.Launcher
 
         #endregion
 
-        #region PUBLIC METHODS
+        #region PUBLIC
 
         public void StartMatching() => PhotonNetwork.ConnectUsingSettings();
 

@@ -1,5 +1,6 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Network.Launcher;
+using Network.External;
 using UnityEngine;
 using Utils.Enums;
 
@@ -21,7 +22,13 @@ namespace UI.Screens.MainMenu
 
         #region OnClick
 
-        public void SwitchToLeaderboarScreen() => ScreenHolder.SetCurrentScreen(ScreenType.Leaderboard).ShowScreen();
+        public void SwitchToLeaderboardScreen()
+        {
+            if (!ExternalServices.Instance.PlayFabAuthenticate.IsReady)
+                PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config("Need PlayFab!").Show();
+            else
+                ScreenHolder.SetCurrentScreen(ScreenType.Leaderboard).ShowScreen();
+        }
 
         public void SwitchToOptionsScreen() => ScreenHolder.SetCurrentScreen(ScreenType.Options).ShowScreen();
 

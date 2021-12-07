@@ -1,31 +1,22 @@
-﻿using PlayFab;
+﻿using System.Collections.Generic;
+using PlayFab;
+using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace UI.Screens
+namespace Core
 {
     /*
      * Вызов событьий влияющих на UI
      * (Добавить UnityEvent, связать в редакторе с public методами)
      */
-    public class ScreenEventHolder : MonoBehaviour
+    public class ScreenEventHolder : BaseInstance<ScreenEventHolder>
     {
-        public static ScreenEventHolder Instance { get; private set; }
-
-        [SerializeField] private UnityEvent<string> _unexpectedErrorEvent;
         [SerializeField] private UnityEvent<string> _loginErrorEvent;
         [SerializeField] private UnityEvent<string> _registrationErrorEvent;
         [SerializeField] private UnityEvent<string> _googleErrorEvent;
-
-        #region UNITY
-
-        void Awake()
-        {
-            Instance = this;
-        }
-
-        #endregion
-
+        [SerializeField] private UnityEvent<List<PlayerLeaderboardEntry>> _leaderBoardLoadEvent;
+        
         #region Events
 
         /*
@@ -44,9 +35,10 @@ namespace UI.Screens
         public void ErrorGooglePlay(string error) => _googleErrorEvent.Invoke(error);
 
         /*
-         * Непредвиденная ошибка
+         *  Рейтинг загружен
          */
-        public void UnexpectedError(string errorText) => _unexpectedErrorEvent.Invoke(errorText);
+        public void LeaderboardLoad(List<PlayerLeaderboardEntry> leaderboard) =>
+            _leaderBoardLoadEvent.Invoke(leaderboard);
 
         #endregion
     }
