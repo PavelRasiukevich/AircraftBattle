@@ -29,8 +29,6 @@ namespace UI.Screens
 
         #endregion
 
-        #region PUBLIC
-
         #region Events
 
         public void OnChanged()
@@ -51,7 +49,7 @@ namespace UI.Screens
 
         public void ConfirmOnClick()
         {
-            ExternalServicesManager.Instance.PlayFabManager.RegisterWithPlayFab(_nameInput.text, _passwordInput.text,
+            ExternalServices.Instance.PlayFabAuthenticate.RegisterWithPlayFab(_nameInput.text, _passwordInput.text,
                 _mailInput.text);
         }
 
@@ -59,8 +57,6 @@ namespace UI.Screens
         {
             ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen();
         }
-
-        #endregion
 
         #endregion
     }
