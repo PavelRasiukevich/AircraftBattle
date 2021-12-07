@@ -19,11 +19,7 @@ namespace Assets.Scripts.GameObjectComponents
             => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
 
         public void MoveWithJoystickSimple(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
-        {
-            print(velocityVector);
-            bodyToMove.velocity = velocityVector * speed;
-            print(bodyToMove.velocity);
-        }
+            => bodyToMove.velocity = velocityVector * speed;
 
         public void MoveWithJoystickSimulated()
         {

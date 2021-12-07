@@ -59,9 +59,6 @@ namespace Assets.Scripts.AirCrafts
             _dataModel.CurrentHp = _dataModel.CurrentHp <= value ? 0 : _dataModel.CurrentHp - value;
 
             if (_dataModel.CurrentHp != 0) return;
-
-            print($"Player: {_photonView.Owner.ActorNumber} destroyed.");
-            print($"Add points to player: {owner.ActorNumber}.");
         }
     }
 }

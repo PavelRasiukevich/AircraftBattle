@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Assets.Scripts.UI.JoyStick
 {
@@ -6,13 +7,15 @@ namespace Assets.Scripts.UI.JoyStick
     {
         [SerializeField] private OuterCircle _outerCircle;
         [SerializeField] private InnerCircle _innerCircle;
-        [SerializeField] private Transform _center;
+        [SerializeField] private Transform _origin;
+
+        [SerializeField] private RectTransform _root;
 
         public static Vector3 VVN => InnerCircle.VelocityVectorNorm;
 
         public OuterCircle OuterCircle => _outerCircle;
         public InnerCircle InnerCircle => _innerCircle;
-        public Transform Center => _center;
+        public Transform Origin => _origin;
 
         private Camera _camera;
 
@@ -21,17 +24,17 @@ namespace Assets.Scripts.UI.JoyStick
             _camera = GameObject.FindGameObjectWithTag("UICameraBattle").GetComponent<Camera>();
 
             _innerCircle.Camera = _camera;
-            _innerCircle.Origin = _center;
+            _innerCircle.Origin = _origin;
 
-            _innerCircle.OuterCircleRadius = CalculateOuterCircleRadius(_outerCircle.transform);
-            _innerCircle.InnerCircleRadius = CalculateOuterCircleRadius(_innerCircle.transform);
+            _innerCircle.Radius = CalculateOuterCircleRadius(_root);
 
         }
 
-        private float CalculateOuterCircleRadius(Transform circle)
+        private float CalculateOuterCircleRadius(RectTransform trsfrm)
         {
-            var w = circle.GetComponent<RectTransform>().rect.width;
-            return w / w;
+            var w = trsfrm.rect.width;
+            print(w);
+            return w / 2;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Assets.Scripts.UI.JoyStick
     public class InnerCircle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         public Transform Origin { get; set; }
-        public float OuterCircleRadius { get; set; }
+        public float Radius { get; set; }
         public float InnerCircleRadius { get; set; }
 
         public static Vector3 VelocityVectorNorm { get; set; }
@@ -26,35 +26,22 @@ namespace Assets.Scripts.UI.JoyStick
 
         private void Update()
         {
-            delta = Vector3.Distance(transform.position, Origin.position) / OuterCircleRadius;
+            delta = Vector3.Distance(transform.position, Origin.position) / Radius;
             VelocityVectorNorm = (transform.position - Origin.position).normalized * delta;
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             var pixelScreenPosition = Input.mousePosition;
-            var pixleToWorldPosition = Camera.ScreenToWorldPoint(pixelScreenPosition);
+
+            print($"Inner Circle Position IN PIXELS: {pixelScreenPosition}");
+
 
             if (IsJoystickTouching)
             {
-                transform.position = pixleToWorldPosition;
-                var zPos = transform.position;
-                zPos.z = 100;
-                transform.position = zPos;
+                transform.position = pixelScreenPosition;
 
-                var distance = Vector3.Distance(Origin.position, transform.position);
-
-                if (distance > OuterCircleRadius)
-                {
-                    var differenceBetweenCenterAndCirclePosition = transform.position - Origin.position;
-                    differenceBetweenCenterAndCirclePosition *= OuterCircleRadius / distance;
-
-                    transform.position = Origin.position + differenceBetweenCenterAndCirclePosition;
-                }
-                else
-                {
-
-                }
+              //  print($"Inner Circle Position: {transform.position}");
             }
         }
 
