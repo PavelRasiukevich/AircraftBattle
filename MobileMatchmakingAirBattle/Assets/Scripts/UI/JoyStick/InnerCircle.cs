@@ -25,10 +25,7 @@ namespace Assets.Scripts.UI.JoyStick
 
         private void Update()
         {
-            if (!IsJoystickTouching)
-            {
-                delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
-            }
+            delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
 
             VelocityVectorNorm = (transform.position - transform.parent.position).normalized * delta;
         }

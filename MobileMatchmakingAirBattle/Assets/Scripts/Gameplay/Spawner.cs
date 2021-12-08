@@ -10,25 +10,32 @@ namespace Assets.Scripts.Gameplay
         [SerializeField] private Transform _playerPrefab;
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private AircraftCamera _airCraftCamera;
+        [SerializeField] private Transform _origin;
 
         private void Awake()
         {
-            SpawnPlayerOnARandomPoint();
-        }
+            var actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+            var point = _spawnPoint[actorNumber - 1];
+            point = SetupPointInWorld(point);
 
-        private void SpawnPlayerOnARandomPoint()
-        {
-            var randomIndex = GetRandomIndex(_spawnPoint);
-            var randomPoint = GetPointByIndex(randomIndex);
+           var actor = InitializeActor(point.position, point.rotation);
 
-            var p = PhotonNetwork.Instantiate(_playerPrefab.name,
-                randomPoint.position,
-                Quaternion.identity);
-
-            CameraSetup(p.transform);
+            CameraSetup(actor.transform);
         }
 
         #region PRIVATE METHODS
+
+        private GameObject InitializeActor(Vector3 position, Quaternion rotation) => PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
+
+        private Transform SetupPointInWorld(Transform point)
+        {
+            var direction = GetDirectionToLook(_origin, point);
+            var lookRotation = Quaternion.LookRotation(direction);
+            lookRotation = SetupRotation(lookRotation);
+            point.rotation = lookRotation;
+            return point;
+        }
+
         private void CameraSetup(Transform t)
         {
             _airCraftCamera.Activate();
@@ -36,20 +43,13 @@ namespace Assets.Scripts.Gameplay
             _airCraftCamera.SetPositionAndRotaion();
         }
 
-        private int GetRandomIndex(Transform[] array) => UnityEngine.Random.Range(0, array.Length);
+        private Vector3 GetDirectionToLook(Transform a, Transform b) => (a.position - b.transform.position).normalized;
 
-        private Transform GetPointByIndex(int index)
+        private static Quaternion SetupRotation(Quaternion lookRotation)
         {
-            if (index < 0) throw new IndexOutOfRangeException();
-
-            if (_spawnPoint == null || _spawnPoint.Length == 0) throw new Exception();
-
-            return _spawnPoint[index];
-        }
-                        
-        private object[] GetInitData()
-        {
-            return new object[1];
+            lookRotation.x = 0;
+            lookRotation.z = 0;
+            return lookRotation;
         }
 
         #endregion

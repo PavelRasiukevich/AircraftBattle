@@ -1,6 +1,5 @@
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
-using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -27,7 +26,7 @@ namespace Assets.Scripts.AirCrafts
         {
             //TODO
             //get color according
-            //to actornumber
+            //to actor number
         }
 
         #region UNITY
@@ -59,6 +58,8 @@ namespace Assets.Scripts.AirCrafts
             _dataModel.CurrentHp = _dataModel.CurrentHp <= value ? 0 : _dataModel.CurrentHp - value;
 
             if (_dataModel.CurrentHp != 0) return;
+
+            //in case hp <= 0 do stuff
         }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts.UI.JoyStick
 {
@@ -21,10 +20,10 @@ namespace Assets.Scripts.UI.JoyStick
             _innerCircle.Radius = CalculateOuterCircleRadius(_root);
         }
 
-        private float CalculateOuterCircleRadius(RectTransform trsfrm)
+        private float CalculateOuterCircleRadius(RectTransform transform)
         {
             var ratio = _scaler.referenceResolution.x / Screen.width;
-            return trsfrm.rect.width / 2 / ratio;
+            return transform.rect.width / 2 / ratio;
         }
     }
 }
