@@ -7,14 +7,23 @@ namespace Assets.Scripts.AirCrafts
     [RequireComponent(typeof(UniversalAdditionalCameraData), typeof(Camera))]
     public class AircraftCamera : MonoBehaviour
     {
-        public void SetParent(Transform parent) => transform.SetParent(parent);
 
-        public void SetPositionAndRotaion() => transform.SetPositionAndRotation(transform.parent.position, transform.parent.rotation);
+        private void Start()
+        {
+            var airCraft = GameObject.FindObjectOfType<AirCraft>();
+
+            SetParent(FindSlotForCamera(airCraft.transform));
+            SetPositionAndRotaionAccordingToParent(transform.parent);
+        }
+
+        private void SetParent(Transform parent) => transform.SetParent(parent);
+
+        private void SetPositionAndRotaionAccordingToParent(Transform parent) => transform.SetPositionAndRotation(parent.position, parent.rotation);
 
         public void Activate() => gameObject.SetActive(true);
 
         public void Deactivate() => gameObject.SetActive(false);
 
-        public Transform FindSlotForCamera(Transform aircraft) => aircraft.GetComponentInChildren<CameraSlot>().transform;
+        private Transform FindSlotForCamera(Transform airCraft) => airCraft.GetComponentInChildren<CameraSlot>().transform;
     }
 }
