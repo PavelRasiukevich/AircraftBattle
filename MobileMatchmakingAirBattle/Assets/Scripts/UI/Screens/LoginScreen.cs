@@ -38,6 +38,7 @@ namespace UI.Screens
 
         public void OnLoginError(string errorText)
         {
+            PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _errorText.gameObject.SetActive(true);
             _errorText.text = errorText;
         }
