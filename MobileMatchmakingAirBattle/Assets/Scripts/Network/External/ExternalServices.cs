@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using Assets.Scripts.Core;
 using Core;
-using Network.External.Google;
-using Network.External.PlayFab;
+using Network.External.GooglePlayServices;
+using Network.External.PlayFabServices;
 using Photon.Pun;
 using TO;
 using UnityEngine;
@@ -17,21 +17,16 @@ namespace Network.External
     public class ExternalServices : BaseInstance<ExternalServices>
     {
         [SerializeField] private AuthenticationType _authenticationType = AuthenticationType.None;
-        public GooglePlayAuthenticate GooglePlayAuthenticate { get; private set; }
-        public PlayFabAuthenticate PlayFabAuthenticate { get; private set; }
-        public PlayFabLeaderboards PlayFabLeaderboards { get; private set; }
-        public PlayFabStatistics PlayFabStatistics { get; private set; }
-
+        public BaseGooglePlay GooglePlay { get; set; }
+        public BasePlayFab PlayFab { get; set; }
 
         #region UNITY
 
         protected override void Awake()
         {
             base.Awake();
-            GooglePlayAuthenticate = new GooglePlayAuthenticate();
-            PlayFabAuthenticate = new PlayFabAuthenticate();
-            PlayFabLeaderboards = new PlayFabLeaderboards();
-            PlayFabStatistics = new PlayFabStatistics();
+            GooglePlay = new BaseGooglePlay();
+            PlayFab = new BasePlayFab();
             _authenticationType = Application.platform == RuntimePlatform.Android
                 ? AuthenticationType.Google
                 : _authenticationType;
@@ -56,11 +51,11 @@ namespace Network.External
                     break;
                 case AuthenticationType.PlayFabWithCustomId:
                     PopupHolder.CurrentPopup(PopupType.Loading).Show();
-                    PlayFabAuthenticate.AuthenticateWithCustomId();
+                    PlayFab.Authenticate.AuthenticateWithCustomId();
                     break;
                 case AuthenticationType.Google:
                     PopupHolder.CurrentPopup(PopupType.Loading).Show();
-                    GooglePlayAuthenticate.SignIn();
+                    GooglePlay.Authenticate.SignIn();
                     break;
             }
         }
@@ -86,13 +81,13 @@ namespace Network.External
             {
                 case AuthenticationType.None:
                     User.Name = $"Photon_PLayer_{Random.Range(0, 100)}";
-                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PunLogo");
+                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PunAvatar");
                     break;
                 case AuthenticationType.PlayFabWithCustomId:
-                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabLogo");
+                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabAvatar");
                     break;
                 case AuthenticationType.PlayFabWithLogin:
-                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabLogo");
+                    User.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabAvatar");
                     break;
                 case AuthenticationType.Google:
                     while (Social.localUser.image == null)

@@ -2,15 +2,14 @@ using System;
 using Core;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using UI.Screens;
 using UnityEngine;
 
-namespace Network.External.Google
+namespace Network.External.GooglePlayServices.Services
 {
     /*
-     * Управление GooglePlay
+     * Авторизация GooglePlay
      */
-    public class GooglePlayAuthenticate : GooglePlay
+    public class BaseGooglePlayAuthenticate
     {
         public bool IsReady { get; private set; }
 
@@ -40,16 +39,16 @@ namespace Network.External.Google
                     IsReady = success;
                     if (success)
                     {
-                        ExternalServices.Instance.PlayFabAuthenticate.LoginWithGoogle(PlayGamesPlatform.Instance
+                        ExternalServices.Inst.PlayFab.Authenticate.LoginWithGoogle(PlayGamesPlatform.Instance
                             .GetServerAuthCode());
                     }
                     else
-                        ScreenEventHolder.Instance.ErrorGooglePlay("Authenticate success False!");
+                        ScreenEventHolder.Inst.ErrorGooglePlay("Authenticate success False!");
                 });
             }
             catch (Exception e)
             {
-                ScreenEventHolder.Instance.ErrorGooglePlay(e.Message);
+                ScreenEventHolder.Inst.ErrorGooglePlay(e.Message);
             }
 #endif
         }

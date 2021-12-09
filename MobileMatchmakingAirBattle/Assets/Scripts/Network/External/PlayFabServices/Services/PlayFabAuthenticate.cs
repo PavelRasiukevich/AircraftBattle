@@ -10,12 +10,12 @@ using TO;
 using UnityEngine;
 using Utils.Enums;
 
-namespace Network.External.PlayFab
+namespace Network.External.PlayFabServices.Services
 {
     /*
-     * Управление PlayFab
+     * Авторизация PlayFab
      */
-    public class PlayFabAuthenticate : PlayFab
+    public class PlayFabAuthenticate
     {
         public string PlayFabPlayerId { get; private set; } = "";
         public bool IsReady { get; private set; }
@@ -34,7 +34,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.LoginWithCustomID(
                 request,
                 RequestPhotonToken,
-                UnexpectedErrorUI
+                ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
 
@@ -50,7 +50,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.LoginWithPlayFab(
                 request,
                 RequestPhotonToken,
-                ScreenEventHolder.Instance.ErrorLogin
+                ScreenEventHolder.Inst.ErrorLogin
             );
         }
 
@@ -66,7 +66,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.RegisterPlayFabUser(
                 request,
                 res => ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen(),
-                ScreenEventHolder.Instance.ErrorRegistration);
+                ScreenEventHolder.Inst.ErrorRegistration);
         }
 
         public void LoginWithGoogle(string serverAuthCode)
@@ -82,7 +82,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.LoginWithGoogleAccount(
                 request,
                 RequestPhotonToken,
-                UnexpectedErrorUI
+                ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
 
@@ -102,7 +102,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.GetPhotonAuthenticationToken(
                 request,
                 OnAuthenticateWithPhoton,
-                UnexpectedErrorUI
+                ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
 
@@ -129,7 +129,8 @@ namespace Network.External.PlayFab
                 {
                     StatisticNames = User.Statistic.Data.Keys.ToList()
                 },
-                OnStatisticsRequest, UnexpectedErrorUI
+                OnStatisticsRequest, 
+                ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
 
@@ -150,7 +151,7 @@ namespace Network.External.PlayFab
             PlayFabClientAPI.GetPlayerProfile(
                 new GetPlayerProfileRequest(),
                 OnPlayerProfileRequest,
-                UnexpectedErrorUI
+                ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
 
@@ -174,7 +175,7 @@ namespace Network.External.PlayFab
                     DisplayName = displayName
                 },
                 OnUserDisplayNameUpdated,
-                UnexpectedErrorUI);
+                ScreenEventHolder.Inst.UnexpectedErrorUI);
         }
 
         private void OnUserDisplayNameUpdated(UpdateUserTitleDisplayNameResult result) =>
@@ -185,7 +186,7 @@ namespace Network.External.PlayFab
         private void PlayFabAuthenticateDone()
         {
             IsReady = true;
-            ExternalServices.Instance.AuthenticationDone();
+            ExternalServices.Inst.AuthenticationDone();
         }
 
         #endregion

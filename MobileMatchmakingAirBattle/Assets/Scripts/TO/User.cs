@@ -29,17 +29,19 @@ namespace TO
                 set
                 {
                     Data[UtilsConst.PlayFab.SCORE_TOTALFIGHTS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFIGHTS, value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFIGHTS,
+                        value);
                 }
             }
-          
+
             public static int Wins
             {
                 get => Data[UtilsConst.PlayFab.SCORE_TOTALWINS];
                 set
                 {
                     Data[UtilsConst.PlayFab.SCORE_TOTALWINS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALWINS, value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALWINS, value);
+                    ExternalServices.Inst.GooglePlay.Achievements.Wins(value);
                 }
             }
 
@@ -49,7 +51,7 @@ namespace TO
                 set
                 {
                     Data[UtilsConst.PlayFab.SCORE_TOTALFAILS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFAILS, value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFAILS, value);
                 }
             }
 
@@ -59,7 +61,9 @@ namespace TO
                 set
                 {
                     Data[UtilsConst.PlayFab.SCORE_TOTALFRAGS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFRAGS, value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFRAGS, value);
+                    if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
+                        ExternalServices.Inst.GooglePlay.Achievements.Frags(value);
                 }
             }
         }

@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using Assets.Scripts.Core;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 using UnityEngine.Events;
+using Utils.Enums;
 
 namespace Core
 {
@@ -16,7 +18,7 @@ namespace Core
         [SerializeField] private UnityEvent<string> _registrationErrorEvent;
         [SerializeField] private UnityEvent<string> _googleErrorEvent;
         [SerializeField] private UnityEvent<List<PlayerLeaderboardEntry>> _leaderBoardLoadEvent;
-        
+
         #region Events
 
         /*
@@ -41,5 +43,14 @@ namespace Core
             _leaderBoardLoadEvent.Invoke(leaderboard);
 
         #endregion
+
+        /*
+         *  Unexpected Error
+         */
+        public void UnexpectedErrorUI(PlayFabError err) =>
+            UnexpectedErrorUI(err);
+
+        private void UnexpectedErrorUI(string err) =>
+            PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config(err).Show();
     }
 }

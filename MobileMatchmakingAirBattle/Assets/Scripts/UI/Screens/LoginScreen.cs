@@ -50,7 +50,7 @@ namespace UI.Screens
         public void ConfirmOnClick()
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
-            ExternalServices.Instance.PlayFabAuthenticate.LoginWithPlayFab(_nameInput.text, _passwordInput.text);
+            ExternalServices.Inst.PlayFab.Authenticate.LoginWithPlayFab(_nameInput.text, _passwordInput.text);
         }
 
         public void RegistrationOnClick()
@@ -61,7 +61,7 @@ namespace UI.Screens
         public void CustomIdOnClick()
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
-            ExternalServices.Instance.PlayFabAuthenticate.AuthenticateWithCustomId();
+            ExternalServices.Inst.PlayFab.Authenticate.AuthenticateWithCustomId();
         }
 
         #endregion
