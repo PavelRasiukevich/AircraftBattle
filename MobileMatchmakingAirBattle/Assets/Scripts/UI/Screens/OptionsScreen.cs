@@ -1,4 +1,5 @@
 using Assets.Scripts.Core;
+using Network.External;
 using TO;
 using Utils.Enums;
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.UI.Screens
 
         public void TestIncWins() => User.Statistic.Wins++;
         public void TestIncFights() => User.Statistic.Fights++;
+        public void TestKamikaze() => ExternalServices.Inst.GooglePlay.Achievements.Kamikaze();
 
         #endregion
     }

@@ -2,9 +2,9 @@
 using PlayFab;
 using PlayFab.ClientModels;
 
-namespace Network.External.PlayFab
+namespace Network.External.PlayFabServices.Services
 {
-    public class PlayFabLeaderboards : PlayFab
+    public class PlayFabLeaderboards
     {
         #region PUBLIC
 
@@ -17,7 +17,7 @@ namespace Network.External.PlayFab
                     MaxResultsCount = 10
                 },
                 DisplayLeaderboard,
-                UnexpectedErrorUI);
+                ScreenEventHolder.Inst.UnexpectedErrorUI);
         }
 
         #endregion
@@ -25,7 +25,7 @@ namespace Network.External.PlayFab
         #region PRIVATE
 
         private void DisplayLeaderboard(GetLeaderboardResult result) =>
-            ScreenEventHolder.Instance.LeaderboardLoad(result.Leaderboard);
+            ScreenEventHolder.Inst.LeaderboardLoad(result.Leaderboard);
 
         #endregion
     }

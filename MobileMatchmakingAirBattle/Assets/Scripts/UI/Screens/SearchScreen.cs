@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI.Screens
 
         #region OnClick
 
-        public void SwitchToMainMenu() => Launcher.Instance.StopMatching();
+        public void SwitchToMainMenu() => Launcher.Inst.StopMatching();
 
         #endregion
     }

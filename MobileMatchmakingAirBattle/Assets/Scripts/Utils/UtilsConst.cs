@@ -49,15 +49,5 @@ namespace Assets.Scripts.Utils
                 return rez;
             }
         }
-
-        /*
-         * Google Play
-         */
-        internal class GooglePlay
-        {
-            public const string ACHIEVE_FRAGS_1 = "";
-            public const string ACHIEVE_FRAGS_100 = "";
-            public const string ACHIEVE_FRAGS_1000 = "";
-        }
     }
 }

@@ -1,4 +1,5 @@
 using Assets.Scripts.Core;
+using Network.External;
 using TMPro;
 using TO;
 using UnityEngine;
@@ -26,7 +27,11 @@ namespace UI.Screens.MainMenu
 
         public void PlayerIconOnClick()
         {
-            PopupHolder.CurrentPopup(PopupType.StatisticPopup).Config().Show();
+            Debug.Log(ExternalServices.Inst.PlayFab.ToString());
+            if (!ExternalServices.Inst.PlayFab.Authenticate.IsReady)
+                PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config("Need PlayFab!").Show();
+            else
+                PopupHolder.CurrentPopup(PopupType.StatisticPopup).Config().Show();
         }
 
         #endregion

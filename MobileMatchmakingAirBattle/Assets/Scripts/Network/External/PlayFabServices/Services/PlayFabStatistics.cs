@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using Core;
 using PlayFab;
 using PlayFab.ClientModels;
 using UnityEngine;
 
-namespace Network.External.PlayFab
+namespace Network.External.PlayFabServices.Services
 {
-    public class PlayFabStatistics : PlayFab
+    public class PlayFabStatistics
     {
         #region PUBLIC
 
@@ -23,7 +24,7 @@ namespace Network.External.PlayFab
                     }
                 },
                 OnStatisticsUpdated,
-                UnexpectedErrorUI);
+                ScreenEventHolder.Inst.UnexpectedErrorUI);
         }
 
         private void OnStatisticsUpdated(UpdatePlayerStatisticsResult updateResult) =>

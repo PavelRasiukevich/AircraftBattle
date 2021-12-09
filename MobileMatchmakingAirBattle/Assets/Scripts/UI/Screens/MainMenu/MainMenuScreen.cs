@@ -24,7 +24,7 @@ namespace UI.Screens.MainMenu
 
         public void SwitchToLeaderboardScreen()
         {
-            if (!ExternalServices.Instance.PlayFabAuthenticate.IsReady)
+            if (!ExternalServices.Inst.PlayFab.Authenticate.IsReady)
                 PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config("Need PlayFab!").Show();
             else
                 ScreenHolder.SetCurrentScreen(ScreenType.Leaderboard).ShowScreen();
@@ -36,8 +36,16 @@ namespace UI.Screens.MainMenu
 
         public void MatchingOnClick()
         {
-            Launcher.Instance.StartMatching();
+            Launcher.Inst.StartMatching();
             ScreenHolder.SetCurrentScreen(ScreenType.Search).ShowScreen();
+        }
+
+        public void AchievementsOnClick()
+        {
+            if (!ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
+                PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config("Need GooglePlay!").Show();
+            else
+                ExternalServices.Inst.GooglePlay.Achievements.Show();
         }
 
         #endregion

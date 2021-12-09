@@ -28,7 +28,7 @@ namespace UI.Screens.LeaderBoard
             _noRecordsText.gameObject.SetActive(false);
             foreach (var line in _content.GetComponentsInChildren<LeaderBoardLine>())
                 Destroy(line.gameObject);
-            ExternalServices.Instance.PlayFabLeaderboards.RequestLeaderboard(
+            ExternalServices.Inst.PlayFab.Leaderboards.RequestLeaderboard(
                 UtilsConst.PlayFab.ScoreBy(LeaderboardType));
         }
 
