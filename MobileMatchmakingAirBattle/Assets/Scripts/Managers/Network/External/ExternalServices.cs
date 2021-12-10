@@ -17,8 +17,8 @@ namespace Network.External
     public class ExternalServices : BaseInstance<ExternalServices>
     {
         [SerializeField] private AuthenticationType _authenticationType = AuthenticationType.None;
-        public BaseGooglePlay GooglePlay { get; set; }
-        public BasePlayFab PlayFab { get; set; }
+        public BaseGooglePlay GooglePlay { get; private set; }
+        public BasePlayFab PlayFab { get; private set; }
 
         #region UNITY
 

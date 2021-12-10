@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Utils.Enums;
 
-namespace UI.Screens.MainMenu
+namespace UI.Screens.MainMenu.Elements
 {
     public class PlayerPanel : MonoBehaviour
     {

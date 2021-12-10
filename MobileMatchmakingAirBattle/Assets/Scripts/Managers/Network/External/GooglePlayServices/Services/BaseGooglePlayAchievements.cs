@@ -1,5 +1,8 @@
-﻿using GooglePlayGames;
+﻿using Assets.Scripts.Core;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 using UnityEngine;
+using Utils.Enums;
 
 namespace Network.External.GooglePlayServices.Services
 {
@@ -48,15 +51,9 @@ namespace Network.External.GooglePlayServices.Services
             }
         }
 
-        public void Kamikaze()
-        {
-            Increment(GPGSIds.achievement_kamikaze);
-        }
+        public void Kamikaze() => Increment(GPGSIds.achievement_kamikaze);
 
-        public void Show()
-        {
-            Social.ShowAchievementsUI();
-        }
+        public void Show() => PlayGamesPlatform.Instance.ShowAchievementsUI(OnShowAchievementsUI);
 
         #endregion
 
@@ -66,6 +63,8 @@ namespace Network.External.GooglePlayServices.Services
 
         private void Increment(string id) =>
             PlayGamesPlatform.Instance.IncrementAchievement(id, 1, (bool success) => { });
+
+        public void OnShowAchievementsUI(UIStatus status) => PopupHolder.CurrentPopup(PopupType.Loading).Hide();
 
         #endregion
     }

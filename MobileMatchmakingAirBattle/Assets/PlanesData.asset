@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14782389e344afda517de46cb6e3054, type: 3}
+  m_Name: PlanesData
+  m_EditorClassIdentifier: 
+  _planeList:
+  - _id: 609055898
+    _displayName: Ghost
+    _isDefaultPlane: 1
+    _isForMoney: 0
+    _gamePrice: 0
+    _icon: {fileID: 21300000, guid: 9ce40f1913d8a9e4b95df6c210c072d2, type: 3}
+    _planePrefab: {fileID: 2362399153265527867, guid: b90d94597980d95419640c5581d7fe78, type: 3}
+    _isViewInEditor: 1
+  - _id: 168736579
+    _displayName: Blue Monster
+    _isDefaultPlane: 0
+    _isForMoney: 0
+    _gamePrice: 250
+    _icon: {fileID: 21300000, guid: 2fab279f56f0ec441ab4dc2437c0551e, type: 3}
+    _planePrefab: {fileID: 2362399153265527867, guid: b90d94597980d95419640c5581d7fe78, type: 3}
+    _isViewInEditor: 1
+  - _id: 367272861
+    _displayName: Destroyer
+    _isDefaultPlane: 0
+    _isForMoney: 0
+    _gamePrice: 500
+    _icon: {fileID: 21300000, guid: 6951a31484a5aac4d8acc87c2ce47a35, type: 3}
+    _planePrefab: {fileID: 2362399153265527867, guid: b90d94597980d95419640c5581d7fe78, type: 3}
+    _isViewInEditor: 1
