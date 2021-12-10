@@ -9,7 +9,10 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private RectTransform _root;
         [SerializeField] private CanvasScaler _scaler;
 
-        public static Vector3 VelocityVector => InnerCircle.VelocityVectorNorm;
+        private static bool v;
+
+        public static Vector2 JoystickInput => InnerCircle.JoystickInput;
+        public static bool IsPressed => v;
 
         public InnerCircle InnerCircle => _innerCircle;
 
@@ -18,10 +21,20 @@ namespace Assets.Scripts.UI.JoyStick
             _innerCircle.Radius = CalculateRadiusAccordingToResolution(_root);
         }
 
+        private void Update()
+        {
+            v = GetValue();
+        }
+
         private float CalculateRadiusAccordingToResolution(RectTransform transform)
         {
             var ratio = _scaler.referenceResolution.x / Screen.width;
             return transform.rect.width / 2 / ratio;
+        }
+
+        private bool GetValue()
+        {
+           return _innerCircle.IsJoystickTouching;
         }
     }
 }

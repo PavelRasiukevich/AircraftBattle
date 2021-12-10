@@ -8,7 +8,7 @@ namespace Assets.Scripts.GameObjectComponents
         public float Horizontal { get; private set; }
         public float Vertical { get; private set; }
 
-        public Vector3 PlayersInput { get; private set; }
+        public Vector2 PlayersInput { get; private set; }
 
         private void Update()
         {
@@ -25,8 +25,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void JoyStickInput()
         {
-            Debug.Log(PlayersInput);
-            PlayersInput = JoyStick.VelocityVector;
+            PlayersInput = JoyStick.JoystickInput;
         }
     }
 }

@@ -1,5 +1,6 @@
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
+using Assets.Scripts.UI.JoyStick;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
@@ -52,11 +53,11 @@ namespace Assets.Scripts.AirCrafts
 
             if (!IsControllable)
             {
-                _moveHandler.MoveUncontrollable(_rigidBody, transform.forward, _dataModel.MoveSpeed);
+                _moveHandler.MoveUncontrollable(_rigidBody, _dataModel.Speed);
             }
             else
             {
-                _moveHandler.MoveWithJoystickSimple(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+                _moveHandler.MoveWithJoyStick(_rigidBody, _inputHandler.PlayersInput, _dataModel.Speed, JoyStick.IsPressed);
             }
         }
 

@@ -13,12 +13,15 @@ namespace Assets.Scripts.UI.JoyStick
 
         #region PROPERTIES
 
+        public static Vector2 JoystickInput { get; private set; }
         public float Radius { get; set; }
-        public static Vector3 VelocityVectorNorm { get; set; }
-        public Camera Camera { get; set; }
         public bool IsJoystickTouching { get; private set; }
 
         #endregion
+
+        private void Awake()
+        {
+        }
 
         private void Start()
         {
@@ -28,7 +31,7 @@ namespace Assets.Scripts.UI.JoyStick
         private void Update()
         {
             delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
-            VelocityVectorNorm = GetVelocityVector().normalized * delta;
+            JoystickInput = (transform.position - transform.parent.position).normalized * delta;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -65,7 +68,7 @@ namespace Assets.Scripts.UI.JoyStick
         }
 
         #region PRIVATE METHODS
-        private Vector3 GetVelocityVector() => transform.position - transform.parent.position;
+
         #endregion
 
         #region ROUTINES

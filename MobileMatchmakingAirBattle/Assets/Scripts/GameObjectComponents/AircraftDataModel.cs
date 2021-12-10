@@ -6,14 +6,21 @@ namespace Assets.Scripts.GameObjectComponents
     [Serializable]
     public class AircraftDataModel
     {
-        [SerializeField] private float _moveSpeed;
+        [SerializeField] Speed _speed;
         [SerializeField] private int _hp;
         [SerializeField] private int _currentHp;
 
-        public float MoveSpeed => _moveSpeed;
+        public Speed Speed => _speed;
 
         public int Hp => _hp;
 
         public int CurrentHp { get => _currentHp; set => _currentHp = value; }
+    }
+
+    [Serializable]
+    public struct Speed
+    {
+        public float MoveSpeed;
+        public float RotationSpeed;
     }
 }
