@@ -6,16 +6,30 @@ namespace Assets.Scripts.UI.JoyStick
 {
     public class InnerCircle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
-        public Transform Origin { get; set; }
+        #region PRIVATE FIELDS
+        [SerializeField] private float delta;
+        [SerializeField] private float ZVelocity;
+        #endregion
+
+        #region PROPERTIES
+
         public float Radius { get; set; }
-
         public static Vector3 VelocityVectorNorm { get; set; }
-
-        private float delta;
-
         public Camera Camera { get; set; }
-
         public bool IsJoystickTouching { get; private set; }
+
+        #endregion
+
+        private void Start()
+        {
+            ZVelocity = Mathf.Clamp(ZVelocity, 0.0f, 1.0f);
+        }
+
+        private void Update()
+        {
+            delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
+            VelocityVectorNorm = GetVelocityVector().normalized * delta;
+        }
 
         public void OnPointerDown(PointerEventData eventData)
         {
@@ -23,15 +37,9 @@ namespace Assets.Scripts.UI.JoyStick
             StopCoroutine(nameof(ReturnToOriginRoutine));
         }
 
-        private void Update()
-        {
-            delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
-
-            VelocityVectorNorm = (transform.position - transform.parent.position).normalized * delta;
-        }
-
         public void OnDrag(PointerEventData eventData)
         {
+
             var pixelScreenPosition = Input.mousePosition;
 
             if (IsJoystickTouching)
@@ -56,6 +64,12 @@ namespace Assets.Scripts.UI.JoyStick
             StartCoroutine(nameof(ReturnToOriginRoutine));
         }
 
+        #region PRIVATE METHODS
+        private Vector3 GetVelocityVector() => transform.position - transform.parent.position;
+        #endregion
+
+        #region ROUTINES
+
         private IEnumerator ReturnToOriginRoutine()
         {
             while (true)
@@ -70,5 +84,7 @@ namespace Assets.Scripts.UI.JoyStick
                 yield return null;
             }
         }
+
+        #endregion
     }
 }

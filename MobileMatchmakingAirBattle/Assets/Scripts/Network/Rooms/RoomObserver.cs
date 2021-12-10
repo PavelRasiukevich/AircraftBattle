@@ -7,11 +7,19 @@ using UnityEngine.UI;
 
 namespace Assets.Scripts.Network.Rooms
 {
+    public enum Clients
+    {
+        Single,
+        Multiple
+    }
+
     public class RoomObserver : MonoBehaviourPunCallbacks
     {
         private List<Player> _playersInRoom;
         private byte _maxPlayers;
         private PhotonView _photonView;
+
+        public Clients clientType;
 
         #region UNITY
         private void Awake()
@@ -28,18 +36,21 @@ namespace Assets.Scripts.Network.Rooms
             _playersInRoom = GetAllPlayersInCurrentRoom();
             _maxPlayers = PhotonNetwork.CurrentRoom.MaxPlayers;
 
-            #region DELETE AFTER TEST
-            if (_playersInRoom.Count < _maxPlayers) return;
+            if (clientType.Equals(Clients.Single))
+            {
+                #region DELETE AFTER TEST
+                if (_playersInRoom.Count < _maxPlayers) return;
 
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.CurrentRoom.IsVisible = false;
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.CurrentRoom.IsVisible = false;
 
-            CheckForExtraPlayers(_playersInRoom);
+                CheckForExtraPlayers(_playersInRoom);
 
-            if (!PhotonNetwork.IsMasterClient) return;
+                if (!PhotonNetwork.IsMasterClient) return;
 
-            PhotonNetwork.LoadLevel(UtilsConst.Battle);
-            #endregion
+                PhotonNetwork.LoadLevel(UtilsConst.Battle);
+                #endregion
+            }
         }
 
         public override void OnLeftRoom()

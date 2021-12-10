@@ -9,20 +9,28 @@ namespace Assets.Scripts.GameObjectComponents
         /// </summary>
         /// <param name="remoteBody"></param>
         /// <param name="networkPosition"></param>
-        public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition) 
+        public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition)
             => remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
 
-        public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed) 
+        public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
             => bodyToMove.velocity = velocityVector * speed;
 
         public void MoveWithInputAxes(Rigidbody bodyToMove, InputHandler handler)
             => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
 
         public void MoveWithJoystickSimple(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
-            => bodyToMove.velocity = velocityVector * speed;
-
-        public void MoveWithJoystickSimulated()
         {
+            var t = velocityVector;
+            t.z = 1.0f;
+            velocityVector = t;
+
+            bodyToMove.velocity = transform.InverseTransformDirection(velocityVector * speed);
+            bodyToMove.angularVelocity = velocityVector;
         }
+
+        public void MoveWithJoystickSimulated() { }
+
+        public void MoveUncontrollable(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
+            => bodyToMove.velocity = velocityVector * speed;
     }
 }

@@ -12,24 +12,21 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void Update()
         {
-#if !UNITY_EDITOR
-            KeyBoardInput();
-#else
             JoyStickInput();
-#endif
         }
 
-        private void KeyBoardInput()
-        {
-            Horizontal = Input.GetAxis("Horizontal");
-            Vertical = Input.GetAxis("Vertical");
+        /*   private void KeyBoardInput()
+           {
+               Horizontal = Input.GetAxis("Horizontal");
+               Vertical = Input.GetAxis("Vertical");
 
-            PlayersInput = new Vector3(Horizontal, 0, Vertical);
-        }
+               PlayersInput = new Vector3(Horizontal, 0, Vertical);
+           }*/
 
         private void JoyStickInput()
         {
-            PlayersInput = JoyStick.VVN;
+            Debug.Log(PlayersInput);
+            PlayersInput = JoyStick.VelocityVector;
         }
     }
 }

@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1795781907
 RectTransform:
   m_ObjectHideFlags: 0
@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: _scaler
       value: 
       objectReference: {fileID: 8298477126064911872}
+    - target: {fileID: 7667052321386152700, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
+      propertyPath: ZVelocity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
 --- !u!224 &777444686690170214 stripped

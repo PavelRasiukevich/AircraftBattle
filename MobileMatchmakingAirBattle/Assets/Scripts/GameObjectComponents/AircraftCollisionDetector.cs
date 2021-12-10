@@ -12,10 +12,15 @@ namespace Assets.Scripts.GameObjectComponents
         {
             var bullet = collision.gameObject.GetComponent<Bullet>();
 
-            if(bullet != null)
+            if (bullet != null)
             {
                 AirCraft.TakeDamage(bullet.BulletDataModel.Damage, bullet.BulletDataModel.Owner);
             }
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            AirCraft.IsControllable = true;
         }
     }
 }

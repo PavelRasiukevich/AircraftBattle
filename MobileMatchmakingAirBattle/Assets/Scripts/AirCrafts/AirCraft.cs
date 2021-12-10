@@ -11,6 +11,8 @@ namespace Assets.Scripts.AirCrafts
     {
         [SerializeField] private AircraftDataModel _dataModel;
 
+        public bool IsControllable { get; set; }
+
         #region COMPONENTS
 
         private InputHandler _inputHandler;
@@ -48,7 +50,14 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
 
-            _moveHandler.MoveWithJoystickSimple(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+            if (!IsControllable)
+            {
+                _moveHandler.MoveUncontrollable(_rigidBody, transform.forward, _dataModel.MoveSpeed);
+            }
+            else
+            {
+                _moveHandler.MoveWithJoystickSimple(_rigidBody, _inputHandler.PlayersInput, _dataModel.MoveSpeed);
+            }
         }
 
         #endregion
