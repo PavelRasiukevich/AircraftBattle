@@ -26,27 +26,27 @@ namespace Assets.Scripts.GameObjectComponents
         {
             gasCoefficient = Mathf.Clamp(gasCoefficient, 0.25f, 1.0f);
 
+            var angularVelocity = new Vector3(joystickInput.y, 0.0f, joystickInput.x * -1);
+
             if (gasPressed)
             {
                 gasCoefficient += 0.01f;
+
+                Quaternion rotation = Quaternion.Euler(angularVelocity);
+                bodyToMove.MoveRotation(bodyToMove.rotation * rotation);
             }
             else
             {
                 gasCoefficient -= 0.01f;
+
+                var returnRotation = Quaternion.Euler(new Vector3(0.0f, bodyToMove.rotation.eulerAngles.y, 0.0f));
+                bodyToMove.rotation = Quaternion.Slerp(bodyToMove.rotation, returnRotation, Time.fixedDeltaTime);
             }
 
-            var value_X = joystickInput.x;
-            var value_Z = joystickInput.y;
-
-            var rotation = new Vector3(value_Z, 0.0f, value_X * -1);
-            var deltaRotation = Quaternion.Euler(rotation * Time.fixedDeltaTime * speed.RotationSpeed);
-
-            bodyToMove.MoveRotation(bodyToMove.rotation * deltaRotation);
-
-            bodyToMove.MovePosition(bodyToMove.position + transform.InverseTransformDirection(Vector3.forward * speed.MoveSpeed * gasCoefficient));
+            bodyToMove.MovePosition(bodyToMove.position + transform.TransformDirection(gasCoefficient * speed.MoveSpeed * Vector3.forward));
         }
 
         public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
-            => bodyToMove.MovePosition(transform.position + transform.InverseTransformDirection(Vector3.forward * speed.MoveSpeed * gasCoefficient));
+            => bodyToMove.MovePosition(transform.position + transform.TransformDirection(speed.MoveSpeed * Vector3.forward));
     }
 }
