@@ -20,7 +20,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void OnTriggerEnter(Collider other)
         {
-            AirCraft.IsControllable = true;
+            AirCraft.DataModel.IsControllable = true;
         }
     }
 }

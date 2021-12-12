@@ -7,36 +7,27 @@ namespace Assets.Scripts.UI.JoyStick
     public class InnerCircle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         #region PRIVATE FIELDS
-        [SerializeField] private float delta;
-        [SerializeField] private float ZVelocity;
+        private float delta;
         #endregion
 
         #region PROPERTIES
 
-        public static Vector2 JoystickInput { get; private set; }
         public float Radius { get; set; }
         public bool IsJoystickTouching { get; private set; }
+        public Vector2 VelocityVectorInput { get; private set; }
 
         #endregion
-
-        private void Awake()
-        {
-        }
-
-        private void Start()
-        {
-            ZVelocity = Mathf.Clamp(ZVelocity, 0.0f, 1.0f);
-        }
 
         private void Update()
         {
             delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
-            JoystickInput = (transform.position - transform.parent.position).normalized * delta;
+            JoyStick.JoystickInput = (transform.position - transform.parent.position).normalized * delta;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
             IsJoystickTouching = true;
+            JoyStick.IsPressed = IsJoystickTouching;
             StopCoroutine(nameof(ReturnToOriginRoutine));
         }
 
@@ -64,12 +55,9 @@ namespace Assets.Scripts.UI.JoyStick
         public void OnPointerUp(PointerEventData eventData)
         {
             IsJoystickTouching = false;
+            JoyStick.IsPressed = IsJoystickTouching;
             StartCoroutine(nameof(ReturnToOriginRoutine));
         }
-
-        #region PRIVATE METHODS
-
-        #endregion
 
         #region ROUTINES
 

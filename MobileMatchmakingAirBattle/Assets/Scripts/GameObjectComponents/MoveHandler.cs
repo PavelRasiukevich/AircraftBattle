@@ -39,6 +39,8 @@ namespace Assets.Scripts.GameObjectComponents
             {
                 gasCoefficient -= 0.01f;
 
+                FreeFall(bodyToMove);
+
                 var returnRotation = Quaternion.Euler(new Vector3(0.0f, bodyToMove.rotation.eulerAngles.y, 0.0f));
                 bodyToMove.rotation = Quaternion.Slerp(bodyToMove.rotation, returnRotation, Time.fixedDeltaTime);
             }
@@ -48,5 +50,14 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
             => bodyToMove.MovePosition(transform.position + transform.TransformDirection(speed.MoveSpeed * Vector3.forward));
+
+        #region Utilities
+        private void FreeFall(Rigidbody bodyToMove)
+        {
+            var bodyPosition = bodyToMove.position;
+            bodyPosition.y -= 0.1f;
+            bodyToMove.position = bodyPosition;
+        }
+        #endregion
     }
 }

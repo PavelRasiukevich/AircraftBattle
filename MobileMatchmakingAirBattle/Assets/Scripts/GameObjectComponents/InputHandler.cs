@@ -23,9 +23,6 @@ namespace Assets.Scripts.GameObjectComponents
                PlayersInput = new Vector3(Horizontal, 0, Vertical);
            }*/
 
-        private void JoyStickInput()
-        {
-            PlayersInput = JoyStick.JoystickInput;
-        }
+        private void JoyStickInput() => PlayersInput = JoyStick.JoystickInput;
     }
 }

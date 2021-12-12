@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.JoyStick
@@ -9,10 +10,9 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private RectTransform _root;
         [SerializeField] private CanvasScaler _scaler;
 
-        private static bool v;
+        public static Vector2 JoystickInput { get;  set; }
 
-        public static Vector2 JoystickInput => InnerCircle.JoystickInput;
-        public static bool IsPressed => v;
+        public static bool IsPressed { get; set; }
 
         public InnerCircle InnerCircle => _innerCircle;
 
@@ -21,20 +21,15 @@ namespace Assets.Scripts.UI.JoyStick
             _innerCircle.Radius = CalculateRadiusAccordingToResolution(_root);
         }
 
-        private void Update()
-        {
-            v = GetValue();
-        }
-
         private float CalculateRadiusAccordingToResolution(RectTransform transform)
         {
             var ratio = _scaler.referenceResolution.x / Screen.width;
             return transform.rect.width / 2 / ratio;
         }
 
-        private bool GetValue()
+        public static Vector2 GetJoysticInput()
         {
-           return _innerCircle.IsJoystickTouching;
+            return default;
         }
     }
 }

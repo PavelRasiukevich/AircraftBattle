@@ -12,7 +12,7 @@ namespace Assets.Scripts.AirCrafts
     {
         [SerializeField] private AircraftDataModel _dataModel;
 
-        public bool IsControllable { get; set; }
+        public AircraftDataModel DataModel => _dataModel;
 
         #region COMPONENTS
 
@@ -51,7 +51,7 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
 
-            if (!IsControllable)
+            if (!_dataModel.IsControllable)
             {
                 _moveHandler.MoveUncontrollable(_rigidBody, _dataModel.Speed);
             }
