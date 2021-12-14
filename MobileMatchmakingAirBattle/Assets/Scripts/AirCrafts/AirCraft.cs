@@ -52,14 +52,10 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
 
-            if (!_dataModel.IsControllable)
-            {
-                _moveHandler.MoveUncontrollable(_rigidBody, _dataModel.Speed);
-            }
-            else
-            {
+            if (_dataModel.IsControllable)
                 _moveHandler.MoveWithJoyStick(_rigidBody, _inputHandler.PlayersInput, _dataModel.Speed, JoyStick.IsPressed);
-            }
+            else
+                _moveHandler.MoveUncontrollable(_rigidBody, _dataModel.Speed);
         }
 
         #endregion

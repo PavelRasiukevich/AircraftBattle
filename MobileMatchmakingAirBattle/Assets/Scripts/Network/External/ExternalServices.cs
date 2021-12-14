@@ -32,9 +32,7 @@ namespace Network.External
             PlayFabAuthenticate = new PlayFabAuthenticate();
             PlayFabLeaderboards = new PlayFabLeaderboards();
             PlayFabStatistics = new PlayFabStatistics();
-            _authenticationType = Application.platform == RuntimePlatform.Android
-                ? AuthenticationType.Google
-                : _authenticationType;
+            _authenticationType = Application.platform == RuntimePlatform.Android? AuthenticationType.None: _authenticationType;
         }
 
         #endregion

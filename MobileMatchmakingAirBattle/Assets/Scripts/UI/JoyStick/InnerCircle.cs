@@ -7,7 +7,8 @@ namespace Assets.Scripts.UI.JoyStick
     public class InnerCircle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
     {
         #region PRIVATE FIELDS
-        private float delta;
+        private float _delta;
+        private Touch _touch;
         #endregion
 
         #region PROPERTIES
@@ -20,8 +21,11 @@ namespace Assets.Scripts.UI.JoyStick
 
         private void Update()
         {
-            delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
-            JoyStick.JoystickInput = (transform.position - transform.parent.position).normalized * delta;
+            if(Input.touchCount > 0)
+                _touch = Input.touches[0];
+
+            _delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
+            JoyStick.JoystickInput = (transform.position - transform.parent.position).normalized * _delta;
         }
 
         public void OnPointerDown(PointerEventData eventData)
@@ -33,9 +37,12 @@ namespace Assets.Scripts.UI.JoyStick
 
         public void OnDrag(PointerEventData eventData)
         {
-
-            var pixelScreenPosition = Input.mousePosition;
-
+            Vector3 pixelScreenPosition;
+#if UNITY_EDITOR
+            pixelScreenPosition = Input.mousePosition;
+#else
+            pixelScreenPosition = _touch.position;
+#endif
             if (IsJoystickTouching)
             {
                 transform.position = pixelScreenPosition;
@@ -59,7 +66,7 @@ namespace Assets.Scripts.UI.JoyStick
             StartCoroutine(nameof(ReturnToOriginRoutine));
         }
 
-        #region ROUTINES
+#region ROUTINES
 
         private IEnumerator ReturnToOriginRoutine()
         {
@@ -76,6 +83,6 @@ namespace Assets.Scripts.UI.JoyStick
             }
         }
 
-        #endregion
+#endregion
     }
 }

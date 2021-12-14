@@ -45,11 +45,11 @@ namespace Assets.Scripts.GameObjectComponents
                 bodyToMove.rotation = Quaternion.Slerp(bodyToMove.rotation, returnRotation, Time.fixedDeltaTime);
             }
 
-            bodyToMove.MovePosition(bodyToMove.position + transform.TransformDirection(gasCoefficient * speed.MoveSpeed * Vector3.forward));
+            bodyToMove.velocity = transform.TransformDirection(gasCoefficient * speed.MoveSpeed * Vector3.forward);
         }
 
         public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
-            => bodyToMove.MovePosition(transform.position + transform.TransformDirection(speed.MoveSpeed * Vector3.forward));
+            => bodyToMove.velocity = transform.TransformDirection(gasCoefficient * speed.MoveSpeed * Vector3.forward);
 
         #region Utilities
         private void FreeFall(Rigidbody bodyToMove)

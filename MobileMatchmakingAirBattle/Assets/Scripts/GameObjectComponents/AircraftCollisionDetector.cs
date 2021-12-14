@@ -10,8 +10,6 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log("Collided");
-
             var bullet = collision.gameObject.GetComponent<Bullet>();
 
             if (bullet != null)
