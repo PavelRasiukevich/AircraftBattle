@@ -45,6 +45,7 @@ namespace Assets.Scripts.AirCrafts
 
             _attackHandler.PhotonView = _photonView;
             _collisionDetector.AirCraft = this;
+
         }
 
         private void FixedUpdate()

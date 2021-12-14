@@ -24,7 +24,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void MoveWithJoyStick(Rigidbody bodyToMove, Vector2 joystickInput, Speed speed, bool gasPressed)
         {
-            gasCoefficient = Mathf.Clamp(gasCoefficient, 0.25f, 1.0f);
+            gasCoefficient = Mathf.Clamp(gasCoefficient, 0.5f, 1.0f);
 
             var angularVelocity = new Vector3(joystickInput.y, 0.0f, joystickInput.x * -1);
 

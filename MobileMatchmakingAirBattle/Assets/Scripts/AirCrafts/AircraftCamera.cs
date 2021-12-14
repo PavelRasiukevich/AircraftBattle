@@ -7,13 +7,22 @@ namespace Assets.Scripts.AirCrafts
     [RequireComponent(typeof(UniversalAdditionalCameraData), typeof(Camera))]
     public class AircraftCamera : MonoBehaviour
     {
+        private AirCraft _airCraftToFollow;
+        private Transform _cameraSlot;
+        private Vector3 _positionOffset;
 
         private void Start()
         {
-            var airCraft = GameObject.FindObjectOfType<AirCraft>();
+            _airCraftToFollow = GameObject.FindObjectOfType<AirCraft>();
+            _cameraSlot = FindSlotForCamera(_airCraftToFollow.transform);
+            SetPositionAndRotaionAccordingToParent(_cameraSlot);
 
-            SetParent(FindSlotForCamera(airCraft.transform));
-            SetPositionAndRotaionAccordingToParent(transform.parent);
+            _positionOffset = _airCraftToFollow.transform.position - transform.position;
+        }
+
+        private void LateUpdate()
+        {
+            transform.position = _airCraftToFollow.transform.position - _positionOffset;
         }
 
         private void SetParent(Transform parent) => transform.SetParent(parent);
