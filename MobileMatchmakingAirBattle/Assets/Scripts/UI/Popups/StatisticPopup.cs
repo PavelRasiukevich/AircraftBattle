@@ -22,12 +22,12 @@ namespace UI.Popups
 
         public override BasePopup Config()
         {
-            _playerName.text = User.Name;
+            _playerName.text = User.Common.Name;
             _fightsCount.text = User.Statistic.Fights.ToString();
             _winsCount.text = User.Statistic.Wins.ToString();
             _fragsCount.text = User.Statistic.Frags.ToString();
             _failsCount.text = User.Statistic.Fails.ToString();
-            _playerAvatar.sprite = User.Sprite;
+            _playerAvatar.sprite = User.Common.Sprite;
             return this;
         }
 

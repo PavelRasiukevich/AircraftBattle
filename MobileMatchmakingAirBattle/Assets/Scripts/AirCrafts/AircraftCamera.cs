@@ -31,8 +31,12 @@ namespace Assets.Scripts.AirCrafts
 
         private void Update()
         {
-            _interpolatedCameraPositionValue = Vector3.Lerp(transform.position, _cameraSlot.position, Time.deltaTime * _lerpT);
             _interpolatedCameraRotationValue = Quaternion.Lerp(transform.rotation, _cameraSlot.rotation, _slerpT);
+            _interpolatedCameraPositionValue = Vector3.Lerp(transform.position, _cameraSlot.position, _lerpT);
+        }
+
+        private void FixedUpdate()
+        {
         }
 
         private void LateUpdate()

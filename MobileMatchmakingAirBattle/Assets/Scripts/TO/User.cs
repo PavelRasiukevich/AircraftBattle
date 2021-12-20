@@ -1,65 +1,76 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Utils;
-using Network.External;
+using Managers.External;
 using UnityEngine;
+using Utils.Enums;
 
 namespace TO
 {
     /*
      * Информация по игроку
+     * (логин, аватар, рейтинги)
      */
     public class User
     {
-        public static string Name { get; set; }
-        public static Sprite Sprite { get; set; }
+        internal class Common
+        {
+            public static string Name { get; set; }
+            public static Sprite Sprite { get; set; }
+            public static float Gold { get; private set; }
+            public static void SpendGold(float value) => Gold -= value;
+        }
 
         internal class Statistic
         {
             public static Dictionary<string, int> Data { get; } = new Dictionary<string, int>
             {
-                {UtilsConst.PlayFab.SCORE_TOTALWINS, 0},
-                {UtilsConst.PlayFab.SCORE_TOTALFAILS, 0},
-                {UtilsConst.PlayFab.SCORE_TOTALFRAGS, 0},
-                {UtilsConst.PlayFab.SCORE_TOTALFIGHTS, 0}
+                {Const.PlayFab.ScoreBy(LeaderboardType.Wins), 0},
+                {Const.PlayFab.ScoreBy(LeaderboardType.Fails), 0},
+                {Const.PlayFab.ScoreBy(LeaderboardType.Frags), 0},
+                {Const.PlayFab.ScoreBy(LeaderboardType.Fights), 0}
             };
 
             public static int Fights
             {
-                get => Data[UtilsConst.PlayFab.SCORE_TOTALFIGHTS];
+                get => Data[Const.PlayFab.ScoreBy(LeaderboardType.Fights)];
                 set
                 {
-                    Data[UtilsConst.PlayFab.SCORE_TOTALFIGHTS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFIGHTS, value);
+                    Data[Const.PlayFab.ScoreBy(LeaderboardType.Fights)] = value;
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fights),
+                        value);
                 }
             }
-          
+
             public static int Wins
             {
-                get => Data[UtilsConst.PlayFab.SCORE_TOTALWINS];
+                get => Data[Const.PlayFab.ScoreBy(LeaderboardType.Wins)];
                 set
                 {
-                    Data[UtilsConst.PlayFab.SCORE_TOTALWINS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALWINS, value);
+                    Data[Const.PlayFab.ScoreBy(LeaderboardType.Wins)] = value;
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Wins), value);
+                    ExternalServices.Inst.GooglePlay.Achievements.Wins(value);
                 }
             }
 
             public static int Fails
             {
-                get => Data[UtilsConst.PlayFab.SCORE_TOTALFAILS];
+                get => Data[Const.PlayFab.ScoreBy(LeaderboardType.Fails)];
                 set
                 {
-                    Data[UtilsConst.PlayFab.SCORE_TOTALFAILS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFAILS, value);
+                    Data[Const.PlayFab.ScoreBy(LeaderboardType.Fails)] = value;
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fails), value);
                 }
             }
 
             public static int Frags
             {
-                get => Data[UtilsConst.PlayFab.SCORE_TOTALFRAGS];
+                get => Data[Const.PlayFab.ScoreBy(LeaderboardType.Frags)];
                 set
                 {
-                    Data[UtilsConst.PlayFab.SCORE_TOTALFRAGS] = value;
-                    ExternalServices.Instance.PlayFabStatistics.SubmitScore(UtilsConst.PlayFab.SCORE_TOTALFRAGS, value);
+                    Data[Const.PlayFab.ScoreBy(LeaderboardType.Frags)] = value;
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Frags), value);
+                    if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
+                        ExternalServices.Inst.GooglePlay.Achievements.Frags(value);
                 }
             }
         }

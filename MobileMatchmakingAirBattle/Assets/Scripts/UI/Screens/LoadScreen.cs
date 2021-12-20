@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +17,7 @@ namespace UI.Screens
 
         #region UNITY
 
-        private void Start() => ExternalServices.Instance.Authentication();
+        private void Start() => ExternalServices.Inst.Authentication();
 
         #endregion
 

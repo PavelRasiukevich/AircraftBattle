@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -49,7 +49,7 @@ namespace UI.Screens
 
         public void ConfirmOnClick()
         {
-            ExternalServices.Instance.PlayFabAuthenticate.RegisterWithPlayFab(_nameInput.text, _passwordInput.text,
+            ExternalServices.Inst.PlayFab.Authenticate.RegisterWithPlayFab(_nameInput.text, _passwordInput.text,
                 _mailInput.text);
         }
 

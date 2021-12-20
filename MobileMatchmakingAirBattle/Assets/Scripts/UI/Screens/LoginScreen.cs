@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +38,7 @@ namespace UI.Screens
 
         public void OnLoginError(string errorText)
         {
+            PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _errorText.gameObject.SetActive(true);
             _errorText.text = errorText;
         }
@@ -50,7 +51,7 @@ namespace UI.Screens
         public void ConfirmOnClick()
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
-            ExternalServices.Instance.PlayFabAuthenticate.LoginWithPlayFab(_nameInput.text, _passwordInput.text);
+            ExternalServices.Inst.PlayFab.Authenticate.LoginWithPlayFab(_nameInput.text, _passwordInput.text);
         }
 
         public void RegistrationOnClick()
@@ -61,7 +62,7 @@ namespace UI.Screens
         public void CustomIdOnClick()
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
-            ExternalServices.Instance.PlayFabAuthenticate.AuthenticateWithCustomId();
+            ExternalServices.Inst.PlayFab.Authenticate.AuthenticateWithCustomId();
         }
 
         #endregion

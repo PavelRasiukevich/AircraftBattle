@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Assets.Scripts.Network.Launcher;
+using Managers.Network.Launcher;
 using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens
@@ -10,7 +10,7 @@ namespace Assets.Scripts.UI.Screens
 
         #region OnClick
 
-        public void SwitchToMainMenu() => Launcher.Instance.StopMatching();
+        public void SwitchToMainMenu() => Launcher.Inst.StopMatching();
 
         #endregion
     }
