@@ -25,8 +25,6 @@ namespace Assets.Scripts.GameObjectComponents
         private void Awake()
         {
             _elapsedTime = _reloadTime;
-
-            JoyStick.FireAction += Handler;
         }
 
         private void Update()
@@ -34,35 +32,25 @@ namespace Assets.Scripts.GameObjectComponents
             if (!Aircraft.DataModel.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
-            if (FireButton.IsFiring)
+            if (FireButton.IsFire)
             {
                 if (_elapsedTime >= _reloadTime)
                 {
-                    _elapsedTime = 0.0f;
-
                     if (PhotonView.IsMine)
                         PhotonView.RPC(nameof(Attack), RpcTarget.All);
+
+                    _elapsedTime = 0.0f;
                 }
 
                 _elapsedTime += Time.deltaTime;
             }
             else
             {
-                _elapsedTime = _reloadTime;
+                if (_elapsedTime < _reloadTime)
+                    _elapsedTime += Time.deltaTime;
+                else
+                    _elapsedTime = _reloadTime;
             }
-        }
-
-        private void Handler()
-        {
-            if (!_processingFire)
-            {
-                StartCoroutine(nameof(PerformFire));
-            }
-        }
-
-        private IEnumerator PerformFire()
-        {
-            yield return null;
         }
 
         #region RPCs

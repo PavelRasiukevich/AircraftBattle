@@ -6,21 +6,16 @@ namespace Assets.Scripts.UI.JoyStick
 {
     public class FireButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
-        public static bool IsFiring { get; private set; }
-
-        private Action _act;
+        public static bool IsFire { get; set; }
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            Debug.Log("OnPointerDown FireButton");
-            IsFiring = true;
+            IsFire = true;
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            Debug.Log("OnPointerUp FireButton");
-            IsFiring = false;
+            IsFire = false;
         }
-
     }
 }

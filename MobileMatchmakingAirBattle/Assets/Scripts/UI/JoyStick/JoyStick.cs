@@ -12,8 +12,6 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private CanvasScaler _scaler;
         [SerializeField] private FireButton _fireButton;
 
-        public static Action FireAction { get; set; }
-
         public static Vector2 JoystickInput { get;  set; }
 
         public static bool IsPressed { get; set; }
@@ -23,6 +21,7 @@ namespace Assets.Scripts.UI.JoyStick
         private void Awake()
         {
             _innerCircle.Radius = CalculateRadiusAccordingToResolution(_root);
+
         }
 
         private float CalculateRadiusAccordingToResolution(RectTransform transform)
