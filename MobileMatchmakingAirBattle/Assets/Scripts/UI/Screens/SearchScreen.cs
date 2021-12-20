@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Assets.Scripts.Network.Launcher;
+using Managers.Network.Launcher;
 using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens

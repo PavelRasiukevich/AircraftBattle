@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Data;
+using Managers.Data;
 using UI.Screens.Shop.Elements;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,17 +16,22 @@ namespace UI.Screens.Shop
 
         #region UNITY
 
-        private void OnEnable() => RefreshUI();
+        private void OnEnable() => Refresh();
 
         #endregion
 
         #region PRIVATE
 
-        private void RefreshUI()
+        public void Refresh()
         {
             foreach (var componentsInChild in _content.GetComponentsInChildren<ShopItemLine>())
                 Destroy(componentsInChild.gameObject);
-            GameDataManager.Inst.PlanesData._planeList.ForEach(item=> Debug.Log(item._displayName));
+            GameData.Inst.Planes.PlaneList.ForEach(line =>
+            {
+                Instantiate(_shopItemLine.gameObject, _content.transform)
+                    .GetComponent<ShopItemLine>()
+                    .Config(line);
+            });
         }
 
         #endregion

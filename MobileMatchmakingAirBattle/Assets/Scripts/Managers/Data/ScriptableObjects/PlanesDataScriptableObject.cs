@@ -2,12 +2,20 @@
 using TO;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace Managers.Data.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "PlanesData", menuName = "Data/Planes", order = 1)]
     public class PlanesDataScriptableObject : ScriptableObject
     {
-        public List<PlaneInfo> _planeList;
+        [SerializeField] private List<PlaneInfo> _planeList;
 
+        public List<PlaneInfo> PlaneList => _planeList;
+
+        public bool GetPlaneBy(int id, out PlaneInfo plane)
+        {
+            plane = null;
+            plane = PlaneList.FindLast(p => p.ID == id);
+            return plane != null;
+        }
     }
 }

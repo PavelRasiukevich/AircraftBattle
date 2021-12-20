@@ -1,11 +1,12 @@
-using Photon.Realtime;
 using System.Collections.Generic;
+using Photon.Realtime;
 
-namespace Assets.Scripts.Network.Lobby
+namespace Managers.Network.Lobby
 {
     public class RoomListUpdater
     {
-        public Dictionary<string, RoomInfo> UpdateCachedRoomList(List<RoomInfo> listOfRooms, Dictionary<string,RoomInfo> updatedListOfRooms)
+        public Dictionary<string, RoomInfo> UpdateCachedRoomList(List<RoomInfo> listOfRooms,
+            Dictionary<string, RoomInfo> updatedListOfRooms)
         {
             for (int i = listOfRooms.Count - 1; i >= 0; i--)
             {

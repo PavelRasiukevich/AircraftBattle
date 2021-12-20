@@ -2,7 +2,7 @@ using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
 
-namespace Assets.Scripts.Network.Lobby
+namespace Managers.Network.Lobby
 {
     public class RoomCreator
     {
@@ -11,7 +11,7 @@ namespace Assets.Scripts.Network.Lobby
             RoomOptions roomOptions = new RoomOptions()
             {
                 MaxPlayers = _customPropeties.MaxPlayers,
-                CustomRoomPropertiesForLobby = new string[2] { UtilsConst.LowerBound, UtilsConst.UpperBound },
+                CustomRoomPropertiesForLobby = new string[2] { Const.LowerBound, Const.UpperBound },
                 CustomRoomProperties = _customPropeties.PTSRange,
                 IsOpen = true,
                 IsVisible = true,

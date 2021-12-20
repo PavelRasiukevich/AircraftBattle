@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TMPro;
 using TO;
 using UnityEngine;
@@ -17,8 +17,8 @@ namespace UI.Screens.MainMenu.Elements
 
         public void Config()
         {
-            _playerName.text = User.Name;
-            _playerAvatar.sprite = User.Sprite;
+            _playerName.text = User.Common.Name;
+            _playerAvatar.sprite = User.Common.Sprite;
         }
 
         #endregion

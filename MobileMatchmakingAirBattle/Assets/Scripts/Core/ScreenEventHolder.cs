@@ -18,6 +18,7 @@ namespace Core
         [SerializeField] private UnityEvent<string> _registrationErrorEvent;
         [SerializeField] private UnityEvent<string> _googleErrorEvent;
         [SerializeField] private UnityEvent<List<PlayerLeaderboardEntry>> _leaderBoardLoadEvent;
+        [SerializeField] private UnityEvent _shopEditInfoEvent;
 
         #region Events
 
@@ -37,10 +38,15 @@ namespace Core
         public void ErrorGooglePlay(string error) => _googleErrorEvent.Invoke(error);
 
         /*
-         *  Рейтинг загружен
+         *  Обновить Рейтинг
          */
-        public void LeaderboardLoad(List<PlayerLeaderboardEntry> leaderboard) =>
+        public void RefreshLeaderboardLoad(List<PlayerLeaderboardEntry> leaderboard) =>
             _leaderBoardLoadEvent.Invoke(leaderboard);
+        
+        /*
+         * Обновить Магазин
+         */
+        public void RefreshShop() => _shopEditInfoEvent.Invoke();
 
         #endregion
 

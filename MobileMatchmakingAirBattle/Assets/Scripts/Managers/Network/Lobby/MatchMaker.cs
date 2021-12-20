@@ -1,16 +1,16 @@
+using System.Collections.Generic;
 using Assets.Scripts.PlayersSettings;
 using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections.Generic;
 
-namespace Assets.Scripts.Network.Lobby
+namespace Managers.Network.Lobby
 {
     public class MatchMaker
     {
         public void MatchPlayers(Dictionary<string, RoomInfo> avaliableRooms, PlayerSettings settings)
         {
-            for (int t = UtilsConst.SearchWidth - 1; t >= 0; t--)
+            for (int t = Const.SearchWidth - 1; t >= 0; t--)
             {
                 foreach (var value in avaliableRooms.Values)
                 {
@@ -23,7 +23,7 @@ namespace Assets.Scripts.Network.Lobby
                     return;
                 }
 
-                settings.ExpandMMRBoundaries(UtilsConst.Difference);
+                settings.ExpandMMRBoundaries(Const.Difference);
             }
 
             //reset MMR to initial?
@@ -34,21 +34,23 @@ namespace Assets.Scripts.Network.Lobby
         private bool CheckRoomConnectionConditions(RoomInfo room, PlayerSettings settings)
         {
             #region Cached
+
             var customProperties = room.CustomProperties;
-            var cachedLowerBound = (int)room.CustomProperties[UtilsConst.LowerBound];
-            var cachedUpperBound = (int)room.CustomProperties[UtilsConst.UpperBound];
+            var cachedLowerBound = (int) room.CustomProperties[Const.LowerBound];
+            var cachedUpperBound = (int) room.CustomProperties[Const.UpperBound];
             var increasedMMR = settings.IncreasedMMR;
             var decreasedMMR = settings.DecreasedMMR;
+
             #endregion
 
             if (customProperties == null || customProperties.Count == 0) return false;
-            if (!customProperties.ContainsKey(UtilsConst.LowerBound)) return false;
-            if (!customProperties.ContainsKey(UtilsConst.UpperBound)) return false;
+            if (!customProperties.ContainsKey(Const.LowerBound)) return false;
+            if (!customProperties.ContainsKey(Const.UpperBound)) return false;
 
             return increasedMMR >= cachedLowerBound
-                                        && increasedMMR <= cachedUpperBound
-                                        || decreasedMMR >= cachedLowerBound
-                                        && decreasedMMR <= cachedUpperBound;
+                   && increasedMMR <= cachedUpperBound
+                   || decreasedMMR >= cachedLowerBound
+                   && decreasedMMR <= cachedUpperBound;
         }
 
         private void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();

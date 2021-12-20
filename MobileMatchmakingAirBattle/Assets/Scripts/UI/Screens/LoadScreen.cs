@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;

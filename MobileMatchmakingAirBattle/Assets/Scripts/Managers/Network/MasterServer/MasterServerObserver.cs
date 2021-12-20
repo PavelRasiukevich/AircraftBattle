@@ -5,11 +5,12 @@ using Photon.Realtime;
 using UnityEngine;
 using Utils.Enums;
 
-namespace Assets.Scripts.Network.MasterServer
+namespace Managers.Network.MasterServer
 {
     public class MasterServerObserver : MonoBehaviourPunCallbacks
     {
         #region PUN CALLBACKS
+
         public override void OnConnectedToMaster()
         {
             MessagesUtilities.ConnectedToMasterMessage();

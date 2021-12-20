@@ -24,7 +24,7 @@ namespace Assets.Scripts.AirCrafts
             GetComponent<UniversalAdditionalCameraData>()
                 .cameraStack
                 .Add(GameObject
-                .FindWithTag(UtilsConst.UICameraBattle)
+                .FindWithTag(Const.UICameraBattle)
                 .GetComponent<Camera>());
         }
     }

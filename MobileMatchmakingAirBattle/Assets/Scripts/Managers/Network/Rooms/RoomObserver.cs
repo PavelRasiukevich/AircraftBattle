@@ -5,7 +5,7 @@ using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.Network.Rooms
+namespace Managers.Network.Rooms
 {
     public class RoomObserver : MonoBehaviourPunCallbacks
     {
@@ -16,19 +16,23 @@ namespace Assets.Scripts.Network.Rooms
         private PhotonView _photonView;
 
         #region UNITY
+
         private void Awake()
         {
             _photonView = photonView.GetComponent<PhotonView>();
         }
+
         #endregion
 
         #region PUN CALLBACKS
+
         public override void OnJoinedRoom()
         {
             MessagesUtilities.JoinRoomMessage();
 
             _playersInRoom = GetAllPlayersInCurrentRoom();
             _maxPlayers = PhotonNetwork.CurrentRoom.MaxPlayers;
+            PhotonNetwork.LoadLevel(Const.Battle);
         }
 
         public override void OnLeftRoom()
@@ -54,7 +58,7 @@ namespace Assets.Scripts.Network.Rooms
 
             if (!PhotonNetwork.IsMasterClient) return;
 
-            PhotonNetwork.LoadLevel(UtilsConst.Battle);
+            PhotonNetwork.LoadLevel(Const.Battle);
         }
 
         public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -69,12 +73,15 @@ namespace Assets.Scripts.Network.Rooms
         #endregion
 
         #region PRIVATE METHODS
+
         private void ClearListOfPlayers() => _playersInRoom.Clear();
 
         private List<Player> GetAllPlayersInCurrentRoom()
         {
             #region Cached Values
+
             Player[] cachedPlayersArray = PhotonNetwork.PlayerList;
+
             #endregion
 
             var players = new List<Player>();
@@ -98,6 +105,5 @@ namespace Assets.Scripts.Network.Rooms
         private void KickPlayerFromRoom() => PhotonNetwork.LeaveRoom();
 
         #endregion
-
     }
 }

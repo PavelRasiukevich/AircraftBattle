@@ -1,13 +1,13 @@
+using System;
+using System.Collections.Generic;
 using Assets.Scripts.PlayersSettings;
 using Assets.Scripts.Utils;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
-namespace Assets.Scripts.Network.Lobby
+namespace Managers.Network.Lobby
 {
     [Serializable]
     public class CustomRoomProperites
@@ -23,10 +23,7 @@ namespace Assets.Scripts.Network.Lobby
         {
             get => _playerMMR;
 
-            set
-            {
-                _playerMMR = value;
-            }
+            set { _playerMMR = value; }
         }
     }
 
@@ -36,29 +33,37 @@ namespace Assets.Scripts.Network.Lobby
 
         [SerializeField] private int _initialMMR;
         [SerializeField] private CustomRoomProperites _customRoomProperties;
+
         #endregion
 
         #region PRIVATE FIELDS
+
         private Dictionary<string, RoomInfo> _rooms;
         private PlayerSettings _settings;
+
         #endregion
 
         #region HELPERS
+
         private RoomListUpdater _roomListUpdater;
         private MatchMaker _matchMaker;
         private RoomCreator _roomCreator;
+
         #endregion
 
         #region UNITY
+
         private void Awake()
         {
             _roomListUpdater = new RoomListUpdater();
             _matchMaker = new MatchMaker();
             _roomCreator = new RoomCreator();
         }
+
         #endregion
 
         #region PUN CALLBACKS
+
         public override void OnJoinedLobby()
         {
             MessagesUtilities.JoinLobbyMessage();
@@ -66,6 +71,7 @@ namespace Assets.Scripts.Network.Lobby
             _rooms = new Dictionary<string, RoomInfo>();
 
             #region Potential Refactoring
+
             _settings = new PlayerSettings
             {
                 //replace with PlayerPrefs.GetInt()
@@ -73,10 +79,11 @@ namespace Assets.Scripts.Network.Lobby
             };
 
             _customRoomProperties.PTSRange = new Hashtable
-             {
-                 { UtilsConst.LowerBound, _settings.MMR - UtilsConst.Difference },
-                 { UtilsConst.UpperBound, _settings.MMR + UtilsConst.Difference }
-             };
+            {
+                {Const.LowerBound, _settings.MMR - Const.Difference},
+                {Const.UpperBound, _settings.MMR + Const.Difference}
+            };
+
             #endregion
         }
 
@@ -94,11 +101,15 @@ namespace Assets.Scripts.Network.Lobby
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
         }
 
-        public override void OnJoinRandomFailed(short returnCode, string message) => _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
+        public override void OnJoinRandomFailed(short returnCode, string message) =>
+            _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
 
-        public override void OnCreatedRoom() { }
+        public override void OnCreatedRoom()
+        {
+        }
 
-        public override void OnCreateRoomFailed(short returnCode, string message) => print($"{returnCode} / Message: {message}");
+        public override void OnCreateRoomFailed(short returnCode, string message) =>
+            print($"{returnCode} / Message: {message}");
 
         #endregion
     }

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CustomEditors
+namespace Managers.Data.CustomEditors
 {
 #if UNITY_EDITOR
     public abstract class BaseCustomEditor : EditorWindow

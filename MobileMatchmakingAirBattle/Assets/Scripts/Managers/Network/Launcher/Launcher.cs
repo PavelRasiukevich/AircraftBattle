@@ -1,7 +1,7 @@
 using Core;
 using Photon.Pun;
 
-namespace Assets.Scripts.Network.Launcher
+namespace Managers.Network.Launcher
 {
     public class Launcher : BaseInstance<Launcher>
     {

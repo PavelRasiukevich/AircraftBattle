@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Assets.Scripts.AirCrafts;
-using ScriptableObjects;
+using Assets.Scripts.Utils;
+using Managers.Data.ScriptableObjects;
 using TO;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace CustomEditors
+namespace Managers.Data.CustomEditors
 {
 #if UNITY_EDITOR
 
@@ -24,50 +25,59 @@ namespace CustomEditors
         private void OnEnable()
         {
             _planesData =
-                AssetDatabase.LoadAssetAtPath("Assets/PlanesData.asset",
+                AssetDatabase.LoadAssetAtPath(Const.PlanesDataPath,
                     typeof(PlanesDataScriptableObject)) as PlanesDataScriptableObject;
-            reorderableList = new ReorderableList(_planesData._planeList, typeof(PlaneInfo));
+            reorderableList = new ReorderableList(_planesData.PlaneList, typeof(PlaneInfo));
             reorderableList.elementHeight =
                 EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing;
-            reorderableList.onSelectCallback = list => _selectedPlane = _planesData._planeList[list.index];
+            reorderableList.onSelectCallback = list => _selectedPlane = _planesData.PlaneList[list.index];
             reorderableList.drawHeaderCallback = rect => EditorGUI.LabelField(rect, "Planes:", EditorStyles.boldLabel);
             reorderableList.drawElementCallback =
                 (rect, index, isactive, isfocused) =>
                     EditorGUI.LabelField(rect,
-                        _planesData._planeList[index]._displayName,
-                        _planesData._planeList[index]._isDefaultPlane ? EditorStyles.boldLabel : EditorStyles.label);
+                        _planesData.PlaneList[index].DisplayName,
+                        index == 0 ? EditorStyles.boldLabel : EditorStyles.label);
         }
 
         private void DrawSelected()
         {
             if (_selectedPlane == null) return;
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField($"Plane: {_selectedPlane._displayName}", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField($"Plane: {_selectedPlane.DisplayName}", EditorStyles.boldLabel);
 
             EditorGUILayout.EndHorizontal();
             EditorGUI.BeginDisabledGroup(true);
-            if (_selectedPlane._id == 0) _selectedPlane._id = Random.Range(100000000, 999999999);
-            EditorGUILayout.IntField("ID", _selectedPlane._id);
+            if (_selectedPlane.ID == 0) _selectedPlane.ID = Random.Range(100000000, 999999999);
+            EditorGUILayout.IntField("ID", _selectedPlane.ID);
             EditorGUI.EndDisabledGroup();
-            _selectedPlane._displayName = EditorGUILayout.TextField("Name", _selectedPlane._displayName);
-            _selectedPlane._isViewInEditor =
-                EditorGUILayout.Foldout(_selectedPlane._isViewInEditor, $"Plane: {_selectedPlane._displayName}");
+            _selectedPlane.DisplayName = EditorGUILayout.TextField("Name", _selectedPlane.DisplayName);
+            _selectedPlane.IsViewInEditor =
+                EditorGUILayout.Foldout(_selectedPlane.IsViewInEditor, $"Plane: {_selectedPlane.DisplayName}");
 
-            if (_selectedPlane._isViewInEditor)
+            if (_selectedPlane.IsViewInEditor)
             {
-                _selectedPlane._icon = (Sprite) EditorGUILayout.ObjectField("Icon", _selectedPlane._icon,
+                EditorGUI.indentLevel++;
+                _selectedPlane.Icon = (Sprite) EditorGUILayout.ObjectField("Icon", _selectedPlane.Icon,
                     typeof(Sprite),
                     allowSceneObjects: true);
-                _selectedPlane._planePrefab = (AirCraft) EditorGUILayout.ObjectField("Prefab",
-                    _selectedPlane._planePrefab,
+                _selectedPlane.PlanePrefab = (AirCraft) EditorGUILayout.ObjectField("Prefab",
+                    _selectedPlane.PlanePrefab,
                     typeof(AirCraft), allowSceneObjects: true);
-                _selectedPlane._isDefaultPlane =
-                    EditorGUILayout.Toggle("Default Plane", _selectedPlane._isDefaultPlane);
-                EditorGUI.BeginDisabledGroup(_selectedPlane._isDefaultPlane);
-                _selectedPlane._gamePrice =
-                    EditorGUILayout.FloatField("Game price",
-                        _selectedPlane._isDefaultPlane ? 0 : _selectedPlane._gamePrice);
+                if (_selectedPlane.PlanePrefab != null)
+                {
+                    EditorGUI.indentLevel++;
+                    EditorGUI.BeginDisabledGroup(true);
+                    EditorGUILayout.IntField("Health", _selectedPlane.PlanePrefab.DataModel.Hp);
+                    EditorGUILayout.FloatField("Speed", _selectedPlane.PlanePrefab.DataModel.MoveSpeed);
+                    EditorGUILayout.FloatField("Mobility", _selectedPlane.PlanePrefab.DataModel.Mobility);
+                    EditorGUI.EndDisabledGroup();
+                    EditorGUI.indentLevel--;
+                }
+                _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power (for shop)", _selectedPlane.FirePower);
+                _selectedPlane.GamePrice =
+                    EditorGUILayout.FloatField("Game price", _selectedPlane.GamePrice);
                 EditorGUI.EndDisabledGroup();
+                EditorGUI.indentLevel--;
             }
         }
 
@@ -77,12 +87,14 @@ namespace CustomEditors
             reorderableList.DoLayoutList();
             DrawSelected();
 
-            if (_planesData._planeList.Count > 0)
-                planesInEditor.AddRange(_planesData._planeList);
+            if (_planesData.PlaneList.Count > 0)
+                planesInEditor.AddRange(_planesData.PlaneList);
 
-            _planesData._planeList.Clear();
-            _planesData._planeList.AddRange(planesInEditor);
+            _planesData.PlaneList.Clear();
+            _planesData.PlaneList.AddRange(planesInEditor);
             EditorGUI.indentLevel = 0;
+            if (GUI.changed)
+                EditorUtility.SetDirty(_planesData);
         }
     }
 #endif
