@@ -44,6 +44,7 @@ namespace Assets.Scripts.AirCrafts
             _collisionDetector = GetComponent<AircraftCollisionDetector>();
 
             _attackHandler.PhotonView = _photonView;
+            _attackHandler.Aircraft = this;
             _collisionDetector.AirCraft = this;
 
         }

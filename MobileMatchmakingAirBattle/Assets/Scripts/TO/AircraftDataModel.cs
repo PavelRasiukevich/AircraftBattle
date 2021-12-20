@@ -8,7 +8,6 @@ namespace TO
     {
         [SerializeField] Speed _speed;
         [SerializeField] private int _hp;
-        [SerializeField] private int _mobility;
         [SerializeField] private int _currentHp;
 
         public Speed Speed => _speed;

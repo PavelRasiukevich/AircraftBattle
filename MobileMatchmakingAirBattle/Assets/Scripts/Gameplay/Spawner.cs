@@ -1,4 +1,3 @@
-using Managers.Data;
 using Photon.Pun;
 using UnityEngine;
 
@@ -22,7 +21,7 @@ namespace Assets.Scripts.Gameplay
 
         #region PRIVATE METHODS
 
-        private void InitializeActor(Vector3 position, Quaternion rotation) => PhotonNetwork.Instantiate(GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
+        private void InitializeActor(Vector3 position, Quaternion rotation) => PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
 
         private Transform SetupPointInWorld(Transform point)
         {
@@ -36,7 +35,6 @@ namespace Assets.Scripts.Gameplay
         private Vector3 GetDirectionToLook(Transform a, Transform b) => (a.position - b.transform.position).normalized;
 
         private static Quaternion SetupRotation(Quaternion lookRotation)
-
         {
             lookRotation.x = 0;
             lookRotation.z = 0;

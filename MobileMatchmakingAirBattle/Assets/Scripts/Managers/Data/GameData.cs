@@ -2,14 +2,15 @@
 using Core;
 using Managers.Data.ScriptableObjects;
 using TO;
-using UnityEditor;
 using UnityEngine;
 
 namespace Managers.Data
 {
     public class GameData : BaseInstance<GameData>
     {
-        public PlanesDataScriptableObject Planes { get; private set; }
+
+        [SerializeField] private PlanesDataScriptableObject _planes;
+        public PlanesDataScriptableObject Planes { get => _planes; private set => _planes = value; }
 
         private PlaneInfo _currentPlane;
         public PlaneInfo CurrentPlane => _currentPlane;
@@ -20,16 +21,17 @@ namespace Managers.Data
         {
 
             base.Awake();
-            Planes =
+
+           /* Planes =
                 AssetDatabase.LoadAssetAtPath(Const.PlanesDataPath,
-                    typeof(PlanesDataScriptableObject)) as PlanesDataScriptableObject;
+                    typeof(PlanesDataScriptableObject)) as PlanesDataScriptableObject;*/
+
             DontDestroyOnLoad(gameObject);
         }
 
         private void Start()
         {
             LoadCurrentPlane();
-
         }
 
         #endregion

@@ -1,14 +1,18 @@
+using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.UI.JoyStick
 {
     public class JoyStick : MonoBehaviour
     {
+
         [SerializeField] private InnerCircle _innerCircle;
         [SerializeField] private RectTransform _root;
         [SerializeField] private CanvasScaler _scaler;
+        [SerializeField] private FireButton _fireButton;
+
+        public static Action FireAction { get; set; }
 
         public static Vector2 JoystickInput { get;  set; }
 

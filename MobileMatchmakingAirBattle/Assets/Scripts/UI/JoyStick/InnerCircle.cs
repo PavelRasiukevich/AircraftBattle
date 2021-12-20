@@ -8,7 +8,7 @@ namespace Assets.Scripts.UI.JoyStick
     {
         #region PRIVATE FIELDS
         private float _delta;
-        private Touch _touch;
+        private int lastTouchID;
         #endregion
 
         #region PROPERTIES
@@ -19,17 +19,21 @@ namespace Assets.Scripts.UI.JoyStick
 
         #endregion
 
+        private void Awake()
+        {
+            lastTouchID = -2;
+        }
+
         private void Update()
         {
-            if(Input.touchCount > 0)
-                _touch = Input.touches[0];
-
             _delta = Vector3.Distance(transform.position, transform.parent.position) / Radius;
             JoyStick.JoystickInput = (transform.position - transform.parent.position).normalized * _delta;
         }
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            lastTouchID = eventData.pointerId;
+
             IsJoystickTouching = true;
             JoyStick.IsPressed = IsJoystickTouching;
             StopCoroutine(nameof(ReturnToOriginRoutine));
@@ -37,36 +41,44 @@ namespace Assets.Scripts.UI.JoyStick
 
         public void OnDrag(PointerEventData eventData)
         {
-            Vector3 pixelScreenPosition;
-#if UNITY_EDITOR
-            pixelScreenPosition = Input.mousePosition;
-#else
-            pixelScreenPosition = _touch.position;
-#endif
-            if (IsJoystickTouching)
+            if (lastTouchID == eventData.pointerId)
             {
-                transform.position = pixelScreenPosition;
 
-                var distance = Vector3.Distance(transform.position, transform.parent.position);
-
-                if (distance > Radius)
+                Vector3 pixelScreenPosition;
+#if UNITY_EDITOR
+                pixelScreenPosition = Input.mousePosition;
+#else
+            pixelScreenPosition = Input.GetTouch(lastTouchID).position;
+#endif
+                if (IsJoystickTouching)
                 {
-                    var diff = transform.position - transform.parent.position;
-                    diff = (diff * Radius) / distance;
+                    transform.position = pixelScreenPosition;
 
-                    transform.position = transform.parent.position + diff;
+                    var distance = Vector3.Distance(transform.position, transform.parent.position);
+
+                    if (distance > Radius)
+                    {
+                        var diff = transform.position - transform.parent.position;
+                        diff = (diff * Radius) / distance;
+
+                        transform.position = transform.parent.position + diff;
+                    }
                 }
             }
         }
 
         public void OnPointerUp(PointerEventData eventData)
         {
-            IsJoystickTouching = false;
-            JoyStick.IsPressed = IsJoystickTouching;
-            StartCoroutine(nameof(ReturnToOriginRoutine));
+            if (lastTouchID == eventData.pointerId)
+            {
+                lastTouchID = -2;
+                IsJoystickTouching = false;
+                JoyStick.IsPressed = IsJoystickTouching;
+                StartCoroutine(nameof(ReturnToOriginRoutine));
+            }
         }
 
-#region ROUTINES
+        #region ROUTINES
 
         private IEnumerator ReturnToOriginRoutine()
         {
@@ -83,6 +95,6 @@ namespace Assets.Scripts.UI.JoyStick
             }
         }
 
-#endregion
+        #endregion
     }
 }

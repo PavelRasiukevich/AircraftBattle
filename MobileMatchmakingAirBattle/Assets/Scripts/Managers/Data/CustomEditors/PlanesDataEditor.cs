@@ -3,8 +3,10 @@ using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Utils;
 using Managers.Data.ScriptableObjects;
 using TO;
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
+#endif
 using UnityEngine;
 
 namespace Managers.Data.CustomEditors
@@ -57,10 +59,10 @@ namespace Managers.Data.CustomEditors
             if (_selectedPlane.IsViewInEditor)
             {
                 EditorGUI.indentLevel++;
-                _selectedPlane.Icon = (Sprite) EditorGUILayout.ObjectField("Icon", _selectedPlane.Icon,
+                _selectedPlane.Icon = (Sprite)EditorGUILayout.ObjectField("Icon", _selectedPlane.Icon,
                     typeof(Sprite),
                     allowSceneObjects: true);
-                _selectedPlane.PlanePrefab = (AirCraft) EditorGUILayout.ObjectField("Prefab",
+                _selectedPlane.PlanePrefab = (AirCraft)EditorGUILayout.ObjectField("Prefab",
                     _selectedPlane.PlanePrefab,
                     typeof(AirCraft), allowSceneObjects: true);
                 if (_selectedPlane.PlanePrefab != null)

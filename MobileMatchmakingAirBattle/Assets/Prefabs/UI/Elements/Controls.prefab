@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1205371364847714484}
+  - component: {fileID: 7483049444913635223}
   m_Layer: 5
   m_Name: Attack
   m_TagString: Untagged
@@ -111,6 +112,18 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: 100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7483049444913635223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3669264299905378748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 548d72cc3b929d44c81180872b283885, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4232771181715310923
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,9 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b3f69f6b28fc49438bade8d910824b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _outerCircle: {fileID: 8643025688598529863}
   _innerCircle: {fileID: 7667052321386152700}
   _root: {fileID: 3312024387499875510}
+  _scaler: {fileID: 0}
 --- !u!1 &6222810962180090998
 GameObject:
   m_ObjectHideFlags: 0
