@@ -25,6 +25,9 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void MoveWithJoyStick(Rigidbody bodyToMove, Vector2 joystickInput, Speed speed, bool gasPressed)
         {
+            bodyToMove.velocity = Vector3.zero;
+            bodyToMove.angularVelocity = Vector3.zero;
+
             _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.5f, 1.0f);
 
             _angularVelocity.x = joystickInput.y;
@@ -58,24 +61,12 @@ namespace Assets.Scripts.GameObjectComponents
         public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
             => bodyToMove.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
 
-        //not used
-        private static Vector3 ClampVelocity(Rigidbody bodyToMove)
-        {
-            var angVel = bodyToMove.angularVelocity;
-
-            angVel.z = Mathf.Clamp(angVel.z, -1.0f, 1.0f);
-            angVel.x = Mathf.Clamp(angVel.x, -1.0f, 1.0f);
-            angVel.y = Mathf.Clamp(angVel.y, 0.0f, 0.0f);
-
-            return angVel;
-        }
-
         #region Utilities
         private void FreeFall(Rigidbody bodyToMove, float gasCoeff)
         {
-            var bodyPosition = bodyToMove.position;
+    /*        var bodyPosition = bodyToMove.position;
             bodyPosition.y -= 0.025f;
-            bodyToMove.position = bodyPosition;
+            bodyToMove.position = bodyPosition;*/
         }
         #endregion
     }
