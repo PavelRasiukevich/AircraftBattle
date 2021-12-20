@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
-using Network.External;
+using Managers.External;
 using PlayFab.ClientModels;
 using TMPro;
 using UI.Screens.LeaderBoard.Elements;
@@ -29,7 +29,7 @@ namespace UI.Screens.LeaderBoard
             foreach (var line in _content.GetComponentsInChildren<LeaderBoardLine>())
                 Destroy(line.gameObject);
             ExternalServices.Inst.PlayFab.Leaderboards.RequestLeaderboard(
-                UtilsConst.PlayFab.ScoreBy(LeaderboardType));
+                Const.PlayFab.ScoreBy(LeaderboardType));
         }
 
         #endregion
@@ -43,10 +43,12 @@ namespace UI.Screens.LeaderBoard
             return this;
         }
 
-        public void ViewLeaderboard(List<PlayerLeaderboardEntry> leaderboard)
+        public void Refresh(List<PlayerLeaderboardEntry> leaderboard)
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _leaderboardTypePanel.Config(LeaderboardType);
+            foreach (var old in _content.GetComponentsInChildren<LeaderBoardLine>())
+                Destroy(old.gameObject);
             leaderboard.ForEach(
                 line =>
                 {

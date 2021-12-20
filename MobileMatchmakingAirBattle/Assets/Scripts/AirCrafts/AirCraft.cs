@@ -3,6 +3,7 @@ using Assets.Scripts.Interfaces;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
+using TO;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
@@ -11,6 +12,7 @@ namespace Assets.Scripts.AirCrafts
     public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
+        public AircraftDataModel DataModel => _dataModel;
 
         #region COMPONENTS
 

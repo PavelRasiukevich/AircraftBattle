@@ -1,5 +1,5 @@
 using Assets.Scripts.Core;
-using Network.External;
+using Managers.External;
 using TO;
 using Utils.Enums;
 

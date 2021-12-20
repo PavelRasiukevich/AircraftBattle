@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b14782389e344afda517de46cb6e3054, type: 3}
+  m_Name: PlanesData
+  m_EditorClassIdentifier: 
+  _planeList:
+  - _id: 609055898
+    _icon: {fileID: 21300000, guid: 17f099b183017b14abbdeca0b513336d, type: 3}
+    _planePrefab: {fileID: 2362399153265527867, guid: b90d94597980d95419640c5581d7fe78, type: 3}
+    _isViewInEditor: 1
+    _displayName: Arrow
+    _firePower: 5
+    _gamePrice: 0
+  - _id: 168736579
+    _icon: {fileID: 21300000, guid: 077c844c7620e9d44bff61f3ba19acba, type: 3}
+    _planePrefab: {fileID: 7723185874673096720, guid: dc06e9636f30c5345b09734304d3d1b0, type: 3}
+    _isViewInEditor: 1
+    _displayName: Fighter
+    _firePower: 28
+    _gamePrice: 200
+  - _id: 367272861
+    _icon: {fileID: 21300000, guid: e513811bcca365740a7666f8c0b853a7, type: 3}
+    _planePrefab: {fileID: 7050751025747784187, guid: f269be61f6e4f9d459643b7b6a5cb199, type: 3}
+    _isViewInEditor: 1
+    _displayName: Frog
+    _firePower: 10
+    _gamePrice: 450
+  - _id: 175548731
+    _icon: {fileID: 21300000, guid: b27bd5b5602040d40b80ad2045f86b5b, type: 3}
+    _planePrefab: {fileID: 5817625852140536901, guid: 48bd389cceadbb9458c47993b8beafbf, type: 3}
+    _isViewInEditor: 1
+    _displayName: Hawk
+    _firePower: 50
+    _gamePrice: 850
+  - _id: 748260358
+    _icon: {fileID: 21300000, guid: 0e2f27d2ee28e384883f05930a1c71b7, type: 3}
+    _planePrefab: {fileID: 5301358326437426886, guid: 2a86bcbfa73d7cf44871a7598fb5c1cd, type: 3}
+    _isViewInEditor: 1
+    _displayName: Thundercloud
+    _firePower: 180
+    _gamePrice: 2500
+  - _id: 945526629
+    _icon: {fileID: 21300000, guid: bb9f3703deab6844ab1d335d193af923, type: 3}
+    _planePrefab: {fileID: 7249756494268464026, guid: 0663f8ad269958a408bbef96da66544e, type: 3}
+    _isViewInEditor: 1
+    _displayName: Eagle
+    _firePower: 140
+    _gamePrice: 5000

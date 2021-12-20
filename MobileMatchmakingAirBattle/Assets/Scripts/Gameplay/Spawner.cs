@@ -1,7 +1,9 @@
+using System;
 using Assets.Scripts.AirCrafts;
+using Managers.Data;
 using Photon.Pun;
 using UnityEngine;
-using System;
+using Random = UnityEngine.Random;
 
 namespace Assets.Scripts.Gameplay
 {
@@ -21,7 +23,8 @@ namespace Assets.Scripts.Gameplay
             var randomIndex = GetRandomIndex(_spawnPoint);
             var randomPoint = GetPointByIndex(randomIndex);
 
-            var p = PhotonNetwork.Instantiate(_playerPrefab.name,
+            var p = PhotonNetwork.Instantiate(
+                GameData.Inst.CurrentPlane.PlanePrefab.name,
                 randomPoint.position,
                 Quaternion.identity);
 
@@ -29,6 +32,7 @@ namespace Assets.Scripts.Gameplay
         }
 
         #region PRIVATE METHODS
+
         private void CameraSetup(Transform t)
         {
             _airCraftCamera.Activate();
@@ -36,7 +40,7 @@ namespace Assets.Scripts.Gameplay
             _airCraftCamera.SetPositionAndRotaion();
         }
 
-        private int GetRandomIndex(Transform[] array) => UnityEngine.Random.Range(0, array.Length);
+        private int GetRandomIndex(Transform[] array) => Random.Range(0, array.Length);
 
         private Transform GetPointByIndex(int index)
         {
@@ -46,7 +50,7 @@ namespace Assets.Scripts.Gameplay
 
             return _spawnPoint[index];
         }
-                        
+
         private object[] GetInitData()
         {
             return new object[1];
