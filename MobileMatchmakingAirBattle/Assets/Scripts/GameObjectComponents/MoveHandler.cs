@@ -7,16 +7,14 @@ namespace Assets.Scripts.GameObjectComponents
         private float _gasCoefficient = 1.0f;
         private Vector3 _angularVelocity;
 
-        Transform
+        private Quaternion _returnRotation;
+        private Vector3 _resetedReturnAngle;
 
         #region NOT USED
-        /// <summary>
-        /// Move using lag compensated position.
-        /// </summary>
-        /// <param name="remoteBody"></param>
-        /// <param name="networkPosition"></param>
         public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition)
-            => remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
+        {
+            remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
+        }
 
         public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
             => bodyToMove.velocity = velocityVector * speed;
@@ -28,69 +26,39 @@ namespace Assets.Scripts.GameObjectComponents
         public void MoveWithJoyStick(Rigidbody bodyToMove, Vector2 joystickInput, Speed speed, bool gasPressed)
         {
             _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.5f, 1.0f);
-            _angularVelocity = new Vector3(joystickInput.y, 0.0f, joystickInput.x * -1);
 
-            #region Old
-            /* if (gasPressed)
-             {
-                 gasCoefficient += 0.01f;
-
-                 Quaternion rotation = Quaternion.Euler(_angularVelocity);
-                 bodyToMove.MoveRotation(bodyToMove.rotation * rotation);
-             }
-             else
-             {
-                 gasCoefficient -= 0.01f;
-
-                 FreeFall(bodyToMove);
-
-                 var returnRotation = Quaternion.Euler(new Vector3(0.0f, bodyToMove.rotation.eulerAngles.y, 0.0f));
-                 bodyToMove.rotation = Quaternion.Lerp(bodyToMove.rotation, returnRotation, Time.fixedDeltaTime);
-             }*/
-            #endregion
-
-            #region New
-
-            bodyToMove.angularVelocity = ClampVelocity(bodyToMove);
+            _angularVelocity.x = joystickInput.y;
+            _angularVelocity.y = 0.0f;
+            _angularVelocity.z = joystickInput.x * -1;
 
             if (gasPressed)
             {
+                _gasCoefficient += 0.01f;
 
-                bodyToMove.AddRelativeTorque(Vector3.right, ForceMode.VelocityChange);
-
-                //RestrictRotation(bodyToMove);
+                Quaternion rotation = Quaternion.Euler(_angularVelocity * speed.RotationSpeed);
+                bodyToMove.MoveRotation(bodyToMove.rotation * rotation);
             }
             else
             {
-                bodyToMove.angularVelocity = Vector3.Lerp(bodyToMove.angularVelocity * 0.01f, Vector3.zero, 0.5f);
-            }
+                _gasCoefficient -= 0.001f;
 
-            #endregion
+                FreeFall(bodyToMove, _gasCoefficient);
+
+                _resetedReturnAngle.x = 0.0f;
+                _resetedReturnAngle.y = bodyToMove.rotation.eulerAngles.y;
+                _resetedReturnAngle.z = 0.0f;
+
+                _returnRotation = Quaternion.Euler(_resetedReturnAngle);
+                bodyToMove.rotation = Quaternion.Lerp(bodyToMove.rotation, _returnRotation, Time.fixedDeltaTime);
+            }
 
             bodyToMove.velocity = transform.TransformDirection(_gasCoefficient * speed.MoveSpeed * Vector3.forward);
         }
 
-        private void RestrictRotation(Rigidbody bodyToMove)
-        {
-            var rotY = bodyToMove.rotation.eulerAngles;
-            rotY.y = 0.0f;
-            bodyToMove.rotation = Quaternion.Euler(rotY);
+        public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
+            => bodyToMove.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
 
-            /*if (bodyToMove.rotation.eulerAngles.z >= 45 && bodyToMove.rotation.eulerAngles.z <= 315)
-            {
-                var angVelZ = bodyToMove.angularVelocity;
-                angVelZ.z = 0;
-                bodyToMove.angularVelocity = angVelZ;
-            }
-
-            if (bodyToMove.rotation.eulerAngles.x >= 315 && bodyToMove.rotation.eulerAngles.x <= 45)
-            {
-                var angVelX = bodyToMove.angularVelocity;
-                angVelX.x = 0;
-                bodyToMove.angularVelocity = angVelX;
-            }*/
-        }
-
+        //not used
         private static Vector3 ClampVelocity(Rigidbody bodyToMove)
         {
             var angVel = bodyToMove.angularVelocity;
@@ -102,14 +70,11 @@ namespace Assets.Scripts.GameObjectComponents
             return angVel;
         }
 
-        public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
-            => bodyToMove.velocity = transform.TransformDirection(_gasCoefficient * speed.MoveSpeed * Vector3.forward);
-
         #region Utilities
-        private void FreeFall(Rigidbody bodyToMove)
+        private void FreeFall(Rigidbody bodyToMove, float gasCoeff)
         {
             var bodyPosition = bodyToMove.position;
-            bodyPosition.y -= 0.1f;
+            bodyPosition.y -= 0.025f;
             bodyToMove.position = bodyPosition;
         }
         #endregion

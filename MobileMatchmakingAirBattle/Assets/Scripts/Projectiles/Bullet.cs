@@ -1,6 +1,5 @@
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
-using Photon.Realtime;
 using UnityEngine;
 
 namespace Assets.Scripts.Projectiles

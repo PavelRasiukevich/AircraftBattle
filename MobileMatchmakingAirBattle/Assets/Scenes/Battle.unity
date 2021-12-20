@@ -830,6 +830,7 @@ GameObject:
   - component: {fileID: 2112242362}
   - component: {fileID: 2112242361}
   - component: {fileID: 2112242365}
+  - component: {fileID: 2112242366}
   m_Layer: 0
   m_Name: Cube_1
   m_TagString: Untagged
@@ -906,13 +907,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112242360}
-  m_LocalRotation: {x: -0, y: -0.264645, z: -0, w: 0.96434593}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 61.4, z: 29.7}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: -30.692, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &2112242365
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -929,6 +930,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2112242366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112242360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6efe6e44ce533384bad581b7bbe51965, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2140693540
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,17 +979,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7541425095189181929, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
-      propertyPath: m_CullingMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 7541425095189181930, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
       propertyPath: m_Name
       value: AircraftCamera
-      objectReference: {fileID: 0}
-    - target: {fileID: 7541425095189181930, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7541425095189181934, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
       propertyPath: m_RootOrder

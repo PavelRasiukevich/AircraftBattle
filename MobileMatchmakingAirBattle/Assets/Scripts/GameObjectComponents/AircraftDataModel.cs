@@ -9,7 +9,7 @@ namespace Assets.Scripts.GameObjectComponents
         [SerializeField] Speed _speed;
         [SerializeField] private int _hp;
         [SerializeField] private int _currentHp;
-       
+
         public Speed Speed => _speed;
 
         public int Hp => _hp;

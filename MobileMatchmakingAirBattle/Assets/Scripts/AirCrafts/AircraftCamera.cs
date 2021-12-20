@@ -6,41 +6,42 @@ namespace Assets.Scripts.AirCrafts
     [RequireComponent(typeof(UniversalAdditionalCameraData), typeof(Camera))]
     public class AircraftCamera : MonoBehaviour
     {
+        [Range(0.0f, 10.0f)]
+        [SerializeField] private float _lerpT;
+
+        [Range(0.0f, 10.0f)]
+        [SerializeField] private float _slerpT;
+
         private AirCraft _airCraftToFollow;
         private Transform _cameraSlot;
         private Vector3 _positionOffset;
 
-        private Vector3 pastFollowerPosition;
-        private Vector3 pastTargetPosition;
-
-        private Vector3 _lerpV;
+        private Quaternion _interpolatedCameraRotationValue;
+        private Vector3 _interpolatedCameraPositionValue;
 
         private void Start()
         {
             _airCraftToFollow = GameObject.FindObjectOfType<AirCraft>();
             _cameraSlot = FindSlotForCamera(_airCraftToFollow.transform);
+
             SetPositionAndRotaionAccordingToParent(_cameraSlot);
 
-            _positionOffset = _airCraftToFollow.transform.position - transform.position;
+            transform.position += Vector3.one;
         }
 
         private void Update()
         {
-        }
-
-        private void FixedUpdate()
-        {
+            _interpolatedCameraPositionValue = Vector3.Lerp(transform.position, _cameraSlot.position, Time.deltaTime * _lerpT);
+            _interpolatedCameraRotationValue = Quaternion.Lerp(transform.rotation, _cameraSlot.rotation, _slerpT);
         }
 
         private void LateUpdate()
         {
-            /*transform.rotation = Quaternion.Slerp(transform.rotation, _cameraSlot.rotation, 0.015f);
-            transform.position = Vector3.Lerp(transform.position, _cameraSlot.position, .1f);*/
-
-            transform.position = _airCraftToFollow.transform.position - _positionOffset;
+            transform.position = _interpolatedCameraPositionValue;
+            transform.rotation = _interpolatedCameraRotationValue;
         }
 
-        //test method
+        //is not working properly
         private Vector3 SmoothApproach(Vector3 pastPosition, Vector3 pastTargetPosition, Vector3 targetPosition, float speed)
         {
             float t = Time.deltaTime * speed;
@@ -51,7 +52,7 @@ namespace Assets.Scripts.AirCrafts
 
         private void SetParent(Transform parent) => transform.SetParent(parent);
 
-        private void SetPositionAndRotaionAccordingToParent(Transform parent) => transform.SetPositionAndRotation(parent.position, parent.rotation);
+        private void SetPositionAndRotaionAccordingToParent(Transform slot) => transform.SetPositionAndRotation(slot.position, slot.rotation);
 
         private Transform FindSlotForCamera(Transform airCraft) => airCraft.GetComponentInChildren<CameraSlot>().transform;
 
