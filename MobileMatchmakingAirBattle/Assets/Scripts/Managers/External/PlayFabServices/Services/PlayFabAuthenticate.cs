@@ -13,14 +13,14 @@ using Utils.Enums;
 namespace Managers.External.PlayFabServices.Services
 {
     /*
-     * Авторизация PlayFab
+     * Авторизация PlayFab, загрузка информации из PlayFab
      */
     public class PlayFabAuthenticate
     {
         public string PlayFabPlayerId { get; private set; } = "";
         public bool IsReady { get; private set; }
 
-        #region public Authenticate
+        #region Authenticate
 
         public void AuthenticateWithCustomId()
         {
@@ -129,7 +129,7 @@ namespace Managers.External.PlayFabServices.Services
                 {
                     StatisticNames = User.Statistic.Data.Keys.ToList()
                 },
-                OnStatisticsRequest, 
+                OnStatisticsRequest,
                 ScreenEventHolder.Inst.UnexpectedErrorUI
             );
         }
@@ -161,25 +161,40 @@ namespace Managers.External.PlayFabServices.Services
                 result.PlayerProfile.DisplayName != User.Common.Name)
                 UpdateUserDisplayName(User.Common.Name);
             else
-                PlayFabAuthenticateDone();
+                LoadInventory();
         }
 
         #endregion
 
-        #region UpdateUserDisplayName
+        #region Update User DisplayName
 
         private void UpdateUserDisplayName(string displayName)
         {
-            PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest()
+            PlayFabClientAPI.UpdateUserTitleDisplayName(new UpdateUserTitleDisplayNameRequest
                 {
                     DisplayName = displayName
                 },
-                OnUserDisplayNameUpdated,
+                result => LoadInventory(),
                 ScreenEventHolder.Inst.UnexpectedErrorUI);
         }
 
-        private void OnUserDisplayNameUpdated(UpdateUserTitleDisplayNameResult result) =>
-            PlayFabAuthenticateDone();
+        #endregion
+
+        #region Load Inventory
+
+        private void LoadInventory()
+        {
+            int goldCount;
+            PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
+                result =>
+                {
+                    result.VirtualCurrency.TryGetValue(Const.CurrencyCode, out goldCount);
+                    User.Currency.CountUpdate(goldCount);
+                    PlayFabAuthenticateDone();
+                },
+                ScreenEventHolder.Inst.UnexpectedErrorUI
+            );
+        }
 
         #endregion
 

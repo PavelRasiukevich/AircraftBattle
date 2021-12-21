@@ -16,8 +16,16 @@ namespace TO
         {
             public static string Name { get; set; }
             public static Sprite Sprite { get; set; }
-            public static float Gold { get; private set; }
-            public static void SpendGold(float value) => Gold -= value;
+        }
+
+        internal class Currency
+        {
+            public static int Count { get; private set; }
+            public static void CountUpdate(int count) => Count = count;
+            public static void Subtract(int value) =>
+                ExternalServices.Inst.PlayFab.Currencies.Subtract(value);
+            public static void Add(int value) => 
+                ExternalServices.Inst.PlayFab.Currencies.Add(value);
         }
 
         internal class Statistic
@@ -47,7 +55,8 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Wins)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Wins), value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Wins),
+                        value);
                     ExternalServices.Inst.GooglePlay.Achievements.Wins(value);
                 }
             }
@@ -58,7 +67,8 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Fails)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fails), value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fails),
+                        value);
                 }
             }
 
@@ -68,7 +78,8 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Frags)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Frags), value);
+                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Frags),
+                        value);
                     if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
                         ExternalServices.Inst.GooglePlay.Achievements.Frags(value);
                 }
