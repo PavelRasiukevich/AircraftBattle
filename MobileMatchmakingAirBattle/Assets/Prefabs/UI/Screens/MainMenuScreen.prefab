@@ -5585,6 +5585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerName: {fileID: 3733458720249813535}
   _playerAvatar: {fileID: 4076655952502951825}
+  _goldText: {fileID: 3189239407846839393}
 --- !u!1 &4411035350837269947
 GameObject:
   m_ObjectHideFlags: 0
