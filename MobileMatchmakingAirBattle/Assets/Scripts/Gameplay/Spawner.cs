@@ -1,4 +1,5 @@
 using Assets.Scripts.AirCrafts;
+using Cinemachine;
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Gameplay
         [SerializeField] private Transform _playerPrefab;
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private Transform _origin;
+        [SerializeField] private CinemachineVirtualCamera _camera;
 
         private Transform point;
         private GameObject _actor;
@@ -28,6 +30,13 @@ namespace Assets.Scripts.Gameplay
         private void InitializeActor(Vector3 position, Quaternion rotation)
         {
             _actor = PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
+
+            if (_actor.GetComponent<AirCraft>().photonView.IsMine)
+            {
+                _camera.Follow = _actor.GetComponent<CameraSlot>().transform;
+                _camera.LookAt = _actor.GetComponent<CenterOfAirCraft>().transform;
+            }
+
             var airCraft = _actor.GetComponent<AirCraft>();
             airCraft.DataModel.RespawnPosition = point;
 
