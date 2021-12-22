@@ -33,8 +33,8 @@ namespace Assets.Scripts.Gameplay
 
             if (_actor.GetComponent<AirCraft>().photonView.IsMine)
             {
-                _camera.Follow = _actor.GetComponent<CameraSlot>().transform;
-                _camera.LookAt = _actor.GetComponent<CenterOfAirCraft>().transform;
+                _camera.Follow = _actor.GetComponentInChildren<CameraSlot>().transform;
+                _camera.LookAt = _actor.GetComponentInChildren<CenterOfAirCraft>().transform;
             }
 
             var airCraft = _actor.GetComponent<AirCraft>();
