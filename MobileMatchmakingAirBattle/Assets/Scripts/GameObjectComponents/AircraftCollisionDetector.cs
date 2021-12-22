@@ -22,7 +22,5 @@ namespace Assets.Scripts.GameObjectComponents
         {
             AirCraft.DataModel.IsControllable = true;
         }
-
-
     }
 }

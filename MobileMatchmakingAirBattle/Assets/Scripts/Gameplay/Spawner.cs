@@ -1,4 +1,6 @@
+using Assets.Scripts.AirCrafts;
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Gameplay
@@ -9,19 +11,47 @@ namespace Assets.Scripts.Gameplay
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private Transform _origin;
 
+        private Transform point;
+        private GameObject _actor;
+
         private void Awake()
         {
             var actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
-            var point = _spawnPoint[actorNumber - 1];
+            point = _spawnPoint[actorNumber - 1];
             point = SetupPointInWorld(point);
 
-           InitializeActor(point.position, point.rotation);
-
+            InitializeActor(point.position, point.rotation);
         }
 
         #region PRIVATE METHODS
 
-        private void InitializeActor(Vector3 position, Quaternion rotation) => PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
+        private void InitializeActor(Vector3 position, Quaternion rotation)
+        {
+            _actor = PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
+            var airCraft = _actor.GetComponent<AirCraft>();
+            airCraft.DataModel.RespawnPosition = point;
+
+            airCraft.DieAction += Die;
+        }
+
+        private void Die()
+        {
+            PhotonNetwork.Destroy(_actor);
+            StartCoroutine(nameof(Wait));
+        }
+
+        private void Respawn()
+        {
+            InitializeActor(point.position, point.rotation);
+        }
+
+        private IEnumerator Wait()
+        {
+            Debug.Log("Wait");
+            yield return new WaitForSeconds(3.0f);
+            Respawn();
+            StopCoroutine(nameof(Wait));
+        }
 
         private Transform SetupPointInWorld(Transform point)
         {

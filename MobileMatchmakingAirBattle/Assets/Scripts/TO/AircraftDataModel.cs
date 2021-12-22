@@ -4,11 +4,13 @@ using UnityEngine;
 namespace TO
 {
     [Serializable]
-    public class AircraftDataModel
+    public class AircraftDataModel 
     {
         [SerializeField] Speed _speed;
         [SerializeField] private int _hp;
         [SerializeField] private int _currentHp;
+
+        public Transform RespawnPosition { get; set; }
 
         public Speed Speed => _speed;
 

@@ -34,8 +34,7 @@ namespace Assets.Scripts.UI.JoyStick
         {
             lastTouchID = eventData.pointerId;
 
-            IsJoystickTouching = true;
-            JoyStick.IsPressed = IsJoystickTouching;
+            JoyStick.IsPressed = IsJoystickTouching = true;
             StopCoroutine(nameof(ReturnToOriginRoutine));
         }
 
@@ -43,7 +42,6 @@ namespace Assets.Scripts.UI.JoyStick
         {
             if (lastTouchID == eventData.pointerId)
             {
-
                 Vector3 pixelScreenPosition;
 #if UNITY_EDITOR
                 pixelScreenPosition = Input.mousePosition;
@@ -72,8 +70,7 @@ namespace Assets.Scripts.UI.JoyStick
             if (lastTouchID == eventData.pointerId)
             {
                 lastTouchID = -2;
-                IsJoystickTouching = false;
-                JoyStick.IsPressed = IsJoystickTouching;
+                JoyStick.IsPressed = IsJoystickTouching = false;
                 StartCoroutine(nameof(ReturnToOriginRoutine));
             }
         }

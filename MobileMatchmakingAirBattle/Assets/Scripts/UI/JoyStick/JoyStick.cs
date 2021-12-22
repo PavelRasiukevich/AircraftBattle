@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +11,7 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private CanvasScaler _scaler;
         [SerializeField] private FireButton _fireButton;
 
-        public static Vector2 JoystickInput { get;  set; }
+        public static Vector2 JoystickInput { get; set; }
 
         public static bool IsPressed { get; set; }
 
@@ -20,6 +19,12 @@ namespace Assets.Scripts.UI.JoyStick
 
         private void Awake()
         {
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+            Deactivate();
+#else
+            Activate();
+#endif
             _innerCircle.Radius = CalculateRadiusAccordingToResolution(_root);
 
         }
@@ -34,5 +39,9 @@ namespace Assets.Scripts.UI.JoyStick
         {
             return default;
         }
+
+        public void Activate() => gameObject.SetActive(true);
+
+        public void Deactivate() => gameObject.SetActive(false);
     }
 }

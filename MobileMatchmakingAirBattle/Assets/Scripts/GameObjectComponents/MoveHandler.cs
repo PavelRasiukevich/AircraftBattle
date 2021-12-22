@@ -1,3 +1,4 @@
+using Assets.Scripts.Structs;
 using TO;
 using UnityEngine;
 
@@ -24,18 +25,15 @@ namespace Assets.Scripts.GameObjectComponents
             => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
         #endregion
 
-        public void MoveWithJoyStick(Rigidbody bodyToMove, Vector2 joystickInput, Speed speed, bool gasPressed)
+        public void MoveWithJoyStick(Rigidbody bodyToMove, InputParameters inputParams, Speed speed)
         {
-            bodyToMove.velocity = Vector3.zero;
-            bodyToMove.angularVelocity = Vector3.zero;
-
             _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.5f, 1.0f);
 
-            _angularVelocity.x = joystickInput.y;
+            _angularVelocity.x = inputParams.Input.y;
             _angularVelocity.y = 0.0f;
-            _angularVelocity.z = joystickInput.x * -1;
+            _angularVelocity.z = inputParams.Input.x * -1;
 
-            if (gasPressed)
+            if (inputParams.IsStickPressed)
             {
                 _gasCoefficient += 0.01f;
 
@@ -65,9 +63,7 @@ namespace Assets.Scripts.GameObjectComponents
         #region Utilities
         private void FreeFall(Rigidbody bodyToMove, float gasCoeff)
         {
-    /*        var bodyPosition = bodyToMove.position;
-            bodyPosition.y -= 0.025f;
-            bodyToMove.position = bodyPosition;*/
+           //TODO Implement free fall
         }
         #endregion
     }
