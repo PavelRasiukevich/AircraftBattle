@@ -38,6 +38,7 @@ namespace Assets.Scripts.GameObjectComponents
             var par = InputParams;
             par.Input = PlayersInput;
             par.IsStickPressed = Mathf.Abs(Horizontal) > 0 || Mathf.Abs(Vertical) > 0;
+            par.IsFiring = Input.GetAxisRaw("Fire1") != 0;
 
             InputParams = par;
 

@@ -8,5 +8,6 @@ namespace Assets.Scripts.Structs
         public bool IsStickPressed;
         public float GasCoefficient;
         public float Delta;
+        public bool IsFiring;
     }
 }

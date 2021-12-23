@@ -27,12 +27,12 @@ namespace Assets.Scripts.GameObjectComponents
             _elapsedTime = _reloadTime;
         }
 
-        private void Update()
+        public void Attack(bool isFiring)
         {
             if (!Aircraft.DataModel.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
-            if (FireButton.IsFire)
+            if (isFiring)
             {
                 if (_elapsedTime >= _reloadTime)
                 {

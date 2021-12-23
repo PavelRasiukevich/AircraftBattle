@@ -64,10 +64,7 @@ namespace Assets.Scripts.AirCrafts
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                TakeDamage(10, null);
-            }
+            _attackHandler.Attack(_inputHandler.InputParams.IsFiring);
         }
 
         private void FixedUpdate()
