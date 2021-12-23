@@ -755,7 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataModel:
     _speed:
-      MoveSpeed: 25
+      MoveSpeed: 47
       RotationSpeed: 1
     _hp: 100
     _currentHp: 100

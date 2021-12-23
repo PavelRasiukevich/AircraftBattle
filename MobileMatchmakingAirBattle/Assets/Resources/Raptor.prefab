@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 7484978972518067391, guid: 7f981c71033d75f4e8bbb5b9a356ff86, type: 3}
   _fireSpot: {fileID: 6459512286689190561}
-  _reloadTime: 1
+  _reloadTime: 0.01
 --- !u!114 &7615560748087256880
 MonoBehaviour:
   m_ObjectHideFlags: 0
