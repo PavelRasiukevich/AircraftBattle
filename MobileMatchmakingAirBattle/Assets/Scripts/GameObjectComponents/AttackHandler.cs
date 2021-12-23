@@ -1,8 +1,6 @@
 using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Projectiles;
-using Assets.Scripts.UI.JoyStick;
 using Photon.Pun;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents

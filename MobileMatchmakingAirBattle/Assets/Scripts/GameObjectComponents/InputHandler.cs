@@ -50,6 +50,7 @@ namespace Assets.Scripts.GameObjectComponents
 
             intermediate.Input = JoyStick.JoystickInput;
             intermediate.IsStickPressed = JoyStick.IsPressed;
+            intermediate.IsFiring = FireButton.IsFire;
 
             InputParams = intermediate;
         }

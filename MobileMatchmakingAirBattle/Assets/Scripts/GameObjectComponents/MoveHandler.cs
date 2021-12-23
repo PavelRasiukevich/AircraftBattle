@@ -27,7 +27,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void MoveWithJoyStick(Rigidbody bodyToMove, InputParameters inputParams, Speed speed)
         {
-            _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.5f, 1.0f);
+            _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.1f, 1.0f);
 
             _angularVelocity.x = inputParams.Input.y;
             _angularVelocity.y = 0.0f;
@@ -35,6 +35,7 @@ namespace Assets.Scripts.GameObjectComponents
 
             if (inputParams.IsStickPressed)
             {
+
                 _gasCoefficient += 0.01f;
 
                 Quaternion rotation = Quaternion.Euler(_angularVelocity * speed.RotationSpeed);
@@ -44,7 +45,7 @@ namespace Assets.Scripts.GameObjectComponents
             {
                 _gasCoefficient -= 0.001f;
 
-                FreeFall(bodyToMove, _gasCoefficient);
+                FreeFall(bodyToMove);
 
                 _resetedReturnAngle.x = 0.0f;
                 _resetedReturnAngle.y = bodyToMove.rotation.eulerAngles.y;
@@ -61,9 +62,8 @@ namespace Assets.Scripts.GameObjectComponents
             => bodyToMove.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
 
         #region Utilities
-        private void FreeFall(Rigidbody bodyToMove, float gasCoeff)
+        private void FreeFall(Rigidbody bodyToMove)
         {
-           //TODO Implement free fall
         }
         #endregion
     }
