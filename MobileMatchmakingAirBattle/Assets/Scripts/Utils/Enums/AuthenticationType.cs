@@ -5,9 +5,8 @@
      */
     public enum AuthenticationType
     {
-        None,
         Google,
-        PlayFabWithCustomId,
+        PlayFabQuickly,
         PlayFabWithLogin
     }
 }

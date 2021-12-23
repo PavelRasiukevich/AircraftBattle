@@ -12,6 +12,7 @@ namespace UI.Screens.MainMenu.Elements
     {
         [SerializeField] private TMP_Text _playerName;
         [SerializeField] private Image _playerAvatar;
+        [SerializeField] private TMP_Text _goldText;
 
         #region PUBLIC
 
@@ -19,6 +20,8 @@ namespace UI.Screens.MainMenu.Elements
         {
             _playerName.text = User.Common.Name;
             _playerAvatar.sprite = User.Common.Sprite;
+            Debug.Log($"User.Currency.Count = {User.Currency.Count}");
+            _goldText.text = User.Currency.Count.ToString();
         }
 
         #endregion

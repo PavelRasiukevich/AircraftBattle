@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using Assets.Scripts.Core;
+using Assets.Scripts.Utils;
 using Core;
 using Managers.External.GooglePlayServices;
 using Managers.External.PlayFabServices;
@@ -16,18 +17,15 @@ namespace Managers.External
      */
     public class ExternalServices : BaseInstance<ExternalServices>
     {
-        [SerializeField] private AuthenticationType _authenticationType = AuthenticationType.None;
-        public BaseGooglePlay GooglePlay { get; private set; }
-        public BasePlayFab PlayFab { get; private set; }
+        [SerializeField] private AuthenticationType _authenticationType = AuthenticationType.PlayFabQuickly;
+        public BaseGooglePlay GooglePlay { get; } = new BaseGooglePlay();
+        public BasePlayFab PlayFab { get; } = new BasePlayFab();
 
-        public ExternalServices()
+
+        protected override void Awake()
         {
             base.Awake();
-            GooglePlay = new BaseGooglePlay();
-            PlayFab = new BasePlayFab();
-            _authenticationType = Application.platform == RuntimePlatform.Android
-                ? AuthenticationType.None
-                : _authenticationType;
+            DontDestroyOnLoad(this);
         }
 
         #region PUBLIC
@@ -37,15 +35,15 @@ namespace Managers.External
          */
         public void Authentication()
         {
+            _authenticationType = Application.platform == RuntimePlatform.Android
+                ? AuthenticationType.PlayFabQuickly // TODO: перед публикацией поставить Google
+                : _authenticationType; 
             switch (_authenticationType)
             {
-                case AuthenticationType.None:
-                    AuthenticationDone();
-                    break;
                 case AuthenticationType.PlayFabWithLogin:
                     ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen();
                     break;
-                case AuthenticationType.PlayFabWithCustomId:
+                case AuthenticationType.PlayFabQuickly:
                     PopupHolder.CurrentPopup(PopupType.Loading).Show();
                     PlayFab.Authenticate.AuthenticateWithCustomId();
                     break;
@@ -59,31 +57,23 @@ namespace Managers.External
         /*
          * Авторизация прошла успешно. (Точка входа в меню)
          */
-        public void AuthenticationDone()
-        {
-            StartCoroutine(nameof(LoadDataAndOpenMenu));
-        }
+        public void AuthenticationDone() => StartCoroutine(nameof(LoadDataAndOpenMenu));
 
         #endregion
 
         #region PRIVATE
 
         /*
-         * Загрузка всей информации перед запуском меню
+         * Загрузка всей информации, вход в меню
          */
         private IEnumerator LoadDataAndOpenMenu()
         {
+            // Аватар
             switch (_authenticationType)
             {
-                case AuthenticationType.None:
-                    User.Common.Name = $"Photon_PLayer_{Random.Range(0, 100)}";
-                    User.Common.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PunAvatar");
-                    break;
-                case AuthenticationType.PlayFabWithCustomId:
-                    User.Common.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabAvatar");
-                    break;
+                case AuthenticationType.PlayFabQuickly:
                 case AuthenticationType.PlayFabWithLogin:
-                    User.Common.Sprite = Resources.Load<Sprite>("Sprite/Avatar/PlayFabAvatar");
+                    User.Common.Sprite = Resources.Load<Sprite>(Const.DefaultAvatarPath);
                     break;
                 case AuthenticationType.Google:
                     while (Social.localUser.image == null)
@@ -94,7 +84,7 @@ namespace Managers.External
                         Vector2.zero);
                     break;
             }
-
+            // NickName
             PhotonNetwork.NickName = User.Common.Name;
             PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();

@@ -17,9 +17,13 @@ namespace Assets.Scripts.Utils
         public const string UICameraBattle = "UICameraBattle";
 
         public const string PlanesDataPath = "Assets/PlanesData.asset";
+        public const string DefaultAvatarPath = "Sprite/Avatar/DefaultAvatar";
 
         public const string CurrentPlaneIdKey = "CurrPlane";
         
+        
+        public const string CurrencyCode = "GD";
+
         /*
          * PlayFab
          */
