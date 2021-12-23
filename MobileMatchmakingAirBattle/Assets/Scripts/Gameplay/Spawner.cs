@@ -1,5 +1,6 @@
 using Assets.Scripts.AirCrafts;
 using Cinemachine;
+using Managers.Data;
 using Photon.Pun;
 using System.Collections;
 using UnityEngine;
@@ -8,7 +9,6 @@ namespace Assets.Scripts.Gameplay
 {
     public class Spawner : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private Transform _playerPrefab;
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private Transform _origin;
         [SerializeField] private CinemachineVirtualCamera _camera;
@@ -29,12 +29,12 @@ namespace Assets.Scripts.Gameplay
 
         private void InitializeActor(Vector3 position, Quaternion rotation)
         {
-            _actor = PhotonNetwork.Instantiate(_playerPrefab.name, position, rotation);
+            _actor = PhotonNetwork.Instantiate(GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
 
             if (_actor.GetComponent<AirCraft>().photonView.IsMine)
             {
                 _camera.Follow = _actor.GetComponentInChildren<CameraSlot>().transform;
-                _camera.LookAt = _actor.GetComponentInChildren<CenterOfAirCraft>().transform;
+                _camera.LookAt = _actor.transform;
             }
 
             var airCraft = _actor.GetComponent<AirCraft>();
@@ -56,7 +56,6 @@ namespace Assets.Scripts.Gameplay
 
         private IEnumerator Wait()
         {
-            Debug.Log("Wait");
             yield return new WaitForSeconds(3.0f);
             Respawn();
             StopCoroutine(nameof(Wait));

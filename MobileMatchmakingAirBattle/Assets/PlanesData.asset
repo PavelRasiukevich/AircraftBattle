@@ -20,38 +20,24 @@ MonoBehaviour:
     _displayName: Arrow
     _firePower: 5
     _gamePrice: 0
-  - _id: 168736579
-    _icon: {fileID: 21300000, guid: 077c844c7620e9d44bff61f3ba19acba, type: 3}
-    _planePrefab: {fileID: 7723185874673096720, guid: dc06e9636f30c5345b09734304d3d1b0, type: 3}
+  - _id: 203669239
+    _icon: {fileID: 21300000, guid: 9782c5ee18b484de3b3636148d0b9f51, type: 3}
+    _planePrefab: {fileID: 3309527340303462569, guid: 0c25bdfb7a36b494aad243b7b7a8a176, type: 3}
     _isViewInEditor: 1
-    _displayName: Fighter
-    _firePower: 28
-    _gamePrice: 200
-  - _id: 367272861
-    _icon: {fileID: 21300000, guid: e513811bcca365740a7666f8c0b853a7, type: 3}
-    _planePrefab: {fileID: 7050751025747784187, guid: f269be61f6e4f9d459643b7b6a5cb199, type: 3}
+    _displayName: Rocket
+    _firePower: 0
+    _gamePrice: 0
+  - _id: 280678593
+    _icon: {fileID: 21300000, guid: 93be74ee564b04053816d1bfed959dd6, type: 3}
+    _planePrefab: {fileID: -8926351280704019118, guid: 478a54e64aa2b614abe378cfe2f98f58, type: 3}
     _isViewInEditor: 1
-    _displayName: Frog
-    _firePower: 10
-    _gamePrice: 450
-  - _id: 175548731
-    _icon: {fileID: 21300000, guid: b27bd5b5602040d40b80ad2045f86b5b, type: 3}
-    _planePrefab: {fileID: 5817625852140536901, guid: 48bd389cceadbb9458c47993b8beafbf, type: 3}
+    _displayName: Raptor
+    _firePower: 0
+    _gamePrice: 0
+  - _id: 109600510
+    _icon: {fileID: 21300000, guid: 57191edf12ca349538520c87a1a1eeb4, type: 3}
+    _planePrefab: {fileID: 2135565026819279249, guid: 14620eb073e3045418150b72266fc7fb, type: 3}
     _isViewInEditor: 1
-    _displayName: Hawk
-    _firePower: 50
-    _gamePrice: 850
-  - _id: 748260358
-    _icon: {fileID: 21300000, guid: 0e2f27d2ee28e384883f05930a1c71b7, type: 3}
-    _planePrefab: {fileID: 5301358326437426886, guid: 2a86bcbfa73d7cf44871a7598fb5c1cd, type: 3}
-    _isViewInEditor: 1
-    _displayName: Thundercloud
-    _firePower: 180
-    _gamePrice: 2500
-  - _id: 945526629
-    _icon: {fileID: 21300000, guid: bb9f3703deab6844ab1d335d193af923, type: 3}
-    _planePrefab: {fileID: 7249756494268464026, guid: 0663f8ad269958a408bbef96da66544e, type: 3}
-    _isViewInEditor: 1
-    _displayName: Eagle
-    _firePower: 140
-    _gamePrice: 5000
+    _displayName: Carrier
+    _firePower: 0
+    _gamePrice: 0
