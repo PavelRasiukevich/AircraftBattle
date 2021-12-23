@@ -31,11 +31,11 @@ namespace Assets.Scripts.Gameplay
         {
             _actor = PhotonNetwork.Instantiate(GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
 
-            if (_actor.GetComponent<AirCraft>().photonView.IsMine)
+         /*   if (_actor.GetComponent<AirCraft>().photonView.IsMine)
             {
                 _camera.Follow = _actor.GetComponentInChildren<CameraSlot>().transform;
                 _camera.LookAt = _actor.transform;
-            }
+            }*/
 
             var airCraft = _actor.GetComponent<AirCraft>();
             airCraft.DataModel.RespawnPosition = point;
