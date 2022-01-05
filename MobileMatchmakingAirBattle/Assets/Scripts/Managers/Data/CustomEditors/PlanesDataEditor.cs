@@ -65,6 +65,9 @@ namespace Managers.Data.CustomEditors
                 _selectedPlane.PlanePrefab = (AirCraft)EditorGUILayout.ObjectField("Prefab",
                     _selectedPlane.PlanePrefab,
                     typeof(AirCraft), allowSceneObjects: true);
+                _selectedPlane.PlaneShopModel = (GameObject)EditorGUILayout.ObjectField("ShopModel",
+                    _selectedPlane.PlaneShopModel,
+                    typeof(GameObject), allowSceneObjects: true);
                 if (_selectedPlane.PlanePrefab != null)
                 {
                     EditorGUI.indentLevel++;
@@ -75,7 +78,10 @@ namespace Managers.Data.CustomEditors
                     EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
                 }
-                _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power (for shop)", _selectedPlane.FirePower);
+                
+                EditorGUILayout.LabelField("-- For Shop --", EditorStyles.boldLabel);
+                _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power", _selectedPlane.FirePower);
+                _selectedPlane.GunsCount = EditorGUILayout.IntField("Guns Count", _selectedPlane.GunsCount);
                 _selectedPlane.GamePrice =
                     EditorGUILayout.FloatField("Game price", _selectedPlane.GamePrice);
                 EditorGUI.EndDisabledGroup();

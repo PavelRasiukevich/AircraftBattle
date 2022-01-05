@@ -10,6 +10,7 @@ namespace Utils.Enums
         Options,
         Search,
         Shop,
+        ShopView,
         Battle
     }
 }

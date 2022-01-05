@@ -31,7 +31,16 @@ namespace TO
             set => _planePrefab = value;
         }
 
-        [SerializeField] private  bool _isViewInEditor;
+
+        [SerializeField] private GameObject _planeShopModel;
+
+        public GameObject PlaneShopModel
+        {
+            get => _planeShopModel;
+            set => _planeShopModel = value;
+        }
+
+        [SerializeField] private bool _isViewInEditor;
 
         public bool IsViewInEditor
         {
@@ -52,8 +61,8 @@ namespace TO
          * "Огневая мощь" визуальная настройка для магазина
          */
 
-        [SerializeField] private  float _firePower;
-        
+        [SerializeField] private float _firePower;
+
         public float FirePower
         {
             get => _firePower;
@@ -61,11 +70,23 @@ namespace TO
         }
 
         /*
+         * Количество орудий
+         */
+
+        [SerializeField] private int _gunsCount;
+
+        public int GunsCount
+        {
+            get => _gunsCount;
+            set => _gunsCount = value;
+        }
+        
+        /*
          * Цена в игровой валюте
          */
 
-        [SerializeField] private  float _gamePrice;
-        
+        [SerializeField] private float _gamePrice;
+
         public float GamePrice
         {
             get => _gamePrice;
