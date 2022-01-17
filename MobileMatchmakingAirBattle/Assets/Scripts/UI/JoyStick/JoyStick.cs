@@ -15,7 +15,7 @@ namespace Assets.Scripts.UI.JoyStick
 
         public static bool IsPressed { get; set; }
 
-        public InnerCircle InnerCircle => _innerCircle;
+        public InnerCircle InnerCircle => _innerCircle; 
 
         private void Awake()
         {

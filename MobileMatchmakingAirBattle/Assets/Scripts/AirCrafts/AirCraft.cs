@@ -28,7 +28,7 @@ namespace Assets.Scripts.AirCrafts
 
         #region COMPONENTS
 
-        private InputHandler _inputHandler;
+        private InputSystemHandler _inputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
@@ -50,7 +50,7 @@ namespace Assets.Scripts.AirCrafts
                 FindObjectOfType<HealthBar>()
             };
 
-            _inputHandler = GetComponent<InputHandler>();
+            _inputHandler = GetComponent<InputSystemHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _photonView = GetComponent<PhotonView>();
