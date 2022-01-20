@@ -61,8 +61,8 @@ namespace Assets.Scripts.GameObjectComponents
 
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
 
-            bullet.BulletDataModel.Owner = PhotonView.Owner;
-            bullet.BulletDataModel.Lag = Mathf.Abs(lag);
+            bullet.Data.Owner = PhotonView.Owner;
+            bullet.Data.Lag = Mathf.Abs(lag);
         }
 
         #endregion

@@ -188,7 +188,7 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
                 result =>
                 {
-                    result.VirtualCurrency.TryGetValue(Const.CurrencyCode, out goldCount);
+                    result.VirtualCurrency.TryGetValue(Const.Currencies.Gold, out goldCount);
                     User.Currency.CountUpdate(goldCount);
                     PlayFabAuthenticateDone();
                 },

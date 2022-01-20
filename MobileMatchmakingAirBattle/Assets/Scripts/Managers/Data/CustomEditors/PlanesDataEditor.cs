@@ -3,11 +3,11 @@ using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Utils;
 using Managers.Data.ScriptableObjects;
 using TO;
+using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 using UnityEditorInternal;
 #endif
-using UnityEngine;
 
 namespace Managers.Data.CustomEditors
 {
@@ -27,7 +27,7 @@ namespace Managers.Data.CustomEditors
         private void OnEnable()
         {
             _planesData =
-                AssetDatabase.LoadAssetAtPath(Const.PlanesDataPath,
+                AssetDatabase.LoadAssetAtPath(Const.Path.PlanesData,
                     typeof(PlanesDataScriptableObject)) as PlanesDataScriptableObject;
             reorderableList = new ReorderableList(_planesData.PlaneList, typeof(PlaneInfo));
             reorderableList.elementHeight =
@@ -59,13 +59,13 @@ namespace Managers.Data.CustomEditors
             if (_selectedPlane.IsViewInEditor)
             {
                 EditorGUI.indentLevel++;
-                _selectedPlane.Icon = (Sprite)EditorGUILayout.ObjectField("Icon", _selectedPlane.Icon,
+                _selectedPlane.Icon = (Sprite) EditorGUILayout.ObjectField("Icon", _selectedPlane.Icon,
                     typeof(Sprite),
                     allowSceneObjects: true);
-                _selectedPlane.PlanePrefab = (AirCraft)EditorGUILayout.ObjectField("Prefab",
+                _selectedPlane.PlanePrefab = (AirCraft) EditorGUILayout.ObjectField("Prefab",
                     _selectedPlane.PlanePrefab,
                     typeof(AirCraft), allowSceneObjects: true);
-                _selectedPlane.PlaneShopModel = (GameObject)EditorGUILayout.ObjectField("ShopModel",
+                _selectedPlane.PlaneShopModel = (GameObject) EditorGUILayout.ObjectField("ShopModel",
                     _selectedPlane.PlaneShopModel,
                     typeof(GameObject), allowSceneObjects: true);
                 if (_selectedPlane.PlanePrefab != null)
@@ -78,7 +78,7 @@ namespace Managers.Data.CustomEditors
                     EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
                 }
-                
+
                 EditorGUILayout.LabelField("-- For Shop --", EditorStyles.boldLabel);
                 _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power", _selectedPlane.FirePower);
                 _selectedPlane.GunsCount = EditorGUILayout.IntField("Guns Count", _selectedPlane.GunsCount);

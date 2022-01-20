@@ -14,15 +14,34 @@ namespace Assets.Scripts.Utils
         public const int Difference = 125;
         public const int SearchWidth = 5;
 
-        public const string UICameraBattle = "UICameraBattle";
-
-        public const string PlanesDataPath = "Assets/PlanesData.asset";
-        public const string DefaultAvatarPath = "Sprite/Avatar/DefaultAvatar";
-
         public const string CurrentPlaneIdKey = "CurrPlane";
-        
-        
-        public const string CurrencyCode = "GD";
+
+        /*
+         * Currencies
+         */
+        internal class Currencies
+        {
+            public const string Gold = "GD";
+        }
+
+        /*
+         * Paths
+         */
+        internal class Path
+        {
+            public const string PlanesData = "Assets/ScriptableObjects/PlanesData.asset";
+            public const string DefaultAvatar = "Sprite/Avatar/DefaultAvatar";
+        }
+
+        /*
+         * Tags
+         */
+        internal class Tags
+        {
+            public const string UICameraBattle = "UICameraBattle";
+            public const string FightArena = "FightArena";
+            public const string Ground = "FightArena";
+        }
 
         /*
          * PlayFab

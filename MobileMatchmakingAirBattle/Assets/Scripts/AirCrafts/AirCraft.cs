@@ -1,12 +1,11 @@
+using System;
+using System.Collections.Generic;
 using Assets.Scripts.Core;
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.UI;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TO;
 using UnityEngine;
 
@@ -23,7 +22,9 @@ namespace Assets.Scripts.AirCrafts
         public AircraftDataModel DataModel => _dataModel;
 
         #region EVENTS
+
         public Action DieAction { get; set; }
+
         #endregion
 
         #region COMPONENTS
@@ -79,41 +80,25 @@ namespace Assets.Scripts.AirCrafts
 
         #endregion
 
-        public void TakeDamage(int value, Player owner)
-        {
-            _photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, new object[2] { value, owner });
-        }
+        public void TakeDamage(int value, Player owner) =>
+            _photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, value, owner);
 
         [PunRPC]
         private void RPC_TakeDamage(object[] values)
         {
             if (!_photonView.IsMine) return;
-
-            _dataModel.CurrentHp = _dataModel.CurrentHp <= (int)values[0] ? 0 : _dataModel.CurrentHp - (int)values[0];
-
+            _dataModel.CurrentHp = _dataModel.CurrentHp <= (int) values[0] ? 0 : _dataModel.CurrentHp - (int) values[0];
             NotifyObservers();
-
-            if (_dataModel.CurrentHp != 0) return;
-
-            Die();
+            if (_dataModel.CurrentHp <= 0) Die();
         }
 
-        private void Die()
-        {
-            DieAction.Invoke();
-        }
+        public void Die() => DieAction.Invoke();
 
         #region Observer
 
-        public void AddObserver(IObserver o)
-        {
-            observers.Add(o);
-        }
+        public void AddObserver(IObserver o) => observers.Add(o);
 
-        public void RemoveObserver(IObserver o)
-        {
-            observers.Remove(o);
-        }
+        public void RemoveObserver(IObserver o) => observers.Remove(o);
 
         public void NotifyObservers()
         {

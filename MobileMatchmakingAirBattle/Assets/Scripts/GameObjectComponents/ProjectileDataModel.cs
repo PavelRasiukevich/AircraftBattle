@@ -1,24 +1,16 @@
-using Assets.Scripts.SriptableObjects;
-using Photon.Realtime;
 using System;
+using Photon.Realtime;
 using UnityEngine;
 
-namespace Assets.Scripts.GameObjectComponents
+namespace Assets.Scripts.SriptableObjects
 {
     [Serializable]
     public class ProjectileDataModel
     {
-        [SerializeField] private ProjectileDataScriptable _dataModel;
+        [SerializeField] private ProjectileDataScriptable _data;
 
-        public int Damage { get; set; }
-        public float Speed { get; set; }
+        public ProjectileDataScriptable Data => _data;
         public Player Owner { get; set; }
         public float Lag { get; set; }
-
-        public void Init()
-        {
-            Damage = _dataModel.Damage;
-            Speed = _dataModel.Speed;
-        }
     }
 }

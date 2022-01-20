@@ -1,5 +1,5 @@
 using Assets.Scripts.AirCrafts;
-using Assets.Scripts.Projectiles;
+using Assets.Scripts.Utils;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
@@ -8,19 +8,16 @@ namespace Assets.Scripts.GameObjectComponents
     {
         public AirCraft AirCraft { get; set; }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnCollisionEnter(Collision other)
         {
-            var bullet = collision.gameObject.GetComponent<Bullet>();
-
-            if (bullet != null)
-            {
-                AirCraft.TakeDamage(bullet.BulletDataModel.Damage, bullet.BulletDataModel.Owner);
-            }
+            if (other.gameObject.CompareTag(Const.Tags.Ground))
+                AirCraft.Die();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            AirCraft.DataModel.IsControllable = true;
+            if (other.CompareTag(Const.Tags.FightArena))
+                AirCraft.DataModel.IsControllable = true;
         }
     }
 }
