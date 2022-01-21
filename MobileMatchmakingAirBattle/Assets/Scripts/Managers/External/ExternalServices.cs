@@ -73,7 +73,7 @@ namespace Managers.External
             {
                 case AuthenticationType.PlayFabQuickly:
                 case AuthenticationType.PlayFabWithLogin:
-                    User.Common.Sprite = Resources.Load<Sprite>(Const.DefaultAvatarPath);
+                    User.Common.Sprite = Resources.Load<Sprite>(Const.Path.DefaultAvatar);
                     break;
                 case AuthenticationType.Google:
                     while (Social.localUser.image == null)

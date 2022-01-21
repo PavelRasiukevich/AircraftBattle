@@ -36,19 +36,10 @@ namespace Assets.Scripts.GameObjectComponents
                 {
                     if (PhotonView.IsMine)
                         PhotonView.RPC(nameof(Attack), RpcTarget.All);
-
-                    _elapsedTime = 0.0f;
+                    _elapsedTime = 0;
                 }
-
-                _elapsedTime += Time.deltaTime;
             }
-            else
-            {
-                if (_elapsedTime < _reloadTime)
-                    _elapsedTime += Time.deltaTime;
-                else
-                    _elapsedTime = _reloadTime;
-            }
+            _elapsedTime += Time.deltaTime;
         }
 
         #region RPCs
@@ -56,13 +47,12 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
-
-            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+            float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
 
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
 
-            bullet.BulletDataModel.Owner = PhotonView.Owner;
-            bullet.BulletDataModel.Lag = Mathf.Abs(lag);
+            bullet.Data.Owner = PhotonView.Owner;
+            bullet.Data.Lag = Mathf.Abs(lag);
         }
 
         #endregion

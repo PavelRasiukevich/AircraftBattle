@@ -29,34 +29,24 @@ namespace Assets.Scripts.GameObjectComponents
             _inputActions.PlayerActions.Moves.performed -= MovesHandler;
         }
 
-        private void Start()
-        {
-
-        }
-
-        private void Update()
-        {
-            KeyboardInput();
-        }
+        private void Update() => KeyboardInput();
 
         private void KeyboardInput()
         {
             var tempInputParams = InputParams;
             _inputValues = _inputActions.PlayerActions.Moves.ReadValue<Vector2>();
-
             tempInputParams.Input = _inputValues;
-
-            //delete after refactoring
             tempInputParams.IsStickPressed = Mathf.Abs(_inputValues.x) > 0 || Mathf.Abs(_inputValues.y) > 0;
-
+            tempInputParams.IsFiring = _inputActions.PlayerActions.Fire.inProgress;
             InputParams = tempInputParams;
         }
 
         #region Callbacks
+
         private void MovesHandler(InputAction.CallbackContext context)
         {
-
         }
+
         #endregion
     }
 }

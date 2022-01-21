@@ -6,6 +6,8 @@ TagManager:
   tags:
   - UICameraBattle
   - Pool
+  - FightArena
+  - Ground
   layers:
   - Default
   - TransparentFX

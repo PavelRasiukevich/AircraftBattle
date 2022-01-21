@@ -16,7 +16,7 @@ namespace Managers.External.PlayFabServices.Services
                 new SubtractUserVirtualCurrencyRequest
                 {
                     Amount = amount,
-                    VirtualCurrency = Const.CurrencyCode
+                    VirtualCurrency = Const.Currencies.Gold
                 },
                 result => User.Currency.CountUpdate(result.Balance),
                 error => Debug.LogError(error.ErrorMessage)
@@ -29,7 +29,7 @@ namespace Managers.External.PlayFabServices.Services
                 new AddUserVirtualCurrencyRequest
                 {
                     Amount = amount,
-                    VirtualCurrency = Const.CurrencyCode
+                    VirtualCurrency = Const.Currencies.Gold
                 },
                 result => User.Currency.CountUpdate(result.Balance),
                 error => Debug.LogError(error.ErrorMessage)
