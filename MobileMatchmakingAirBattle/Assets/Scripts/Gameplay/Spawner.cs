@@ -29,7 +29,7 @@ namespace Assets.Scripts.Gameplay
 
         private void InitializeActor(Vector3 position, Quaternion rotation)
         {
-            _actor = PhotonNetwork.Instantiate(GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
+            _actor = PhotonNetwork.Instantiate("Planes/"+GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
 
          /*   if (_actor.GetComponent<AirCraft>().photonView.IsMine)
             {

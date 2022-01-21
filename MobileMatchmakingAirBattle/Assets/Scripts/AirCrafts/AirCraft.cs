@@ -15,13 +15,11 @@ namespace Assets.Scripts.AirCrafts
     public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable, IObservable
     {
         [SerializeField] private AircraftDataModel _dataModel;
-        [SerializeField] private Transform _center;
-
-        private List<IObserver> observers;
+        private List<IObserver> _damageObservers = new List<IObserver>();
 
         public AircraftDataModel DataModel => _dataModel;
 
-        #region EVENTS
+        #region ACTIONS
 
         public Action DieAction { get; set; }
 
@@ -35,6 +33,7 @@ namespace Assets.Scripts.AirCrafts
         private PhotonView _photonView;
         private Rigidbody _rigidBody;
         private AircraftCollisionDetector _collisionDetector;
+        private AircraftParticles _aircraftParticles;
 
         #endregion
 
@@ -46,27 +45,20 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-            observers = new List<IObserver>
-            {
-                FindObjectOfType<HealthBar>()
-            };
-
+            AddObserver(FindObjectOfType<HealthBar>());
             _inputHandler = GetComponent<InputSystemHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _photonView = GetComponent<PhotonView>();
             _rigidBody = GetComponent<Rigidbody>();
             _collisionDetector = GetComponent<AircraftCollisionDetector>();
-
+            _aircraftParticles = GetComponent<AircraftParticles>();
             _attackHandler.PhotonView = _photonView;
             _attackHandler.Aircraft = this;
             _collisionDetector.AirCraft = this;
         }
 
-        private void Update()
-        {
-            _attackHandler.Attack(_inputHandler.InputParams.IsFiring);
-        }
+        private void Update() => _attackHandler.Attack(_inputHandler.InputParams.IsFiring);
 
         private void FixedUpdate()
         {
@@ -87,22 +79,26 @@ namespace Assets.Scripts.AirCrafts
         private void RPC_TakeDamage(object[] values)
         {
             if (!_photonView.IsMine) return;
-            _dataModel.CurrentHp = _dataModel.CurrentHp <= (int) values[0] ? 0 : _dataModel.CurrentHp - (int) values[0];
+            _dataModel.CurrentHp -= (int) values[0];
             NotifyObservers();
             if (_dataModel.CurrentHp <= 0) Die();
         }
 
-        public void Die() => DieAction.Invoke();
+        public void Die()
+        {
+            _aircraftParticles.DestroyEffect();
+            DieAction.Invoke();
+        }
 
         #region Observer
 
-        public void AddObserver(IObserver o) => observers.Add(o);
+        public void AddObserver(IObserver o) => _damageObservers.Add(o);
 
-        public void RemoveObserver(IObserver o) => observers.Remove(o);
+        public void RemoveObserver(IObserver o) => _damageObservers.Remove(o);
 
         public void NotifyObservers()
         {
-            foreach (IObserver observer in observers)
+            foreach (IObserver observer in _damageObservers)
                 observer.PerformAction(_dataModel.CurrentHp, _dataModel.Hp);
         }
 

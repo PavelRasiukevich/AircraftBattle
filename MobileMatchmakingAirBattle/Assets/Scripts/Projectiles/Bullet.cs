@@ -1,6 +1,5 @@
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.SriptableObjects;
-using Assets.Scripts.Utils;
 using UnityEngine;
 
 namespace Assets.Scripts.Projectiles
@@ -10,7 +9,7 @@ namespace Assets.Scripts.Projectiles
         #region FIELDS
 
         [SerializeField] private ProjectileDataModel _data;
-
+        [SerializeField] private ParticleSystem _destroyPs;
         private Rigidbody _rigidBody;
 
         #endregion
@@ -22,7 +21,7 @@ namespace Assets.Scripts.Projectiles
         private void Awake()
         {
             _rigidBody = GetComponent<Rigidbody>();
-            Destroy(gameObject, 5.0f);
+            Destroy(gameObject, Data.Data.LifeTime);
         }
 
         private void FixedUpdate()
@@ -39,23 +38,20 @@ namespace Assets.Scripts.Projectiles
         {
             IDamageable target;
             if (collision.gameObject.TryGetComponent<IDamageable>(out target))
-            {
                 target.TakeDamage(Data.Data.Damage, Data.Owner);
-                Destroy(gameObject);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.CompareTag(Const.Tags.FightArena))
-                DestroySelf();
+            DestroySelf();
         }
 
         #endregion
 
+        #region PRIVATE
+
         private void DestroySelf()
         {
+            // Spawn effect RPC
             Destroy(gameObject);
         }
+
+        #endregion
     }
 }

@@ -8525,7 +8525,7 @@ Transform:
   m_GameObject: {fileID: 1758228276}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 58.239975, y: 0, z: 22.374832}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.32534, z: 1}
   m_Children: []
   m_Father: {fileID: 525041026}
   m_RootOrder: 16
@@ -31736,7 +31736,7 @@ GameObject:
   - component: {fileID: 2891930488925565713}
   m_Layer: 0
   m_Name: FightArena
-  m_TagString: Untagged
+  m_TagString: FightArena
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46336,7 +46336,7 @@ Transform:
   m_GameObject: {fileID: 1108132189}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 47.6, y: 0.19479561, z: -42.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.20545, z: 1}
   m_Children: []
   m_Father: {fileID: 525041026}
   m_RootOrder: 11
@@ -77245,11 +77245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7541425095189181934, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1082
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7541425095189181934, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2303
+      value: -4.6000004
       objectReference: {fileID: 0}
     - target: {fileID: 7541425095189181934, guid: bd8bcbd4d8bc07b4089c7b0bab50c797, type: 3}
       propertyPath: m_LocalRotation.w
@@ -77336,7 +77336,7 @@ GameObject:
   - component: {fileID: 5060988861410414815}
   m_Layer: 0
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

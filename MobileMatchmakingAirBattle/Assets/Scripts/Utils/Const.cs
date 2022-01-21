@@ -40,7 +40,7 @@ namespace Assets.Scripts.Utils
         {
             public const string UICameraBattle = "UICameraBattle";
             public const string FightArena = "FightArena";
-            public const string Ground = "FightArena";
+            public const string Ground = "Ground";
         }
 
         /*
