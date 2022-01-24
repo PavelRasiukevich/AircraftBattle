@@ -36,8 +36,7 @@ namespace Assets.Scripts.Projectiles
 
         private void OnCollisionEnter(Collision collision)
         {
-            IDamageable target;
-            if (collision.gameObject.TryGetComponent<IDamageable>(out target))
+            if (collision.gameObject.TryGetComponent<IDamageable>(out var target))
                 target.TakeDamage(Data.Data.Damage, Data.Owner);
             DestroySelf();
         }
@@ -48,7 +47,7 @@ namespace Assets.Scripts.Projectiles
 
         private void DestroySelf()
         {
-            // Spawn effect RPC
+            // Spawn effect
             Destroy(gameObject);
         }
 

@@ -519,10 +519,29 @@ PrefabInstance:
       propertyPath: _scaler
       value: 
       objectReference: {fileID: 8298477126064911872}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7483049444913635223, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
 --- !u!224 &777444686690170214 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5909264283788371694, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
   m_PrefabInstance: {fileID: 6398459880951600008}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8777731860944334260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2385537551046966844, guid: 9d443d6076c7a754f8dd2edb57a08066, type: 3}
+  m_PrefabInstance: {fileID: 6398459880951600008}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &145473965721824085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8777731860944334260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ControlPath: <Keyboard>/space
