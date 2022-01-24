@@ -29,7 +29,6 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void KeyBoardInput()
         {
-
             Horizontal = Input.GetAxis("Horizontal");
             Vertical = Input.GetAxis("Vertical");
 
@@ -42,17 +41,13 @@ namespace Assets.Scripts.GameObjectComponents
             par.IsFiring = Input.GetAxisRaw("Fire1") != 0;
 
             InputParams = par;
-
         }
 
         private void JoyStickInput()
         {
             var intermediate = InputParams;
-
             intermediate.Input = JoyStick.JoystickInput;
             intermediate.IsStickPressed = JoyStick.IsPressed;
-            intermediate.IsFiring = FireButton.IsFire;
-
             InputParams = intermediate;
         }
     }

@@ -9,7 +9,6 @@ namespace Assets.Scripts.UI.JoyStick
         [SerializeField] private InnerCircle _innerCircle;
         [SerializeField] private RectTransform _root;
         [SerializeField] private CanvasScaler _scaler;
-        [SerializeField] private FireButton _fireButton;
 
         public static Vector2 JoystickInput { get; set; }
 
