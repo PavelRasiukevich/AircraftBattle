@@ -1,5 +1,7 @@
 ﻿using Assets.Scripts.Utils;
 using Core;
+using Core.Base;
+using Interfaces.Subscriber;
 using Managers.Data.ScriptableObjects;
 using TO;
 using UnityEngine;
@@ -50,7 +52,7 @@ namespace Managers.Data
         public void SelectPlane(int id)
         {
             Planes.GetPlaneBy(id, out _currentPlane);
-            ScreenEventHolder.Inst.RefreshShop();
+            EventBus.InvokeEvent<IShopRefreshHandler>(h => h.Refresh());
             PlayerPrefs.SetInt(Const.CurrentPlaneIdKey, id);
             PlayerPrefs.Save();
         }

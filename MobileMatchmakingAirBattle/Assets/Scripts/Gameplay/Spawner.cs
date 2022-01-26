@@ -38,7 +38,7 @@ namespace Assets.Scripts.Gameplay
             }*/
 
             var airCraft = _actor.GetComponent<AirCraft>();
-            airCraft.DataModel.RespawnPosition = point;
+            airCraft.Data.RespawnPosition = point;
 
             airCraft.DieAction += Die;
         }

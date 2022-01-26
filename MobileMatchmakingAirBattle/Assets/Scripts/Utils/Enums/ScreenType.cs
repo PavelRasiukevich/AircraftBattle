@@ -11,6 +11,7 @@ namespace Utils.Enums
         Search,
         Shop,
         ShopView,
-        Battle
+        Battle,
+        Fail
     }
 }

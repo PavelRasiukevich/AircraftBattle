@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Core
+namespace Interfaces
 {
     public interface ISender
     {

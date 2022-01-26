@@ -1,4 +1,7 @@
 using Assets.Scripts.Core;
+using Core;
+using Core.Base;
+using Interfaces.Subscriber;
 using Managers.External;
 using TMPro;
 using UnityEngine;
@@ -7,7 +10,7 @@ using Utils.Enums;
 
 namespace UI.Screens
 {
-    public class LoadScreen : BaseScreen
+    public class LoadScreen : BaseScreen, IStringErrorHandler
     {
         [SerializeField] private TMP_Text _authErrorText;
         [SerializeField] private Button _exitGameButton;
@@ -19,32 +22,30 @@ namespace UI.Screens
 
         private void Start() => ExternalServices.Inst.Authentication();
 
+        private void OnEnable() => EventBus.Subscribe(this);
+
+        private void OnDisable() => EventBus.Unsubscribe(this);
+
         #endregion
 
         #region Events
 
-        public void GoogleAuthError(string errorText)
+        public void Error(string error)
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _shareScreenButton.gameObject.SetActive(true);
             _exitGameButton.gameObject.SetActive(true);
             _authErrorText.gameObject.SetActive(true);
-            _authErrorText.text = errorText;
+            _authErrorText.text = error;
         }
 
         #endregion
 
         #region OnClick
 
-        public void ExitOnClick()
-        {
-            Application.Quit();
-        }
+        public void ExitOnClick() => Application.Quit();
 
-        public void ShareScreenOnClick()
-        {
-            new NativeShare().SetText("Error In Load Screen!").Share();
-        }
+        public void ShareScreenOnClick() => new NativeShare().SetText("Error In Load Screen!").Share();
 
         #endregion
     }

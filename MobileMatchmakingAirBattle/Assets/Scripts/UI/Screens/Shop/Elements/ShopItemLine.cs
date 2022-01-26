@@ -32,7 +32,6 @@ namespace UI.Screens.Shop.Elements
 
         private void Awake()
         {
-            //  _buyButton.onClick.AddListener(BuyOnClick);
             _selectButton.onClick.AddListener(SelectOnClick);
             _infoButton.onClick.AddListener(InfoOnClick);
         }
@@ -47,9 +46,9 @@ namespace UI.Screens.Shop.Elements
             _id = planeInfo.ID;
             _icon.sprite = planeInfo.Icon;
             _name.text = planeInfo.DisplayName;
-            _hp.text = planeInfo.PlanePrefab.DataModel.Hp.ToString(CultureInfo.InvariantCulture);
-            _speed.text = planeInfo.PlanePrefab.DataModel.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
-            _mobility.text = planeInfo.PlanePrefab.DataModel.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
+            _hp.text = planeInfo.PlanePrefab.Data.Hp.ToString(CultureInfo.InvariantCulture);
+            _speed.text = planeInfo.PlanePrefab.Data.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
+            _mobility.text = planeInfo.PlanePrefab.Data.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
             // UI
             if (GameData.Inst.CurrentPlane.ID == planeInfo.ID)
             {

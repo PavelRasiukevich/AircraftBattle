@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils.Enums;
 
-namespace Assets.Scripts.Core
+namespace Core.Base
 {
     public abstract class BaseScreen : MonoBehaviour
     {

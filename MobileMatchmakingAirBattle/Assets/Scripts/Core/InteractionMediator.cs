@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using Interfaces;
 using UnityEngine;
-using static Assets.Scripts.Core.ISender;
+using static Interfaces.ISender;
 
 namespace Assets.Scripts.Core
 {

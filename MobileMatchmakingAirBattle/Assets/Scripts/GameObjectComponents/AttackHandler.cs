@@ -10,7 +10,7 @@ namespace Assets.Scripts.GameObjectComponents
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform _fireSpot;
 
-        public AirCraft Aircraft { get; set; }
+        private AirCraft Aircraft { get; set; }
 
         //add CustomTimer Class 
         [SerializeField] private float _reloadTime;
@@ -23,11 +23,12 @@ namespace Assets.Scripts.GameObjectComponents
         private void Awake()
         {
             _elapsedTime = _reloadTime;
+            Aircraft = GetComponent<AirCraft>();
         }
 
         public void Attack(bool isFiring)
         {
-            if (!Aircraft.DataModel.IsControllable) return;
+            if (!Aircraft.Data.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
             if (isFiring)
@@ -39,6 +40,7 @@ namespace Assets.Scripts.GameObjectComponents
                     _elapsedTime = 0;
                 }
             }
+
             _elapsedTime += Time.deltaTime;
         }
 

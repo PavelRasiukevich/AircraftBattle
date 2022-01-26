@@ -1,9 +1,8 @@
 using System;
-using System.Collections.Generic;
-using Assets.Scripts.Core;
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
-using Assets.Scripts.UI;
+using Core;
+using Interfaces.Subscriber;
 using Photon.Pun;
 using Photon.Realtime;
 using TO;
@@ -12,12 +11,10 @@ using UnityEngine;
 namespace Assets.Scripts.AirCrafts
 {
     [DisallowMultipleComponent]
-    public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable, IObservable
+    public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
-        private List<IObserver> _damageObservers = new List<IObserver>();
-
-        public AircraftDataModel DataModel => _dataModel;
+        public AircraftDataModel Data => _dataModel;
 
         #region ACTIONS
 
@@ -31,8 +28,9 @@ namespace Assets.Scripts.AirCrafts
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
+        public PhotonView PhotonView => _photonView;
+
         private Rigidbody _rigidBody;
-        private AircraftCollisionDetector _collisionDetector;
         private AircraftParticles _aircraftParticles;
 
         #endregion
@@ -45,18 +43,18 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-            AddObserver(FindObjectOfType<HealthBar>());
             _inputHandler = GetComponent<InputSystemHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _photonView = GetComponent<PhotonView>();
             _rigidBody = GetComponent<Rigidbody>();
-            _collisionDetector = GetComponent<AircraftCollisionDetector>();
             _aircraftParticles = GetComponent<AircraftParticles>();
             _attackHandler.PhotonView = _photonView;
-            _attackHandler.Aircraft = this;
-            _collisionDetector.AirCraft = this;
         }
+
+        private void Start() =>
+            EventBus.InvokeEvent<IBattleScreenHandler>(h =>
+                h.RefreshUI(Data));
 
         private void Update() => _attackHandler.Attack(_inputHandler.InputParams.IsFiring);
 
@@ -80,7 +78,7 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
             _dataModel.CurrentHp -= (int) values[0];
-            NotifyObservers();
+            EventBus.InvokeEvent<IBattleScreenHandler>(h => h.DamageUI(Data));
             if (_dataModel.CurrentHp <= 0) Die();
         }
 
@@ -89,19 +87,5 @@ namespace Assets.Scripts.AirCrafts
             _aircraftParticles.DestroyEffect();
             DieAction.Invoke();
         }
-
-        #region Observer
-
-        public void AddObserver(IObserver o) => _damageObservers.Add(o);
-
-        public void RemoveObserver(IObserver o) => _damageObservers.Remove(o);
-
-        public void NotifyObservers()
-        {
-            foreach (IObserver observer in _damageObservers)
-                observer.PerformAction(_dataModel.CurrentHp, _dataModel.Hp);
-        }
-
-        #endregion
     }
 }

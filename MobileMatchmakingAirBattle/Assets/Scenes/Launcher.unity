@@ -3575,6 +3575,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3133046683301746361, guid: 1f67ab92f14b6e34eb71316166864de9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4878148064431019262, guid: 1f67ab92f14b6e34eb71316166864de9, type: 3}
       propertyPath: m_Name
       value: RegistrationScreen
@@ -13226,7 +13230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb4d25ddde1495489121514d26a101b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _authenticationType: 1
+  _authenticationType: 2
 --- !u!1 &249554256
 GameObject:
   m_ObjectHideFlags: 3
@@ -16333,6 +16337,7 @@ GameObject:
   m_Component:
   - component: {fileID: 317116839}
   - component: {fileID: 317116838}
+  - component: {fileID: 317116840}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -16367,6 +16372,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317116840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317116837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc430ff12e104b21aa87ac9f4d88a8bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &317490402
 GameObject:
   m_ObjectHideFlags: 3
