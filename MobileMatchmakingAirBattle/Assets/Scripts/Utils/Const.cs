@@ -44,6 +44,22 @@ namespace Assets.Scripts.Utils
         }
 
         /*
+         * Events
+         */
+        public static class Events
+        {
+            public static string SwichWeaponUI = "SwichWeaponUI";
+            public static string DamageUI = "DamageUI";
+            public static string InitBattleScreenUI = "InitBattleScreenUI";
+            public static string ErrorLogin = "ErrorLogin";
+            public static string ErrorRegistration = "ErrorRegistration";
+            public static string ErrorGooglePlay = "ErrorGooglePlay";
+            public static string RefreshLeaderboardLoad = "RefreshLeaderboardLoad";
+            public static string RefreshShop = "RefreshShop";
+            public static string UnexpectedError = "UnexpectedError";
+        }
+
+        /*
          * PlayFab
          */
         internal class PlayFab

@@ -13,7 +13,7 @@ namespace Managers.Data.CustomEditors
 {
 #if UNITY_EDITOR
 
-    public class PlanesDataEditor : BaseCustomEditor
+    public class PlanesDataEditor : EditorWindow
     {
         private PlanesDataScriptableObject _planesData;
 
@@ -72,9 +72,9 @@ namespace Managers.Data.CustomEditors
                 {
                     EditorGUI.indentLevel++;
                     EditorGUI.BeginDisabledGroup(true);
-                    EditorGUILayout.IntField("Health", _selectedPlane.PlanePrefab.DataModel.Hp);
-                    EditorGUILayout.FloatField("Speed", _selectedPlane.PlanePrefab.DataModel.Speed.MoveSpeed);
-                    EditorGUILayout.FloatField("Mobility", _selectedPlane.PlanePrefab.DataModel.Speed.RotationSpeed);
+                    EditorGUILayout.IntField("Health", _selectedPlane.PlanePrefab.Data.Hp);
+                    EditorGUILayout.FloatField("Speed", _selectedPlane.PlanePrefab.Data.Speed.MoveSpeed);
+                    EditorGUILayout.FloatField("Mobility", _selectedPlane.PlanePrefab.Data.Speed.RotationSpeed);
                     EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
                 }

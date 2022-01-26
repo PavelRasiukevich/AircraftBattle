@@ -1,5 +1,6 @@
 using System.Globalization;
 using Assets.Scripts.Core;
+using Core.Base;
 using Managers.Data;
 using TMPro;
 using UnityEngine;
@@ -30,9 +31,9 @@ namespace UI.Screens.Shop
         {
             _shopViewModel.Load(GameData.Inst.CurrentShopPlane.PlaneShopModel);
             _name.text = GameData.Inst.CurrentShopPlane.DisplayName;
-            _hp.text = GameData.Inst.CurrentShopPlane.PlanePrefab.DataModel.Hp.ToString(CultureInfo.InvariantCulture);
-            _speed.text = GameData.Inst.CurrentShopPlane.PlanePrefab.DataModel.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
-            _mobility.text = GameData.Inst.CurrentShopPlane.PlanePrefab.DataModel.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
+            _hp.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString(CultureInfo.InvariantCulture);
+            _speed.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
+            _mobility.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
             _firePower.text = GameData.Inst.CurrentShopPlane.FirePower.ToString(CultureInfo.InvariantCulture);
             _gunsCount.text = GameData.Inst.CurrentShopPlane.GunsCount.ToString();
         } 

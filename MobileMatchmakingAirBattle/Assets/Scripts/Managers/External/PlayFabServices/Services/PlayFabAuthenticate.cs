@@ -2,6 +2,7 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
 using Core;
+using Interfaces.Subscriber;
 using Photon.Pun;
 using Photon.Realtime;
 using PlayFab;
@@ -50,7 +51,8 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.LoginWithPlayFab(
                 request,
                 RequestPhotonToken,
-                ScreenEventHolder.Inst.ErrorLogin
+                error=>
+                EventBus.InvokeEvent<IPlayFabErrorHandler>(h =>h.Error(error))
             );
         }
 
@@ -66,7 +68,8 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.RegisterPlayFabUser(
                 request,
                 res => ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen(),
-                ScreenEventHolder.Inst.ErrorRegistration);
+                error => EventBus.InvokeEvent<IPlayFabErrorHandler>(h => h.Error(error))
+                );
         }
 
         public void LoginWithGoogle(string serverAuthCode)

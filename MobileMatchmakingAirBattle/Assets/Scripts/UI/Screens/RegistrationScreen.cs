@@ -1,5 +1,9 @@
 ﻿using Assets.Scripts.Core;
+using Core;
+using Core.Base;
+using Interfaces.Subscriber;
 using Managers.External;
+using PlayFab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +14,7 @@ namespace UI.Screens
     /*
      * Регистрация игрока в PlayFab
      */
-    public class RegistrationScreen : BaseScreen
+    public class RegistrationScreen : BaseScreen, IPlayFabErrorHandler
     {
         [SerializeField] private TMP_InputField _nameInput;
         [SerializeField] private TMP_InputField _mailInput;
@@ -24,8 +28,11 @@ namespace UI.Screens
         private void OnEnable()
         {
             _errorText.text = string.Empty;
+            EventBus.Subscribe(this);
             OnChanged();
         }
+
+        private void OnDisable() => EventBus.Unsubscribe(this);
 
         #endregion
 
@@ -37,10 +44,10 @@ namespace UI.Screens
                                           _passwordInput.text.Length > 6;
         }
 
-        public void OnRegistrationError(string errorText)
+        public void Error(PlayFabError error)
         {
             _errorText.gameObject.SetActive(true);
-            _errorText.text = errorText;
+            _errorText.text = error.ErrorMessage;
         }
 
         #endregion

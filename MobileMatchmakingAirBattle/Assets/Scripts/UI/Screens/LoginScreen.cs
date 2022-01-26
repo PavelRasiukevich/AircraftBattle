@@ -1,5 +1,9 @@
 ﻿using Assets.Scripts.Core;
+using Core;
+using Core.Base;
+using Interfaces.Subscriber;
 using Managers.External;
+using PlayFab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,7 +14,7 @@ namespace UI.Screens
     /*
      * Авторизация в PlayFab
      */
-    public class LoginScreen : BaseScreen
+    public class LoginScreen : BaseScreen, IPlayFabErrorHandler
     {
         public override ScreenType Type => ScreenType.Login;
 
@@ -23,8 +27,14 @@ namespace UI.Screens
 
         private void OnEnable()
         {
+            EventBus.Subscribe(this);
             _errorText.text = string.Empty;
             OnChanged();
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe(this);
         }
 
         #endregion
@@ -36,11 +46,11 @@ namespace UI.Screens
             _confirmButton.interactable = _nameInput.text.Length > 0 && _passwordInput.text.Length > 0;
         }
 
-        public void OnLoginError(string errorText)
+        public void Error(PlayFabError error)
         {
             PopupHolder.CurrentPopup(PopupType.Loading).Hide();
             _errorText.gameObject.SetActive(true);
-            _errorText.text = errorText;
+            _errorText.text = error.ErrorMessage;
         }
 
         #endregion

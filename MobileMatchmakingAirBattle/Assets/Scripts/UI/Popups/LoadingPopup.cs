@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Core;
+using Core.Base;
 using Utils.Enums;
 
 namespace UI.Popups

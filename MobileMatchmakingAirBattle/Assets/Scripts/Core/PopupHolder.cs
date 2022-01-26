@@ -1,13 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
+using Core.Base;
 using UnityEngine;
 using Utils.Enums;
 
-namespace Assets.Scripts.Core
+namespace Core
 {
-    /*
-     * Модальные окна и т.д.
-     */
     public class PopupHolder : MonoBehaviour
     {
         private static Dictionary<PopupType, BasePopup> _dictionary;

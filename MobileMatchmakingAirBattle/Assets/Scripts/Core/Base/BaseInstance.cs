@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Core
+namespace Core.Base
 {
     public abstract class BaseInstance : MonoBehaviour
     {

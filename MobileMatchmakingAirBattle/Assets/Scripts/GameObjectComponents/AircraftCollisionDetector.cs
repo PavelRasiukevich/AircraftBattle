@@ -6,7 +6,9 @@ namespace Assets.Scripts.GameObjectComponents
 {
     public class AircraftCollisionDetector : MonoBehaviour
     {
-        public AirCraft AirCraft { get; set; }
+        private AirCraft AirCraft { get; set; }
+
+        private void Awake() => AirCraft = GetComponent<AirCraft>();
 
         private void OnCollisionEnter(Collision other)
         {
@@ -17,7 +19,7 @@ namespace Assets.Scripts.GameObjectComponents
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag(Const.Tags.FightArena))
-                AirCraft.DataModel.IsControllable = true;
+                AirCraft.Data.IsControllable = true;
         }
     }
 }

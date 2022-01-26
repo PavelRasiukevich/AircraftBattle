@@ -1,4 +1,7 @@
 using Assets.Scripts.Core;
+using Core;
+using Core.Base;
+using Interfaces.Subscriber;
 using Managers.Data;
 using UI.Screens.Shop.Elements;
 using UnityEngine;
@@ -7,7 +10,7 @@ using Utils.Enums;
 
 namespace UI.Screens.Shop
 {
-    public class ShopScreen : BaseScreen
+    public class ShopScreen : BaseScreen, IShopRefreshHandler
     {
         public override ScreenType Type => ScreenType.Shop;
 
@@ -16,7 +19,16 @@ namespace UI.Screens.Shop
 
         #region UNITY
 
-        private void OnEnable() => Refresh();
+        private void OnEnable()
+        {
+            EventBus.Subscribe(this);
+            Refresh();
+        }
+
+        private void OnDisable()
+        {
+            EventBus.Unsubscribe(this);
+        }
 
         #endregion
 
