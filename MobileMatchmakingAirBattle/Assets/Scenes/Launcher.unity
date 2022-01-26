@@ -3004,17 +3004,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1933
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &67648715 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 481028675301816739, guid: 1f67ab92f14b6e34eb71316166864de9, type: 3}
-  m_PrefabInstance: {fileID: 74781899}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef872b4313d492b803c904b9e247d21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &67694301
 GameObject:
   m_ObjectHideFlags: 3
@@ -13230,7 +13219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb4d25ddde1495489121514d26a101b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _authenticationType: 2
+  _authenticationType: 1
 --- !u!1 &249554256
 GameObject:
   m_ObjectHideFlags: 3
@@ -73847,17 +73836,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 988
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1419879498 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 89760490656876538, guid: 56f29339964990d4ab7f33d6e7e04aa2, type: 3}
-  m_PrefabInstance: {fileID: 1981303602}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b93c599c9536aa4ca4ca33ec895a24e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1420729468
 GameObject:
   m_ObjectHideFlags: 3
@@ -87360,17 +87338,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1698
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1678794224 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5225452680631230111, guid: 1fc6d1c022ce82b4984775c31afef0a5, type: 3}
-  m_PrefabInstance: {fileID: 6669758593147790235}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049363a7ee824d2faacaa5d13b3a0dc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1679857712
 GameObject:
   m_ObjectHideFlags: 3
@@ -95439,81 +95406,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 527745ac3fd04c6eb76ffb60beda064d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loginErrorEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1678794224}
-        m_TargetAssemblyTypeName: UI.Screens.LoginScreen, Assembly-CSharp
-        m_MethodName: OnLoginError
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _registrationErrorEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 67648715}
-        m_TargetAssemblyTypeName: UI.Screens.RegistrationScreen, Assembly-CSharp
-        m_MethodName: OnRegistrationError
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _googleErrorEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1419879498}
-        m_TargetAssemblyTypeName: UI.Screens.LoadScreen, Assembly-CSharp
-        m_MethodName: GoogleAuthError
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _leaderBoardLoadEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1864714192}
-        m_TargetAssemblyTypeName: UI.Screens.LeaderBoard.LeaderboardScreen, Assembly-CSharp
-        m_MethodName: Refresh
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _shopEditInfoEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3250235115556974172}
-        m_TargetAssemblyTypeName: UI.Screens.Shop.ShopScreen, Assembly-CSharp
-        m_MethodName: Refresh
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1842951820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96782,17 +96674,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7792896169611628513, guid: c4b9e2c6452f85140b1659a23c7246ca, type: 3}
   m_PrefabInstance: {fileID: 144774777}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1864714192 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2992917641378451844, guid: c4b9e2c6452f85140b1659a23c7246ca, type: 3}
-  m_PrefabInstance: {fileID: 144774777}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d48120ba0448844fb572806220c2afa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1866767177
 GameObject:
   m_ObjectHideFlags: 3
@@ -111726,17 +111607,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9deb9d9ba6266ab46b4b3c5ed81c6b86, type: 3}
---- !u!114 &3250235115556974172 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6010444332765949549, guid: 9deb9d9ba6266ab46b4b3c5ed81c6b86, type: 3}
-  m_PrefabInstance: {fileID: 3250235115556974171}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ecd4fdbe0417644bb12c253683ab24d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &3485424150736840431
 PrefabInstance:
   m_ObjectHideFlags: 0
