@@ -1,5 +1,7 @@
 using Assets.Scripts.Core;
-using Assets.Scripts.Utils;
+using Core.Base;
+using Managers.Network.Launcher;
+using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens
 {
@@ -7,6 +9,10 @@ namespace Assets.Scripts.UI.Screens
     {
         public override ScreenType Type => ScreenType.Search;
 
-        public void SwitchToMainMenu() => ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
+        #region OnClick
+
+        public void SwitchToMainMenu() => Launcher.Inst.StopMatching();
+
+        #endregion
     }
 }

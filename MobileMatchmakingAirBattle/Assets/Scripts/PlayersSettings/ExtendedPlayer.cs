@@ -1,5 +1,6 @@
-using Photon.Realtime;
 using System.Collections.Generic;
+using ExitGames.Client.Photon;
+using Photon.Realtime;
 
 namespace Assets.Scripts.PlayersSettings
 {
@@ -11,7 +12,7 @@ namespace Assets.Scripts.PlayersSettings
         {
         }
 
-        protected internal ExtendedPlayer(string nickName, int actorNumber, bool isLocal, ExitGames.Client.Photon.Hashtable playerProperties) : base(nickName, actorNumber, isLocal, playerProperties)
+        protected internal ExtendedPlayer(string nickName, int actorNumber, bool isLocal, Hashtable playerProperties) : base(nickName, actorNumber, isLocal, playerProperties)
         {
         }
     }

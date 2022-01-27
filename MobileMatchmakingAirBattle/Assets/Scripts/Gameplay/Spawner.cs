@@ -1,50 +1,84 @@
 using Assets.Scripts.AirCrafts;
+using Cinemachine;
+using Managers.Data;
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
-using System;
 
 namespace Assets.Scripts.Gameplay
 {
     public class Spawner : MonoBehaviourPunCallbacks
     {
-        [SerializeField] private Transform _playerPrefab;
         [SerializeField] private Transform[] _spawnPoint;
-        [SerializeField] private AircraftCamera _airCraftCamera;
+        [SerializeField] private Transform _origin;
+        [SerializeField] private CinemachineVirtualCamera _camera;
+
+        private Transform point;
+        private GameObject _actor;
 
         private void Awake()
         {
-            SpawnPlayerOnARandomPoint();
+            var actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
+            point = _spawnPoint[actorNumber - 1];
+            point = SetupPointInWorld(point);
+
+            InitializeActor(point.position, point.rotation);
         }
 
-        private void SpawnPlayerOnARandomPoint()
+        #region PRIVATE METHODS
+
+        private void InitializeActor(Vector3 position, Quaternion rotation)
         {
-            var randomIndex = GetRandomIndex(_spawnPoint);
-            var randomPoint = GetPointByIndex(randomIndex);
+            _actor = PhotonNetwork.Instantiate("Planes/"+GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
 
-            var p = PhotonNetwork.Instantiate(_playerPrefab.name,
-                randomPoint.position,
-                Quaternion.identity);
+         /*   if (_actor.GetComponent<AirCraft>().photonView.IsMine)
+            {
+                _camera.Follow = _actor.GetComponentInChildren<CameraSlot>().transform;
+                _camera.LookAt = _actor.transform;
+            }*/
 
-            CameraSetup(p.transform);
+            var airCraft = _actor.GetComponent<AirCraft>();
+            airCraft.Data.RespawnPosition = point;
+
+            airCraft.DieAction += Die;
         }
 
-        private void CameraSetup(Transform t)
+        private void Die()
         {
-            _airCraftCamera.Activate();
-            _airCraftCamera.SetParent(t);
-            _airCraftCamera.ResetSettings();
-            _airCraftCamera.SetupCameraSettings();
+            PhotonNetwork.Destroy(_actor);
+            StartCoroutine(nameof(Wait));
         }
 
-        private int GetRandomIndex(Transform[] array) => UnityEngine.Random.Range(0, array.Length);
-
-        private Transform GetPointByIndex(int index)
+        private void Respawn()
         {
-            if (index < 0) throw new IndexOutOfRangeException();
-
-            if (_spawnPoint == null || _spawnPoint.Length == 0) throw new Exception();
-
-            return _spawnPoint[index];
+            InitializeActor(point.position, point.rotation);
         }
+
+        private IEnumerator Wait()
+        {
+            yield return new WaitForSeconds(3.0f);
+            Respawn();
+            StopCoroutine(nameof(Wait));
+        }
+
+        private Transform SetupPointInWorld(Transform point)
+        {
+            var direction = GetDirectionToLook(_origin, point);
+            var lookRotation = Quaternion.LookRotation(direction);
+            lookRotation = SetupRotation(lookRotation);
+            point.rotation = lookRotation;
+            return point;
+        }
+
+        private Vector3 GetDirectionToLook(Transform a, Transform b) => (a.position - b.transform.position).normalized;
+
+        private static Quaternion SetupRotation(Quaternion lookRotation)
+        {
+            lookRotation.x = 0;
+            lookRotation.z = 0;
+            return lookRotation;
+        }
+
+        #endregion
     }
 }

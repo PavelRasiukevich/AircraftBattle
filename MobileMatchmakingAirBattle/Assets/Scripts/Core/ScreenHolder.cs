@@ -1,6 +1,7 @@
-using Assets.Scripts.Utils;
 using System.Collections.Generic;
+using Core.Base;
 using UnityEngine;
+using Utils.Enums;
 
 namespace Assets.Scripts.Core
 {
@@ -17,10 +18,11 @@ namespace Assets.Scripts.Core
         {
             _dictionary = new Dictionary<ScreenType, BaseScreen>();
             _children = GetComponentsInChildren<BaseScreen>(true);
-
-            PopulateDictionary(_dictionary, _children);
+            
+            foreach (var screen in _children)
+                _dictionary.Add(screen.Type, screen);
             _currentScreen = _dictionary[_default];
-
+            
             _currentScreen.ShowScreen();
         }
 
@@ -34,12 +36,6 @@ namespace Assets.Scripts.Core
             _currentScreen = nextScreen;
 
             return _currentScreen;
-        }
-
-        private void PopulateDictionary(Dictionary<ScreenType, BaseScreen> dictionary, BaseScreen[] array)
-        {
-            foreach (var screen in array)
-                dictionary.Add(screen.Type, screen);
         }
     }
 }
