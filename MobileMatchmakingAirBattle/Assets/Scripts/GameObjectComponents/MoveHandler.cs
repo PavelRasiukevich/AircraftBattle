@@ -12,21 +12,9 @@ namespace Assets.Scripts.GameObjectComponents
         private Quaternion _returnRotation;
         private Vector3 _resetedReturnAngle;
 
-        #region NOT USED
-        public void MoveCompensate(Rigidbody remoteBody, Vector3 networkPosition)
-        {
-            remoteBody.position = Vector3.Lerp(remoteBody.position, networkPosition, Time.fixedDeltaTime);
-        }
-
-        public void MoveWithVelocity(Rigidbody bodyToMove, Vector3 velocityVector, float speed)
-            => bodyToMove.velocity = velocityVector * speed;
-
-        public void MoveWithInputAxes(Rigidbody bodyToMove, InputHandler handler)
-            => bodyToMove.MovePosition(bodyToMove.position + new Vector3(handler.Horizontal, 0, handler.Vertical));
-        #endregion
-
         public void MoveWithJoyStick(Rigidbody bodyToMove, InputParameters inputParams, Speed speed)
         {
+
             _gasCoefficient = Mathf.Clamp(_gasCoefficient, 0.1f, 1.0f);
 
             _angularVelocity.x = inputParams.Input.y;
@@ -56,6 +44,11 @@ namespace Assets.Scripts.GameObjectComponents
             }
 
             bodyToMove.velocity = transform.TransformDirection(_gasCoefficient * speed.MoveSpeed * Vector3.forward);
+        }
+
+        private void Move(InputParameters inputParams, Speed speed)
+        {
+
         }
 
         public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)

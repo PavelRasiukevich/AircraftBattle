@@ -1,5 +1,5 @@
 {
-    "name": "InputActions",
+    "name": "Actions",
     "maps": [
         {
             "name": "PlayerActions",
@@ -37,52 +37,19 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "1677fa6c-c738-42fe-8515-59d7179351dc",
-                    "path": "<Keyboard>/w",
+                    "name": "",
+                    "id": "4e15428b-bdb3-4eba-ae97-8d5978954a7e",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard",
+                    "groups": "",
                     "action": "Moves",
                     "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "b319ed2b-0faa-4a8c-aaa1-8375afff7d1e",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Moves",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "b238cc3e-1817-41c3-9b70-769b53957891",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Moves",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "3b995dc0-19bf-485f-84e1-5c12945cabea",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Moves",
-                    "isComposite": false,
-                    "isPartOfComposite": true
+                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "646825e5-8db6-4b46-b4de-a48c8e59376f",
+                    "id": "af6b04a9-cd92-4b2c-8262-64c986ac1ba1",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
@@ -94,11 +61,5 @@
             ]
         }
     ],
-    "controlSchemes": [
-        {
-            "name": "Keyboard",
-            "bindingGroup": "Keyboard",
-            "devices": []
-        }
-    ]
+    "controlSchemes": []
 }

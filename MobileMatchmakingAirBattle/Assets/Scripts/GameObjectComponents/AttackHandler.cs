@@ -26,22 +26,22 @@ namespace Assets.Scripts.GameObjectComponents
             Aircraft = GetComponent<AirCraft>();
         }
 
-        public void Attack(bool isFiring)
+        private void Update()
+        {
+            _elapsedTime += Time.deltaTime;
+        }
+
+        public void Attack()
         {
             if (!Aircraft.Data.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
-            if (isFiring)
+            if (_elapsedTime >= _reloadTime)
             {
-                if (_elapsedTime >= _reloadTime)
-                {
-                    if (PhotonView.IsMine)
-                        PhotonView.RPC(nameof(Attack), RpcTarget.All);
-                    _elapsedTime = 0;
-                }
+                if (PhotonView.IsMine)
+                    PhotonView.RPC(nameof(Attack), RpcTarget.All);
+                _elapsedTime = 0;
             }
-
-            _elapsedTime += Time.deltaTime;
         }
 
         #region RPCs
@@ -49,7 +49,7 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
-            float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
+            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
 

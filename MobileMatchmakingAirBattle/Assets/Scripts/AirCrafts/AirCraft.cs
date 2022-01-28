@@ -1,17 +1,17 @@
-using System;
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
 using Core;
 using Interfaces.Subscriber;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using TO;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
 {
     [DisallowMultipleComponent]
-    public class AirCraft : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback, IDamageable
+    public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
         public AircraftDataModel Data => _dataModel;
@@ -35,10 +35,6 @@ namespace Assets.Scripts.AirCrafts
 
         #endregion
 
-        public void OnPhotonInstantiate(PhotonMessageInfo info)
-        {
-        }
-
         #region UNITY
 
         private void Awake()
@@ -50,13 +46,13 @@ namespace Assets.Scripts.AirCrafts
             _rigidBody = GetComponent<Rigidbody>();
             _aircraftParticles = GetComponent<AircraftParticles>();
             _attackHandler.PhotonView = _photonView;
+
+            _inputHandler.Attacking += _attackHandler.Attack;
         }
 
         private void Start() =>
             EventBus.InvokeEvent<IBattleScreenHandler>(h =>
                 h.RefreshUI(Data));
-
-        private void Update() => _attackHandler.Attack(_inputHandler.InputParams.IsFiring);
 
         private void FixedUpdate()
         {

@@ -1,52 +1,73 @@
 using Assets.Scripts.Structs;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
 
 namespace Assets.Scripts.GameObjectComponents
 {
     public class InputSystemHandler : MonoBehaviour
     {
-        private InputActions _inputActions;
+        private Actions _actions;
+        private InputAction _moveAction;
+        private ButtonControl _buttonControl;
+
         private Vector2 _inputValues;
 
         public InputParameters InputParams { get; private set; }
+        public bool IsCenterPressed { get; private set; }
+
+
+        #region EVENTS
+
+        public delegate void Attack();
+        public event Attack Attacking;
+
+        #endregion
 
         private void Awake()
         {
-            _inputActions = new InputActions();
+            _actions = new Actions();
+            _moveAction = _actions.PlayerActions.Moves;
+            _buttonControl = Gamepad.current.leftStickButton;
+
             InputParams = new InputParameters();
         }
 
         private void OnEnable()
         {
-            _inputActions.PlayerActions.Enable();
-            _inputActions.PlayerActions.Moves.performed += MovesHandler;
+            _actions.PlayerActions.Enable();
         }
 
         private void OnDisable()
         {
-            _inputActions.PlayerActions.Disable();
-            _inputActions.PlayerActions.Moves.performed -= MovesHandler;
+            _actions.PlayerActions.Disable();
         }
 
-        private void Update() => KeyboardInput();
+        private void Update()
+        {
+            if (_actions.PlayerActions.Fire.inProgress)
+                Attacking?.Invoke();
+
+            IsCenterPressed = _buttonControl.isPressed;
+
+            print($"InputHandlerUpdate - {IsCenterPressed}");
+
+            KeyboardInput();
+        }
 
         private void KeyboardInput()
         {
             var tempInputParams = InputParams;
-            _inputValues = _inputActions.PlayerActions.Moves.ReadValue<Vector2>();
+
+            _inputValues = _moveAction.ReadValue<Vector2>();
+
             tempInputParams.Input = _inputValues;
-            tempInputParams.IsStickPressed = Mathf.Abs(_inputValues.x) > 0 || Mathf.Abs(_inputValues.y) > 0;
-            tempInputParams.IsFiring = _inputActions.PlayerActions.Fire.inProgress;
+            tempInputParams.IsStickPressed = IsCenterPressed;
+
             InputParams = tempInputParams;
         }
 
         #region Callbacks
-
-        private void MovesHandler(InputAction.CallbackContext context)
-        {
-        }
-
         #endregion
     }
 }
