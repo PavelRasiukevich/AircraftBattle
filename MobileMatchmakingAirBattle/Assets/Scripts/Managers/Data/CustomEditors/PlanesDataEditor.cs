@@ -78,6 +78,13 @@ namespace Managers.Data.CustomEditors
                     EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
                 }
+                EditorGUILayout.LabelField("-- Settings --", EditorStyles.boldLabel);
+                EditorGUI.indentLevel++;
+           //     EditorGUI.BeginDisabledGroup(true);
+           _selectedPlane.Settings.Color = EditorGUILayout.ColorField("Color", _selectedPlane.Settings.Color);
+              //  EditorGUI.EndDisabledGroup();
+                EditorGUI.indentLevel--;
+
 
                 EditorGUILayout.LabelField("-- For Shop --", EditorStyles.boldLabel);
                 _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power", _selectedPlane.FirePower);

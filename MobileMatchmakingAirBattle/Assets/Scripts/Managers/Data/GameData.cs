@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Utils;
-using Core;
+﻿using Core;
 using Core.Base;
 using Interfaces.Subscriber;
 using Managers.Data.ScriptableObjects;
@@ -12,11 +11,7 @@ namespace Managers.Data
     {
         [SerializeField] private PlanesDataScriptableObject _planes;
 
-        public PlanesDataScriptableObject Planes
-        {
-            get => _planes;
-            private set => _planes = value;
-        }
+        public PlanesDataScriptableObject Planes => _planes;
 
         private PlaneInfo _currentPlane;
         public PlaneInfo CurrentPlane => _currentPlane;
@@ -34,14 +29,8 @@ namespace Managers.Data
 
         private void Start()
         {
-            if (PlayerPrefs.HasKey(Const.CurrentPlaneIdKey))
-            {
-                if (!Planes.GetPlaneBy(PlayerPrefs.GetInt(Const.CurrentPlaneIdKey), out _currentPlane))
-                    SelectPlane(Planes.PlaneList[0].ID);
-            }
-            else SelectPlane(Planes.PlaneList[0].ID);
-
-            SelectShopPlane(Planes.PlaneList[0].ID);
+            SelectPlane(Planes.CurrID);
+            SelectShopPlane(Planes.CurrID);
         }
 
         #endregion
@@ -51,14 +40,23 @@ namespace Managers.Data
 
         public void SelectPlane(int id)
         {
-            Planes.GetPlaneBy(id, out _currentPlane);
+            Planes.CurrID = id == 0 ? Planes.PlaneList[0].ID : id;
+            Planes.GetPlaneBy(Planes.CurrID, out _currentPlane);
             EventBus.InvokeEvent<IShopRefreshHandler>(h => h.Refresh());
-            PlayerPrefs.SetInt(Const.CurrentPlaneIdKey, id);
-            PlayerPrefs.Save();
+            Planes.CurrID = Planes.CurrID;
         }
 
         public void SelectShopPlane(int id) =>
             Planes.GetPlaneBy(id, out _currentShopPlane);
+
+        public void ChangeInfoBy(PlaneInfo planeInfo)
+        {
+            Planes.ChangePlaneBy(planeInfo);
+            if (planeInfo.ID == _currentPlane.ID)
+                _currentPlane = planeInfo;
+            if (planeInfo.ID == _currentShopPlane.ID)
+                _currentShopPlane = planeInfo;
+        }
 
         #endregion
     }

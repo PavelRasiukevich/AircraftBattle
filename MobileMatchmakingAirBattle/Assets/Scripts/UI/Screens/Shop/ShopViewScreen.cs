@@ -19,30 +19,33 @@ namespace UI.Screens.Shop
         [SerializeField] private TMP_Text _mobility;
         [SerializeField] private TMP_Text _firePower;
         [SerializeField] private TMP_Text _gunsCount;
+
         #region UNITY
 
-        private void OnEnable() => Refresh();
-
-        #endregion
-
-        #region PRIVATE
-
-        private void Refresh()
+        private void OnEnable()
         {
-            _shopViewModel.Load(GameData.Inst.CurrentShopPlane.PlaneShopModel);
+            _shopViewModel.Load(GameData.Inst.CurrentShopPlane);
             _name.text = GameData.Inst.CurrentShopPlane.DisplayName;
-            _hp.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString(CultureInfo.InvariantCulture);
-            _speed.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
-            _mobility.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
+            _hp.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString();
+            _speed.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString();
+            _mobility.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString();
             _firePower.text = GameData.Inst.CurrentShopPlane.FirePower.ToString(CultureInfo.InvariantCulture);
             _gunsCount.text = GameData.Inst.CurrentShopPlane.GunsCount.ToString();
-        } 
+        }
 
         #endregion
 
         #region OnClick
 
-        public void SelectOnClick()
+        public void Color(Color color)
+        {
+            GameData.Inst.CurrentShopPlane.Settings.Color = color;
+            GameData.Inst.ChangeInfoBy(GameData.Inst.CurrentShopPlane);
+            _shopViewModel.Load(GameData.Inst.CurrentShopPlane);
+        }
+
+
+        public void GoOnClick()
         {
             GameData.Inst.SelectPlane(GameData.Inst.CurrentShopPlane.ID);
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
