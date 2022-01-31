@@ -2267,7 +2267,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3771526601731690318}
         m_TargetAssemblyTypeName: UI.Screens.Shop.ShopViewScreen, Assembly-CSharp
-        m_MethodName: SelectOnClick
+        m_MethodName: GoOnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
