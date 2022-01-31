@@ -69,6 +69,7 @@ GameObject:
   - component: {fileID: 5666788011329144845}
   - component: {fileID: 9018413157766262694}
   - component: {fileID: 3632852602106516040}
+  - component: {fileID: 8733916824425938906}
   m_Layer: 0
   m_Name: Carrier
   m_TagString: Untagged
@@ -370,6 +371,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyParticle: {fileID: 0}
+--- !u!114 &8733916824425938906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6619439048150899283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6a860991b94b138be25f6e503cd6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _body: {fileID: 6619439048150899283}
 --- !u!1 &7900517788378181939
 GameObject:
   m_ObjectHideFlags: 0

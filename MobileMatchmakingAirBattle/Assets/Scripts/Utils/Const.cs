@@ -14,7 +14,7 @@ namespace Assets.Scripts.Utils
         public const int Difference = 125;
         public const int SearchWidth = 5;
 
-        public const string CurrentPlaneIdKey = "CurrPlane";
+        public const string AircraftMaterialName = "RedCC0813";
 
         /*
          * Currencies

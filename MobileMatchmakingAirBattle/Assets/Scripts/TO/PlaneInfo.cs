@@ -56,9 +56,8 @@ namespace TO
             set => _displayName = value;
         }
 
-
         /*
-         * "Огневая мощь" визуальная настройка для магазина
+         * "Огневая мощь" (для магазина)
          */
 
         [SerializeField] private float _firePower;
@@ -70,7 +69,7 @@ namespace TO
         }
 
         /*
-         * Количество орудий
+         * Количество орудий (для магазина)
          */
 
         [SerializeField] private int _gunsCount;
@@ -80,9 +79,9 @@ namespace TO
             get => _gunsCount;
             set => _gunsCount = value;
         }
-        
+
         /*
-         * Цена в игровой валюте
+         * Цена в игровой валюте (для магазина)
          */
 
         [SerializeField] private float _gamePrice;
@@ -91,6 +90,14 @@ namespace TO
         {
             get => _gamePrice;
             set => _gamePrice = value;
+        }
+
+        [SerializeField] private PlaneSettings _settings;
+
+        public PlaneSettings Settings
+        {
+            get => _settings;
+            set => _settings = value;
         }
     }
 }
