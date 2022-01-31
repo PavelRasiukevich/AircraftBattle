@@ -1,8 +1,12 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.UI;
+#endif
 
 namespace Buttons.ColorButton
 {
+#if UNITY_EDITOR
+    
     [CustomEditor(typeof(ColorButton))]
     public class ColorButtonEditor : ButtonEditor
     {
@@ -18,4 +22,5 @@ namespace Buttons.ColorButton
             serializedObject.ApplyModifiedProperties();
         }
     }
+#endif
 }
