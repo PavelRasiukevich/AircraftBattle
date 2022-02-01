@@ -1,8 +1,9 @@
+using System.Collections;
+using AirCrafts;
 using Assets.Scripts.AirCrafts;
 using Cinemachine;
 using Managers.Data;
 using Photon.Pun;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.Gameplay
@@ -29,17 +30,10 @@ namespace Assets.Scripts.Gameplay
 
         private void InitializeActor(Vector3 position, Quaternion rotation)
         {
-            _actor = PhotonNetwork.Instantiate("Planes/"+GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
-
-         /*   if (_actor.GetComponent<AirCraft>().photonView.IsMine)
-            {
-                _camera.Follow = _actor.GetComponentInChildren<CameraSlot>().transform;
-                _camera.LookAt = _actor.transform;
-            }*/
-
+            _actor = PhotonNetwork.Instantiate("Planes/" + GameData.Inst.CurrentPlane.PlanePrefab.name, position, rotation);
             var airCraft = _actor.GetComponent<AirCraft>();
+            airCraft.GetComponent<Settings>().Config(GameData.Inst.CurrentPlane.Settings);
             airCraft.Data.RespawnPosition = point;
-
             airCraft.DieAction += Die;
         }
 
