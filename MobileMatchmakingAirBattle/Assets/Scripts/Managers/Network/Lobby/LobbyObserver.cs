@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Assets.Scripts.PlayersSettings;
 using Assets.Scripts.Utils;
 using ExitGames.Client.Photon;
@@ -38,6 +39,7 @@ namespace Managers.Network.Lobby
 
         #region PRIVATE FIELDS
 
+        private string content = "";
         private string _log = "";
         private RoomInfo _roomLog = null;
 
@@ -91,21 +93,23 @@ namespace Managers.Network.Lobby
             foreach (var room in roomList)
             {
                 _roomLog = room;
+                content = _roomLog.Name;
             }
 
             _rooms = _roomListUpdater.UpdateCachedRoomList(roomList, _rooms);
 
             if (_rooms != null && _rooms.Count > 0)
             {
-                _log = "matchmaker";
+                content = "matchmaker";
                 _matchMaker.MatchPlayers(_rooms, _settings);
             }
             else
             {
-                _log = "RoomCreator";
+                content = "RoomCreator";
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
             }
 
+            WriteLog("D:\\Logs\\");
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message) =>
@@ -119,11 +123,22 @@ namespace Managers.Network.Lobby
         public override void OnCreateRoomFailed(short returnCode, string message) =>
             print($"{returnCode} / Message: {message}");
 
+        #endregion
+
+        private void WriteLog(string path)
+        {
+
+            if (!File.Exists(path + "log.txt"))
+            {
+                File.Create(path + "log.txt");
+            }
+
+            File.WriteAllText(path + "log.txt", content);
+        }
+
         void OnGUI()
         {
             GUI.Label(new Rect(0, 0, 200, 100), $"LOG: { _log} / Rooms: {_rooms.Count} / RoomLog: {_roomLog}");
         }
-
-        #endregion
     }
 }
