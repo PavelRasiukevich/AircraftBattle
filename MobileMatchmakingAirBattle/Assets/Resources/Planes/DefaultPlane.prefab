@@ -443,7 +443,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 66d7e2830448081499deabc55dfe8022, type: 2}
+  - {fileID: 2100000, guid: f60ac1b2503f43841a8e363a1e574f06, type: 2}
   - {fileID: 2100000, guid: cdff1d4fd86e5e04cb1dda34a0333337, type: 2}
   - {fileID: 2100000, guid: 711560f2dfa60cb49bdbb90c291be014, type: 2}
   - {fileID: 2100000, guid: 24620a2f936eafd4f9aa143575733c2d, type: 2}
@@ -674,6 +674,7 @@ GameObject:
   - component: {fileID: 4800748574067253183}
   - component: {fileID: -8353922386413972525}
   - component: {fileID: 4757466050382488539}
+  - component: {fileID: 842354797857936020}
   m_Layer: 0
   m_Name: DefaultPlane
   m_TagString: Untagged
@@ -859,6 +860,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyParticle: {fileID: 0}
+--- !u!114 &842354797857936020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566665338853090476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6a860991b94b138be25f6e503cd6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _body: {fileID: 4495179519686683336}
 --- !u!1001 &4559295614393329553
 PrefabInstance:
   m_ObjectHideFlags: 0

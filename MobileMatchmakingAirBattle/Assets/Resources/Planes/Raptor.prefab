@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 1637710716795258281}
   - component: {fileID: 7624550122044262017}
   - component: {fileID: 5436254523596349496}
+  - component: {fileID: 2111106817021518952}
   m_Layer: 0
   m_Name: Raptor
   m_TagString: Untagged
@@ -395,6 +396,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyParticle: {fileID: 0}
+--- !u!114 &2111106817021518952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990862194007617115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c6a860991b94b138be25f6e503cd6a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _body: {fileID: 7990862194007617115}
 --- !u!1001 &4018065027500426628
 PrefabInstance:
   m_ObjectHideFlags: 0
