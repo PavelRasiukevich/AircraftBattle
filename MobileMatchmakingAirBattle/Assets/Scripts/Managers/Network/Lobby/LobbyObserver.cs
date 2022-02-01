@@ -38,9 +38,11 @@ namespace Managers.Network.Lobby
 
         #region PRIVATE FIELDS
 
-        private Dictionary<string, RoomInfo> _rooms;
-        private PlayerSettings _settings;
+        private string _log = "";
+        private RoomInfo _roomLog = null;
 
+        private Dictionary<string, RoomInfo> _rooms = new Dictionary<string, RoomInfo>();
+        private PlayerSettings _settings;
         #endregion
 
         #region HELPERS
@@ -68,13 +70,8 @@ namespace Managers.Network.Lobby
         {
             MessagesUtilities.JoinLobbyMessage();
 
-            _rooms = new Dictionary<string, RoomInfo>();
-
-            #region Potential Refactoring
-
             _settings = new PlayerSettings
             {
-                //replace with PlayerPrefs.GetInt()
                 MMR = _initialMMR,
             };
 
@@ -83,8 +80,6 @@ namespace Managers.Network.Lobby
                 {Const.LowerBound, _settings.MMR - Const.Difference},
                 {Const.UpperBound, _settings.MMR + Const.Difference}
             };
-
-            #endregion
         }
 
         public override void OnLeftLobby() => MessagesUtilities.LeftLobbyMessage();
@@ -93,12 +88,24 @@ namespace Managers.Network.Lobby
         {
             MessagesUtilities.RoomListUpdateMessage();
 
+            foreach (var room in roomList)
+            {
+                _roomLog = room;
+            }
+
             _rooms = _roomListUpdater.UpdateCachedRoomList(roomList, _rooms);
 
             if (_rooms != null && _rooms.Count > 0)
+            {
+                _log = "matchmaker";
                 _matchMaker.MatchPlayers(_rooms, _settings);
+            }
             else
+            {
+                _log = "RoomCreator";
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
+            }
+
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message) =>
@@ -106,10 +113,16 @@ namespace Managers.Network.Lobby
 
         public override void OnCreatedRoom()
         {
+            Debug.Log("Created And Entered");
         }
 
         public override void OnCreateRoomFailed(short returnCode, string message) =>
             print($"{returnCode} / Message: {message}");
+
+        void OnGUI()
+        {
+            GUI.Label(new Rect(0, 0, 200, 100), $"LOG: { _log} / Rooms: {_rooms.Count} / RoomLog: {_roomLog}");
+        }
 
         #endregion
     }

@@ -41,7 +41,6 @@ namespace Managers.Network.Rooms
 
             if (clientType.Equals(Clients.Single))
             {
-                #region DELETE AFTER TEST
                 if (_playersInRoom.Count < _maxPlayers) return;
 
                 PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -52,7 +51,6 @@ namespace Managers.Network.Rooms
                 if (!PhotonNetwork.IsMasterClient) return;
 
                 PhotonNetwork.LoadLevel(Const.Battle);
-                #endregion
             }
 
         }
