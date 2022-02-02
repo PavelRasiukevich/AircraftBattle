@@ -1,4 +1,3 @@
-using Assets.Scripts.Core;
 using Core;
 using Managers.External;
 using TMPro;
@@ -21,7 +20,6 @@ namespace UI.Screens.MainMenu.Elements
         {
             _playerName.text = User.Common.Name;
             _playerAvatar.sprite = User.Common.Sprite;
-            Debug.Log($"User.Currency.Count = {User.Currency.Count}");
             _goldText.text = User.Currency.Count.ToString();
         }
 
@@ -31,7 +29,6 @@ namespace UI.Screens.MainMenu.Elements
 
         public void PlayerIconOnClick()
         {
-            Debug.Log(ExternalServices.Inst.PlayFab.ToString());
             if (!ExternalServices.Inst.PlayFab.Authenticate.IsReady)
                 PopupHolder.CurrentPopup(PopupType.UnexpectedError).Config("Need PlayFab!").Show();
             else

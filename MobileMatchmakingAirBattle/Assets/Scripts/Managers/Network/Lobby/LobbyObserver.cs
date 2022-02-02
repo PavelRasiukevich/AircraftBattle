@@ -108,8 +108,18 @@ namespace Managers.Network.Lobby
         {
         }
 
+        public override void OnJoinedRoom()
+        {
+            Debug.Log("OnJoinedRoom OK");
+        }
+
+        public override void OnJoinRoomFailed(short returnCode, string message)
+        {
+            Debug.Log($"OnJoinRoomFailed {returnCode} / Message: {message}");
+        }
+
         public override void OnCreateRoomFailed(short returnCode, string message) =>
-            print($"{returnCode} / Message: {message}");
+            print($"OnCreateRoomFailed {returnCode} / Message: {message}");
 
         #endregion
     }

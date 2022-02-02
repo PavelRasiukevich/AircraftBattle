@@ -3,16 +3,17 @@ using Assets.Scripts.PlayersSettings;
 using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine;
 
 namespace Managers.Network.Lobby
 {
     public class MatchMaker
     {
-        public void MatchPlayers(Dictionary<string, RoomInfo> avaliableRooms, PlayerSettings settings)
+        public void MatchPlayers(Dictionary<string, RoomInfo> rooms, PlayerSettings settings)
         {
             for (int t = Const.SearchWidth - 1; t >= 0; t--)
             {
-                foreach (var value in avaliableRooms.Values)
+                foreach (var value in rooms.Values)
                 {
                     var room = value;
 
@@ -20,6 +21,7 @@ namespace Managers.Network.Lobby
 
                     settings.ResetChangedMMR();
                     PhotonNetwork.JoinRoom(room.Name);
+                    Debug.Log("UserId  " + PhotonNetwork.LocalPlayer.UserId);
                     return;
                 }
 
