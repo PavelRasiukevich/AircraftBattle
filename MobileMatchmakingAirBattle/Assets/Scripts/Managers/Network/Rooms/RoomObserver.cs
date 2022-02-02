@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Managers.Network.Rooms
 {

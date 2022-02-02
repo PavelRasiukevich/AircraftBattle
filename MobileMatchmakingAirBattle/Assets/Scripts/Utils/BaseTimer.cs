@@ -1,5 +1,3 @@
-using System;
-
 namespace Assets.Scripts.Utils
 {
     public class BaseTimer

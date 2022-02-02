@@ -2,7 +2,6 @@ using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Projectiles;
 using Assets.Scripts.Utils;
 using Photon.Pun;
-using System;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
