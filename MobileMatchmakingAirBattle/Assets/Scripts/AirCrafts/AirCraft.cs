@@ -47,6 +47,8 @@ namespace Assets.Scripts.AirCrafts
             _aircraftParticles = GetComponent<AircraftParticles>();
             _attackHandler.PhotonView = _photonView;
 
+            _attackHandler.Aircraft = this;
+
             _inputHandler.Attacking += _attackHandler.Attack;
         }
 

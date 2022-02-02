@@ -268,6 +268,7 @@ MonoBehaviour:
       RotationSpeed: 1.2
     _hp: 100
     _currentHp: 100
+    _reloadTime: 0.32
 --- !u!114 &9095780132202551788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -321,7 +322,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bulletPrefab: {fileID: 3098581733777114758, guid: f29f0d3105d9ba947a5af49eca979d96, type: 3}
   _fireSpot: {fileID: 1031130973530183491}
-  _reloadTime: 0.32
 --- !u!114 &3011946893302601626
 MonoBehaviour:
   m_ObjectHideFlags: 0

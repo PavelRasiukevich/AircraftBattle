@@ -109,7 +109,7 @@ namespace Managers.Network.Lobby
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
             }
 
-            WriteLog("D:\\Logs\\");
+            // WriteLog("D:\\Logs\\");
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message) =>
@@ -125,16 +125,16 @@ namespace Managers.Network.Lobby
 
         #endregion
 
-        private void WriteLog(string path)
-        {
+        /*  private void WriteLog(string path)
+          {
 
-            if (!File.Exists(path + "log.txt"))
-            {
-                File.Create(path + "log.txt");
-            }
+              if (!File.Exists(path + "log.txt"))
+              {
+                  File.Create(path + "log.txt");
+              }
 
-            File.WriteAllText(path + "log.txt", content);
-        }
+              File.WriteAllText(path + "log.txt", content);
+          }*/
 
         void OnGUI()
         {

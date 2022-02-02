@@ -4,11 +4,12 @@ using UnityEngine;
 namespace TO
 {
     [Serializable]
-    public class AircraftDataModel 
+    public class AircraftDataModel
     {
         [SerializeField] Speed _speed;
         [SerializeField] private int _hp;
         [SerializeField] private int _currentHp;
+        [SerializeField] private float _reloadTime;
 
         public Transform RespawnPosition { get; set; }
 
@@ -19,6 +20,8 @@ namespace TO
         public int CurrentHp { get => _currentHp; set => _currentHp = value; }
 
         public bool IsControllable { get; set; }
+
+        public float ReloadTime { get => _reloadTime; set => _reloadTime = value; }
     }
 
     [Serializable]

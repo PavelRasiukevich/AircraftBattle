@@ -1,6 +1,8 @@
 using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Projectiles;
+using Assets.Scripts.Utils;
 using Photon.Pun;
+using System;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
@@ -10,25 +12,25 @@ namespace Assets.Scripts.GameObjectComponents
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform _fireSpot;
 
-        private AirCraft Aircraft { get; set; }
-
-        //add CustomTimer Class 
-        [SerializeField] private float _reloadTime;
-        private float _elapsedTime;
-
-        private bool _processingFire;
+        public AirCraft Aircraft { get; set; }
 
         public PhotonView PhotonView { get; set; }
 
+        private BaseTimer _timer;
+
         private void Awake()
         {
-            _elapsedTime = _reloadTime;
             Aircraft = GetComponent<AirCraft>();
+        }
+
+        private void Start()
+        {
+            _timer = new BaseTimer(Aircraft.Data.ReloadTime);
         }
 
         private void Update()
         {
-            _elapsedTime += Time.deltaTime;
+            _timer.Tick(Time.deltaTime);
         }
 
         public void Attack()
@@ -36,11 +38,12 @@ namespace Assets.Scripts.GameObjectComponents
             if (!Aircraft.Data.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
-            if (_elapsedTime >= _reloadTime)
+            if (_timer.IsTimerStoped)
             {
                 if (PhotonView.IsMine)
                     PhotonView.RPC(nameof(Attack), RpcTarget.All);
-                _elapsedTime = 0;
+
+                _timer.ResetTimer();
             }
         }
 

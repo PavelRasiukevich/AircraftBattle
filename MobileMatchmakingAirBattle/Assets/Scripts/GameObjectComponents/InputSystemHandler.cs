@@ -48,10 +48,6 @@ namespace Assets.Scripts.GameObjectComponents
             if (_actions.PlayerActions.Fire.inProgress)
                 Attacking?.Invoke();
 
-            IsCenterPressed = _buttonControl.isPressed;
-
-            print($"InputHandlerUpdate - {IsCenterPressed}");
-
             KeyboardInput();
         }
 
@@ -62,12 +58,9 @@ namespace Assets.Scripts.GameObjectComponents
             _inputValues = _moveAction.ReadValue<Vector2>();
 
             tempInputParams.Input = _inputValues;
-            tempInputParams.IsStickPressed = IsCenterPressed;
+            tempInputParams.IsStickPressed = _buttonControl.isPressed;
 
             InputParams = tempInputParams;
         }
-
-        #region Callbacks
-        #endregion
     }
 }
