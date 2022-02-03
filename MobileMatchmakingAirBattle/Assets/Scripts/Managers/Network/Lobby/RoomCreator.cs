@@ -6,13 +6,13 @@ namespace Managers.Network.Lobby
 {
     public class RoomCreator
     {
-        public void CreateRoomWithCustomOptions(CustomRoomProperites _customPropeties)
+        public void CreateRoomWithCustomOptions(CustomRoomProperites customPropeties)
         {
-            RoomOptions roomOptions = new RoomOptions()
+            RoomOptions roomOptions = new RoomOptions
             {
-                MaxPlayers = _customPropeties.MaxPlayers,
-                CustomRoomPropertiesForLobby = new string[2] { Const.LowerBound, Const.UpperBound },
-                CustomRoomProperties = _customPropeties.PTSRange,
+                MaxPlayers = customPropeties.MaxPlayers,
+                CustomRoomPropertiesForLobby = new[] { Const.LowerBound, Const.UpperBound },
+                CustomRoomProperties = customPropeties.PTSRange,
                 IsOpen = true,
                 IsVisible = true,
                 PlayerTtl = 12000,

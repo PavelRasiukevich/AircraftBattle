@@ -41,6 +41,10 @@ namespace Managers.External
                 : _authenticationType; 
             switch (_authenticationType)
             {
+                case AuthenticationType.None: // ONLY FOR TEST!
+                    User.Common.Name = "Test_User";
+                    AuthenticationDone();
+                    break;
                 case AuthenticationType.PlayFabWithLogin:
                     ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen();
                     break;
@@ -72,6 +76,7 @@ namespace Managers.External
             // Аватар
             switch (_authenticationType)
             {
+                case AuthenticationType.None:
                 case AuthenticationType.PlayFabQuickly:
                 case AuthenticationType.PlayFabWithLogin:
                     User.Common.Sprite = Resources.Load<Sprite>(Const.Path.DefaultAvatar);
