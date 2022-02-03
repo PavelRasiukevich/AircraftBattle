@@ -11,7 +11,7 @@ namespace Assets.Scripts.Utils
         public BaseTimer()
         {
         }
-
+         
         public BaseTimer(float value)
         {
             Treshold = value;
