@@ -3,6 +3,7 @@ using Core.Base;
 using Interfaces.Subscriber;
 using Managers.Data.ScriptableObjects;
 using TO;
+using UI.Screens.Shop;
 using UnityEngine;
 
 namespace Managers.Data
@@ -42,7 +43,7 @@ namespace Managers.Data
         {
             Planes.CurrID = id == 0 ? Planes.PlaneList[0].ID : id;
             Planes.GetPlaneBy(Planes.CurrID, out _currentPlane);
-            EventBus.InvokeEvent<IShopRefreshHandler>(h => h.Refresh());
+            EventBus<ShopScreen>.InvokeEvent(h => h.Refresh());
             Planes.CurrID = Planes.CurrID;
         }
 

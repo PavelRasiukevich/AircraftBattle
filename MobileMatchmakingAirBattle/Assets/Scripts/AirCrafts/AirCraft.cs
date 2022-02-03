@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System;
 using TO;
+using UI.Screens.BattleScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
@@ -53,7 +54,7 @@ namespace Assets.Scripts.AirCrafts
         }
 
         private void Start() =>
-            EventBus.InvokeEvent<IBattleScreenHandler>(h =>
+            EventBus<BattleScreen>.InvokeEvent(h =>
                 h.RefreshUI(Data));
 
         private void FixedUpdate()
@@ -75,8 +76,8 @@ namespace Assets.Scripts.AirCrafts
         private void RPC_TakeDamage(object[] values)
         {
             if (!_photonView.IsMine) return;
-            _dataModel.CurrentHp -= (int) values[0];
-            EventBus.InvokeEvent<IBattleScreenHandler>(h => h.DamageUI(Data));
+            _dataModel.CurrentHp -= (int)values[0];
+            EventBus<BattleScreen>.InvokeEvent((x) => x.DamageUI(Data));
             if (_dataModel.CurrentHp <= 0) Die();
         }
 

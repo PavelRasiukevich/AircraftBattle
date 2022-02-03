@@ -27,7 +27,7 @@ namespace UI.Screens.LeaderBoard
 
         private void OnEnable()
         {
-            EventBus.Subscribe(this);
+            EventBus<LeaderboardScreen>.Subscribe(this);
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
             _noRecordsText.gameObject.SetActive(false);
             foreach (var line in _content.GetComponentsInChildren<LeaderBoardLine>())
@@ -36,7 +36,7 @@ namespace UI.Screens.LeaderBoard
                 Const.PlayFab.ScoreBy(LeaderboardType));
         }
 
-        private void OnDisable()=>EventBus.Unsubscribe(this);
+        private void OnDisable()=>EventBus<LeaderboardScreen>.Unsubscribe(this);
 
         #endregion
 

@@ -28,11 +28,11 @@ namespace UI.Screens
         private void OnEnable()
         {
             _errorText.text = string.Empty;
-            EventBus.Subscribe(this);
+            EventBus<RegistrationScreen>.Subscribe(this);
             OnChanged();
         }
 
-        private void OnDisable() => EventBus.Unsubscribe(this);
+        private void OnDisable() => EventBus<RegistrationScreen>.Unsubscribe(this);
 
         #endregion
 

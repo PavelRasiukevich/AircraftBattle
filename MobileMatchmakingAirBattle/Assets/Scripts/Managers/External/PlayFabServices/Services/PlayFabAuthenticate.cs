@@ -8,6 +8,7 @@ using Photon.Realtime;
 using PlayFab;
 using PlayFab.ClientModels;
 using TO;
+using UI.Screens;
 using UnityEngine;
 using Utils.Enums;
 
@@ -52,7 +53,7 @@ namespace Managers.External.PlayFabServices.Services
                 request,
                 RequestPhotonToken,
                 error=>
-                EventBus.InvokeEvent<IPlayFabErrorHandler>(h =>h.Error(error))
+                EventBus<LoginScreen>.InvokeEvent(h =>h.Error(error))
             );
         }
 
@@ -68,7 +69,7 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.RegisterPlayFabUser(
                 request,
                 res => ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen(),
-                error => EventBus.InvokeEvent<IPlayFabErrorHandler>(h => h.Error(error))
+                error => EventBus<RegistrationScreen>.InvokeEvent(h => h.Error(error))
                 );
         }
 

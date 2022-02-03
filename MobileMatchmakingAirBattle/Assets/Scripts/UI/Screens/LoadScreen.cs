@@ -22,9 +22,9 @@ namespace UI.Screens
 
         private void Start() => ExternalServices.Inst.Authentication();
 
-        private void OnEnable() => EventBus.Subscribe(this);
+        private void OnEnable() => EventBus<LoadScreen>.Subscribe(this);
 
-        private void OnDisable() => EventBus.Unsubscribe(this);
+        private void OnDisable() => EventBus<LoadScreen>.Unsubscribe(this);
 
         #endregion
 
