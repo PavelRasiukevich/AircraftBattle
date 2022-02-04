@@ -290,7 +290,7 @@ MonoBehaviour:
   _dataModel:
     _speed:
       MoveSpeed: 60
-      RotationSpeed: 1.2
+      RotationSpeed: 2
     _hp: 100
     _currentHp: 100
     _reloadTime: 0.32

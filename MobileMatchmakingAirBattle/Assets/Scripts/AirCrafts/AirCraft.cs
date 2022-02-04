@@ -15,7 +15,10 @@ namespace Assets.Scripts.AirCrafts
     public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
+
         public AircraftDataModel Data => _dataModel;
+
+        public PhotonView PhotonView => _photonView;
 
         #region ACTIONS
 
@@ -25,12 +28,11 @@ namespace Assets.Scripts.AirCrafts
 
         #region COMPONENTS
 
+        [SerializeField] private View _view;
         private InputSystemHandler _inputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
-        public PhotonView PhotonView => _photonView;
-
         private Rigidbody _rigidBody;
         private AircraftParticles _aircraftParticles;
 
@@ -49,6 +51,7 @@ namespace Assets.Scripts.AirCrafts
             _attackHandler.PhotonView = _photonView;
 
             _attackHandler.Aircraft = this;
+            _moveHandler.View = _view;
 
             _inputHandler.Attacking += _attackHandler.Attack;
         }
@@ -62,9 +65,9 @@ namespace Assets.Scripts.AirCrafts
             if (!_photonView.IsMine) return;
 
             if (_dataModel.IsControllable)
-                _moveHandler.MoveWithJoyStick(_rigidBody, _inputHandler.InputParams, _dataModel.Speed);
+                _moveHandler.Pilot(_rigidBody, _inputHandler.InputParams, Data.Speed);
             else
-                _moveHandler.MoveUncontrollable(_rigidBody, _dataModel.Speed);
+                _moveHandler.DragToBattleField(_rigidBody, _dataModel.Speed);
         }
 
         #endregion

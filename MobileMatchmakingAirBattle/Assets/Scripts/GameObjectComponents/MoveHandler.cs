@@ -1,4 +1,5 @@
 using Assets.Scripts.Structs;
+using System;
 using TO;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace Assets.Scripts.GameObjectComponents
 {
     public class MoveHandler : MonoBehaviour
     {
+        public View View { get; set; }
+
         private float _gasCoefficient = 1.0f;
         private Vector3 _angularVelocity;
 
@@ -46,18 +49,37 @@ namespace Assets.Scripts.GameObjectComponents
             bodyToMove.velocity = transform.TransformDirection(_gasCoefficient * speed.MoveSpeed * Vector3.forward);
         }
 
-        private void Move(InputParameters inputParams, Speed speed)
+        public void Pilot(Rigidbody bodyToMove, InputParameters inputValues, Speed speed)
         {
+            bodyToMove.velocity = transform.forward * speed.MoveSpeed;
 
+            RotatePlane(bodyToMove, inputValues);
         }
 
-        public void MoveUncontrollable(Rigidbody bodyToMove, Speed speed)
+        public void DragToBattleField(Rigidbody bodyToMove, Speed speed)
             => bodyToMove.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
 
         #region Utilities
         private void FreeFall(Rigidbody bodyToMove)
         {
+            //turn on gravity
+            //rotate toward to global -Y axis
+            print("FALLING DOWN PULL UP KURWA");
         }
+
+        private void RotatePlane(Rigidbody bodyToRotate, InputParameters inputValues)
+        {
+            Quaternion targetRotation = Quaternion.Euler(Vector3.up * inputValues.Input.x);
+            bodyToRotate.MoveRotation(bodyToRotate.rotation * targetRotation);
+
+
+            //повернуть с помощью кватернионов
+            View.transform.localEulerAngles = new Vector3(inputValues.Input.y *45, 0, inputValues.Input.x * 45 * -1);
+            //если нет инпута возвращать значение по Z в 0
+        }
+
+        private bool IsInputPerformed(InputParameters values)
+            => Mathf.Abs(values.Input.x) > 0 || Mathf.Abs(values.Input.y) > 0;
         #endregion
     }
 }
