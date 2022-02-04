@@ -51,7 +51,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void Pilot(Rigidbody bodyToMove, InputParameters inputValues, Speed speed)
         {
-            bodyToMove.velocity = transform.forward * speed.MoveSpeed;
+            bodyToMove.velocity = View.transform.forward * speed.MoveSpeed;
 
             RotatePlane(bodyToMove, inputValues);
         }
@@ -74,7 +74,8 @@ namespace Assets.Scripts.GameObjectComponents
 
 
             //повернуть с помощью кватернионов
-            View.transform.localEulerAngles = new Vector3(inputValues.Input.y *45, 0, inputValues.Input.x * 45 * -1);
+            Quaternion viewTargetRotation = Quaternion.Euler(inputValues.Input.y, 0, inputValues.Input.x * -1);
+            View.transform.rotation *= viewTargetRotation;
             //если нет инпута возвращать значение по Z в 0
         }
 
