@@ -21,13 +21,13 @@ namespace UI.Screens.Shop
 
         private void OnEnable()
         {
-            EventBus<ShopScreen>.Subscribe(this);
+            EventBus<ShopScreen>.AddListener(this);
             Refresh();
         }
 
         private void OnDisable()
         {
-            EventBus<ShopScreen>.Unsubscribe(this);
+            EventBus<ShopScreen>.RemoveListener(this);
         }
 
         #endregion

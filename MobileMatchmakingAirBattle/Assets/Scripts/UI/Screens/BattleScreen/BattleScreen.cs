@@ -16,9 +16,9 @@ namespace UI.Screens.BattleScreen
         private void Awake() =>
             _healthBar = GetComponentInChildren<HealthBar>();
 
-        private void OnEnable() => EventBus<BattleScreen>.Subscribe(this);
+        private void OnEnable() => EventBus<BattleScreen>.AddListener(this);
 
-        private void OnDisable() => EventBus<BattleScreen>.Unsubscribe(this);
+        private void OnDisable() => EventBus<BattleScreen>.RemoveListener(this);
 
         public void SwitchWeaponUI(AircraftDataModel dataModel)
         {

@@ -5,11 +5,11 @@ namespace Core
 {
     public static class EventBus<T> where T : class, new()
     {
-        private static List<object> _list = new List<object>();
+        private static readonly List<object> _list = new List<object>();
 
-        public static void Subscribe(T subscriber) => _list.Add(subscriber);
+        public static void AddListener(T subscriber) => _list.Add(subscriber);
 
-        public static void Unsubscribe(T subscriber)
+        public static void RemoveListener(T subscriber)
         {
             if (_list.Contains(subscriber))
                 _list.Remove(subscriber);

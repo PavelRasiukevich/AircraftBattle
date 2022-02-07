@@ -27,14 +27,14 @@ namespace UI.Screens
 
         private void OnEnable()
         {
-            EventBus<LoginScreen>.Subscribe(this);
+            EventBus<LoginScreen>.AddListener(this);
             _errorText.text = string.Empty;
             OnChanged();
         }
 
         private void OnDisable()
         {
-            EventBus<LoginScreen>.Unsubscribe(this);
+            EventBus<LoginScreen>.RemoveListener(this);
         }
 
         #endregion

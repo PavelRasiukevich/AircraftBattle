@@ -44,7 +44,6 @@ namespace Assets.Scripts.GameObjectComponents
         {
             //turn on gravity
             //rotate toward to global -Y axis
-            print("FALLING DOWN PULL UP KURWA");
         }
 
         #region Utilities
