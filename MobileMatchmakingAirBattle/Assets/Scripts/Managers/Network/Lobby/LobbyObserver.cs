@@ -38,11 +38,6 @@ namespace Managers.Network.Lobby
         #endregion
 
         #region PRIVATE FIELDS
-
-        private string content = "";
-        private string _log = "";
-        private RoomInfo _roomLog = null;
-
         private Dictionary<string, RoomInfo> _rooms = new Dictionary<string, RoomInfo>();
         private PlayerSettings _settings;
         #endregion
@@ -90,26 +85,13 @@ namespace Managers.Network.Lobby
         {
             MessagesUtilities.RoomListUpdateMessage();
 
-            foreach (var room in roomList)
-            {
-                _roomLog = room;
-                content = _roomLog.Name;
-            }
-
             _rooms = _roomListUpdater.UpdateCachedRoomList(roomList, _rooms);
 
             if (_rooms != null && _rooms.Count > 0)
-            {
-                content = "matchmaker";
                 _matchMaker.MatchPlayers(_rooms, _settings);
-            }
             else
-            {
-                content = "RoomCreator";
                 _roomCreator.CreateRoomWithCustomOptions(_customRoomProperties);
-            }
 
-            // WriteLog("D:\\Logs\\");
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message) =>
@@ -135,20 +117,6 @@ namespace Managers.Network.Lobby
 
         #endregion
 
-        /*  private void WriteLog(string path)
-          {
-
-              if (!File.Exists(path + "log.txt"))
-              {
-                  File.Create(path + "log.txt");
-              }
-
-              File.WriteAllText(path + "log.txt", content);
-          }*/
-
-        void OnGUI()
-        {
-            GUI.Label(new Rect(0, 0, 200, 100), $"LOG: { _log} / Rooms: {_rooms.Count} / RoomLog: {_roomLog}");
-        }
+     
     }
 }
