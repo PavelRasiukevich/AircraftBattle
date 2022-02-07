@@ -1,7 +1,6 @@
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
 using Core;
-using Interfaces.Subscriber;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
@@ -51,7 +50,7 @@ namespace Assets.Scripts.AirCrafts
             _attackHandler.PhotonView = _photonView;
 
             _attackHandler.Aircraft = this;
-            _moveHandler.View = _view;
+            _moveHandler.View = _view.transform;
 
             _inputHandler.Attacking += _attackHandler.Attack;
         }
