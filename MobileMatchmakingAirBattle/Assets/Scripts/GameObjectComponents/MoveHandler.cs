@@ -40,12 +40,6 @@ namespace Assets.Scripts.GameObjectComponents
             }
         }
 
-        private void FreeFall(Rigidbody bodyToMove)
-        {
-            //turn on gravity
-            //rotate toward to global -Y axis
-        }
-
         #region Utilities
 
         private Vector3 ResetReturnAngleValues(Vector3 vector)
