@@ -7,9 +7,7 @@ namespace Assets.Scripts.AirCrafts
         public override void OnEnable()
         {
             if (!GetComponentInParent<PhotonView>().IsMine)
-            {
                 gameObject.SetActive(false);
-            }
         }
     }
 }

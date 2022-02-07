@@ -14,6 +14,7 @@ namespace Assets.Scripts.AirCrafts
         private Transform FindSlotForCamera(Transform airCraft) => airCraft.GetComponentInChildren<CameraSlot>().transform;
 
         public void Activate() => gameObject.SetActive(true);
+
         public void Deactivate() => gameObject.SetActive(false);
     }
 }
