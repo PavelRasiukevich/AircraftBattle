@@ -160,11 +160,18 @@ namespace Managers.External.PlayFabServices.Services
 
         private void OnPlayerProfileRequest(GetPlayerProfileResult result)
         {
-            if (string.IsNullOrEmpty(result.PlayerProfile.DisplayName) ||
-                result.PlayerProfile.DisplayName != User.Common.Name)
+            if (string.IsNullOrEmpty(result.PlayerProfile.DisplayName))
+            {
                 UpdateUserDisplayName(User.Common.Name);
+            }
             else
+            {
+                if (result.PlayerProfile.DisplayName != User.Common.Name)
+                {
+                    User.Common.Name = result.PlayerProfile.DisplayName;
+                }
                 LoadInventory();
+            }
         }
 
         #endregion
@@ -187,11 +194,10 @@ namespace Managers.External.PlayFabServices.Services
 
         private void LoadInventory()
         {
-            int goldCount;
             PlayFabClientAPI.GetUserInventory(new GetUserInventoryRequest(),
                 result =>
                 {
-                    result.VirtualCurrency.TryGetValue(Const.Currencies.Gold, out goldCount);
+                    result.VirtualCurrency.TryGetValue(Const.Currencies.Gold, out var goldCount);
                     User.Currency.CountUpdate(goldCount);
                     PlayFabAuthenticateDone();
                 },

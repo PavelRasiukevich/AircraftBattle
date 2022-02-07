@@ -3,7 +3,6 @@ using Assets.Scripts.Utils;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Managers.Network.Rooms
 {
@@ -42,6 +41,7 @@ namespace Managers.Network.Rooms
             if (clientType.Equals(Clients.Single))
             {
                 #region DELETE AFTER TEST
+
                 if (_playersInRoom.Count < _maxPlayers) return;
 
                 PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -52,9 +52,9 @@ namespace Managers.Network.Rooms
                 if (!PhotonNetwork.IsMasterClient) return;
 
                 PhotonNetwork.LoadLevel(Const.Battle);
+
                 #endregion
             }
-
         }
 
         public override void OnLeftRoom()
