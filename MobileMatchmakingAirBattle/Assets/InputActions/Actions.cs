@@ -48,17 +48,6 @@ public partial class @Actions : IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""4e15428b-bdb3-4eba-ae97-8d5978954a7e"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Moves"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""WASD"",
                     ""id"": ""b8c29e06-5386-435d-817a-40d85e7a9f69"",
                     ""path"": ""2DVector"",
@@ -112,6 +101,17 @@ public partial class @Actions : IInputActionCollection2, IDisposable
                     ""action"": ""Moves"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e15428b-bdb3-4eba-ae97-8d5978954a7e"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Moves"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",

@@ -9,7 +9,7 @@ using UI.Screens.BattleScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
-{
+{ 
     [DisallowMultipleComponent]
     public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
     {

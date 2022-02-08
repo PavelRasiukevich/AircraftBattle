@@ -9,12 +9,10 @@ namespace Assets.Scripts.GameObjectComponents
     {
         private Actions _actions;
         private InputAction _moveAction;
-        private ButtonControl _buttonControl;
 
         private Vector2 _inputValues;
 
         public InputParameters InputParams { get; private set; }
-        public bool IsCenterPressed { get; private set; }
 
 
         #region EVENTS
@@ -28,7 +26,6 @@ namespace Assets.Scripts.GameObjectComponents
         {
             _actions = new Actions();
             _moveAction = _actions.PlayerActions.Moves;
-            _buttonControl = Gamepad.current.leftStickButton;
 
             InputParams = new InputParameters();
         }
@@ -36,11 +33,13 @@ namespace Assets.Scripts.GameObjectComponents
         private void OnEnable()
         {
             _actions.PlayerActions.Enable();
+            _moveAction.Enable();
         }
 
         private void OnDisable()
         {
             _actions.PlayerActions.Disable();
+            _moveAction.Disable();
         }
 
         private void Update()
@@ -58,7 +57,6 @@ namespace Assets.Scripts.GameObjectComponents
             _inputValues = _moveAction.ReadValue<Vector2>();
 
             tempInputParams.Input = _inputValues;
-            tempInputParams.IsStickPressed = _buttonControl.isPressed;
 
             InputParams = tempInputParams;
         }

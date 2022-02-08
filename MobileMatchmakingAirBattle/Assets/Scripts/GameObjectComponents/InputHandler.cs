@@ -37,7 +37,6 @@ namespace Assets.Scripts.GameObjectComponents
             var par = InputParams;
 
             par.Input = PlayersInput;
-            par.IsStickPressed = Mathf.Abs(Horizontal) > 0 || Mathf.Abs(Vertical) > 0;
             par.IsFiring = Input.GetAxisRaw("Fire1") != 0;
 
             InputParams = par;
@@ -47,7 +46,6 @@ namespace Assets.Scripts.GameObjectComponents
         {
             var intermediate = InputParams;
             intermediate.Input = JoyStick.JoystickInput;
-            intermediate.IsStickPressed = JoyStick.IsPressed;
             InputParams = intermediate;
         }
     }

@@ -288,7 +288,6 @@ GameObject:
   - component: {fileID: 1136816940674746945}
   - component: {fileID: 7771106467840010211}
   - component: {fileID: 7385563372885949098}
-  - component: {fileID: 5959187520200431075}
   m_Layer: 5
   m_Name: Inner
   m_TagString: Untagged
@@ -367,19 +366,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementRange: 80
   m_ControlPath: <Gamepad>/leftStick
---- !u!114 &5959187520200431075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6610544203309898331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ControlPath: <Gamepad>/leftStickPress
 --- !u!1 &6962737183511647734
 GameObject:
   m_ObjectHideFlags: 0
