@@ -15,6 +15,9 @@ namespace Assets.Scripts.AirCrafts
     {
         [SerializeField] private AircraftDataModel _dataModel;
 
+        //test value
+        [SerializeField] private bool _isContrl;
+
         public AircraftDataModel Data => _dataModel;
 
         public PhotonView PhotonView => _photonView;
@@ -63,7 +66,7 @@ namespace Assets.Scripts.AirCrafts
         {
             if (!_photonView.IsMine) return;
 
-            if (_dataModel.IsControllable)
+            if (_dataModel.IsControllable || _isContrl)
                 _moveHandler.Pilot(_rigidBody, _inputHandler.InputParams, Data.Speed);
             else
                 _moveHandler.DragToBattleField(_rigidBody, _dataModel.Speed);
