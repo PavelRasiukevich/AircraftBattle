@@ -9,11 +9,12 @@ using UI.Screens.BattleScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
-{ 
+{
     [DisallowMultipleComponent]
     public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
+        [SerializeField] private DeathZone _deathZone;
 
         //test value
         [SerializeField] private bool _isContrl;
@@ -54,8 +55,11 @@ namespace Assets.Scripts.AirCrafts
 
             _attackHandler.Aircraft = this;
             _moveHandler.View = _view.transform;
+            _moveHandler.Body = _rigidBody;
 
             _inputHandler.Attacking += _attackHandler.Attack;
+
+
         }
 
         private void Start() =>
@@ -67,9 +71,9 @@ namespace Assets.Scripts.AirCrafts
             if (!_photonView.IsMine) return;
 
             if (_dataModel.IsControllable || _isContrl)
-                _moveHandler.Pilot(_rigidBody, _inputHandler.InputParams, Data.Speed);
+                _moveHandler.Pilot(_inputHandler.InputParams, Data.Speed);
             else
-                _moveHandler.DragToBattleField(_rigidBody, _dataModel.Speed);
+                _moveHandler.DragToBattleField(_dataModel.Speed);
         }
 
         #endregion

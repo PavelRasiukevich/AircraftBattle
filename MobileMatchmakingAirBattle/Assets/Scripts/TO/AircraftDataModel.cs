@@ -6,14 +6,14 @@ namespace TO
     [Serializable]
     public class AircraftDataModel
     {
-        [SerializeField] Speed _speed;
+        [SerializeField] Properties _speed;
         [SerializeField] private int _hp;
         [SerializeField] private int _currentHp;
         [SerializeField] private float _reloadTime;
 
         public Transform RespawnPosition { get; set; }
 
-        public Speed Speed => _speed;
+        public Properties Speed => _speed;
 
         public int Hp => _hp;
 
@@ -25,9 +25,10 @@ namespace TO
     }
 
     [Serializable]
-    public struct Speed
+    public struct Properties
     {
         public float MoveSpeed;
         public float RotationSpeed;
+        public float ReturnSpeed;
     }
 }

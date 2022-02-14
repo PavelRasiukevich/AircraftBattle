@@ -7,28 +7,25 @@ namespace Assets.Scripts.GameObjectComponents
     public class MoveHandler : MonoBehaviour
     {
         public Transform View { get; set; }
+        public Rigidbody Body { get; set; }
 
         private Quaternion _returnRotation;
         private Vector3 _resetedReturnAngle;
 
-        public void Pilot(Rigidbody bodyToMove, InputParameters inputValues, Speed speed)
+        public void Pilot(in InputParameters inputValues, in Properties props)
         {
-            bodyToMove.velocity = View.forward * speed.MoveSpeed;
+            Body.velocity = View.forward * props.MoveSpeed;
 
-            RotatePlane(bodyToMove, inputValues, speed);
+            Rotate(inputValues, props);
         }
 
-        public void DragToBattleField(Rigidbody bodyToMove, Speed speed)
-            => bodyToMove.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
-
-        private void RotatePlane(Rigidbody bodyToRotate, InputParameters inputValues, Speed speed)
+        private void Rotate(in InputParameters inputValues, in Properties props)
         {
+            var rotationAroundYInWorldSpace = inputValues.Input.x * props.RotationSpeed * Vector3.up;
+            Body.angularVelocity = rotationAroundYInWorldSpace * Mathf.Deg2Rad;
 
             if (IsInputPerformed(inputValues))
             {
-                Quaternion targetRotation = Quaternion.Euler(Vector3.up * inputValues.Input.x);
-                bodyToRotate.MoveRotation(bodyToRotate.rotation * targetRotation);
-
                 Quaternion viewTargetRotation = Quaternion.Euler(inputValues.Input.y, 0, inputValues.Input.x * -1);
                 View.rotation *= viewTargetRotation;
             }
@@ -36,9 +33,12 @@ namespace Assets.Scripts.GameObjectComponents
             {
                 _resetedReturnAngle = ResetReturnAngleValues(_resetedReturnAngle);
                 _returnRotation = Quaternion.Euler(_resetedReturnAngle);
-                View.rotation = Quaternion.Slerp(View.rotation, _returnRotation, Time.fixedDeltaTime * speed.RotationSpeed);
+                View.rotation = Quaternion.Slerp(View.rotation, _returnRotation, Time.fixedDeltaTime * props.ReturnSpeed);
             }
         }
+
+        public void DragToBattleField(Properties speed)
+            => Body.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
 
         #region Utilities
 

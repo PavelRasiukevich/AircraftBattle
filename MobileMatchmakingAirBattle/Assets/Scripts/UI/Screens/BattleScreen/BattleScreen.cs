@@ -9,6 +9,7 @@ namespace UI.Screens.BattleScreen
 {
     public class BattleScreen : BaseScreen, IBattleScreenHandler
     {
+
         public override ScreenType Type => ScreenType.Battle;
 
         private HealthBar _healthBar;

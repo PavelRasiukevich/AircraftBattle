@@ -8,12 +8,13 @@ namespace Assets.Scripts.GameObjectComponents
     {
         private AirCraft AirCraft { get; set; }
 
-        private void Awake() => AirCraft = GetComponent<AirCraft>();
+        private void Awake()
+        {
+            AirCraft = GetComponent<AirCraft>();
+        }
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject.CompareTag(Const.Tags.Ground))
-                AirCraft.Die();
         }
 
         private void OnTriggerEnter(Collider other)

@@ -1,7 +1,6 @@
 using Assets.Scripts.Structs;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Controls;
 
 namespace Assets.Scripts.GameObjectComponents
 {
@@ -13,7 +12,6 @@ namespace Assets.Scripts.GameObjectComponents
         private Vector2 _inputValues;
 
         public InputParameters InputParams { get; private set; }
-
 
         #region EVENTS
 
