@@ -14,7 +14,6 @@ namespace Assets.Scripts.AirCrafts
     public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
     {
         [SerializeField] private AircraftDataModel _dataModel;
-        [SerializeField] private DeathZone _deathZone;
 
         //test value
         [SerializeField] private bool _isContrl;
@@ -58,8 +57,6 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.Body = _rigidBody;
 
             _inputHandler.Attacking += _attackHandler.Attack;
-
-
         }
 
         private void Start() =>
