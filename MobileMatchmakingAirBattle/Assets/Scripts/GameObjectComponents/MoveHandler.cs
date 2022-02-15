@@ -1,10 +1,11 @@
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Structs;
 using TO;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
 {
-    public class MoveHandler : MonoBehaviour
+    public class MoveHandler : MonoBehaviour, IReturnToBattle
     {
         public Transform View { get; set; }
         public Rigidbody Body { get; set; }
@@ -53,6 +54,12 @@ namespace Assets.Scripts.GameObjectComponents
 
         private bool IsInputPerformed(InputParameters values)
             => Mathf.Abs(values.Input.x) > 0 || Mathf.Abs(values.Input.y) > 0;
+
+        void IReturnToBattle.Return()
+        {
+            var angle = Body.rotation.eulerAngles + 180 * Vector3.up;
+            Body.transform.eulerAngles = Vector3.Slerp(Body.transform.eulerAngles, angle, 180);
+        }
 
         #endregion
     }

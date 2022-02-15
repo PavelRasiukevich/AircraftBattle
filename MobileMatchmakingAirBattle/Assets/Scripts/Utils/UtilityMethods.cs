@@ -6,9 +6,14 @@ namespace Assets.Scripts.Utils
 {
     public static class UtilityMethods
     {
-        public static bool ValidateCollision(Collision collision)
+        public static bool ValidateCollision<T>(Collision collision)
         {
-            return collision.gameObject.TryGetComponent(out Obstacle _);
+            return collision.gameObject.TryGetComponent(out T _);
+        }
+
+        public static bool ValidateTrigger<T>(Collider trigger, out T component)
+        {
+            return trigger.gameObject.TryGetComponent(out component);
         }
     }
 }

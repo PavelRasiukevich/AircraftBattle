@@ -8,7 +8,6 @@ public class DeathZone : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (UtilityMethods.ValidateCollision(other))
-            AirCraft.Die();
+
     }
 }
