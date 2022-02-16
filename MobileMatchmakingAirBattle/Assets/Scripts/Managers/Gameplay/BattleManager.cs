@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using Assets.Scripts.Core;
 using Core;
 using Interfaces.EventBus;
@@ -16,6 +17,10 @@ namespace Managers.Gameplay
         void Awake()
         {
             Spawner = GetComponent<Spawner>();
+        }
+
+        void Start()
+        {
             GameStart();
         }
 

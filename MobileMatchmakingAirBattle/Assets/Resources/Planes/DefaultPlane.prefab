@@ -637,14 +637,8 @@ GameObject:
   - component: {fileID: 4800748574067253183}
   - component: {fileID: -8353922386413972525}
   - component: {fileID: 4757466050382488539}
-<<<<<<< HEAD
   - component: {fileID: 842354797857936020}
   m_Layer: 8
-=======
-  - component: {fileID: 6627708444268833254}
-  - component: {fileID: 8676232560179855243}
-  m_Layer: 0
->>>>>>> origin/develop
   m_Name: DefaultPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -709,11 +703,7 @@ MonoBehaviour:
       ReturnSpeed: 5
     _hp: 100
     _currentHp: 100
-<<<<<<< HEAD
     _reloadTime: 0.32
-=======
-    _reloadTime: 0.29
->>>>>>> origin/develop
   _isContrl: 1
   _view: {fileID: 3806294500952841975}
 --- !u!114 &5660593696835341330
