@@ -13,14 +13,5 @@ namespace Assets.Scripts.GameObjectComponents
             AirCraft = GetComponent<AirCraft>();
         }
 
-        private void OnCollisionEnter(Collision other)
-        {
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.CompareTag(Const.Tags.FightArena))
-                AirCraft.Data.IsControllable = true;
-        }
     }
 }
