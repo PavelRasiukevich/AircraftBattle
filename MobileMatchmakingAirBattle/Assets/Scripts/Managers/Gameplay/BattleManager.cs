@@ -19,11 +19,7 @@ namespace Managers.Gameplay
             Spawner = GetComponent<Spawner>();
         }
 
-<<<<<<< HEAD
-        private void Start()
-=======
         void Start()
->>>>>>> origin/develop
         {
             GameStart();
         }
