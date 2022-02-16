@@ -52,14 +52,8 @@ GameObject:
   - component: {fileID: 746620892309326011}
   - component: {fileID: 2981573261464948461}
   - component: {fileID: 1873202258467764746}
-<<<<<<< HEAD
   - component: {fileID: 2421107894894952351}
   m_Layer: 8
-=======
-  - component: {fileID: 301112052745071460}
-  - component: {fileID: 4122042484725283439}
-  m_Layer: 0
->>>>>>> origin/develop
   m_Name: Rocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,13 +166,8 @@ MonoBehaviour:
     _hp: 100
     _currentHp: 100
     _reloadTime: 0.32
-<<<<<<< HEAD
   _isContrl: 1
   _view: {fileID: 9142117271774020434}
-=======
-  _isContrl: 0
-  _view: {fileID: 0}
->>>>>>> origin/develop
 --- !u!114 &8252441844842166826
 MonoBehaviour:
   m_ObjectHideFlags: 0
