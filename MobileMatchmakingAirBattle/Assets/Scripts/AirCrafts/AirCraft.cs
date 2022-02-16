@@ -59,6 +59,7 @@ namespace Assets.Scripts.AirCrafts
         private void Start()
         {
             _isFail = false;
+            Data.IsControllable = true;
             EventBus.InvokeEvent<IBattleScreenEvents>(h => h.RefreshUI(Data));
         }
             
