@@ -22,7 +22,7 @@ namespace UI.Screens.MainMenu
         private void OnEnable()
         {
             _playerPanel.Config();
-            _planeImage.sprite = GameData.Inst.CurrentPlane.Icon;
+            _planeImage.sprite = GameDataManager.Inst.CurrentPlane.Icon;
         }
 
         #endregion

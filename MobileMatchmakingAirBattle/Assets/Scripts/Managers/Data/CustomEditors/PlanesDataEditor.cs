@@ -53,6 +53,7 @@ namespace Managers.Data.CustomEditors
             EditorGUILayout.IntField("ID", _selectedPlane.ID);
             EditorGUI.EndDisabledGroup();
             _selectedPlane.DisplayName = EditorGUILayout.TextField("Name", _selectedPlane.DisplayName);
+            _selectedPlane.FileName = EditorGUILayout.TextField("File", _selectedPlane.FileName);
             _selectedPlane.IsViewInEditor =
                 EditorGUILayout.Foldout(_selectedPlane.IsViewInEditor, $"Plane: {_selectedPlane.DisplayName}");
 
@@ -78,19 +79,10 @@ namespace Managers.Data.CustomEditors
                     EditorGUI.EndDisabledGroup();
                     EditorGUI.indentLevel--;
                 }
-                EditorGUILayout.LabelField("-- Settings --", EditorStyles.boldLabel);
-                EditorGUI.indentLevel++;
-           //     EditorGUI.BeginDisabledGroup(true);
-           _selectedPlane.Settings.Color = EditorGUILayout.ColorField("Color", _selectedPlane.Settings.Color);
-              //  EditorGUI.EndDisabledGroup();
-                EditorGUI.indentLevel--;
 
-
-                EditorGUILayout.LabelField("-- For Shop --", EditorStyles.boldLabel);
                 _selectedPlane.FirePower = EditorGUILayout.FloatField("Fire Power", _selectedPlane.FirePower);
                 _selectedPlane.GunsCount = EditorGUILayout.IntField("Guns Count", _selectedPlane.GunsCount);
-                _selectedPlane.GamePrice =
-                    EditorGUILayout.FloatField("Game price", _selectedPlane.GamePrice);
+                _selectedPlane.GamePrice = EditorGUILayout.FloatField("Price", _selectedPlane.GamePrice);
                 EditorGUI.EndDisabledGroup();
                 EditorGUI.indentLevel--;
             }
