@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BulletData
   m_EditorClassIdentifier: 
   _damage: 1
-  _speed: 10
+  _speed: 15
   _lifeTime: 5

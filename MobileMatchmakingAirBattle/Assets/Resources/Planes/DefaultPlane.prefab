@@ -637,7 +637,8 @@ GameObject:
   - component: {fileID: 4800748574067253183}
   - component: {fileID: -8353922386413972525}
   - component: {fileID: 4757466050382488539}
-  - component: {fileID: 842354797857936020}
+  - component: {fileID: 6627708444268833254}
+  - component: {fileID: 8676232560179855243}
   m_Layer: 8
   m_Name: DefaultPlane
   m_TagString: Untagged
@@ -698,12 +699,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dataModel:
     _speed:
-      MoveSpeed: 75
+      MoveSpeed: 50
       RotationSpeed: 100
       ReturnSpeed: 5
     _hp: 100
     _currentHp: 100
-    _reloadTime: 0.32
+    _reloadTime: 0.21
   _isContrl: 1
   _view: {fileID: 3806294500952841975}
 --- !u!114 &5660593696835341330
