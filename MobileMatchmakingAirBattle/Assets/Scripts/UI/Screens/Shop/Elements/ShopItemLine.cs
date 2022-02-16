@@ -26,7 +26,6 @@ namespace UI.Screens.Shop.Elements
         [SerializeField] private Button _buyButton;
         [SerializeField] private Button _infoButton;
         [SerializeField] private Button _selectButton;
-        [SerializeField] private Image _isSelectedIcon;
 
         #region UNITY
 
@@ -50,20 +49,17 @@ namespace UI.Screens.Shop.Elements
             _speed.text = planeInfo.PlanePrefab.Data.Speed.MoveSpeed.ToString(CultureInfo.InvariantCulture);
             _mobility.text = planeInfo.PlanePrefab.Data.Speed.RotationSpeed.ToString(CultureInfo.InvariantCulture);
             // UI
-            if (GameData.Inst.CurrentPlane.ID == planeInfo.ID)
+
+            _selectButton.gameObject.SetActive(true);
+            _infoButton.gameObject.SetActive(true);
+            if (GameDataManager.Inst.CurrentPlane.ID == planeInfo.ID)
             {
                 //Самолет выбран
-                _isSelectedIcon.gameObject.SetActive(true);
-                _selectButton.gameObject.SetActive(false);
-                _infoButton.gameObject.SetActive(false);
                 _buyButton.gameObject.SetActive(false);
                 _background.sprite = _backgroundLight;
             }
             else
             {
-                _isSelectedIcon.gameObject.SetActive(false);
-                _selectButton.gameObject.SetActive(true);
-                _infoButton.gameObject.SetActive(true);
                 _buyButton.gameObject.SetActive(false);
                 _background.sprite = _backgroundDark;
             }
@@ -75,13 +71,13 @@ namespace UI.Screens.Shop.Elements
 
         private void SelectOnClick()
         {
-            GameData.Inst.SelectPlane(_id);
+            GameDataManager.Inst.SelectPlane(_id);
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
         }
 
         private void InfoOnClick()
         {
-            GameData.Inst.SelectShopPlane(_id);
+            GameDataManager.Inst.SelectShopPlane(_id);
             ScreenHolder.SetCurrentScreen(ScreenType.ShopView).ShowScreen();
         }
 

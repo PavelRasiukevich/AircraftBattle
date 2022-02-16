@@ -1,11 +1,12 @@
+using System;
 using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Interfaces;
 using Core;
+using GameObjectComponents;
+using Interfaces.EventBus;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
 using TO;
-using UI.Screens.BattleScreen;
 using UnityEngine;
 
 namespace Assets.Scripts.AirCrafts
@@ -23,16 +24,12 @@ namespace Assets.Scripts.AirCrafts
 
         public PhotonView PhotonView => _photonView;
 
-        #region ACTIONS
-
-        public Action DieAction { get; set; }
-
-        #endregion
-
+        private bool _isFail;
+        
         #region COMPONENTS
 
         [SerializeField] private View _view;
-        private InputSystemHandler _inputHandler;
+        private PlayerInputHandler _playerInputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
@@ -45,7 +42,7 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-            _inputHandler = GetComponent<InputSystemHandler>();
+            _playerInputHandler = GetComponent<PlayerInputHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _photonView = GetComponent<PhotonView>();
@@ -57,14 +54,15 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.View = _view.transform;
             _moveHandler.Body = _rigidBody;
 
-            _inputHandler.Attacking += _attackHandler.Attack;
-
-
+            _playerInputHandler.Attacking += _attackHandler.Attack;
         }
 
-        private void Start() =>
-            EventBus<BattleScreen>.InvokeEvent(h =>
-                h.RefreshUI(Data));
+        private void Start()
+        {
+            _isFail = false;
+            EventBus.InvokeEvent<IBattleScreenEvents>(h => h.RefreshUI(Data));
+        }
+            
 
         private void FixedUpdate()
         {
@@ -85,15 +83,23 @@ namespace Assets.Scripts.AirCrafts
         private void RPC_TakeDamage(object[] values)
         {
             if (!_photonView.IsMine) return;
-            _dataModel.CurrentHp -= (int)values[0];
-            EventBus<BattleScreen>.InvokeEvent((x) => x.DamageUI(Data));
-            if (_dataModel.CurrentHp <= 0) Die();
+            _dataModel.CurrentHp -= (int) values[0];
+            if (_dataModel.CurrentHp <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(Data));
+            }
         }
 
         public void Die()
         {
-            _aircraftParticles.DestroyEffect();
-            DieAction.Invoke();
+            if (_isFail)return;
+            _isFail = true;
+            EventBus.InvokeEvent<IDestroy>(x => x.DestroyAircraft());
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }

@@ -2,13 +2,12 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
 using Core;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Photon.Pun;
 using Photon.Realtime;
 using PlayFab;
 using PlayFab.ClientModels;
 using TO;
-using UI.Screens;
 using UnityEngine;
 using Utils.Enums;
 
@@ -19,7 +18,7 @@ namespace Managers.External.PlayFabServices.Services
      */
     public class PlayFabAuthenticate
     {
-        public string PlayFabPlayerId { get; private set; } = "";
+        public string PlayFabPlayerId { get; private set; } = string.Empty;
         public bool IsReady { get; private set; }
 
         #region Authenticate
@@ -52,8 +51,8 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.LoginWithPlayFab(
                 request,
                 RequestPhotonToken,
-                error=>
-                EventBus<LoginScreen>.InvokeEvent(h =>h.Error(error))
+                error =>
+                    EventBus.InvokeEvent<IPlayfabError>(h => h.Error(error))
             );
         }
 
@@ -69,8 +68,8 @@ namespace Managers.External.PlayFabServices.Services
             PlayFabClientAPI.RegisterPlayFabUser(
                 request,
                 res => ScreenHolder.SetCurrentScreen(ScreenType.Login).ShowScreen(),
-                error => EventBus<RegistrationScreen>.InvokeEvent(h => h.Error(error))
-                );
+                error => EventBus.InvokeEvent<IPlayfabError>(h => h.Error(error))
+            );
         }
 
         public void LoginWithGoogle(string serverAuthCode)
@@ -171,6 +170,7 @@ namespace Managers.External.PlayFabServices.Services
                 {
                     User.Common.Name = result.PlayerProfile.DisplayName;
                 }
+
                 LoadInventory();
             }
         }

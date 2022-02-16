@@ -125,6 +125,34 @@ public partial class @Actions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BattleScreenActions"",
+            ""id"": ""a3040a34-af2c-4ae9-8111-925d92656b59"",
+            ""actions"": [
+                {
+                    ""name"": ""TabPress"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e748061-c946-48f2-85fa-e2f1947a0f9d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a84f07b1-f89f-4a9e-ae61-b1675d108500"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TabPress"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -133,6 +161,9 @@ public partial class @Actions : IInputActionCollection2, IDisposable
         m_PlayerActions = asset.FindActionMap("PlayerActions", throwIfNotFound: true);
         m_PlayerActions_Moves = m_PlayerActions.FindAction("Moves", throwIfNotFound: true);
         m_PlayerActions_Fire = m_PlayerActions.FindAction("Fire", throwIfNotFound: true);
+        // BattleScreenActions
+        m_BattleScreenActions = asset.FindActionMap("BattleScreenActions", throwIfNotFound: true);
+        m_BattleScreenActions_TabPress = m_BattleScreenActions.FindAction("TabPress", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,9 +260,46 @@ public partial class @Actions : IInputActionCollection2, IDisposable
         }
     }
     public PlayerActionsActions @PlayerActions => new PlayerActionsActions(this);
+
+    // BattleScreenActions
+    private readonly InputActionMap m_BattleScreenActions;
+    private IBattleScreenActionsActions m_BattleScreenActionsActionsCallbackInterface;
+    private readonly InputAction m_BattleScreenActions_TabPress;
+    public struct BattleScreenActionsActions
+    {
+        private @Actions m_Wrapper;
+        public BattleScreenActionsActions(@Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @TabPress => m_Wrapper.m_BattleScreenActions_TabPress;
+        public InputActionMap Get() { return m_Wrapper.m_BattleScreenActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BattleScreenActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IBattleScreenActionsActions instance)
+        {
+            if (m_Wrapper.m_BattleScreenActionsActionsCallbackInterface != null)
+            {
+                @TabPress.started -= m_Wrapper.m_BattleScreenActionsActionsCallbackInterface.OnTabPress;
+                @TabPress.performed -= m_Wrapper.m_BattleScreenActionsActionsCallbackInterface.OnTabPress;
+                @TabPress.canceled -= m_Wrapper.m_BattleScreenActionsActionsCallbackInterface.OnTabPress;
+            }
+            m_Wrapper.m_BattleScreenActionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @TabPress.started += instance.OnTabPress;
+                @TabPress.performed += instance.OnTabPress;
+                @TabPress.canceled += instance.OnTabPress;
+            }
+        }
+    }
+    public BattleScreenActionsActions @BattleScreenActions => new BattleScreenActionsActions(this);
     public interface IPlayerActionsActions
     {
         void OnMoves(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface IBattleScreenActionsActions
+    {
+        void OnTabPress(InputAction.CallbackContext context);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Core;
+using Interfaces.EventBus;
 using PlayFab;
 using PlayFab.ClientModels;
-using UI.Screens.LeaderBoard;
 
 namespace Managers.External.PlayFabServices.Services
 {
@@ -17,7 +17,7 @@ namespace Managers.External.PlayFabServices.Services
                     StartPosition = 0,
                     MaxResultsCount = 10
                 },
-                result => EventBus<LeaderboardScreen>.InvokeEvent(h => h.Refresh(result.Leaderboard)),
+                result => EventBus.InvokeEvent<ILeaderboardScreenEvents>(h => h.Refresh(result.Leaderboard)),
                 ScreenEventHolder.Inst.UnexpectedErrorUI);
         }
 

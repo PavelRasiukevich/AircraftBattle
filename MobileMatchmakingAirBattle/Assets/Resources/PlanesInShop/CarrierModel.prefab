@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2320385557953881427}
   - component: {fileID: 363490967602592111}
   - component: {fileID: 6573895590626932767}
-  - component: {fileID: 2755901751796937129}
+  - component: {fileID: 4141418808834364348}
   m_Layer: 7
   m_Name: CarrierModel
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2755901751796937129
+--- !u!114 &4141418808834364348
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6612992268698260795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6a860991b94b138be25f6e503cd6a1, type: 3}
+  m_Script: {fileID: 11500000, guid: b233412dab6a40cfb612e910a0c593b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 6612992268698260795}

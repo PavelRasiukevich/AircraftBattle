@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
 namespace Utils
 {
