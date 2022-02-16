@@ -16,6 +16,10 @@ namespace Managers.Gameplay
         void Awake()
         {
             Spawner = GetComponent<Spawner>();
+        }
+
+        private void Start()
+        {
             GameStart();
         }
 
