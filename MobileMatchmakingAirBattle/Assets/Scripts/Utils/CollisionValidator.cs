@@ -4,8 +4,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.Utils
 {
-    public static class UtilityMethods
+    public static class CollisionValidator
     {
+        public static bool ValidateCollision<T>(Collision collision, out T component)
+        {
+            return collision.gameObject.TryGetComponent(out component);
+        }
+
         public static bool ValidateCollision<T>(Collision collision)
         {
             return collision.gameObject.TryGetComponent(out T _);

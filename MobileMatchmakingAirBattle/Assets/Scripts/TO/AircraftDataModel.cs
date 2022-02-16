@@ -19,8 +19,6 @@ namespace TO
 
         public int CurrentHp { get => _currentHp; set => _currentHp = value; }
 
-        public bool IsControllable { get; set; }
-
         public float ReloadTime { get => _reloadTime; set => _reloadTime = value; }
     }
 

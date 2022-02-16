@@ -3,6 +3,7 @@ using Assets.Scripts.Projectiles;
 using Assets.Scripts.Utils;
 using Photon.Pun;
 using System;
+using TO;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
@@ -12,30 +13,30 @@ namespace Assets.Scripts.GameObjectComponents
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private Transform _fireSpot;
 
-        public AirCraft Aircraft { get; set; }
+        public InputSystemHandler InputHandler { get; set; }
 
         public PhotonView PhotonView { get; set; }
 
-        private BaseTimer _timer;
+        public AircraftDataModel DataModel { get; set; }
 
-        private void Awake()
-        {
-            Aircraft = GetComponent<AirCraft>();
-        }
+        private BaseTimer _timer;
 
         private void Start()
         {
-            _timer = new BaseTimer(Aircraft.Data.ReloadTime);
+            _timer = new BaseTimer(DataModel.ReloadTime);
         }
 
         private void Update()
         {
+            if (InputHandler.InputParams.IsFiring)
+                Attack();
+
             _timer.Tick(Time.deltaTime);
+           
         }
 
         public void Attack()
         {
-            if (!Aircraft.Data.IsControllable) return;
             if (!PhotonView.IsMine) return;
 
             if (_timer.IsTimerStoped)

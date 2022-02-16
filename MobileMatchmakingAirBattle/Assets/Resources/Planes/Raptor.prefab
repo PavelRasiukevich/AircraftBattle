@@ -139,7 +139,9 @@ GameObject:
   - component: {fileID: 1637710716795258281}
   - component: {fileID: 7624550122044262017}
   - component: {fileID: 5436254523596349496}
-  - component: {fileID: 2111106817021518952}
+  - component: {fileID: 2510070926521790078}
+  - component: {fileID: 6775890856893681142}
+  - component: {fileID: -8674748735065330431}
   m_Layer: 8
   m_Name: Raptor
   m_TagString: Untagged
@@ -281,7 +283,6 @@ MonoBehaviour:
     _hp: 100
     _currentHp: 100
     _reloadTime: 0.32
-  _isContrl: 1
   _view: {fileID: 1148739055455260581}
 --- !u!114 &8359708806048388601
 MonoBehaviour:
@@ -410,6 +411,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 7990862194007617115}
+--- !u!114 &-8674748735065330431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7990862194007617115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306b099b78250da408d07f3476e2102b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8014748877624844316
 GameObject:
   m_ObjectHideFlags: 0

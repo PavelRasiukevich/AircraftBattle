@@ -1,5 +1,6 @@
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Structs;
+using Photon.Pun;
 using TO;
 using UnityEngine;
 
@@ -9,9 +10,21 @@ namespace Assets.Scripts.GameObjectComponents
     {
         public Transform View { get; set; }
         public Rigidbody Body { get; set; }
+        public PhotonView PhotonView { get; set; }
+
+        public InputSystemHandler InputHandler { get; set; }
+
+        public AircraftDataModel DataModel { get; set; }
 
         private Quaternion _returnRotation;
         private Vector3 _resetedReturnAngle;
+
+        private void FixedUpdate()
+        {
+            if (!PhotonView.IsMine) return;
+
+            Pilot(InputHandler.InputParams, DataModel.Speed);
+        }
 
         public void Pilot(in InputParameters inputValues, in Properties props)
         {

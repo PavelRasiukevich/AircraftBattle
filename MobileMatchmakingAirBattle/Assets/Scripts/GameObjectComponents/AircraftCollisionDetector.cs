@@ -1,4 +1,5 @@
 using Assets.Scripts.AirCrafts;
+using Assets.Scripts.Interfaces;
 using Assets.Scripts.Utils;
 using UnityEngine;
 
@@ -6,12 +7,12 @@ namespace Assets.Scripts.GameObjectComponents
 {
     public class AircraftCollisionDetector : MonoBehaviour
     {
-        private AirCraft AirCraft { get; set; }
+        public IDamageable Interactor { get; set; }
 
-        private void Awake()
+        private void OnCollisionEnter(Collision collision)
         {
-            AirCraft = GetComponent<AirCraft>();
+            if (CollisionValidator.ValidateCollision<IObstacle>(collision))
+                Interactor.Die();
         }
-
     }
 }

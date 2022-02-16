@@ -77335,6 +77335,7 @@ GameObject:
   - component: {fileID: 5060988861411249374}
   - component: {fileID: 5060988861412347422}
   - component: {fileID: 5060988861410414815}
+  - component: {fileID: 5060988861410414816}
   m_Layer: 0
   m_Name: Water
   m_TagString: Ground
@@ -77356,6 +77357,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 7ddaa1c967b38f2409f7bcb6762c0e20, type: 3}
+--- !u!114 &5060988861410414816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060988861410414814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f121ebd16585a64478b1b5d7b9677615, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5060988861410446590
 Transform:
   m_ObjectHideFlags: 0

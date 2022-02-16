@@ -12,28 +12,25 @@ using UnityEngine;
 namespace Assets.Scripts.AirCrafts
 {
     [DisallowMultipleComponent]
-    public class AirCraft : MonoBehaviourPunCallbacks, IDamageable
+    public class AirCraft : MonoBehaviourPunCallbacks
     {
         [SerializeField] private AircraftDataModel _dataModel;
-
-        //test value
-        [SerializeField] private bool _isContrl;
+        [SerializeField] private View _view;
 
         public AircraftDataModel Data => _dataModel;
 
         public PhotonView PhotonView => _photonView;
 
-        private bool _isFail;
-        
         #region COMPONENTS
 
-        [SerializeField] private View _view;
         private InputSystemHandler _inputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
         private Rigidbody _rigidBody;
+        private AircraftCollisionDetector _collisionDetector;
         private AircraftParticles _aircraftParticles;
+        private InteractionsHandler _interactor;
 
         #endregion
 
@@ -47,59 +44,31 @@ namespace Assets.Scripts.AirCrafts
             _photonView = GetComponent<PhotonView>();
             _rigidBody = GetComponent<Rigidbody>();
             _aircraftParticles = GetComponent<AircraftParticles>();
-            _attackHandler.PhotonView = _photonView;
+            _collisionDetector = GetComponent<AircraftCollisionDetector>();
+            _interactor = GetComponent<InteractionsHandler>();
 
-            _attackHandler.Aircraft = this;
+            _interactor.PhotonView = PhotonView;
+            _interactor.DataModel = Data;
+
+            _attackHandler.PhotonView = PhotonView;
+            _attackHandler.DataModel = Data;
+            _attackHandler.InputHandler = _inputHandler;
+
+            _collisionDetector.Interactor = _interactor;
+
             _moveHandler.View = _view.transform;
             _moveHandler.Body = _rigidBody;
+            _moveHandler.InputHandler = _inputHandler;
+            _moveHandler.DataModel = Data;
+            _moveHandler.PhotonView = PhotonView;
 
-            _inputHandler.Attacking += _attackHandler.Attack;
+            //_inputHandler.Attacking += _attackHandler.Attack;
         }
 
         private void Start()
         {
-            _isFail = false;
-            Data.IsControllable = true;
             EventBus.InvokeEvent<IBattleScreenEvents>(h => h.RefreshUI(Data));
         }
-            
-
-        private void FixedUpdate()
-        {
-            if (!_photonView.IsMine) return;
-
-            if (_dataModel.IsControllable || _isContrl)
-                _moveHandler.Pilot(_inputHandler.InputParams, Data.Speed);
-            else
-                _moveHandler.DragToBattleField(_dataModel.Speed);
-        }
-
         #endregion
-
-        public void TakeDamage(int value, Player owner) =>
-            _photonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, value, owner);
-
-        [PunRPC]
-        private void RPC_TakeDamage(object[] values)
-        {
-            if (!_photonView.IsMine) return;
-            _dataModel.CurrentHp -= (int) values[0];
-            if (_dataModel.CurrentHp <= 0)
-            {
-                Die();
-            }
-            else
-            {
-                EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(Data));
-            }
-        }
-
-        public void Die()
-        {
-            if (_isFail)return;
-            _isFail = true;
-            EventBus.InvokeEvent<IDestroy>(x => x.DestroyAircraft());
-            PhotonNetwork.Destroy(gameObject);
-        }
     }
 }

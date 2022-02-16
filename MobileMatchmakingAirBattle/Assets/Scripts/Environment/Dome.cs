@@ -8,7 +8,7 @@ namespace Assets.Scripts.Environment
     {
         private void OnTriggerExit(Collider other)
         {
-            if (UtilityMethods.ValidateTrigger(other, out IReturnToBattle result))
+            if (CollisionValidator.ValidateTrigger(other, out IReturnToBattle result))
                 result.Return();
         } 
     }
