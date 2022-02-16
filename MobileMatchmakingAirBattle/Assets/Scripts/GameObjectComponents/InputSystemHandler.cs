@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.GameObjectComponents
 {
-    public class PlayerInputHandler : MonoBehaviour
+    public class InputSystemHandler : MonoBehaviour
     {
         private Actions _actions;
         private InputAction _moveAction;

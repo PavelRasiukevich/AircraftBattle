@@ -29,7 +29,7 @@ namespace Assets.Scripts.AirCrafts
         #region COMPONENTS
 
         [SerializeField] private View _view;
-        private PlayerInputHandler _playerInputHandler;
+        private InputSystemHandler _inputHandler;
         private MoveHandler _moveHandler;
         private AttackHandler _attackHandler;
         private PhotonView _photonView;
@@ -42,7 +42,7 @@ namespace Assets.Scripts.AirCrafts
 
         private void Awake()
         {
-            _playerInputHandler = GetComponent<PlayerInputHandler>();
+            _inputHandler = GetComponent<InputSystemHandler>();
             _moveHandler = GetComponent<MoveHandler>();
             _attackHandler = GetComponent<AttackHandler>();
             _photonView = GetComponent<PhotonView>();
@@ -54,7 +54,7 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.View = _view.transform;
             _moveHandler.Body = _rigidBody;
 
-            _playerInputHandler.Attacking += _attackHandler.Attack;
+            _inputHandler.Attacking += _attackHandler.Attack;
         }
 
         private void Start()
