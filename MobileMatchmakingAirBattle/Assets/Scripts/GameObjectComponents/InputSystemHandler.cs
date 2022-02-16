@@ -16,6 +16,7 @@ namespace Assets.Scripts.GameObjectComponents
         #region EVENTS
 
         public delegate void Attack();
+
         public event Attack Attacking;
 
         #endregion

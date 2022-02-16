@@ -1,4 +1,4 @@
-using AirCrafts;
+using GameObjectComponents;
 using TO;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace UI.Screens.Shop
             GameObject model = Instantiate(plane.PlaneShopModel, transform);
             model.transform.position = transform.position;
             model.transform.rotation = transform.rotation;
-            model.GetComponent<Settings>().Config(plane.Settings);
+            model.GetComponent<BodySettings>().Config(plane.Settings.Color);
         }
     }
 }

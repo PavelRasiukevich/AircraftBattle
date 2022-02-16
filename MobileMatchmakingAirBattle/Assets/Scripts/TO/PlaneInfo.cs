@@ -1,6 +1,7 @@
 ﻿using System;
 using Assets.Scripts.AirCrafts;
 using UnityEngine;
+using Utils;
 
 namespace TO
 {
@@ -56,6 +57,14 @@ namespace TO
             set => _displayName = value;
         }
 
+        [SerializeField] private string _fileName;
+
+        public string FileName
+        {
+            get => _fileName;
+            set => _fileName = value;
+        }
+
         /*
          * "Огневая мощь" (для магазина)
          */
@@ -92,12 +101,35 @@ namespace TO
             set => _gamePrice = value;
         }
 
-        [SerializeField] private PlaneSettings _settings;
+        [SerializeField] private AircraftSettings _settings;
 
-        public PlaneSettings Settings
+        public AircraftSettings Settings
         {
             get => _settings;
             set => _settings = value;
         }
+
+        #region PRIVATE
+
+        public void LoadSettings() // TODO: Хранить удаленно
+        {
+            if (Data.IsExists(FileName))
+            {
+                AircraftSettings settings = Data.Get<AircraftSettings>(FileName);
+                _settings = settings;
+            }
+            else
+            {
+                AircraftSettings settings = new AircraftSettings(Color.red);
+                _settings = settings;
+            }
+        }
+
+        public void SaveSettings() // TODO: Хранить удаленно
+        {
+            Data.Set(FileName, _settings);
+        }
+
+        #endregion
     }
 }

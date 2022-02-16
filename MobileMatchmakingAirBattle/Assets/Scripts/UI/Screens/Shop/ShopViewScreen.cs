@@ -24,30 +24,30 @@ namespace UI.Screens.Shop
 
         private void OnEnable()
         {
-            _shopViewModel.Load(GameData.Inst.CurrentShopPlane);
-            _name.text = GameData.Inst.CurrentShopPlane.DisplayName;
-            _hp.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString();
-            _speed.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString();
-            _mobility.text = GameData.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString();
-            _firePower.text = GameData.Inst.CurrentShopPlane.FirePower.ToString(CultureInfo.InvariantCulture);
-            _gunsCount.text = GameData.Inst.CurrentShopPlane.GunsCount.ToString();
+            _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
+            _name.text = GameDataManager.Inst.CurrentShopPlane.DisplayName;
+            _hp.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString();
+            _speed.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString();
+            _mobility.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString();
+            _firePower.text = GameDataManager.Inst.CurrentShopPlane.FirePower.ToString(CultureInfo.InvariantCulture);
+            _gunsCount.text = GameDataManager.Inst.CurrentShopPlane.GunsCount.ToString();
         }
 
         #endregion
 
         #region OnClick
 
-        public void Color(Color color)
+        public void ColorOnClick(Color color)
         {
-            GameData.Inst.CurrentShopPlane.Settings.Color = color;
-            GameData.Inst.ChangeInfoBy(GameData.Inst.CurrentShopPlane);
-            _shopViewModel.Load(GameData.Inst.CurrentShopPlane);
+            GameDataManager.Inst.CurrentShopPlane.Settings.Color = color;
+            GameDataManager.Inst.Save(GameDataManager.Inst.CurrentShopPlane);
+            _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
         }
 
 
         public void GoOnClick()
         {
-            GameData.Inst.SelectPlane(GameData.Inst.CurrentShopPlane.ID);
+            GameDataManager.Inst.SelectPlane(GameDataManager.Inst.CurrentShopPlane.ID);
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
         }
 

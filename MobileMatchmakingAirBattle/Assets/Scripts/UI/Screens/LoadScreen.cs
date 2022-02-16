@@ -1,7 +1,6 @@
-using Assets.Scripts.Core;
 using Core;
 using Core.Base;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Managers.External;
 using TMPro;
 using UnityEngine;
@@ -10,7 +9,7 @@ using Utils.Enums;
 
 namespace UI.Screens
 {
-    public class LoadScreen : BaseScreen, IStringErrorHandler
+    public class LoadScreen : BaseScreen, IStringError
     {
         [SerializeField] private TMP_Text _authErrorText;
         [SerializeField] private Button _exitGameButton;
@@ -22,9 +21,9 @@ namespace UI.Screens
 
         private void Start() => ExternalServices.Inst.Authentication();
 
-        private void OnEnable() => EventBus<LoadScreen>.AddListener(this);
+        private void OnEnable() => EventBus.AddListener<IStringError>(this);
 
-        private void OnDisable() => EventBus<LoadScreen>.RemoveListener(this);
+        private void OnDisable() => EventBus.RemoveListener<IStringError>(this);
 
         #endregion
 

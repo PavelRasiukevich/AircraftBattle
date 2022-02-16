@@ -637,8 +637,14 @@ GameObject:
   - component: {fileID: 4800748574067253183}
   - component: {fileID: -8353922386413972525}
   - component: {fileID: 4757466050382488539}
+<<<<<<< HEAD
   - component: {fileID: 842354797857936020}
   m_Layer: 8
+=======
+  - component: {fileID: 6627708444268833254}
+  - component: {fileID: 8676232560179855243}
+  m_Layer: 0
+>>>>>>> origin/develop
   m_Name: DefaultPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +709,11 @@ MonoBehaviour:
       ReturnSpeed: 5
     _hp: 100
     _currentHp: 100
+<<<<<<< HEAD
     _reloadTime: 0.32
+=======
+    _reloadTime: 0.29
+>>>>>>> origin/develop
   _isContrl: 1
   _view: {fileID: 3806294500952841975}
 --- !u!114 &5660593696835341330
@@ -819,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyParticle: {fileID: 0}
---- !u!114 &842354797857936020
+--- !u!114 &6627708444268833254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -828,7 +838,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8566665338853090476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6a860991b94b138be25f6e503cd6a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ee21d4b0f314ea5b24f7041a1fd8c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8676232560179855243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8566665338853090476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b233412dab6a40cfb612e910a0c593b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _body: {fileID: 4495179519686683336}

@@ -1,7 +1,7 @@
 using Assets.Scripts.Core;
 using Core;
 using Core.Base;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Managers.Data;
 using UI.Screens.Shop.Elements;
 using UnityEngine;
@@ -10,7 +10,7 @@ using Utils.Enums;
 
 namespace UI.Screens.Shop
 {
-    public class ShopScreen : BaseScreen, IShopRefreshHandler
+    public class ShopScreen : BaseScreen, IShopScreenEvents
     {
         public override ScreenType Type => ScreenType.Shop;
 
@@ -21,13 +21,13 @@ namespace UI.Screens.Shop
 
         private void OnEnable()
         {
-            EventBus<ShopScreen>.AddListener(this);
+            EventBus.AddListener<IShopScreenEvents>(this);
             Refresh();
         }
 
         private void OnDisable()
         {
-            EventBus<ShopScreen>.RemoveListener(this);
+            EventBus.RemoveListener<IShopScreenEvents>(this);
         }
 
         #endregion
@@ -38,7 +38,7 @@ namespace UI.Screens.Shop
         {
             foreach (var componentsInChild in _content.GetComponentsInChildren<ShopItemLine>())
                 Destroy(componentsInChild.gameObject);
-            GameData.Inst.Planes.PlaneList.ForEach(line =>
+            GameDataManager.Inst.Planes.PlaneList.ForEach(line =>
             {
                 Instantiate(_shopItemLine.gameObject, _content.transform)
                     .GetComponent<ShopItemLine>()

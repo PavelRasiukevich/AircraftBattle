@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Core;
 using Core;
 using Core.Base;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Managers.External;
 using PlayFab;
 using TMPro;
@@ -14,7 +14,7 @@ namespace UI.Screens
     /*
      * Авторизация в PlayFab
      */
-    public class LoginScreen : BaseScreen, IPlayFabErrorHandler
+    public class LoginScreen : BaseScreen, IPlayfabError
     {
         public override ScreenType Type => ScreenType.Login;
 
@@ -27,15 +27,12 @@ namespace UI.Screens
 
         private void OnEnable()
         {
-            EventBus<LoginScreen>.AddListener(this);
+            EventBus.AddListener<IPlayfabError>(this);
             _errorText.text = string.Empty;
             OnChanged();
         }
 
-        private void OnDisable()
-        {
-            EventBus<LoginScreen>.RemoveListener(this);
-        }
+        private void OnDisable() => EventBus.RemoveListener<IPlayfabError>(this);
 
         #endregion
 

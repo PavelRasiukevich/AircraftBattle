@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14782389e344afda517de46cb6e3054, type: 3}
   m_Name: PlanesData
   m_EditorClassIdentifier: 
+  _currPlaneID: 609055898
   _planeList:
   - _id: 609055898
     _icon: {fileID: 21300000, guid: 17f099b183017b14abbdeca0b513336d, type: 3}
@@ -19,6 +20,7 @@ MonoBehaviour:
     _planeShopModel: {fileID: 8028048405312394092, guid: ef6ab0d1fa81d9e479a5f7e1c3e71463, type: 3}
     _isViewInEditor: 1
     _displayName: Arrow
+    _fileName: Arrow
     _firePower: 25
     _gunsCount: 1
     _gamePrice: 0
@@ -30,17 +32,19 @@ MonoBehaviour:
     _planeShopModel: {fileID: 1501441695537480101, guid: 7c086ce73965f094381ac108b4d76ce7, type: 3}
     _isViewInEditor: 1
     _displayName: Rocket
+    _fileName: Rocket
     _firePower: 10
     _gunsCount: 1
     _gamePrice: 0
     _settings:
-      _color: {r: 0, g: 0, b: 1, a: 1}
+      _color: {r: 0, g: 0.83921576, b: 0.12941177, a: 1}
   - _id: 280678593
     _icon: {fileID: 21300000, guid: 93be74ee564b04053816d1bfed959dd6, type: 3}
     _planePrefab: {fileID: -8926351280704019118, guid: 478a54e64aa2b614abe378cfe2f98f58, type: 3}
     _planeShopModel: {fileID: 9094808342101343432, guid: 49b2546874611344fa2f32506c67cea5, type: 3}
     _isViewInEditor: 1
     _displayName: Raptor
+    _fileName: Raptor
     _firePower: 70
     _gunsCount: 2
     _gamePrice: 0
@@ -52,6 +56,7 @@ MonoBehaviour:
     _planeShopModel: {fileID: 6612992268698260795, guid: 42ee230b46493ff468abac584ca30675, type: 3}
     _isViewInEditor: 1
     _displayName: Carrier
+    _fileName: Carrier
     _firePower: 120
     _gunsCount: 3
     _gamePrice: 0

@@ -43,6 +43,13 @@ namespace Assets.Scripts.Utils
             public const string Ground = "Ground";
         }
 
+        internal class Properties
+        {
+            public const string MaterialColor = "MaterialColor";
+            public const string Fails = "Fails";
+            public const string Frags = "Frags";
+        }
+
         /*
          * PlayFab
          */

@@ -3,7 +3,7 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
 using Core;
 using Core.Base;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Managers.External;
 using PlayFab.ClientModels;
 using TMPro;
@@ -13,7 +13,7 @@ using Utils.Enums;
 
 namespace UI.Screens.LeaderBoard
 {
-    public class LeaderboardScreen : BaseScreen, ILeaderboardLoadHandler
+    public class LeaderboardScreen : BaseScreen,ILeaderboardScreenEvents
     {
         public override ScreenType Type => ScreenType.Leaderboard;
 
@@ -27,7 +27,7 @@ namespace UI.Screens.LeaderBoard
 
         private void OnEnable()
         {
-            EventBus<LeaderboardScreen>.AddListener(this);
+            EventBus.AddListener<ILeaderboardScreenEvents>(this);
             PopupHolder.CurrentPopup(PopupType.Loading).Show();
             _noRecordsText.gameObject.SetActive(false);
             foreach (var line in _content.GetComponentsInChildren<LeaderBoardLine>())
@@ -36,7 +36,7 @@ namespace UI.Screens.LeaderBoard
                 Const.PlayFab.ScoreBy(LeaderboardType));
         }
 
-        private void OnDisable()=>EventBus<LeaderboardScreen>.RemoveListener(this);
+        private void OnDisable()=>EventBus.RemoveListener<ILeaderboardScreenEvents>(this);
 
         #endregion
 

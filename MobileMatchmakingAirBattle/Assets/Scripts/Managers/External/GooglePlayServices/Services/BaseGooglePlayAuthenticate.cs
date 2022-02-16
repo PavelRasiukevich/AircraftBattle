@@ -2,7 +2,6 @@ using System;
 using Core;
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using Interfaces.Subscriber;
 using UnityEngine;
 
 namespace Managers.External.GooglePlayServices.Services
@@ -43,13 +42,15 @@ namespace Managers.External.GooglePlayServices.Services
                         ExternalServices.Inst.PlayFab.Authenticate.LoginWithGoogle(PlayGamesPlatform.Instance
                             .GetServerAuthCode());
                     }
-                    else
-                        EventBus.InvokeEvent<IStringErrorHandler>(h => h.Error("Authenticate success False!"));
+                    else 
+                    {
+                        //Error("Authenticate success False!") 
+                    }
                 });
             }
             catch (Exception e)
             {
-                EventBus.InvokeEvent<IStringErrorHandler>(h => h.Error(e.Message));
+                        //Error(e.Message) 
             }
 #endif
         }

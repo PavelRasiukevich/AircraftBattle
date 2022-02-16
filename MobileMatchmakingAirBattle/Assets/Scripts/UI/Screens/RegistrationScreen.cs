@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Core;
 using Core;
 using Core.Base;
-using Interfaces.Subscriber;
+using Interfaces.EventBus;
 using Managers.External;
 using PlayFab;
 using TMPro;
@@ -14,7 +14,7 @@ namespace UI.Screens
     /*
      * Регистрация игрока в PlayFab
      */
-    public class RegistrationScreen : BaseScreen, IPlayFabErrorHandler
+    public class RegistrationScreen : BaseScreen, IPlayfabError
     {
         [SerializeField] private TMP_InputField _nameInput;
         [SerializeField] private TMP_InputField _mailInput;
@@ -28,11 +28,11 @@ namespace UI.Screens
         private void OnEnable()
         {
             _errorText.text = string.Empty;
-            EventBus<RegistrationScreen>.AddListener(this);
+            EventBus.AddListener<IPlayfabError>(this);
             OnChanged();
         }
 
-        private void OnDisable() => EventBus<RegistrationScreen>.RemoveListener(this);
+        private void OnDisable() => EventBus.RemoveListener<IPlayfabError>(this);
 
         #endregion
 
