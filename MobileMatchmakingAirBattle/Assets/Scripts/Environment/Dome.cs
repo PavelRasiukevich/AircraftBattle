@@ -10,6 +10,6 @@ namespace Assets.Scripts.Environment
         {
             if (UtilityMethods.ValidateTrigger(other, out IReturnToBattle result))
                 result.Return();
-        }
+        } 
     }
 }
