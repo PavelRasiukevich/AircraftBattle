@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
 {
-    public class InteractionsHandler : MonoBehaviour, IDamageable
+    public class InteractionsHandler : MonoBehaviour, IDamageable 
     {
         public PhotonView PhotonView { get; set; }
 

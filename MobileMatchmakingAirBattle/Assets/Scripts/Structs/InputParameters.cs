@@ -7,6 +7,7 @@ namespace Assets.Scripts.Structs
         public Vector2 Input;
         public float GasCoefficient;
         public float Delta;
-        public bool IsFiring;
+        public bool HasFire;
+        public bool HasMove;
     }
 }

@@ -8,7 +8,7 @@ namespace Assets.Scripts.Utils
     {
         public static bool ValidateCollision<T>(Collision collision, out T component)
         {
-            return collision.gameObject.TryGetComponent(out component);
+            return collision.gameObject.TryGetComponent(out component); 
         }
 
         public static bool ValidateCollision<T>(Collision collision)

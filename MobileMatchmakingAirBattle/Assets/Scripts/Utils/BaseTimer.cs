@@ -1,44 +1,22 @@
 namespace Assets.Scripts.Utils
 {
-    public class BaseTimer
+    public abstract class BaseTimer
     {
-        public float ElapsedTime { get; private set; }
+        public abstract float ElapsedTime { get; protected set; }
 
-        public float Treshold { get; private set; }
+        public abstract float Treshold { get; protected set; }
 
-        public bool IsTimerStoped { get; private set; }
+        public abstract bool IsStopped { get; protected set; }
 
-        public BaseTimer()
-        {
-        }
-         
         public BaseTimer(float value)
         {
             Treshold = value;
             ElapsedTime = Treshold;
         }
 
-        public void Tick(float tick)
-        {
-            if (IsTimerStoped) return;
+        public abstract void Tick(float tick);
 
-            ElapsedTime += tick;
+        public abstract void ResetTimer();
 
-            IsTimerStoped = ElapsedTime >= Treshold;
-        }
-
-        /// <summary>
-        /// Test method for research porposes
-        /// </summary>
-        /// <param name="tick">Time step</param>
-        public void StartTimer(float tick)
-        {
-        }
-
-        public void ResetTimer()
-        {
-            ElapsedTime = 0.0f;
-            IsTimerStoped = false;
-        }
     }
 }

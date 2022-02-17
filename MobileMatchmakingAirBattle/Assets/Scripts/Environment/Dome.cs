@@ -6,10 +6,5 @@ namespace Assets.Scripts.Environment
 {
     public class Dome : MonoBehaviour
     {
-        private void OnTriggerExit(Collider other)
-        {
-            if (CollisionValidator.ValidateTrigger(other, out IReturnToBattle result))
-                result.Return();
-        } 
     }
 }

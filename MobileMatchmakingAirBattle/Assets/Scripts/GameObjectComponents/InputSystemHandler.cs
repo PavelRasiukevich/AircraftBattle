@@ -10,17 +10,10 @@ namespace Assets.Scripts.GameObjectComponents
         private InputAction _moveAction;
 
         private Vector2 _inputValues;
-        private float _fireButtonValue;
+        private int _fireButtonValue;
 
         public InputParameters InputParams { get; private set; }
 
-        #region EVENTS
-
-        public delegate void Attack();
-
-        public event Attack Attacking;
-
-        #endregion
 
         private void Awake()
         {
@@ -44,9 +37,6 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void Update()
         {
-            /*if (_actions.PlayerActions.Fire.inProgress)
-                Attacking?.Invoke();*/
-
             KeyboardInput();
         }
 
@@ -56,13 +46,9 @@ namespace Assets.Scripts.GameObjectComponents
 
             _inputValues = _moveAction.ReadValue<Vector2>();
 
-            if (_actions.PlayerActions.Fire.phase == InputActionPhase.Performed)
-            {
-                _fireButtonValue = _actions.PlayerActions.Fire.ReadValue<float>();
-            }
-
             tempInputParams.Input = _inputValues;
-            tempInputParams.IsFiring = _fireButtonValue != 0;
+            tempInputParams.HasFire = _actions.PlayerActions.Fire.inProgress;
+            tempInputParams.HasMove = _actions.PlayerActions.Moves.inProgress;
 
             InputParams = tempInputParams;
 

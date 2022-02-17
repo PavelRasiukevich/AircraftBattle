@@ -1,11 +1,8 @@
-using System;
 using Assets.Scripts.GameObjectComponents;
-using Assets.Scripts.Interfaces;
 using Core;
 using GameObjectComponents;
 using Interfaces.EventBus;
 using Photon.Pun;
-using Photon.Realtime;
 using TO;
 using UnityEngine;
 
@@ -15,7 +12,7 @@ namespace Assets.Scripts.AirCrafts
     public class AirCraft : MonoBehaviourPunCallbacks
     {
         [SerializeField] private AircraftDataModel _dataModel;
-        [SerializeField] private View _view;
+        [SerializeField] private Transform _view;
 
         public AircraftDataModel Data => _dataModel;
 
@@ -56,13 +53,22 @@ namespace Assets.Scripts.AirCrafts
 
             _collisionDetector.Interactor = _interactor;
 
-            _moveHandler.View = _view.transform;
+            _moveHandler.View = _view;
             _moveHandler.Body = _rigidBody;
             _moveHandler.InputHandler = _inputHandler;
             _moveHandler.DataModel = Data;
             _moveHandler.PhotonView = PhotonView;
 
-            //_inputHandler.Attacking += _attackHandler.Attack;
+        }
+
+        private void OnEnable()
+        {
+            _collisionDetector.CrossDome += _moveHandler.Return;
+        }
+
+        private void OnDisable()
+        {
+            _collisionDetector.CrossDome -= _moveHandler.Return;
         }
 
         private void Start()

@@ -1,8 +1,5 @@
-using Assets.Scripts.AirCrafts;
 using Assets.Scripts.Projectiles;
-using Assets.Scripts.Utils;
 using Photon.Pun;
-using System;
 using TO;
 using UnityEngine;
 
@@ -19,32 +16,31 @@ namespace Assets.Scripts.GameObjectComponents
 
         public AircraftDataModel DataModel { get; set; }
 
-        private BaseTimer _timer;
+        public ReloadTimer ReloadTimer { get; private set; }
 
         private void Start()
         {
-            _timer = new BaseTimer(DataModel.ReloadTime);
+            ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
         }
 
         private void Update()
         {
-            if (InputHandler.InputParams.IsFiring)
+            if (InputHandler.InputParams.HasFire)
                 Attack();
-
-            _timer.Tick(Time.deltaTime);
            
+            ReloadTimer.Tick(Time.deltaTime);
         }
 
         public void Attack()
         {
             if (!PhotonView.IsMine) return;
 
-            if (_timer.IsTimerStoped)
+            if (ReloadTimer.IsStopped)
             {
                 if (PhotonView.IsMine)
                     PhotonView.RPC(nameof(Attack), RpcTarget.All);
 
-                _timer.ResetTimer();
+                ReloadTimer.ResetTimer();
             }
         }
 

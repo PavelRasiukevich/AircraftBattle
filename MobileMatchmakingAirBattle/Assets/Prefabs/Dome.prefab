@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8522655044608687239}
   - component: {fileID: 4163655704932405124}
   - component: {fileID: 7781494128828457591}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dome
   m_TagString: Untagged
   m_Icon: {fileID: 0}

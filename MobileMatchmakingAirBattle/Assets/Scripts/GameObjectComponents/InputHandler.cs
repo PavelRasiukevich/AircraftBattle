@@ -37,7 +37,7 @@ namespace Assets.Scripts.GameObjectComponents
             var par = InputParams;
 
             par.Input = PlayersInput;
-            par.IsFiring = Input.GetAxisRaw("Fire1") != 0;
+            par.HasFire = Input.GetAxisRaw("Fire1") != 0;
 
             InputParams = par;
         }

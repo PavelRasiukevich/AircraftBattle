@@ -38,7 +38,7 @@ namespace Assets.Scripts.GameObjectComponents
             var rotationAroundYInWorldSpace = inputValues.Input.x * props.RotationSpeed * Vector3.up;
             Body.angularVelocity = rotationAroundYInWorldSpace * Mathf.Deg2Rad;
 
-            if (IsInputPerformed(inputValues))
+            if (inputValues.HasMove)
             {
                 Quaternion viewTargetRotation = Quaternion.Euler(inputValues.Input.y, 0, inputValues.Input.x * -1);
                 View.rotation *= viewTargetRotation;
@@ -51,9 +51,6 @@ namespace Assets.Scripts.GameObjectComponents
             }
         }
 
-        public void DragToBattleField(Properties speed)
-            => Body.velocity = transform.TransformDirection(speed.MoveSpeed * Vector3.forward);
-
         #region Utilities
 
         private Vector3 ResetReturnAngleValues(Vector3 vector)
@@ -65,10 +62,7 @@ namespace Assets.Scripts.GameObjectComponents
             return vector;
         }
 
-        private bool IsInputPerformed(InputParameters values)
-            => Mathf.Abs(values.Input.x) > 0 || Mathf.Abs(values.Input.y) > 0;
-
-        void IReturnToBattle.Return()
+        public void Return()
         {
             var angle = Body.rotation.eulerAngles + 180 * Vector3.up;
             Body.transform.eulerAngles = Vector3.Slerp(Body.transform.eulerAngles, angle, 180);
