@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 1832531113395973927}
   - component: {fileID: 4345322200371951088}
   m_Layer: 8
-  m_Name: TEST_PLANE_DELETE_AFTER_RESEARCH
+  m_Name: TEST_PLANE_DELETE_AFTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
