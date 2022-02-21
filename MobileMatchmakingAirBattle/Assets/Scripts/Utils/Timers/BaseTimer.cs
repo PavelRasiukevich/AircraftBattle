@@ -1,4 +1,4 @@
-namespace Assets.Scripts.Utils
+namespace Assets.Scripts.Utils.Timers
 {
     public abstract class BaseTimer
     {

@@ -6,7 +6,7 @@ using UnityEditor.UI;
 namespace Buttons.ColorButton
 {
 #if UNITY_EDITOR
-    
+
     [CustomEditor(typeof(ColorButton))]
     public class ColorButtonEditor : ButtonEditor
     {
@@ -14,11 +14,11 @@ namespace Buttons.ColorButton
         {
             serializedObject.Update();
             base.OnInspectorGUI();
-            ColorButton targetColorButton = (ColorButton) target;
+            ColorButton targetColorButton = (ColorButton)target;
 
             targetColorButton.Color = EditorGUILayout.ColorField("Color: ", targetColorButton.Color);
 
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_event"),true);
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("_event"), true);
             serializedObject.ApplyModifiedProperties();
         }
     }

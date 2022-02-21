@@ -1,4 +1,5 @@
 using Assets.Scripts.AirCrafts;
+using Assets.Scripts.GameObjectComponents;
 using Assets.Scripts.Utils;
 using Cinemachine;
 using Managers.Data;
@@ -8,14 +9,15 @@ using Utils.Extensions;
 
 namespace Managers.Gameplay
 {
-    public class Spawner : MonoBehaviourPunCallbacks
+    public class AirCraftCreator : MonoBehaviourPunCallbacks
     {
         [SerializeField] private Transform[] _spawnPoint;
         [SerializeField] private Transform _origin;
-        [SerializeField] private CinemachineVirtualCamera _camera;
 
         private Transform point;
         private GameObject _actor;
+
+        private BattleManager _battleManager;
 
         #region UNITY
 
@@ -24,13 +26,14 @@ namespace Managers.Gameplay
             var actorNumber = PhotonNetwork.LocalPlayer.ActorNumber;
             point = _spawnPoint[actorNumber - 1];
             point = SetupPointInWorld(point);
+            _battleManager = GetComponent<BattleManager>();
         }
 
         #endregion
 
         #region PUBLIC
 
-        public void Spawn() => InitializeActor(point.position, point.rotation);
+        public void Create() => InitializeActor(point.position, point.rotation);
 
         #endregion
 
@@ -41,13 +44,21 @@ namespace Managers.Gameplay
             _actor = PhotonNetwork.Instantiate("Planes/" + GameDataManager.Inst.CurrentPlane.PlanePrefab.name, position,
                 rotation);
             var airCraft = _actor.GetComponent<AirCraft>();
+            var t = _actor.GetComponent<InteractionsHandler>();
+
             PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.MaterialColor,
                 GameDataManager.Inst.CurrentPlane.Settings.Color.ToVector3());
+
             PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Fails, 0);
+
             PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Frags, 0);
+
             airCraft.Data.RespawnPosition = point;
+
+            t.Died += _battleManager.GameFail;
+
         }
-        
+
         private Transform SetupPointInWorld(Transform point)
         {
             var direction = GetDirectionToLook(_origin, point);

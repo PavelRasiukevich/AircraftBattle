@@ -12,8 +12,11 @@ namespace UI.Screens.Shop
                 Destroy(transform.GetChild(0).gameObject);
 
             GameObject model = Instantiate(plane.PlaneShopModel, transform);
+
             model.transform.position = transform.position;
+
             model.transform.rotation = transform.rotation;
+
             model.GetComponent<BodySettings>().Config(plane.Settings.Color);
         }
     }

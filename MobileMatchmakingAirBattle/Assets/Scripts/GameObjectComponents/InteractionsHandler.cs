@@ -3,6 +3,7 @@ using Core;
 using Interfaces.EventBus;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using TO;
 using UnityEngine;
 
@@ -10,13 +11,15 @@ namespace Assets.Scripts.GameObjectComponents
 {
     public class InteractionsHandler : MonoBehaviour, IDamageable 
     {
+        public event Action Died;
+
         public PhotonView PhotonView { get; set; }
 
         public AircraftDataModel DataModel { get; set; }
 
         public void Die()
         {
-            EventBus.InvokeEvent<IDestroy>(x => x.DestroyAircraft());
+            Died?.Invoke();
 
             PhotonNetwork.Destroy(gameObject);
         }

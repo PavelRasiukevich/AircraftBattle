@@ -32,6 +32,7 @@ namespace UI.Screens.LeaderBoard.Elements
             _positionNum.text = (++line.Position).ToString();
             _playerName.text = line.DisplayName;
             _score.text = line.StatValue.ToString();
+
             switch (leaderboardType)
             {
                 case LeaderboardType.Fails:

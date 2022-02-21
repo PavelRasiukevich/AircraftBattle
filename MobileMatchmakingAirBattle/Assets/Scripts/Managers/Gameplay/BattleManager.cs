@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Assets.Scripts.Core;
+using Assets.Scripts.Utils.Timers;
 using System.Collections;
-using Assets.Scripts.Core;
-using Core;
-using Interfaces.EventBus;
 using UnityEngine;
 using Utils.Enums;
 
 namespace Managers.Gameplay
 {
-    public class BattleManager : MonoBehaviour, IDestroy
+    public class BattleManager : MonoBehaviour
     {
-        private Spawner Spawner { get; set; }
+        private AirCraftCreator Creator { get; set; }
+
+        private MatchTimer _matchTimer;
 
         #region UNITY
 
         void Awake()
         {
-            Spawner = GetComponent<Spawner>();
+            _matchTimer = new MatchTimer(600);
+
+            Creator = GetComponent<AirCraftCreator>();
         }
 
         void Start()
@@ -24,9 +26,19 @@ namespace Managers.Gameplay
             GameStart();
         }
 
-        void OnEnable() => EventBus.AddListener<IDestroy>(this);
+        private void Update()
+        {
+            if (!_matchTimer.IsStopped)
+                _matchTimer.Tick(Time.deltaTime);
+            else
+            {
+                //stop game
+                //show stats
+                //show exit to menu button
 
-        void OnDisable() => EventBus.RemoveListener<IDestroy>(this);
+                GameFinish();
+            }
+        }
 
         #endregion
 
@@ -39,7 +51,7 @@ namespace Managers.Gameplay
             StopCoroutine(nameof(Wait));
         }
 
-        private void GameFail()
+        public void GameFail()
         {
             StartCoroutine(nameof(Wait));
             ScreenHolder.SetCurrentScreen(ScreenType.BattleFail).ShowScreen();
@@ -47,7 +59,7 @@ namespace Managers.Gameplay
 
         private void GameStart()
         {
-            Spawner.Spawn();
+            Creator.Create();
             ScreenHolder.SetCurrentScreen(ScreenType.Battle).ShowScreen();
         }
 
@@ -55,13 +67,6 @@ namespace Managers.Gameplay
         {
             ScreenHolder.SetCurrentScreen(ScreenType.BattleFinish).ShowScreen();
         }
-
-        #endregion
-
-
-        #region PUBLIC
-
-        public void DestroyAircraft() => GameFail();
 
         #endregion
     }
