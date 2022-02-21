@@ -35,11 +35,6 @@ namespace Managers.Gameplay
             GameStart();
         }
 
-        private void Update()
-        {
-           
-        }
-
         #endregion
 
         #region PRIVATE

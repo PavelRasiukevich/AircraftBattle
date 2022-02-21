@@ -15,7 +15,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         public PhotonView PhotonView { get; set; }
 
-        public AircraftDataModel DataModel { get; set; }
+        public AircraftDataModel DataModel { get; set; } 
 
         public ReloadTimer ReloadTimer { get; private set; }
 
@@ -54,6 +54,7 @@ namespace Assets.Scripts.GameObjectComponents
 
             var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
 
+            bullet.AirCraftDataModel = DataModel;
             bullet.Data.Owner = PhotonView.Owner;
             bullet.Data.Lag = Mathf.Abs(lag);
         }
