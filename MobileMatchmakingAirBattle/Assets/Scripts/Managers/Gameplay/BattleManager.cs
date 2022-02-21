@@ -1,5 +1,5 @@
 ﻿using Assets.Scripts.Core;
-using Assets.Scripts.Utils.Timers;
+using Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements;
 using System.Collections;
 using UnityEngine;
 using Utils.Enums;
@@ -8,17 +8,26 @@ namespace Managers.Gameplay
 {
     public class BattleManager : MonoBehaviour
     {
+        [SerializeField] private BattleClock _timer;
+
         private AirCraftCreator Creator { get; set; }
 
-        private MatchTimer _matchTimer;
 
         #region UNITY
 
         void Awake()
         {
-            _matchTimer = new MatchTimer(600);
-
             Creator = GetComponent<AirCraftCreator>();
+        }
+
+        private void OnEnable()
+        {
+            _timer.TimeIsOver += GameFinish;
+        }
+
+        private void OnDisable()
+        {
+            _timer.TimeIsOver -= GameFinish;
         }
 
         void Start()
@@ -28,16 +37,7 @@ namespace Managers.Gameplay
 
         private void Update()
         {
-            if (!_matchTimer.IsStopped)
-                _matchTimer.Tick(Time.deltaTime);
-            else
-            {
-                //stop game
-                //show stats
-                //show exit to menu button
-
-                GameFinish();
-            }
+           
         }
 
         #endregion

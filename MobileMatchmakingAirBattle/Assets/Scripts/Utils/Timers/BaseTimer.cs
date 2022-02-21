@@ -8,10 +8,16 @@ namespace Assets.Scripts.Utils.Timers
 
         public abstract bool IsStopped { get; protected set; }
 
+        public BaseTimer()
+        {
+        }
+
         public BaseTimer(float value)
         {
-            Treshold = value;
-            ElapsedTime = Treshold;
+        }
+
+        public BaseTimer(int value)
+        {
         }
 
         public abstract void Tick(float tick);

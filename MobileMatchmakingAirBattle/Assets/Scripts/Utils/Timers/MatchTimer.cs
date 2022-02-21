@@ -2,9 +2,9 @@ namespace Assets.Scripts.Utils.Timers
 {
     public class MatchTimer : BaseTimer
     {
-        public MatchTimer(float value) : base(value)
+        public MatchTimer(float time)
         {
-            TimeAmmount = value;
+            TimeAmmount = time;
             Treshold = 0;
         }
 
