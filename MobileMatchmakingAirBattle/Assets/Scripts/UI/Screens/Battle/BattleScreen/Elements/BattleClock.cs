@@ -1,6 +1,5 @@
 using Assets.Scripts.Utils.Timers;
 using System;
-using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements
@@ -11,37 +10,29 @@ namespace Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements
 
         [SerializeField] private float _time;
 
-        private TextMeshProUGUI _textMesh;
+        public string FormatedTime => FormatTime((int)_matchTimer.TimeAmmount);
 
         private MatchTimer _matchTimer;
 
         private void Awake()
         {
-            _textMesh = GetComponent<TextMeshProUGUI>();
-
             _matchTimer = new MatchTimer(_time);
         }
 
         private void Update()
         {
-            if (!_matchTimer.IsStopped)
-            {
-                _matchTimer.Tick(Time.deltaTime);
-
-                UpdateTimerView(ToReadableValue((int)_matchTimer.TimeAmmount));
-            }
-            else
-            {
-                TimeIsOver?.Invoke();
-            }
+            ClockRun();
         }
 
-        private void UpdateTimerView(string time)
+        private void ClockRun()
         {
-            _textMesh.text = time;
+            if (!_matchTimer.IsStopped)
+                _matchTimer.Tick(Time.deltaTime);
+            else
+                TimeIsOver?.Invoke();
         }
 
-        private string ToReadableValue(int time)
+        private string FormatTime(int time)
         {
             var min = time / 60;
             var sec = time % 60;
