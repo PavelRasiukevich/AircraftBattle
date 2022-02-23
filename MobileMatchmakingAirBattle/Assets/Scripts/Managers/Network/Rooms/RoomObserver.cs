@@ -58,7 +58,7 @@ namespace Managers.Network.Rooms
 
         public override void OnLeftRoom()
         {
-            MessagesUtilities.PlayerLeftRoomMessage(1);
+            MessagesUtilities.PlayerLeftRoomMessage(PlayerType.Local);
             ClearListOfPlayers();
         }
 

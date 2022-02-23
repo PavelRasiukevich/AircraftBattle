@@ -153,6 +153,34 @@ public partial class @Actions : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""PUNNetworkTest"",
+            ""id"": ""6a511a9c-12ed-4e91-abb5-b93167e02504"",
+            ""actions"": [
+                {
+                    ""name"": ""Activate/Deactivate"",
+                    ""type"": ""Button"",
+                    ""id"": ""0b0a1465-6532-4efa-8d7c-3a135a223547"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""3d280aa0-3610-4831-8bf6-d84410248f02"",
+                    ""path"": ""<Keyboard>/o"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Activate/Deactivate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -164,6 +192,9 @@ public partial class @Actions : IInputActionCollection2, IDisposable
         // BattleScreenActions
         m_BattleScreenActions = asset.FindActionMap("BattleScreenActions", throwIfNotFound: true);
         m_BattleScreenActions_TabPress = m_BattleScreenActions.FindAction("TabPress", throwIfNotFound: true);
+        // PUNNetworkTest
+        m_PUNNetworkTest = asset.FindActionMap("PUNNetworkTest", throwIfNotFound: true);
+        m_PUNNetworkTest_ActivateDeactivate = m_PUNNetworkTest.FindAction("Activate/Deactivate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -293,6 +324,39 @@ public partial class @Actions : IInputActionCollection2, IDisposable
         }
     }
     public BattleScreenActionsActions @BattleScreenActions => new BattleScreenActionsActions(this);
+
+    // PUNNetworkTest
+    private readonly InputActionMap m_PUNNetworkTest;
+    private IPUNNetworkTestActions m_PUNNetworkTestActionsCallbackInterface;
+    private readonly InputAction m_PUNNetworkTest_ActivateDeactivate;
+    public struct PUNNetworkTestActions
+    {
+        private @Actions m_Wrapper;
+        public PUNNetworkTestActions(@Actions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @ActivateDeactivate => m_Wrapper.m_PUNNetworkTest_ActivateDeactivate;
+        public InputActionMap Get() { return m_Wrapper.m_PUNNetworkTest; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PUNNetworkTestActions set) { return set.Get(); }
+        public void SetCallbacks(IPUNNetworkTestActions instance)
+        {
+            if (m_Wrapper.m_PUNNetworkTestActionsCallbackInterface != null)
+            {
+                @ActivateDeactivate.started -= m_Wrapper.m_PUNNetworkTestActionsCallbackInterface.OnActivateDeactivate;
+                @ActivateDeactivate.performed -= m_Wrapper.m_PUNNetworkTestActionsCallbackInterface.OnActivateDeactivate;
+                @ActivateDeactivate.canceled -= m_Wrapper.m_PUNNetworkTestActionsCallbackInterface.OnActivateDeactivate;
+            }
+            m_Wrapper.m_PUNNetworkTestActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @ActivateDeactivate.started += instance.OnActivateDeactivate;
+                @ActivateDeactivate.performed += instance.OnActivateDeactivate;
+                @ActivateDeactivate.canceled += instance.OnActivateDeactivate;
+            }
+        }
+    }
+    public PUNNetworkTestActions @PUNNetworkTest => new PUNNetworkTestActions(this);
     public interface IPlayerActionsActions
     {
         void OnMoves(InputAction.CallbackContext context);
@@ -301,5 +365,9 @@ public partial class @Actions : IInputActionCollection2, IDisposable
     public interface IBattleScreenActionsActions
     {
         void OnTabPress(InputAction.CallbackContext context);
+    }
+    public interface IPUNNetworkTestActions
+    {
+        void OnActivateDeactivate(InputAction.CallbackContext context);
     }
 }

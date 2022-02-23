@@ -10,9 +10,15 @@ namespace Assets.Scripts.Utils
         public static void JoinRoomMessage() => Debug.Log("Room Joined");
         public static void LeftRoomMessage() => Debug.Log("Room Left");
         public static void PlayerLeftRoomMessage() => Debug.Log("Remote Player Left Room");
-        public static void PlayerLeftRoomMessage(int version) => Debug.Log("Local Player Left Room");
+        public static void PlayerLeftRoomMessage(PlayerType type) => Debug.Log("Local Player Left Room");
         public static void PlayerEnterRoomMessage() => Debug.Log("Player Entered Room");
         public static void RoomListUpdateMessage() => Debug.Log("Room List Updated");
         public static void DisconnectedFromMasterMessage() => Debug.Log("Disconnected");
+    }
+
+    public enum PlayerType
+    {
+        Local,
+        Remote
     }
 }

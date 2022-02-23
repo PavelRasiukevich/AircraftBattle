@@ -131,6 +131,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PUNNetworkTest",
+            "id": "6a511a9c-12ed-4e91-abb5-b93167e02504",
+            "actions": [
+                {
+                    "name": "Activate/Deactivate",
+                    "type": "Button",
+                    "id": "0b0a1465-6532-4efa-8d7c-3a135a223547",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "3d280aa0-3610-4831-8bf6-d84410248f02",
+                    "path": "<Keyboard>/o",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Activate/Deactivate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
