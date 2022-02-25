@@ -51,8 +51,6 @@ namespace Assets.Scripts.GameObjectComponents
             }
         }
 
-        public void DeadHandler() => IsDead = true;
-
         #region Utilities
 
         private Vector3 ResetReturnAngleValues(Vector3 vector)

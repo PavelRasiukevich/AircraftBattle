@@ -43,6 +43,7 @@ MonoBehaviour:
   - Attack
   - RPC_TakeDamage
   - ClockRun
+  - CreateDestroyEffect
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

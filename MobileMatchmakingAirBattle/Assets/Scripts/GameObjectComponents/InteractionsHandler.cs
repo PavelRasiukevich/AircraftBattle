@@ -13,6 +13,8 @@ namespace Assets.Scripts.GameObjectComponents
     {
         public event Action Died;
 
+        [SerializeField] private GameObject _effect;
+
         public PhotonView PhotonView { get; set; }
 
         public AircraftDataModel DataModel { get; set; }
@@ -21,7 +23,8 @@ namespace Assets.Scripts.GameObjectComponents
         public void Die()
         {
             Died?.Invoke();
-          
+            PhotonView.RPC(nameof(CreateDestroyEffect), RpcTarget.All);
+
             PhotonNetwork.Destroy(gameObject);
         }
 
@@ -40,6 +43,17 @@ namespace Assets.Scripts.GameObjectComponents
                 Die();
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(DataModel));
+        }
+
+        [PunRPC]
+        private void CreateDestroyEffect()
+        {
+            if (!PhotonView.IsMine) return;
+
+            Instantiate(_effect,
+                PhotonView.GetComponent<Transform>().position,
+                PhotonView.GetComponent<Transform>().rotation
+                );
         }
     }
 }
