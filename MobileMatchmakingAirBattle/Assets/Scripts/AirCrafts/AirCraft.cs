@@ -64,13 +64,11 @@ namespace Assets.Scripts.AirCrafts
         private void OnEnable()
         {
             _collisionDetector.CrossDome += _moveHandler.Return;
-            //_interactor.Died += _moveHandler.DeadHandler; 
         }
 
         private void OnDisable()
         {
             _collisionDetector.CrossDome -= _moveHandler.Return;
-            //_interactor.Died -= _moveHandler.DeadHandler; 
         }
 
         private void Start()
