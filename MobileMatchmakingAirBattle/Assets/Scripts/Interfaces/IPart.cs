@@ -4,6 +4,6 @@ namespace Assets.Scripts.Interfaces
     {
         public void DisableColliders();
 
-        public void DestroyPart();
+        public void DestroyPart(float time);
     }
 }

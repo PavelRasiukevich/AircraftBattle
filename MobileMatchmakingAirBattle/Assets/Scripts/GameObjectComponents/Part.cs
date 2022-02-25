@@ -12,9 +12,9 @@ namespace Assets.Scripts.GameObjectComponents
             _collider = GetComponent<Collider>();
         }
 
-        public void DestroyPart()
+        public void DestroyPart(float time)
         {
-            Destroy(gameObject);
+            Destroy(gameObject, time);
         }
 
         public void DisableColliders()

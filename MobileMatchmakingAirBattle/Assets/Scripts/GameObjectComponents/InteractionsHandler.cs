@@ -4,8 +4,6 @@ using Interfaces.EventBus;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
-using System.Collections;
-using System.Threading.Tasks;
 using TO;
 using UnityEngine;
 
@@ -19,18 +17,12 @@ namespace Assets.Scripts.GameObjectComponents
 
         public AircraftDataModel DataModel { get; set; }
 
-        public Transform View { get; set; }
 
         public void Die()
         {
             Died?.Invoke();
-
-            foreach (Transform v in View)
-            {
-                v.SetParent(null);
-            }
-
-            StartCoroutine(nameof(Delay));
+          
+            PhotonNetwork.Destroy(gameObject);
         }
 
         public void TakeDamage(int value, Player owner)
@@ -39,6 +31,7 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void RPC_TakeDamage(object[] values)
         {
+
             if (!PhotonView.IsMine) return;
 
             DataModel.CurrentHp -= (int)values[0];
@@ -47,12 +40,6 @@ namespace Assets.Scripts.GameObjectComponents
                 Die();
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(DataModel));
-        }
-
-        private IEnumerator Delay()
-        {
-            yield return new WaitForSeconds(3);
-            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
