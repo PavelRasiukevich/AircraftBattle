@@ -16,12 +16,15 @@ namespace Assets.Scripts.GameObjectComponents
 
         public AircraftDataModel DataModel { get; set; }
 
+        public bool IsDead { get; set; }
+
         private Quaternion _returnRotation;
         private Vector3 _resetedReturnAngle;
 
         private void FixedUpdate()
         {
             if (!PhotonView.IsMine) return;
+            if (IsDead) return;
 
             Pilot(InputHandler.InputParams, DataModel.Speed);
         }
@@ -50,6 +53,8 @@ namespace Assets.Scripts.GameObjectComponents
                 View.rotation = Quaternion.Slerp(View.rotation, _returnRotation, Time.fixedDeltaTime * props.ReturnSpeed);
             }
         }
+
+        public void DeadHandler() => IsDead = true;
 
         #region Utilities
 

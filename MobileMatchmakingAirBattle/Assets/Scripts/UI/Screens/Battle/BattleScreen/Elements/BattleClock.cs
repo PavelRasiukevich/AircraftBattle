@@ -2,7 +2,6 @@ using Assets.Scripts.Utils.Timers;
 using Photon.Pun;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements
 {
