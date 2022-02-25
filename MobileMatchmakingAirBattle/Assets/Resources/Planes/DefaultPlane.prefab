@@ -548,7 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8763888421908932596}
-  - component: {fileID: 3806294500952841975}
+  - component: {fileID: 250612622000488478}
   m_Layer: 8
   m_Name: View
   m_TagString: Untagged
@@ -577,7 +577,7 @@ Transform:
   m_Father: {fileID: 8566665338853090475}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3806294500952841975
+--- !u!114 &250612622000488478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,9 +586,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5669543884238630557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb81788d7be7d340a4c40b24e84c7a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &6507204747933444943
 GameObject:
   m_ObjectHideFlags: 0
@@ -728,6 +732,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 5485255497289154420}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

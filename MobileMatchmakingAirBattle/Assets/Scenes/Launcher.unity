@@ -66447,7 +66447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b264848a6235464e9f5d08e6cae3dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientType: 0
+  clientType: 1
 --- !u!114 &1287735860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96611,7 +96611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialMMR: 500
   _customRoomProperties:
-    _maxPlayers: 1
+    _maxPlayers: 2
     _playerMMR: 500
 --- !u!1 &1862769429
 GameObject:
@@ -111912,7 +111912,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7249553764893191502, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -11.4383335
+      value: -11.438339
       objectReference: {fileID: 0}
     - target: {fileID: 7357041880581505451, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
       propertyPath: m_AnchorMax.y

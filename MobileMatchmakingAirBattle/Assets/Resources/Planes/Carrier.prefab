@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 445763379203461223}
-  - component: {fileID: 6156695686111446687}
   - component: {fileID: 6711330852040963228}
   - component: {fileID: 3654187789146409643}
   - component: {fileID: 1024446590968443944}
   - component: {fileID: 7303874679443041746}
   - component: {fileID: 2103381398939461901}
   - component: {fileID: 3331914197218170923}
+  - component: {fileID: 4333279147246720033}
   m_Layer: 8
   m_Name: View
   m_TagString: Untagged
@@ -40,18 +40,6 @@ Transform:
   m_Father: {fileID: 2317457763250334267}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6156695686111446687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 728701393901138933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbb81788d7be7d340a4c40b24e84c7a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &6711330852040963228
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -134,6 +122,22 @@ CapsuleCollider:
   m_Height: 3.24
   m_Direction: 1
   m_Center: {x: 0, y: 2.08, z: -5.04}
+--- !u!114 &4333279147246720033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728701393901138933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &4849669544205988953
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,6 +329,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2753109625362745283}
+  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -341,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
+  m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &2295195334978834618
