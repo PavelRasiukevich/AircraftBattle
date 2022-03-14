@@ -1,9 +1,9 @@
+using System.Collections.Generic;
 using Assets.Scripts.Utils;
+using Managers.Data;
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Utils.Extensions;
 
 namespace Managers.Network.Rooms
 {
@@ -38,10 +38,13 @@ namespace Managers.Network.Rooms
 
             _playersInRoom = GetAllPlayersInCurrentRoom();
             _maxPlayers = PhotonNetwork.CurrentRoom.MaxPlayers;
+            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.MaterialColor,
+                GameDataManager.Inst.CurrentPlane.Settings.Color.ToVector3());
+            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Fails, 0);
+            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Frags, 0);
 
             if (clientType.Equals(Clients.Single))
             {
-
                 if (_playersInRoom.Count < _maxPlayers) return;
 
                 PhotonNetwork.CurrentRoom.IsOpen = false;
@@ -52,7 +55,6 @@ namespace Managers.Network.Rooms
                 if (!PhotonNetwork.IsMasterClient) return;
 
                 PhotonNetwork.LoadLevel(Const.Battle);
-
             }
         }
 
