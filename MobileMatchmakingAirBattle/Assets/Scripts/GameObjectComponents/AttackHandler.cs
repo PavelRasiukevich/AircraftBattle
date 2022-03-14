@@ -8,14 +8,21 @@ namespace Assets.Scripts.GameObjectComponents
 {
     public class AttackHandler : MonoBehaviour
     {
-        [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private Transform _fireSpot;
+        [SerializeField] private Shell _shell;
+        [SerializeField] private Bullet _bullet;
+        [SerializeField] private GameObject _flare;
+
+        [SerializeField] private Transform _fireSpot1;
+        [SerializeField] private Transform _fireSpot2;
+        [SerializeField] private Transform _flareSpot1;
+        [SerializeField] private Transform _flareSpot2;
+        [SerializeField] private Transform _shellSpot;
 
         public InputSystemHandler InputHandler { get; set; }
 
         public PhotonView PhotonView { get; set; }
 
-        public AircraftDataModel DataModel { get; set; } 
+        public AircraftDataModel DataModel { get; set; }
 
         public ReloadTimer ReloadTimer { get; private set; }
 
@@ -28,7 +35,7 @@ namespace Assets.Scripts.GameObjectComponents
         {
             if (InputHandler.InputParams.HasFire)
                 Attack();
-           
+
             ReloadTimer.Tick(Time.deltaTime);
         }
 
@@ -52,11 +59,29 @@ namespace Assets.Scripts.GameObjectComponents
         {
             float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
 
-            var bullet = Instantiate(_bulletPrefab, _fireSpot.position, _fireSpot.transform.rotation);
+            var bullet1 = Instantiate(_bullet, _fireSpot1.position, _fireSpot1.transform.rotation);
+            var bullet2 = Instantiate(_bullet, _fireSpot2.position, _fireSpot2.transform.rotation);
 
-            bullet.AirCraftDataModel = DataModel;
-            bullet.Data.Owner = PhotonView.Owner;
-            bullet.Data.Lag = Mathf.Abs(lag);
+            bullet1.AirCraftDataModel = DataModel;
+            bullet1.Data.Owner = PhotonView.Owner;
+            bullet1.Data.Lag = Mathf.Abs(lag);
+
+            bullet2.AirCraftDataModel = DataModel;
+            bullet2.Data.Owner = PhotonView.Owner;
+            bullet2.Data.Lag = Mathf.Abs(lag);
+
+            PhotonView.RPC(nameof(InstantiateShell), RpcTarget.All);
+            PhotonView.RPC(nameof(InstantiateFlare), RpcTarget.All);
+        }
+
+        [PunRPC]
+        private void InstantiateShell(PhotonMessageInfo info) => Instantiate(_shell, _shellSpot.position, _shellSpot.rotation);
+
+        [PunRPC]
+        private void InstantiateFlare()
+        {
+            Instantiate(_flare, _flareSpot1.position, _flareSpot1.rotation);
+            Instantiate(_flare, _flareSpot2.position, _flareSpot2.rotation);
         }
 
         #endregion

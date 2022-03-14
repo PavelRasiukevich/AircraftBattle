@@ -44,6 +44,9 @@ MonoBehaviour:
   - RPC_TakeDamage
   - ClockRun
   - CreateDestroyEffect
+  - DisposeShell
+  - InstantiateShell
+  - InstantiateFlare
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

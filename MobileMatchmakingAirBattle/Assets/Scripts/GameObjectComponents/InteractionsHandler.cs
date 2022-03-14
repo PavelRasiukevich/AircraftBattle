@@ -22,10 +22,13 @@ namespace Assets.Scripts.GameObjectComponents
 
         public void Die()
         {
+            if (!PhotonView.IsMine) return;
+
             Died?.Invoke();
             PhotonView.RPC(nameof(CreateDestroyEffect), RpcTarget.All);
 
             PhotonNetwork.Destroy(gameObject);
+
         }
 
         public void TakeDamage(int value, Player owner)
