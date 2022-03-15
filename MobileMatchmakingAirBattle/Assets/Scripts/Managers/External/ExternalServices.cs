@@ -38,11 +38,11 @@ namespace Managers.External
         {
             _authenticationType = Application.platform == RuntimePlatform.Android
                 ? AuthenticationType.PlayFabQuickly // TODO: перед публикацией поставить Google
-                : _authenticationType; 
+                : _authenticationType;
             switch (_authenticationType)
             {
                 case AuthenticationType.None: // ONLY FOR TEST!
-                    User.Common.Name = "Test_User";
+                    User.Common.Name = "Test_User_" + Random.Range(0, 1000);
                     AuthenticationDone();
                     break;
                 case AuthenticationType.PlayFabWithLogin:
@@ -90,6 +90,7 @@ namespace Managers.External
                         Vector2.zero);
                     break;
             }
+
             // NickName
             PhotonNetwork.NickName = User.Common.Name;
             PopupHolder.CurrentPopup(PopupType.Loading).Hide();
