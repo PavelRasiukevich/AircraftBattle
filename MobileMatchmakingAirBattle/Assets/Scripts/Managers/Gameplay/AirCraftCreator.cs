@@ -1,11 +1,8 @@
 using Assets.Scripts.AirCrafts;
 using Assets.Scripts.GameObjectComponents;
-using Assets.Scripts.Utils;
-using Cinemachine;
 using Managers.Data;
 using Photon.Pun;
 using UnityEngine;
-using Utils.Extensions;
 
 namespace Managers.Gameplay
 {
@@ -46,17 +43,9 @@ namespace Managers.Gameplay
             var airCraft = _actor.GetComponent<AirCraft>();
             var t = _actor.GetComponent<InteractionsHandler>();
 
-            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.MaterialColor,
-                GameDataManager.Inst.CurrentPlane.Settings.Color.ToVector3());
-
-            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Fails, 0);
-
-            PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Frags, 0);
-
             airCraft.Data.RespawnPosition = point;
 
             t.Died += _battleManager.GameFail;
-
         }
 
         private Transform SetupPointInWorld(Transform point)
@@ -68,7 +57,8 @@ namespace Managers.Gameplay
             return point;
         }
 
-        private static Vector3 GetDirectionToLook(Transform a, Transform b) => (a.position - b.transform.position).normalized;
+        private static Vector3 GetDirectionToLook(Transform a, Transform b) =>
+            (a.position - b.transform.position).normalized;
 
         private static Quaternion SetupRotation(Quaternion lookRotation)
         {

@@ -9,7 +9,7 @@ using UnityEngine;
 namespace Assets.Scripts.AirCrafts
 {
     [DisallowMultipleComponent]
-    public class AirCraft : MonoBehaviourPunCallbacks
+    public class AirCraft : MonoBehaviour
     {
         [SerializeField] private AircraftDataModel _dataModel;
         [SerializeField] private Transform _view;
@@ -28,6 +28,8 @@ namespace Assets.Scripts.AirCrafts
         private AircraftCollisionDetector _collisionDetector;
         private AircraftParticles _aircraftParticles;
         private InteractionsHandler _interactor;
+        private BodyProperties _bodyProperties;
+        private BodySettings _bodySettings;
 
         #endregion
 
@@ -43,6 +45,11 @@ namespace Assets.Scripts.AirCrafts
             _aircraftParticles = GetComponent<AircraftParticles>();
             _collisionDetector = GetComponent<AircraftCollisionDetector>();
             _interactor = GetComponent<InteractionsHandler>();
+            _bodyProperties = GetComponent<BodyProperties>();
+            _bodySettings = GetComponent<BodySettings>();
+
+            _bodyProperties.PhotonView = PhotonView;
+            _bodyProperties.BodySettings = _bodySettings;
 
             _interactor.PhotonView = PhotonView;
             _interactor.DataModel = Data;
@@ -58,7 +65,6 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.InputHandler = _inputHandler;
             _moveHandler.DataModel = Data;
             _moveHandler.PhotonView = PhotonView;
-
         }
 
         private void OnEnable()
@@ -75,6 +81,7 @@ namespace Assets.Scripts.AirCrafts
         {
             EventBus.InvokeEvent<IBattleScreenEvents>(h => h.RefreshUI(Data));
         }
+
         #endregion
     }
 }
