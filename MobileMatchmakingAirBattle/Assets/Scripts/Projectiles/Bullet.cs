@@ -1,4 +1,3 @@
-using Assets.Scripts.Interfaces;
 using Assets.Scripts.SriptableObjects;
 using TO;
 using UnityEngine;
@@ -26,7 +25,7 @@ namespace Assets.Scripts.Projectiles
         {
             _rigidBody = GetComponent<Rigidbody>();
 
-            Destroy(gameObject, Data.Data.LifeTime);
+            Destroy(gameObject, Data.ScriptableData.LifeTime);
         }
 
         private void FixedUpdate()

@@ -18,7 +18,7 @@ namespace Assets.Scripts.GameObjectComponents
                 Interactor.Die();
 
             if (CollisionValidator.ValidateCollision(collision, out Bullet sender))
-                Interactor.TakeDamage(sender.Data.Data.Damage, sender.Data.Owner);
+                Interactor.TakeDamage(sender.Data.ScriptableData.Damage, sender.Data.Owner);
         }
 
         private void OnTriggerExit(Collider other)

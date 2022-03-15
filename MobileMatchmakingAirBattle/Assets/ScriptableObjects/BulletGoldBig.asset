@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f7de76b74ee1774aa0a9a06de4a60d7, type: 3}
-  m_Name: BulletData
+  m_Name: BulletGoldBig
   m_EditorClassIdentifier: 
   _damage: 1
   _speed: 15
   _lifeTime: 5
+  _flare: {fileID: 999778576033196947, guid: cb9126b293d247c4aa23cd8a79992b3d, type: 3}
+  _shell: {fileID: 5166246081700196553, guid: 5e1d3b1c5fcf69846a9e8e0bbaabdbca, type: 3}
