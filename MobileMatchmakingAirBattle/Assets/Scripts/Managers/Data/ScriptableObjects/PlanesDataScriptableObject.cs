@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Managers.Data.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "PlanesData", menuName = "Data/Planes", order = 1)]
-    public class PlanesDataScriptableObject : ScriptableObject
+    public class PlanesDataScriptableObject : ScriptableObject 
     {
         [SerializeField] private List<PlaneInfo> _planeList;
 

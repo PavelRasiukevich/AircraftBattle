@@ -10,6 +10,7 @@ namespace Assets.Scripts.Projectiles
 
         public void FireBullet(Bullet bullet, Player owner, AircraftDataModel DataModel)
         {
+
             var b = Instantiate(bullet, transform.position, transform.rotation);
 
             b.AirCraftDataModel = DataModel;

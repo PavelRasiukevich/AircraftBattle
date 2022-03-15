@@ -6,7 +6,7 @@ using Utils;
 namespace TO
 {
     [Serializable]
-    public class PlaneInfo
+    public class PlaneInfo 
     {
         [SerializeField] private int _id;
 
@@ -120,7 +120,7 @@ namespace TO
             }
             else
             {
-                AircraftSettings settings = new AircraftSettings(Color.red);
+                AircraftSettings settings = new AircraftSettings();
                 _settings = settings;
             }
         }

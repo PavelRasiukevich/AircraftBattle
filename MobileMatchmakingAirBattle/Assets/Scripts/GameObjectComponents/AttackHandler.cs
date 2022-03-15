@@ -1,9 +1,11 @@
 using Assets.Scripts.Projectiles;
 using Assets.Scripts.Utils.Enums;
 using Assets.Scripts.Utils.Timers;
+using Managers.Data;
 using Photon.Pun;
 using TO;
 using UnityEngine;
+using Utils;
 
 namespace Assets.Scripts.GameObjectComponents
 {
@@ -22,12 +24,12 @@ namespace Assets.Scripts.GameObjectComponents
 
         public ReloadTimer ReloadTimer { get; private set; }
 
-        private Bullet _bullet;
-        public Bullet Bullet => Resources.Load<Bullet>($"Bullets/{BulletType.Default}");
+        public Bullet Bullet { get; private set; }
 
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
+            GetBullet();
         }
 
         private void Update()
@@ -36,6 +38,11 @@ namespace Assets.Scripts.GameObjectComponents
                 Attack();
 
             ReloadTimer.Tick(Time.deltaTime);
+        }
+
+        private void GetBullet()
+        {
+            Bullet = Resources.Load<Bullet>($"Bullets/{GameDataManager.Inst.CurrentPlane.Settings.Type}");
         }
 
         public void Attack()

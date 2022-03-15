@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f7de76b74ee1774aa0a9a06de4a60d7, type: 3}
-  m_Name: BulletGoldBig
+  m_Name: DefaultBullet
   m_EditorClassIdentifier: 
   _damage: 1
   _speed: 15

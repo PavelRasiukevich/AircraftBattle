@@ -10,13 +10,13 @@ namespace Utils.Extensions
             if (player.CustomProperties.TryGetValue(property, out var value))
                 return (T) value;
 
-            return defaultValue;
+            return defaultValue; 
         }
 
         public static void SetPropertyValue<T>(this Player player, string property, T value)
         {
             player.SetCustomProperties(new Hashtable {{property, value}});
-        }
+        }   
 
         public static void AddValueToProperty(this Player player, string property, int value)
         {
