@@ -16,6 +16,8 @@ namespace Assets.Scripts.Utils
 
         public const string AircraftMaterialName = "RedCC0813";
 
+        public const string BulletPath = "Bullets/";
+
         /*
          * Currencies
          */

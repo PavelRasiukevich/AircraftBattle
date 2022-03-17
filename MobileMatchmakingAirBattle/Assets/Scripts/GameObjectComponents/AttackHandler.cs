@@ -1,11 +1,10 @@
 using Assets.Scripts.Projectiles;
-using Assets.Scripts.Utils.Enums;
+using Assets.Scripts.Utils;
 using Assets.Scripts.Utils.Timers;
 using Managers.Data;
 using Photon.Pun;
 using TO;
 using UnityEngine;
-using Utils;
 
 namespace Assets.Scripts.GameObjectComponents
 {
@@ -42,7 +41,7 @@ namespace Assets.Scripts.GameObjectComponents
 
         private void GetBullet()
         {
-            Bullet = Resources.Load<Bullet>($"Bullets/{GameDataManager.Inst.CurrentPlane.Settings.Type}");
+            Bullet = Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.Type}");
         }
 
         public void Attack()
