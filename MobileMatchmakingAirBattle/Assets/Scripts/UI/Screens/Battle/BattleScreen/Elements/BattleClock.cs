@@ -1,33 +1,32 @@
+using System;
+using Assets.Scripts.Utils;
 using Assets.Scripts.Utils.Timers;
 using Photon.Pun;
-using System;
 using UnityEngine;
 
-namespace Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements
+namespace UI.Screens.Battle.BattleScreen.Elements
 {
     public class BattleClock : MonoBehaviour
     {
-        public event Action TimeIsOver;
+        public event Action OnTimeIsOver;
 
-        public const int MatchDuration = 600;
 
-        private PhotonView _photonView;
-
-        public string FormatedTime => FormatTime((int)_matchTimer.TimeAmmount);
+        private PhotonView PhotonView { get; set; }
+        public string FormatedTime => FormatTime((int) _matchTimer.TimeAmmount);
 
         private MatchTimer _matchTimer;
 
-        private void Awake()
+        public void Config(PhotonView photonView)
         {
-            _photonView = GetComponent<PhotonView>();
-            _matchTimer = new MatchTimer(MatchDuration);
+            PhotonView = photonView;
+            _matchTimer = new MatchTimer(Const.Conditions.MatchDuration);
         }
 
         private void FixedUpdate()
         {
             if (!PhotonNetwork.IsMasterClient) return;
 
-            _photonView.RPC(nameof(ClockRun), RpcTarget.All);
+            PhotonView.RPC(nameof(ClockRun), RpcTarget.All);
         }
 
         [PunRPC]
@@ -36,7 +35,7 @@ namespace Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements
             if (!_matchTimer.IsStopped)
                 _matchTimer.Tick(Time.fixedDeltaTime);
             else
-                TimeIsOver?.Invoke();
+                OnTimeIsOver?.Invoke();
         }
 
         private string FormatTime(int time)

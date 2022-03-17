@@ -1,10 +1,10 @@
 using Core;
+using Enums;
 using Managers.External;
 using TMPro;
 using TO;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens.MainMenu.Elements
 {

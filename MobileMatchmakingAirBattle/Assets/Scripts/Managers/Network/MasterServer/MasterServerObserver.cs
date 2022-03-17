@@ -1,9 +1,9 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
+using Enums;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
-using Utils.Enums;
 
 namespace Managers.Network.MasterServer
 {

@@ -1,5 +1,5 @@
-using Assets.Scripts.UI.Screens.Battle.BattleScreen.Elements;
 using TMPro;
+using UI.Screens.Battle.BattleScreen.Elements;
 using UnityEngine;
 
 namespace Assets.Scripts.UI.Screens.Battle

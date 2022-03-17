@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Core.Base;
+using Enums;
 using UnityEngine;
-using Utils.Enums;
 
 namespace Core
 {

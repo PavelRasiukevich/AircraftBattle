@@ -1,11 +1,11 @@
 ﻿using Assets.Scripts.Core;
 using Core;
+using Enums;
 #if UNITY_ANDROID
 using GooglePlayGames;
 #endif
 using GooglePlayGames.BasicApi;
 using UnityEngine;
-using Utils.Enums;
 
 namespace Managers.External.GooglePlayServices.Services
 {

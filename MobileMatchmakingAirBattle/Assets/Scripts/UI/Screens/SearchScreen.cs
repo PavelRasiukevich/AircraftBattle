@@ -1,6 +1,6 @@
 using Core.Base;
+using Enums;
 using Managers.Network.Launcher;
-using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens
 {

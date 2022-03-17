@@ -1,4 +1,4 @@
-﻿namespace Utils.Enums
+﻿namespace Enums
 {
     public enum LeaderboardType
     {

@@ -2,6 +2,7 @@
 using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
 using Core;
+using Enums;
 using Interfaces.EventBus;
 using Photon.Pun;
 using Photon.Realtime;
@@ -9,7 +10,6 @@ using PlayFab;
 using PlayFab.ClientModels;
 using TO;
 using UnityEngine;
-using Utils.Enums;
 
 namespace Managers.External.PlayFabServices.Services
 {

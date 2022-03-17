@@ -1,8 +1,8 @@
 using Assets.Scripts.Core;
 using Core.Base;
+using Enums;
 using TMPro;
 using UnityEngine;
-using Utils.Enums;
 
 namespace UI.Popups
 {

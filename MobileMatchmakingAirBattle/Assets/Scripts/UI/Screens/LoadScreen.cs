@@ -1,11 +1,11 @@
 using Core;
 using Core.Base;
+using Enums;
 using Interfaces.EventBus;
 using Managers.External;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens
 {

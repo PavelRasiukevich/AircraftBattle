@@ -1,13 +1,13 @@
 ﻿using Assets.Scripts.Core;
 using Core;
 using Core.Base;
+using Enums;
 using Interfaces.EventBus;
 using Managers.External;
 using PlayFab;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens
 {
