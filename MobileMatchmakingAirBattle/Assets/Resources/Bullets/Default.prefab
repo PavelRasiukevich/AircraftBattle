@@ -14654,7 +14654,7 @@ MonoBehaviour:
   impactPrefab: {fileID: 1879272669879180, guid: 52baafc6c69151e418a228e14e1bd356, type: 3}
   explosionPrefab: {fileID: 0}
   thrust: 0
-  thisRigidbody: {fileID: 54212628334827884, guid: d414b898c12e9b241917fe056bed92c7, type: 3}
+  thisRigidbody: {fileID: 117345729739699069}
   particleKillGroup: {fileID: 0}
   LookRotation: 1
   Missile: 0
