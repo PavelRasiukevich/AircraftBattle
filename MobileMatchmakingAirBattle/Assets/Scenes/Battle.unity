@@ -13440,7 +13440,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 351397589}
   m_Mesh: {fileID: 4300000, guid: f4710a01ed02d8f46a1f0f22dd6f01f7, type: 3}
-<<<<<<< HEAD
 --- !u!1 &351750864
 GameObject:
   m_ObjectHideFlags: 0
@@ -13507,8 +13506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 294ea80e672dcf3429e0c04377394d2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-=======
->>>>>>> 2cb1cefc7d201386808dc93ce97b1e61c1320fa0
 --- !u!1 &351810997
 GameObject:
   m_ObjectHideFlags: 0
