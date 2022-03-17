@@ -1,7 +1,7 @@
+using System;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Projectiles;
 using Assets.Scripts.Utils;
-using System;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
@@ -15,7 +15,7 @@ namespace Assets.Scripts.GameObjectComponents
         private void OnCollisionEnter(Collision collision)
         {
             if (CollisionValidator.ValidateCollision<IObstacle>(collision))
-                Interactor.Die();
+                Interactor.Die(true);
 
             if (CollisionValidator.ValidateCollision(collision, out Bullet sender))
                 Interactor.TakeDamage(sender.Data.Data.Damage, sender.Data.Owner);

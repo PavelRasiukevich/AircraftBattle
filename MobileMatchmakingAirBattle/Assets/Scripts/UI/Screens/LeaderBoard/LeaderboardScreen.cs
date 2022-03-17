@@ -3,13 +3,13 @@ using Assets.Scripts.Core;
 using Assets.Scripts.Utils;
 using Core;
 using Core.Base;
+using Enums;
 using Interfaces.EventBus;
 using Managers.External;
 using PlayFab.ClientModels;
 using TMPro;
 using UI.Screens.LeaderBoard.Elements;
 using UnityEngine;
-using Utils.Enums;
 
 namespace UI.Screens.LeaderBoard
 {

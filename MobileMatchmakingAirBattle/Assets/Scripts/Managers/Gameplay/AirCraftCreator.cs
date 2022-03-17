@@ -1,3 +1,4 @@
+using System;
 using Assets.Scripts.AirCrafts;
 using Assets.Scripts.GameObjectComponents;
 using Managers.Data;
@@ -32,6 +33,8 @@ namespace Managers.Gameplay
 
         public void Create() => InitializeActor(point.position, point.rotation);
 
+        public void Destroy() => DestroyActor();
+
         #endregion
 
         #region PRIVATE
@@ -46,6 +49,21 @@ namespace Managers.Gameplay
             airCraft.Data.RespawnPosition = point;
 
             t.Died += _battleManager.GameFail;
+        }
+
+        private void DestroyActor()
+        {
+            if (_actor == null) return;
+            try
+            {
+                var t = _actor.GetComponent<InteractionsHandler>();
+                t.Died -= _battleManager.GameFail;
+                t.Die(false);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private Transform SetupPointInWorld(Transform point)

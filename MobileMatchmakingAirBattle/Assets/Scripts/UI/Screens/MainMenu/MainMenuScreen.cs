@@ -1,13 +1,13 @@
 using Assets.Scripts.Core;
 using Core;
 using Core.Base;
+using Enums;
 using Managers.Data;
 using Managers.External;
 using Managers.Network.Launcher;
 using UI.Screens.MainMenu.Elements;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens.MainMenu
 {

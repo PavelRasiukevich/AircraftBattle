@@ -1,4 +1,4 @@
-using Utils.Enums;
+using Enums;
 
 namespace Assets.Scripts.Utils
 {
@@ -48,6 +48,12 @@ namespace Assets.Scripts.Utils
             public const string MaterialColor = "MaterialColor";
             public const string Fails = "Fails";
             public const string Frags = "Frags";
+        }
+
+        internal class Conditions
+        {
+            public const int MatchDuration = 600;
+            public const int FragsToWin = 20;
         }
 
         /*

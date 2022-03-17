@@ -1,6 +1,6 @@
 ﻿using Core.Base;
+using Enums;
 using PlayFab;
-using Utils.Enums;
 
 namespace Core
 {

@@ -1,5 +1,5 @@
 ﻿using Core.Base;
-using Utils.Enums;
+using Enums;
 
 namespace UI.Screens.Battle.WaitScreen
 {

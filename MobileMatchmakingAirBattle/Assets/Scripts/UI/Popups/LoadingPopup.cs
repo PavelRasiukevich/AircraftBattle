@@ -1,6 +1,6 @@
 ﻿using Assets.Scripts.Core;
 using Core.Base;
-using Utils.Enums;
+using Enums;
 
 namespace UI.Popups
 {

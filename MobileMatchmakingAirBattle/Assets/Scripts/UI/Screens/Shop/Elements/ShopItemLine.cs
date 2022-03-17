@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using Assets.Scripts.Core;
+using Enums;
 using Managers.Data;
 using TMPro;
 using TO;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens.Shop.Elements
 {

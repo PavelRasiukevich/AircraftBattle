@@ -1,5 +1,5 @@
+using Enums;
 using UnityEngine;
-using Utils.Enums;
 
 namespace Core.Base
 {
