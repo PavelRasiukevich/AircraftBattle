@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Assets.Scripts.Utils;
+using Enums;
 using Managers.External;
 using UnityEngine;
-using Utils.Enums;
 
 namespace TO
 {

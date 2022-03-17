@@ -1,10 +1,10 @@
 using Core;
 using Core.Base;
+using Enums;
 using Interfaces.EventBus;
 using TO;
 using UI.Screens.Battle.BattleScreen.Elements;
 using UI.Screens.Battle.BattleScreen.Elements.Stats;
-using Utils.Enums;
 
 namespace UI.Screens.Battle.BattleScreen
 {

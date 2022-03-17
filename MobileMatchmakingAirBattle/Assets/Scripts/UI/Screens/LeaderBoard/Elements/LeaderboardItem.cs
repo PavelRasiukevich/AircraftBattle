@@ -1,7 +1,7 @@
 ﻿using Assets.Scripts.Core;
+using Enums;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens.LeaderBoard.Elements
 {

@@ -1,9 +1,9 @@
-﻿using PlayFab.ClientModels;
+﻿using Enums;
+using PlayFab.ClientModels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utils;
-using Utils.Enums;
 
 namespace UI.Screens.LeaderBoard.Elements
 {

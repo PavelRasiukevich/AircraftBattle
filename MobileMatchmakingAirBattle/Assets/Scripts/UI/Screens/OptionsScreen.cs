@@ -1,8 +1,8 @@
 using Assets.Scripts.Core;
 using Core.Base;
+using Enums;
 using Managers.External;
 using TO;
-using Utils.Enums;
 
 namespace Assets.Scripts.UI.Screens
 {

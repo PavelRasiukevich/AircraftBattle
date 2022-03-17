@@ -22,16 +22,13 @@ namespace Assets.Scripts.GameObjectComponents
         public AircraftDataModel DataModel { get; set; }
 
 
-        public void Die()
+        public void Die(bool isHit) // true - сбит   false - раунд завершен
         {
             if (!PhotonView.IsMine) return;
-
             Died?.Invoke();
-            PhotonView.Owner.AddValueToProperty(Const.Properties.Fails, 1);
             PhotonView.RPC(nameof(CreateDestroyEffect), RpcTarget.All);
-
+            if (isHit) PhotonView.Owner.AddValueToProperty(Const.Properties.Fails, 1);
             PhotonNetwork.Destroy(gameObject);
-
         }
 
         public void TakeDamage(int value, Player owner)
@@ -48,7 +45,7 @@ namespace Assets.Scripts.GameObjectComponents
             {
                 Player player = (Player) values[1];
                 player.AddValueToProperty(Const.Properties.Frags, 1);
-                Die();
+                Die(true);
             }
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(DataModel));

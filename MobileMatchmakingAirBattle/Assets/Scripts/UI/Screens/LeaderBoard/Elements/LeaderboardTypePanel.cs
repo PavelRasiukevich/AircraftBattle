@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Utils.Enums;
+﻿using Enums;
+using UnityEngine;
 
 namespace UI.Screens.LeaderBoard.Elements
 {

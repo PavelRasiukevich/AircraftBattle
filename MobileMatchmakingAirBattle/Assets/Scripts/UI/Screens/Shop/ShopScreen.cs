@@ -1,12 +1,12 @@
 using Assets.Scripts.Core;
 using Core;
 using Core.Base;
+using Enums;
 using Interfaces.EventBus;
 using Managers.Data;
 using UI.Screens.Shop.Elements;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Enums;
 
 namespace UI.Screens.Shop
 {

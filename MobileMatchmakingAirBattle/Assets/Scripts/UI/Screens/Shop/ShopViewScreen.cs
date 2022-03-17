@@ -1,10 +1,10 @@
 using System.Globalization;
 using Assets.Scripts.Core;
 using Core.Base;
+using Enums;
 using Managers.Data;
 using TMPro;
 using UnityEngine;
-using Utils.Enums;
 
 namespace UI.Screens.Shop
 {

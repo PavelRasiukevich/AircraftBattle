@@ -3,7 +3,6 @@ using Core.Base;
 using Interfaces.EventBus;
 using Managers.Data.ScriptableObjects;
 using TO;
-using UI.Screens.Shop;
 using UnityEngine;
 
 namespace Managers.Data
