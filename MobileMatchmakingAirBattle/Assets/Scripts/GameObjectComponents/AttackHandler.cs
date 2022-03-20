@@ -34,7 +34,11 @@ namespace Assets.Scripts.GameObjectComponents
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
+<<<<<<< HEAD
             Bullet = new BulletGetter().GetBullet();
+=======
+            Bullet = GetBullet();
+>>>>>>> 848a031215492ce35ea78d52596eded882548017
         }
 
         private void Update()
@@ -45,6 +49,14 @@ namespace Assets.Scripts.GameObjectComponents
             ReloadTimer.Tick(Time.deltaTime);
         }
 
+<<<<<<< HEAD
+=======
+        private Bullet GetBullet()
+        {
+            return Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.BulletType}");
+        }
+
+>>>>>>> 848a031215492ce35ea78d52596eded882548017
         public void Attack()
         {
             if (!PhotonView.IsMine) return;
