@@ -8,6 +8,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
 {
+    public class BulletGetter
+    {
+        public Bullet GetBullet() =>
+            Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.Type}");
+    }
+
     public class AttackHandler : MonoBehaviour
     {
         [SerializeField] private Transform _shellSpot;
@@ -28,7 +34,7 @@ namespace Assets.Scripts.GameObjectComponents
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
-            GetBullet();
+            Bullet = new BulletGetter().GetBullet();
         }
 
         private void Update()
@@ -37,11 +43,6 @@ namespace Assets.Scripts.GameObjectComponents
                 Attack();
 
             ReloadTimer.Tick(Time.deltaTime);
-        }
-
-        private void GetBullet()
-        {
-            Bullet = Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.Type}");
         }
 
         public void Attack()
