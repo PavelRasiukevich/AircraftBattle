@@ -1,5 +1,5 @@
 using Assets.Scripts.Projectiles;
-using Assets.Scripts.Utils.Enums;
+using Enums;
 using UnityEngine;
 
 namespace Assets.Scripts.SriptableObjects

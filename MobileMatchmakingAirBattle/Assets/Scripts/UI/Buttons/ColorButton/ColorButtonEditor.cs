@@ -1,9 +1,9 @@
-﻿#if UNITY_EDITOR
+﻿using UnityEditor.UI;
+#if UNITY_EDITOR
 using UnityEditor;
-using UnityEditor.UI;
 #endif
 
-namespace Buttons.ColorButton
+namespace UI.Buttons.ColorButton
 {
 #if UNITY_EDITOR
 
@@ -12,12 +12,10 @@ namespace Buttons.ColorButton
     {
         public override void OnInspectorGUI()
         {
-            serializedObject.Update();
             base.OnInspectorGUI();
-            ColorButton targetColorButton = (ColorButton)target;
-
+            serializedObject.Update();
+            ColorButton targetColorButton = (ColorButton) target;
             targetColorButton.Color = EditorGUILayout.ColorField("Color: ", targetColorButton.Color);
-
             EditorGUILayout.PropertyField(serializedObject.FindProperty("_event"), true);
             serializedObject.ApplyModifiedProperties();
         }
