@@ -16,7 +16,6 @@ namespace UI.Buttons.ColorButton
             serializedObject.Update();
             ColorButton targetColorButton = (ColorButton) target;
             targetColorButton.Color = EditorGUILayout.ColorField("Color: ", targetColorButton.Color);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_event"), true);
             serializedObject.ApplyModifiedProperties();
         }
     }

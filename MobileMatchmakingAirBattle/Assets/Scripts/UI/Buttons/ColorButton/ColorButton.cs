@@ -1,4 +1,6 @@
 ﻿using System;
+using Managers.Data;
+using UI.Screens.Shop;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -12,9 +14,9 @@ namespace UI.Buttons.ColorButton
 
     public class ColorButton : Button
     {
-        [SerializeField] private ColorEvent _event = new ColorEvent();
-
         [SerializeField] private Color _planeColor;
+        private SelectedEffect _selected;
+        private ShopViewScreen _shopViewScreen;
 
         public Color Color
         {
@@ -26,8 +28,17 @@ namespace UI.Buttons.ColorButton
         {
             base.Awake();
             onClick.AddListener(Click);
+            _selected = gameObject.GetComponentInChildren<SelectedEffect>();
+            _shopViewScreen = gameObject.GetComponentInParent<ShopViewScreen>();
         }
 
-        private void Click() => _event.Invoke(_planeColor);
+        private void Click() => _shopViewScreen.ColorOnClick(_planeColor);
+
+        void Update()
+        {
+            if (_selected != null)
+                _selected.gameObject.SetActive(
+                    GameDataManager.Inst.CurrentShopPlane.Settings.Color.Equals(_planeColor));
+        }
     }
 }
