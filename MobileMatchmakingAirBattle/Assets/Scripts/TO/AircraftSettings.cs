@@ -1,6 +1,5 @@
-﻿using Assets.Scripts.Projectiles;
-using Assets.Scripts.Utils.Enums;
-using System;
+﻿using System;
+using Enums;
 using UnityEngine;
 
 namespace TO
@@ -9,17 +8,12 @@ namespace TO
     public class AircraftSettings
     {
         [SerializeField] private Color _color;
-        [SerializeField] private BulletType _type;
+        [SerializeField] private BulletType _bulletType;
 
         public AircraftSettings()
         {
             _color = Color.red;
-            _type = BulletType.Default;
-        }
-
-        public AircraftSettings(Color color)
-        {
-            _color = color;
+            _bulletType = BulletType.Default;
         }
 
         public Color Color
@@ -28,6 +22,10 @@ namespace TO
             set => _color = value;
         }
 
-        public BulletType Type { get => _type; set => _type = value; }
+        public BulletType BulletType
+        {
+            get => _bulletType;
+            set => _bulletType = value;
+        }
     }
 }

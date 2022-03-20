@@ -1,9 +1,9 @@
-namespace Assets.Scripts.Utils.Enums
+namespace Enums
 {
     public enum BulletType
     {
-        Default,
-        Plasma,
-        Freezer
+        Default = 0,
+        Plasma = 1,
+        Freezer = 2
     }
 }

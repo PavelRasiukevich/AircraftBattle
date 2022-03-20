@@ -111,7 +111,7 @@ namespace TO
 
         #region PRIVATE
 
-        public void LoadSettings() // TODO: Хранить удаленно
+        public void LoadSettings()
         {
             if (Data.IsExists(FileName))
             {

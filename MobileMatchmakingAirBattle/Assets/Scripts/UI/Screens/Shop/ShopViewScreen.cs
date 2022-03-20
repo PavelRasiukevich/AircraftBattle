@@ -40,13 +40,18 @@ namespace UI.Screens.Shop
         public void ColorOnClick(Color color)
         {
             GameDataManager.Inst.CurrentShopPlane.Settings.Color = color;
-            GameDataManager.Inst.Save(GameDataManager.Inst.CurrentShopPlane);
             _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
         }
 
+        public void WeaponOnClick(BulletType bulletType)
+        {
+            GameDataManager.Inst.CurrentShopPlane.Settings.BulletType = bulletType;
+          //  _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
+        }
 
         public void GoOnClick()
         {
+            GameDataManager.Inst.Save(GameDataManager.Inst.CurrentShopPlane);
             GameDataManager.Inst.SelectPlane(GameDataManager.Inst.CurrentShopPlane.ID);
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
         }

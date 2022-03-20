@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Buttons.ColorButton
+namespace UI.Buttons.ColorButton
 {
     [Serializable]
     public class ColorEvent : UnityEvent<Color>
@@ -13,13 +13,13 @@ namespace Buttons.ColorButton
     public class ColorButton : Button
     {
         [SerializeField] private ColorEvent _event = new ColorEvent();
-        
-        [SerializeField] private Color _color;
+
+        [SerializeField] private Color _planeColor;
 
         public Color Color
         {
-            get => _color;
-            set => _color = value;
+            get => _planeColor;
+            set => _planeColor = value;
         }
 
         protected override void Awake()
@@ -28,6 +28,6 @@ namespace Buttons.ColorButton
             onClick.AddListener(Click);
         }
 
-        private void Click() => _event.Invoke(_color);
+        private void Click() => _event.Invoke(_planeColor);
     }
 }

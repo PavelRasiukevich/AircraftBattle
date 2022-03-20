@@ -28,7 +28,7 @@ namespace Assets.Scripts.GameObjectComponents
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
-            GetBullet();
+            Bullet = GetBullet();
         }
 
         private void Update()
@@ -39,9 +39,9 @@ namespace Assets.Scripts.GameObjectComponents
             ReloadTimer.Tick(Time.deltaTime);
         }
 
-        private void GetBullet()
+        private Bullet GetBullet()
         {
-            Bullet = Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.Type}");
+            return Resources.Load<Bullet>($"{Const.BulletPath}{GameDataManager.Inst.CurrentPlane.Settings.BulletType}");
         }
 
         public void Attack()
