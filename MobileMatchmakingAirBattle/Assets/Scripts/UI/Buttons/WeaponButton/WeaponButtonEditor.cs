@@ -17,7 +17,6 @@ namespace UI.Buttons.WeaponButton
             serializedObject.Update();
             WeaponButton targetWeaponButton = (WeaponButton) target;
             targetWeaponButton.Type = (BulletType) EditorGUILayout.EnumPopup("BulletType: ", targetWeaponButton.Type);
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("_event"), true);
             serializedObject.ApplyModifiedProperties();
         }
     }

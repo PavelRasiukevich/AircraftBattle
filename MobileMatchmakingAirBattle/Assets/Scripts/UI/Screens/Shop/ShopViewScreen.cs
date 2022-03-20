@@ -46,7 +46,6 @@ namespace UI.Screens.Shop
         public void WeaponOnClick(BulletType bulletType)
         {
             GameDataManager.Inst.CurrentShopPlane.Settings.BulletType = bulletType;
-          //  _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
         }
 
         public void GoOnClick()
