@@ -1,7 +1,6 @@
 using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class Water : MonoBehaviour, IObstacle
+public class Obstacle : MonoBehaviour, IObstacle
 {
-   
 }

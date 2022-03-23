@@ -44,7 +44,7 @@ namespace UI.Screens.Battle.BattleScreen
             _healthBar.Config(dataModel.CurrentHp, dataModel.Hp);
         }
 
-        public void DamageUI(AircraftDataModel dataModel)
+        public void RefreshHealthUI(AircraftDataModel dataModel)
         {
             _healthBar.Config(dataModel.CurrentHp, dataModel.Hp);
         }

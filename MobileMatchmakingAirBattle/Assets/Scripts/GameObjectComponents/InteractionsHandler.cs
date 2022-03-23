@@ -34,6 +34,9 @@ namespace Assets.Scripts.GameObjectComponents
         public void TakeDamage(int value, Player owner)
             => PhotonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, value, owner);
 
+        public void AddHealth(int value)
+            => PhotonView.RPC(nameof(RPC_AddHealth), RpcTarget.All, value);
+
         [PunRPC]
         private void RPC_TakeDamage(object[] values)
         {
@@ -48,7 +51,15 @@ namespace Assets.Scripts.GameObjectComponents
                 Die(true);
             }
             else
-                EventBus.InvokeEvent<IBattleScreenEvents>(x => x.DamageUI(DataModel));
+                EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
+        }
+
+        [PunRPC]
+        private void RPC_AddHealth(object[] values)
+        {
+            if (!PhotonView.IsMine) return;
+            DataModel.CurrentHp += (int) values[0];
+            EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
         }
 
         [PunRPC]
