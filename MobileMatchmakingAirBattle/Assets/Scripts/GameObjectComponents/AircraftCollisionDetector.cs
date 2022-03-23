@@ -2,6 +2,8 @@ using System;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Projectiles;
 using Assets.Scripts.Utils;
+using Projectiles;
+using Projectiles.Bonuses;
 using UnityEngine;
 
 namespace Assets.Scripts.GameObjectComponents
@@ -19,6 +21,9 @@ namespace Assets.Scripts.GameObjectComponents
 
             if (CollisionValidator.ValidateCollision(collision, out Bullet sender))
                 Interactor.TakeDamage(sender.Data.ScriptableData.Damage, sender.Data.Owner);
+
+            if (CollisionValidator.ValidateCollision(collision, out HeartBonus bonus))
+                Interactor.AddHealth(bonus._bonusHealth);
         }
 
         private void OnTriggerExit(Collider other)
