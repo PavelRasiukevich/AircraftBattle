@@ -59,6 +59,7 @@ namespace Assets.Scripts.AirCrafts
             _attackHandler.InputHandler = _inputHandler;
 
             _collisionDetector.Interactor = _interactor;
+            _collisionDetector.PhotonView = _photonView;
 
             _moveHandler.View = _view;
             _moveHandler.Body = _rigidBody;
@@ -67,15 +68,9 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.PhotonView = PhotonView;
         }
 
-        private void OnEnable()
-        {
-            _collisionDetector.CrossDome += _moveHandler.Return;
-        }
+        private void OnEnable() => _collisionDetector.CrossDome += _moveHandler.Return;
 
-        private void OnDisable()
-        {
-            _collisionDetector.CrossDome -= _moveHandler.Return;
-        }
+        private void OnDisable() => _collisionDetector.CrossDome -= _moveHandler.Return;
 
         private void Start()
         {

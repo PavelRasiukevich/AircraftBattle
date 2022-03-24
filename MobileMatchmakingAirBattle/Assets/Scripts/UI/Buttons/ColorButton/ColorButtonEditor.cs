@@ -1,5 +1,5 @@
-﻿using UnityEditor.UI;
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
+using UnityEditor.UI;
 using UnityEditor;
 #endif
 

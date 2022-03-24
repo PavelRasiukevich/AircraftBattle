@@ -1,7 +1,7 @@
-﻿using UnityEditor;
-using UnityEditor.UI;
-#if UNITY_EDITOR
+﻿#if UNITY_EDITOR
 using Enums;
+using UnityEditor;
+using UnityEditor.UI;
 #endif
 
 namespace UI.Buttons.WeaponButton

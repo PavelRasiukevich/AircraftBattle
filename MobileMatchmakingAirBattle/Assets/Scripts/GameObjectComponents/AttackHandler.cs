@@ -52,7 +52,7 @@ namespace Assets.Scripts.GameObjectComponents
             if (ReloadTimer.IsStopped)
             {
                 if (PhotonView.IsMine)
-                    PhotonView.RPC(nameof(Attack), RpcTarget.All);
+                    PhotonView.RPC(nameof(RPC_Attack), RpcTarget.All);
 
                 ReloadTimer.ResetTimer();
             }
@@ -61,14 +61,10 @@ namespace Assets.Scripts.GameObjectComponents
         #region RPCs
 
         [PunRPC]
-        private void Attack(PhotonMessageInfo info)
+        private void RPC_Attack(PhotonMessageInfo info)
         {
-            float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
-
             _gun1.FireBullet(Bullet, PhotonView.Owner, DataModel);
             _gun2.FireBullet(Bullet, PhotonView.Owner, DataModel);
-
-            //   bullet1.Data.Lag = Mathf.Abs(lag);
 
             Instantiate(Bullet.Data.ScriptableData.Shell, _shellSpot.position, _shellSpot.rotation);
         }
