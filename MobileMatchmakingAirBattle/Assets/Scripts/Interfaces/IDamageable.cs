@@ -6,6 +6,8 @@ namespace Assets.Scripts.Interfaces
     {
         public void TakeDamage(int value, Player owner);
 
+        public void AddHealth(int value);
+
         public void Die(bool isHit);
     }
 }

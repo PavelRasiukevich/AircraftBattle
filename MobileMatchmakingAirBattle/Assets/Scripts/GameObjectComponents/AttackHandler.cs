@@ -34,9 +34,13 @@ namespace Assets.Scripts.GameObjectComponents
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
+<<<<<<< HEAD
 
             Bullet = new BulletGetter().GetBullet();
             
+=======
+            Bullet = new BulletGetter().GetBullet();
+>>>>>>> 11fb4fa9dd7ccdb97b26ed9011aaac452ac21649
         }
 
         private void Update()
@@ -47,7 +51,10 @@ namespace Assets.Scripts.GameObjectComponents
             ReloadTimer.Tick(Time.deltaTime);
         }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 11fb4fa9dd7ccdb97b26ed9011aaac452ac21649
         public void Attack()
         {
             if (!PhotonView.IsMine) return;
@@ -66,8 +73,7 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void Attack(PhotonMessageInfo info)
         {
-
-            float lag = (float)(PhotonNetwork.Time - info.SentServerTime);
+            float lag = (float) (PhotonNetwork.Time - info.SentServerTime);
 
             _gun1.FireBullet(Bullet, PhotonView.Owner, DataModel);
             _gun2.FireBullet(Bullet, PhotonView.Owner, DataModel);
