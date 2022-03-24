@@ -34,13 +34,9 @@ namespace Assets.Scripts.GameObjectComponents
         private void Start()
         {
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
-<<<<<<< HEAD
 
             Bullet = new BulletGetter().GetBullet();
             
-=======
-            Bullet = new BulletGetter().GetBullet();
->>>>>>> 11fb4fa9dd7ccdb97b26ed9011aaac452ac21649
         }
 
         private void Update()
@@ -51,10 +47,6 @@ namespace Assets.Scripts.GameObjectComponents
             ReloadTimer.Tick(Time.deltaTime);
         }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 11fb4fa9dd7ccdb97b26ed9011aaac452ac21649
         public void Attack()
         {
             if (!PhotonView.IsMine) return;
