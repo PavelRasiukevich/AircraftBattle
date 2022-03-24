@@ -36,7 +36,7 @@ namespace Assets.Scripts.GameObjectComponents
             ReloadTimer = new ReloadTimer(DataModel.ReloadTime);
 
             Bullet = new BulletGetter().GetBullet();
-
+            
         }
 
         private void Update()

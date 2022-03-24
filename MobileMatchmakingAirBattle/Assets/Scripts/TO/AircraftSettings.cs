@@ -13,7 +13,7 @@ namespace TO
         public AircraftSettings()
         {
             _color = Color.red;
-            _bulletType = BulletType.Default;
+            _bulletType = BulletType.DefaultBullet;
         }
 
         public Color Color

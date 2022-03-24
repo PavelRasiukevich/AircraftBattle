@@ -1,3 +1,4 @@
+using Assets.Scripts.Audio;
 using Assets.Scripts.Projectiles;
 using Enums;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Assets.Scripts.SriptableObjects
         [SerializeField] private Projectiles.Flare _flare;
         [SerializeField] private Shell _shell;
         [SerializeField] private BulletType _type;
+        [SerializeField] private SoundSettings _soundSettings;
 
         public int Damage => _damage;
         public float Speed => _speed;
@@ -22,5 +24,7 @@ namespace Assets.Scripts.SriptableObjects
         public Projectiles.Flare Flare => _flare;
         public Shell Shell => _shell;
         public BulletType Type => _type;
+
+        public SoundSettings SoundSettings => _soundSettings;
     }
 }

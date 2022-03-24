@@ -1,3 +1,4 @@
+using Assets.Scripts.Audio;
 using Assets.Scripts.GameObjectComponents;
 using Core;
 using GameObjectComponents;
@@ -13,6 +14,8 @@ namespace Assets.Scripts.AirCrafts
     {
         [SerializeField] private AircraftDataModel _dataModel;
         [SerializeField] private Transform _view;
+
+        private AudioController _audioController;
 
         public AircraftDataModel Data => _dataModel;
 
@@ -65,6 +68,9 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.InputHandler = _inputHandler;
             _moveHandler.DataModel = Data;
             _moveHandler.PhotonView = PhotonView;
+
+            _audioController = FindObjectOfType<AudioController>();
+            _audioController.PlaySound("PlaneMove", gameObject);
         }
 
         private void OnEnable()

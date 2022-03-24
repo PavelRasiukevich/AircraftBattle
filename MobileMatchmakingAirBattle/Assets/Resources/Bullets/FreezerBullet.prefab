@@ -9675,7 +9675,7 @@ GameObject:
   - component: {fileID: 1407715990253681191}
   - component: {fileID: 8131629351254041225}
   m_Layer: 0
-  m_Name: Freezer
+  m_Name: FreezerBullet
   m_TagString: FX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

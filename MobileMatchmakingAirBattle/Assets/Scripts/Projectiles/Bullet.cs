@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Assets.Scripts.Projectiles
 {
     public class Bullet : MonoBehaviour
-    {
+    { 
         #region FIELDS
 
         [SerializeField] private ProjectileDataModel _data;

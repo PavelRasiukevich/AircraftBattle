@@ -17,3 +17,8 @@ MonoBehaviour:
   _lifeTime: 5
   _flare: {fileID: 999778576033196947, guid: cb9126b293d247c4aa23cd8a79992b3d, type: 3}
   _shell: {fileID: 5166246081700196553, guid: 5e1d3b1c5fcf69846a9e8e0bbaabdbca, type: 3}
+  _type: 0
+  _soundSettings:
+    Volume: 0
+    Pitch: 1
+    PlayOnAwake: 0

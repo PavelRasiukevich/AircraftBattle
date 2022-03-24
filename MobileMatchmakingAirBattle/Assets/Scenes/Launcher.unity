@@ -16326,6 +16326,7 @@ GameObject:
   m_Component:
   - component: {fileID: 317116839}
   - component: {fileID: 317116838}
+  - component: {fileID: 317116840}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -16354,12 +16355,55 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 317116837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.4193935, y: -1.963168, z: 12.452381}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &317116840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317116837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62f23552b9c03e84285ef3b1ab065109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundBank:
+    _sounds:
+    - _name: DefaultBulletShot
+      _clip: {fileID: 8300000, guid: c6039b3f96fc48e47b8c33a54b27e074, type: 3}
+      _soundSettings:
+        Volume: 0.003
+        Pitch: 1
+        PlayOnAwake: 0
+        Loop: 0
+    - _name: DefaultFlare
+      _clip: {fileID: 8300000, guid: 996f679488b8a2d4e83e00978cb9474c, type: 3}
+      _soundSettings:
+        Volume: 0.002
+        Pitch: 1
+        PlayOnAwake: 0
+        Loop: 0
+    - _name: PlaneMove
+      _clip: {fileID: 8300000, guid: 3b80a7725507ea44886df104110f3378, type: 3}
+      _soundSettings:
+        Volume: 0.3
+        Pitch: 1
+        PlayOnAwake: 1
+        Loop: 1
+    - _name: PlasmaBulletShot
+      _clip: {fileID: 8300000, guid: 7f46121997d8d1c4cb1018d12c8f529c, type: 3}
+      _soundSettings:
+        Volume: 0
+        Pitch: 0
+        PlayOnAwake: 0
+        Loop: 0
+    _assetSearchSettings: {fileID: 11400000, guid: 6f280d3655dcbdc48adcc7948dfb99a5, type: 2}
 --- !u!1 &317490402
 GameObject:
   m_ObjectHideFlags: 3
