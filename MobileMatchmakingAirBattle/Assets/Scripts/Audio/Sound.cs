@@ -31,8 +31,7 @@ namespace Assets.Scripts.Audio
         public string Name { get => _name; set => _name = value; }
         public AudioClip Clip { get => _clip; set => _clip = value; }
 
-        public bool PlayOnAwake { get; set; } = false;
-        public SoundSettings Settings => _soundSettings;
+        public SoundSettings Settings { get => _soundSettings; set => _soundSettings = value; }
     }
 
     [Serializable]

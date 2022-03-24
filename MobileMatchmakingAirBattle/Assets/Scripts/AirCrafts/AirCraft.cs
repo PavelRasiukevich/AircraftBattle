@@ -69,8 +69,7 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.DataModel = Data;
             _moveHandler.PhotonView = PhotonView;
 
-            _audioController = FindObjectOfType<AudioController>();
-            _audioController.PlaySound("PlaneMove", gameObject);
+            AudioController.Instance.PlaySound("PlaneMove", gameObject);
         }
 
         private void OnEnable()

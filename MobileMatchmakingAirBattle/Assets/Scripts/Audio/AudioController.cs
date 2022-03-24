@@ -1,10 +1,24 @@
-using Assets.Scripts.Projectiles;
+using Assets.Scripts.Utils;
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Utils;
 
 namespace Assets.Scripts.Audio
 {
+    [Serializable]
+    public class AudioSetup
+    {
+        [SerializeField] public string[] Keys;
+        [SerializeField] public Sound[] Values;
+
+        public AudioSetup()
+        {
+            Values = new Sound[AssetDatabase.FindAssets($"t:{AssetTypeFilter.AudioClip}").Length];
+        }
+    }
+
     public class AudioController : MonoBehaviour
     {
         [SerializeField] private SoundBank _soundBank;
@@ -14,11 +28,40 @@ namespace Assets.Scripts.Audio
         private AudioSource _source;
         private ClipGetter _clipGetter;
         private Sound _sound;
+        private AudioSetup _audioSetup;
+
+        public static AudioController Instance { get; private set; }
+
+        #region UNITY
 
         private void Awake()
         {
             _clipGetter = new ClipGetter();
+
+            {
+                if (Instance)
+                    throw new System.Exception("Instance not null");
+
+                Instance = this;
+            }
+
+
+            if (Data.IsExists("AudioSetup"))
+                _audioSetup = Data.Get<AudioSetup>("AudioSetup");
+            else
+                _audioSetup = new AudioSetup();
+
         }
+
+        private void OnValidate()
+        {
+            Debug.Log("OnValidate");
+
+            _audioSetup.Values = _soundBank.Sounds.ToArray();
+            Data.Set("AudioSetup", _audioSetup);
+        }
+
+        #endregion 
 
         public void PlaySound(string clipName, GameObject sender)
         {
@@ -43,12 +86,11 @@ namespace Assets.Scripts.Audio
         }
 
         [ContextMenu("Autofill SoundBank")]
-        private void PerformAction() => _soundBank.AutofillList();
+        private void PerformAction() => _soundBank.AutofillList(_audioSetup);
     }
 
     public class ClipGetter
     {
-        public List<Sound> Sounds { get; set; }
 
         public Sound GetSoundClipToPlayByName(string name, List<Sound> sounds)
         {
