@@ -4,6 +4,7 @@ using Assets.Scripts.Utils;
 using Enums;
 using Interfaces.EventBus.PlayerProperties;
 using Photon.Pun;
+using TO;
 using UI.Screens.Battle.BattleScreen.Elements;
 using UnityEngine;
 
@@ -63,18 +64,24 @@ namespace Managers.Gameplay
         private void GameStart()
         {
             if (BattleState == BattleState.Finish) return;
+            if (BattleState == BattleState.Battle) return;
             BattleState = BattleState.Battle;
             Creator.Create();
             ScreenHolder.SetCurrentScreen(ScreenType.Battle).ShowScreen();
         }
 
-        private void GameFinish() => PhotonView.RPC(nameof(RPC_Finish), RpcTarget.All);
+        private void GameFinish()
+        {
+            PhotonView.RPC(nameof(RPC_Finish), RpcTarget.All);
+        }
+
 
         [PunRPC]
         private void RPC_Finish()
         {
             if (!PhotonView.IsMine) return;
-
+            if (BattleState == BattleState.Finish) return;
+            User.Currency.Add(10);
             BattleState = BattleState.Finish;
             Creator.Destroy();
             ScreenHolder.SetCurrentScreen(ScreenType.BattleFinish).ShowScreen();

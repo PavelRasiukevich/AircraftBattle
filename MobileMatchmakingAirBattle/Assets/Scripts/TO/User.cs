@@ -26,8 +26,11 @@ namespace TO
             public static void Subtract(int value) =>
                 ExternalServices.Inst.PlayFab.Currencies.Subtract(value);
 
-            public static void Add(int value) =>
+            public static void Add(int value)
+            {
+                Debug.Log("!!!!!!!Currency  "+value);
                 ExternalServices.Inst.PlayFab.Currencies.Add(value);
+            }
         }
 
         internal class Statistic
