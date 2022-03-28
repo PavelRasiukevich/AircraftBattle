@@ -1,22 +1,16 @@
-﻿using Managers.Gameplay;
-using Photon.Pun;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Projectiles.Bonuses
 {
     public class HeartBonus : MonoBehaviour
     {
-        public BonusCreator BonusCreator { get; set; }
-        public int _bonusHealth = 15;
+        [SerializeField] private int _bonusHealth = 20;
 
-        private void OnDestroy()
-        {
-            BonusCreator.RemoveBonus();
-        }
+        public int BonusHealth => _bonusHealth;
 
         private void OnCollisionEnter(Collision other)
         {
-            PhotonNetwork.Destroy(gameObject);
+            gameObject.GetComponentInParent<Bonus>().RemoveBonus();
         }
     }
 }
