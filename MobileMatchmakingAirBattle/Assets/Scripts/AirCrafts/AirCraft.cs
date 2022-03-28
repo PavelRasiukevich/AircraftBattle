@@ -70,7 +70,7 @@ namespace Assets.Scripts.AirCrafts
             _moveHandler.DataModel = Data;
             _moveHandler.PhotonView = PhotonView;
 
-            AudioController.Instance.PlaySound("PlaneMove", gameObject);
+            AudioController.Instance.PlaySound(SoundName.PlaneMove.ToString(), gameObject);
         }
 
         private void OnEnable() => _collisionDetector.CrossDome += _moveHandler.Return;

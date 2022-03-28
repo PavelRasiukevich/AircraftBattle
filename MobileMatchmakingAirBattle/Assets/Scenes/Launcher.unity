@@ -16375,7 +16375,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _soundBank:
     _sounds:
-    - _name: DefaultBulletShot
+    - _name: DefaultBullet
       _clip: {fileID: 8300000, guid: 95d645c579f9d8f41962afd700ccaf48, type: 3}
       _soundSettings:
         Volume: 1
@@ -16389,6 +16389,20 @@ MonoBehaviour:
         Pitch: 1
         PlayOnAwake: 0
         Loop: 0
+    - _name: FreezerBullet
+      _clip: {fileID: 8300000, guid: e08001f769a8ccc42b433fad468b1bde, type: 3}
+      _soundSettings:
+        Volume: 1
+        Pitch: 1
+        PlayOnAwake: 0
+        Loop: 0
+    - _name: Impact
+      _clip: {fileID: 8300000, guid: 832d8187399c07d41833ba56d1a833db, type: 3}
+      _soundSettings:
+        Volume: 1
+        Pitch: 1
+        PlayOnAwake: 0
+        Loop: 0
     - _name: PlaneMove
       _clip: {fileID: 8300000, guid: 3b80a7725507ea44886df104110f3378, type: 3}
       _soundSettings:
@@ -16396,7 +16410,7 @@ MonoBehaviour:
         Pitch: 1
         PlayOnAwake: 0
         Loop: 1
-    - _name: PlasmaBulletShot
+    - _name: PlasmaBullet
       _clip: {fileID: 8300000, guid: 7f46121997d8d1c4cb1018d12c8f529c, type: 3}
       _soundSettings:
         Volume: 1
@@ -23984,7 +23998,6 @@ MonoBehaviour:
   - {fileID: 1886210750}
   - {fileID: 7120340168220814602}
   - {fileID: 6503455140158249901}
-  - {fileID: 0}
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -24064,7 +24077,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &460607370
 GameObject:
@@ -97177,7 +97190,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1875072462
 GameObject:
@@ -111759,6 +111772,10 @@ PrefabInstance:
     - target: {fileID: 2685256671961811757, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -326.745
+      objectReference: {fileID: 0}
+    - target: {fileID: 3136057660967905115, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3193154633780853616, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
       propertyPath: m_AnchorMax.y

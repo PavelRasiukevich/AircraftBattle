@@ -118,20 +118,24 @@ namespace Assets.Scripts.Audio
 
     public class ClipGetter
     {
-
         public Sound GetSoundClipToPlayByName(string name, List<Sound> sounds)
         {
-
-            int clipNameLength = name.Length;
-
             for (int i = 0; i < sounds.Count; i++)
-            {
-                string simplifiedName = sounds[i].Name.Substring(0, clipNameLength);
-
-                if (simplifiedName.Equals(name)) return sounds[i];
-            }
+                if (sounds[i].Name.Equals(name)) return sounds[i];
 
             return null;
         }
+    }
+
+    public enum SoundName
+    {
+        None,
+        DefaultBulletShot,
+        FreezerBulletShot,
+        PlasmaBulletShot,
+        Impact,
+        Powerup,
+        Explosion,
+        PlaneMove,
     }
 }

@@ -54,7 +54,7 @@ namespace Assets.Scripts.GameObjectComponents
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
 
-            AudioController.Instance.PlaySound("Impact", gameObject);
+            AudioController.Instance.PlaySound(SoundName.Impact.ToString(), gameObject);
 
             Destroy(GetComponent<AudioSource>());
         }

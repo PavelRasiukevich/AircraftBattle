@@ -52,7 +52,8 @@ namespace Projectiles.Bonuses
         public void RPC_RemoveBonus()
         {
             _bonus.SetActive(false);
-            AudioController.Instance.PlaySound("Powerup", gameObject);
+
+            AudioController.Instance.PlaySound(SoundName.Powerup.ToString(), gameObject);
         }
     }
 }
