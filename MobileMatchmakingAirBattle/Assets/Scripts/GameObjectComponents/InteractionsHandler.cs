@@ -43,30 +43,34 @@ namespace Assets.Scripts.GameObjectComponents
         {
             if (!PhotonView.IsMine) return;
 
-            DataModel.CurrentHp -= (int) values[0];
+            DataModel.CurrentHp -= (int)values[0];
 
             if (DataModel.CurrentHp <= 0)
             {
-                Player player = (Player) values[1];
+                Player player = (Player)values[1];
                 player.AddValueToProperty(Const.Properties.Frags, 1);
                 Die(true);
             }
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
+
+            AudioController.Instance.PlaySound("Impact", gameObject);
+
+            Destroy(GetComponent<AudioSource>());
         }
 
         [PunRPC]
         private void RPC_AddHealth(object[] values)
         {
             if (!PhotonView.IsMine) return;
-            DataModel.CurrentHp += (int) values[0];
+            DataModel.CurrentHp += (int)values[0];
             EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
         }
 
         [PunRPC]
         private void CreateDestroyEffect()
         {
-           
+
             if (!PhotonView.IsMine) return;
 
             Instantiate(_effect,
