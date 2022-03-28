@@ -36,13 +36,16 @@ namespace Assets.Scripts.Audio
 
         private string[] GetDirectories(string path)
             => Directory.GetDirectories(path);
+#if UNITY_EDITOR
 
         private string[] GetAssetsGUIDs()
             => AssetDatabase.FindAssets($"t:{AssetTypeFilter.AudioClip}", GetDirectories(_assetSearchSettings.AudioAssetsPath));
+#endif
 
         public void AutofillList(AudioSetup setup)
         {
 
+#if UNITY_EDITOR
             Sounds.Clear();
 
             _assetGuids = GetAssetsGUIDs();
@@ -58,9 +61,9 @@ namespace Assets.Scripts.Audio
                         LoadValues(setup, s, _assetGuids[i]);
 
 
-                //находим клип из папки с ассетами
-                //как еще 1 вариант можно попробовать
-                //сериализовать файл и грузить его из JSON
+                //РЅР°С…РѕРґРёРј РєР»РёРї РёР· РїР°РїРєРё СЃ Р°СЃСЃРµС‚Р°РјРё
+                //РєР°Рє РµС‰Рµ 1 РІР°СЂРёР°РЅС‚ РјРѕР¶РЅРѕ РїРѕРїСЂРѕР±РѕРІР°С‚СЊ
+                //СЃРµСЂРёР°Р»РёР·РѕРІР°С‚СЊ С„Р°Р№Р» Рё РіСЂСѓР·РёС‚СЊ РµРіРѕ РёР· JSON
                 var path = AssetDatabase.GUIDToAssetPath(_assetGuids[i]);
                 Sounds[i].Clip = AssetDatabase.LoadAssetAtPath(path, typeof(AudioClip)) as AudioClip;
                 InitNames();
@@ -72,6 +75,7 @@ namespace Assets.Scripts.Audio
             setup.Keys = _assetGuids;
 
             Data.Set("AudioSetup", setup);
+#endif
 
         }
 

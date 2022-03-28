@@ -37,7 +37,7 @@ namespace Managers.External
         public void Authentication()
         {
             _authenticationType = Application.platform == RuntimePlatform.Android
-                ? AuthenticationType.PlayFabQuickly // TODO: перед публикацией поставить Google
+                ? AuthenticationType.Google // TODO: перед публикацией поставить Google
                 : _authenticationType;
             switch (_authenticationType)
             {

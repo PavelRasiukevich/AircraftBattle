@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class AssetDatabaseExample : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("AssetDatabase/Refresh Example")]
     public static void RefreshExample()
     {
@@ -27,4 +28,5 @@ public class AssetDatabaseExample : MonoBehaviour
             Debug.Log(AssetDatabase.IsValidFolder($"Assets/{folder}"));
         }
     }
+#endif
 }

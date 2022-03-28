@@ -15,8 +15,10 @@ namespace Assets.Scripts.Audio
 
         public AudioSetup()
         {
+#if UNITY_EDITOR
             Debug.LogWarning("AUDIOSETUP CONSTRUCTOR");
             Values = new Sound[AssetDatabase.FindAssets($"t:{AssetTypeFilter.AudioClip}").Length];
+#endif
         }
     }
 
