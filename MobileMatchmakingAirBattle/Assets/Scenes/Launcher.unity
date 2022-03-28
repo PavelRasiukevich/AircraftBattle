@@ -16378,22 +16378,22 @@ MonoBehaviour:
     - _name: DefaultBulletShot
       _clip: {fileID: 8300000, guid: 95d645c579f9d8f41962afd700ccaf48, type: 3}
       _soundSettings:
-        Volume: 0.374
-        Pitch: -1.64
+        Volume: 1
+        Pitch: 0
         PlayOnAwake: 0
         Loop: 0
-    - _name: DefaultFlare
-      _clip: {fileID: 8300000, guid: 996f679488b8a2d4e83e00978cb9474c, type: 3}
+    - _name: Explosion
+      _clip: {fileID: 8300000, guid: 34a5799ed48a47645a97080032c065f9, type: 3}
       _soundSettings:
-        Volume: 0
-        Pitch: 3
+        Volume: 1
+        Pitch: 0
         PlayOnAwake: 0
         Loop: 0
     - _name: PlaneMove
       _clip: {fileID: 8300000, guid: 3b80a7725507ea44886df104110f3378, type: 3}
       _soundSettings:
         Volume: 0
-        Pitch: -3
+        Pitch: 0
         PlayOnAwake: 0
         Loop: 0
     - _name: PlasmaBulletShot

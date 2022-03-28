@@ -15,7 +15,7 @@ namespace Assets.Scripts.Audio
     {
         private SoundBank() { }
 
-        [SerializeField] private List<Sound> _sounds;
+        public List<Sound> _sounds;
         [SerializeField] private Pathes _assetSearchSettings;
 
         private string[] _assetGuids;
@@ -23,11 +23,14 @@ namespace Assets.Scripts.Audio
 
         public List<Sound> Sounds => _sounds;
 
+        public List<string> PreviousGuids { get => _previousGuids; set => _previousGuids = value; }
+
         private void InitNames()
         {
             foreach (var sound in Sounds)
                 sound.Name = sound.Clip.name;
         }
+
 
         #region Editor
 
@@ -54,6 +57,10 @@ namespace Assets.Scripts.Audio
                     if (_previousGuids.Contains(_assetGuids[i]))
                         LoadValues(setup, s, _assetGuids[i]);
 
+
+                //находим клип из папки с ассетами
+                //как еще 1 вариант можно попробовать
+                //сериализовать файл и грузить его из JSON
                 var path = AssetDatabase.GUIDToAssetPath(_assetGuids[i]);
                 Sounds[i].Clip = AssetDatabase.LoadAssetAtPath(path, typeof(AudioClip)) as AudioClip;
                 InitNames();
@@ -76,6 +83,8 @@ namespace Assets.Scripts.Audio
 
             var values = setup.Values.ToList();
             var keys = setup.Keys.ToList();
+
+            if ((values == null || values.Count == 0)) return;
 
             var savedSound = values[keys.FindIndex(x => x.Contains(guid))];
 

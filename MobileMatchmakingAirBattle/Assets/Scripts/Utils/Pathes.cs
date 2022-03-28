@@ -10,6 +10,7 @@ namespace Assets.Scripts.Utils
 
     public enum AssetTypeFilter
     {
+        Unknown,
         AudioClip,
     }
 }

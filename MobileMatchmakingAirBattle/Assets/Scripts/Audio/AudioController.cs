@@ -15,6 +15,7 @@ namespace Assets.Scripts.Audio
 
         public AudioSetup()
         {
+            Debug.LogWarning("AUDIOSETUP CONSTRUCTOR");
             Values = new Sound[AssetDatabase.FindAssets($"t:{AssetTypeFilter.AudioClip}").Length];
         }
     }
@@ -34,6 +35,12 @@ namespace Assets.Scripts.Audio
 
         #region UNITY
 
+        private void OnApplicationQuit()
+        {
+            ValidateExistance();
+            //check for previouse GUID
+        }
+
         private void Awake()
         {
             _clipGetter = new ClipGetter();
@@ -45,23 +52,31 @@ namespace Assets.Scripts.Audio
                 Instance = this;
             }
 
-
-            if (Data.IsExists("AudioSetup"))
-                _audioSetup = Data.Get<AudioSetup>("AudioSetup");
-            else
-                _audioSetup = new AudioSetup();
+            ValidateExistance();
 
         }
 
         private void OnValidate()
         {
-            Debug.Log("OnValidate");
+            ValidateExistance();
 
             _audioSetup.Values = _soundBank.Sounds.ToArray();
+
+            if (_soundBank.PreviousGuids != null)
+                _audioSetup.Keys = _soundBank.PreviousGuids.ToArray();
+
             Data.Set("AudioSetup", _audioSetup);
         }
 
-        #endregion 
+        private void ValidateExistance()
+        {
+            if (Data.IsExists("AudioSetup"))
+                _audioSetup = Data.Get<AudioSetup>("AudioSetup");
+            else
+                _audioSetup = new AudioSetup();
+        }
+
+        #endregion
 
         public void PlaySound(string clipName, GameObject sender)
         {
@@ -86,7 +101,19 @@ namespace Assets.Scripts.Audio
         }
 
         [ContextMenu("Autofill SoundBank")]
-        private void PerformAction() => _soundBank.AutofillList(_audioSetup);
+        private void PerformAction()
+        {
+            _soundBank.AutofillList(_audioSetup);
+        }
+
+        [ContextMenu("Set Default Value")]
+        private void DefaultValues()
+        {
+            foreach (var sound in _soundBank.Sounds)
+                sound.Settings = new SoundSettings(SoundSettingsType.Default);
+
+            Data.Set("AudioSetup", _audioSetup);
+        }
     }
 
     public class ClipGetter

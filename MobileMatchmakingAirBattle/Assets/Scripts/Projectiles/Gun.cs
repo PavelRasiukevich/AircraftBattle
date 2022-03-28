@@ -27,9 +27,7 @@ namespace Assets.Scripts.Projectiles
 
         private void ExposeFlare(Bullet bullet)
         {
-            Flare impact = Instantiate(bullet.Data.ScriptableData.Flare, _flareSpot.position, _flareSpot.rotation);
-
-            AudioController.Instance.PlaySound(_createdBullet.Data.ScriptableData.Flare.name, impact.gameObject);
+            Instantiate(bullet.Data.ScriptableData.Flare, _flareSpot.position, _flareSpot.rotation);
         }
     }
 }
