@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Utils;
 using Core;
@@ -15,7 +16,7 @@ namespace Assets.Scripts.GameObjectComponents
     {
         public event Action Died;
 
-        [SerializeField] private GameObject _effect;
+        [SerializeField] private SoundEffect _effect;
 
         public PhotonView PhotonView { get; set; }
 
@@ -65,12 +66,14 @@ namespace Assets.Scripts.GameObjectComponents
         [PunRPC]
         private void CreateDestroyEffect()
         {
+           
             if (!PhotonView.IsMine) return;
 
             Instantiate(_effect,
                 PhotonView.GetComponent<Transform>().position,
                 PhotonView.GetComponent<Transform>().rotation
             );
+
         }
     }
 }

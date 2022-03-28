@@ -16379,28 +16379,35 @@ MonoBehaviour:
       _clip: {fileID: 8300000, guid: 95d645c579f9d8f41962afd700ccaf48, type: 3}
       _soundSettings:
         Volume: 1
-        Pitch: 0
+        Pitch: 1
         PlayOnAwake: 0
         Loop: 0
     - _name: Explosion
       _clip: {fileID: 8300000, guid: 34a5799ed48a47645a97080032c065f9, type: 3}
       _soundSettings:
         Volume: 1
-        Pitch: 0
+        Pitch: 1
         PlayOnAwake: 0
         Loop: 0
     - _name: PlaneMove
       _clip: {fileID: 8300000, guid: 3b80a7725507ea44886df104110f3378, type: 3}
       _soundSettings:
-        Volume: 0
-        Pitch: 0
+        Volume: 1
+        Pitch: 1
         PlayOnAwake: 0
-        Loop: 0
+        Loop: 1
     - _name: PlasmaBulletShot
       _clip: {fileID: 8300000, guid: 7f46121997d8d1c4cb1018d12c8f529c, type: 3}
       _soundSettings:
-        Volume: 0
-        Pitch: 0
+        Volume: 1
+        Pitch: 1
+        PlayOnAwake: 0
+        Loop: 0
+    - _name: Powerup
+      _clip: {fileID: 8300000, guid: 14140e4426879c3479e447548200da58, type: 3}
+      _soundSettings:
+        Volume: 1
+        Pitch: 1
         PlayOnAwake: 0
         Loop: 0
     _assetSearchSettings: {fileID: 11400000, guid: 6f280d3655dcbdc48adcc7948dfb99a5, type: 2}
@@ -66496,7 +66503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b264848a6235464e9f5d08e6cae3dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientType: 1
+  clientType: 0
 --- !u!114 &1287735860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96660,7 +96667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialMMR: 500
   _customRoomProperties:
-    _maxPlayers: 2
+    _maxPlayers: 1
     _playerMMR: 500
 --- !u!1 &1862769429
 GameObject:

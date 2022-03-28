@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using Assets.Scripts.Audio;
+using Photon.Pun;
 using UnityEngine;
 
 namespace Projectiles.Bonuses
@@ -42,11 +43,12 @@ namespace Projectiles.Bonuses
         {
             _photonView.RPC(nameof(RPC_RemoveBonus), RpcTarget.All);
         }
-        
+
         [PunRPC]
         public void RPC_RemoveBonus()
         {
             _bonus.SetActive(false);
+            AudioController.Instance.PlaySound("Powerup", gameObject);
         }
     }
 }
