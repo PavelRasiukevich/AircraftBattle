@@ -35,7 +35,7 @@ namespace Assets.Scripts.GameObjectComponents
             => PhotonView.RPC(nameof(RPC_TakeDamage), RpcTarget.All, value, owner);
 
         public void AddHealth(int value)
-            => PhotonView.RPC(nameof(RPC_AddHealth), RpcTarget.All, value);
+            => PhotonView.RPC(nameof(RPC_AddHealth), RpcTarget.All, value, PhotonView.Owner);
 
         [PunRPC]
         private void RPC_TakeDamage(object[] values)

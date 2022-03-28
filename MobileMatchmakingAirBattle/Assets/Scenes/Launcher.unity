@@ -66447,7 +66447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b264848a6235464e9f5d08e6cae3dc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clientType: 1
+  clientType: 0
 --- !u!114 &1287735860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96611,7 +96611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialMMR: 500
   _customRoomProperties:
-    _maxPlayers: 2
+    _maxPlayers: 1
     _playerMMR: 500
 --- !u!1 &1862769429
 GameObject:

@@ -9,6 +9,7 @@ namespace Projectiles.Bonuses
         [SerializeField] private GameObject _bonus;
         [SerializeField] private float _bonusTime = 30;
         private float _time = 0;
+        private bool _isActive = false;
 
         void Awake()
         {
@@ -29,6 +30,7 @@ namespace Projectiles.Bonuses
         private void SpawnBonus()
         {
             if (!PhotonNetwork.IsMasterClient) return;
+            _isActive = true;
             _photonView.RPC(nameof(RPC_SpawnBonus), RpcTarget.All);
         }
 
@@ -40,9 +42,11 @@ namespace Projectiles.Bonuses
 
         public void RemoveBonus()
         {
+            if (!_isActive) return;
+            _isActive = false;
             _photonView.RPC(nameof(RPC_RemoveBonus), RpcTarget.All);
         }
-        
+
         [PunRPC]
         public void RPC_RemoveBonus()
         {
