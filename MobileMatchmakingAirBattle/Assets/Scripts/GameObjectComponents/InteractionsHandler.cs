@@ -27,7 +27,12 @@ namespace Assets.Scripts.GameObjectComponents
             if (!PhotonView.IsMine) return;
             Died?.Invoke();
             PhotonView.RPC(nameof(CreateDestroyEffect), RpcTarget.All);
-            if (isHit) PhotonView.Owner.AddValueToProperty(Const.Properties.Fails, 1);
+            if (isHit)
+            {
+                PhotonView.Owner.AddValueToProperty(Const.Properties.Fails, 1);
+                User.Statistic.Fails++;
+            }
+
             PhotonNetwork.Destroy(gameObject);
         }
 
@@ -48,6 +53,7 @@ namespace Assets.Scripts.GameObjectComponents
             {
                 Player player = (Player) values[1];
                 player.AddValueToProperty(Const.Properties.Frags, 1);
+                if (PhotonView.Owner.Equals(player)) User.Statistic.Frags++;
                 Die(true);
             }
             else

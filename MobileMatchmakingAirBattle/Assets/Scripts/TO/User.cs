@@ -22,9 +22,11 @@ namespace TO
         {
             public static int Count { get; private set; }
             public static void CountUpdate(int count) => Count = count;
+
             public static void Subtract(int value) =>
                 ExternalServices.Inst.PlayFab.Currencies.Subtract(value);
-            public static void Add(int value) => 
+
+            public static void Add(int value) =>
                 ExternalServices.Inst.PlayFab.Currencies.Add(value);
         }
 
@@ -44,8 +46,12 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Fights)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fights),
-                        value);
+                    if (ExternalServices.Inst.PlayFab.Authenticate.IsReady)
+                    {
+                        ExternalServices.Inst.PlayFab.Statistics.SubmitScore(
+                            Const.PlayFab.ScoreBy(LeaderboardType.Fights),
+                            value);
+                    }
                 }
             }
 
@@ -55,9 +61,14 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Wins)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Wins),
-                        value);
-                    ExternalServices.Inst.GooglePlay.Achievements.Wins(value);
+                    if (ExternalServices.Inst.PlayFab.Authenticate.IsReady)
+                    {
+                        ExternalServices.Inst.PlayFab.Statistics.SubmitScore(
+                            Const.PlayFab.ScoreBy(LeaderboardType.Wins),
+                            value);
+                        if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
+                            ExternalServices.Inst.GooglePlay.Achievements.Wins(value);
+                    }
                 }
             }
 
@@ -67,8 +78,12 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Fails)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Fails),
-                        value);
+                    if (ExternalServices.Inst.PlayFab.Authenticate.IsReady)
+                    {
+                        ExternalServices.Inst.PlayFab.Statistics.SubmitScore(
+                            Const.PlayFab.ScoreBy(LeaderboardType.Fails),
+                            value);
+                    }
                 }
             }
 
@@ -78,10 +93,14 @@ namespace TO
                 set
                 {
                     Data[Const.PlayFab.ScoreBy(LeaderboardType.Frags)] = value;
-                    ExternalServices.Inst.PlayFab.Statistics.SubmitScore(Const.PlayFab.ScoreBy(LeaderboardType.Frags),
-                        value);
-                    if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
-                        ExternalServices.Inst.GooglePlay.Achievements.Frags(value);
+                    if (ExternalServices.Inst.PlayFab.Authenticate.IsReady)
+                    {
+                        ExternalServices.Inst.PlayFab.Statistics.SubmitScore(
+                            Const.PlayFab.ScoreBy(LeaderboardType.Frags),
+                            value);
+                        if (ExternalServices.Inst.GooglePlay.Authenticate.IsReady)
+                            ExternalServices.Inst.GooglePlay.Achievements.Frags(value);
+                    }
                 }
             }
         }
