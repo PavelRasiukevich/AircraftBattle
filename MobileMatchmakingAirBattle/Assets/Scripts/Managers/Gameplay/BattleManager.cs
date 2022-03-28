@@ -63,7 +63,6 @@ namespace Managers.Gameplay
 
         private void GameStart()
         {
-            if (BattleState == BattleState.Finish) return;
             if (BattleState == BattleState.Battle) return;
             BattleState = BattleState.Battle;
             Creator.Create();

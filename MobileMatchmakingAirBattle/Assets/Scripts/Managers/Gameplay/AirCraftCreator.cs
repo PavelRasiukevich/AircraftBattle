@@ -41,6 +41,7 @@ namespace Managers.Gameplay
 
         private void InitializeActor(Vector3 position, Quaternion rotation)
         {
+            Debug.Log("111 InitializeActor");
             _actor = PhotonNetwork.Instantiate("Planes/" + GameDataManager.Inst.CurrentPlane.PlanePrefab.name, position,
                 rotation);
             var airCraft = _actor.GetComponent<AirCraft>();

@@ -43,7 +43,7 @@ namespace Managers.Network.Rooms
                 GameDataManager.Inst.CurrentPlane.Settings.Color.ToVector3());
             PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Fails, 0);
             PhotonNetwork.LocalPlayer.SetPropertyValue(Const.Properties.Frags, 0);
-            User.Statistic.Fights++;
+                //   User.Statistic.Fights++;
             if (clientType.Equals(Clients.Single))
             {
                 if (_playersInRoom.Count < _maxPlayers) return;
