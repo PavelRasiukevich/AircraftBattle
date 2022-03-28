@@ -54,7 +54,7 @@ namespace Assets.Scripts.Utils
 
         internal class Conditions
         {
-            public const int MatchDuration = 60;
+            public const int MatchDuration = 600;
             public const int FragsToWin = 20;
         }
 
