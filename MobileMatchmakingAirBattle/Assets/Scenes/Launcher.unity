@@ -23998,6 +23998,7 @@ MonoBehaviour:
   - {fileID: 1886210750}
   - {fileID: 7120340168220814602}
   - {fileID: 6503455140158249901}
+  - {fileID: 1657547009}
   m_RendererIndex: 0
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -86319,6 +86320,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 767
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1657547009 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3136057661332512543, guid: afe2bde513b9736459caac5cde973e8a, type: 3}
+  m_PrefabInstance: {fileID: 4202316537487166196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1658211148
 GameObject:
   m_ObjectHideFlags: 3

@@ -63,7 +63,7 @@ namespace Managers.Gameplay
 
         private void GameStart()
         {
-            if (BattleState == BattleState.Battle) return;
+            if (BattleState == BattleState.Finish) return;
             BattleState = BattleState.Battle;
             Creator.Create();
             ScreenHolder.SetCurrentScreen(ScreenType.Battle).ShowScreen();
