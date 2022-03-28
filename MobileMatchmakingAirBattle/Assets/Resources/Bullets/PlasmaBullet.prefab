@@ -14333,7 +14333,7 @@ GameObject:
   - component: {fileID: 3709205099852525812}
   - component: {fileID: 7385437658088848107}
   m_Layer: 0
-  m_Name: Plasma
+  m_Name: PlasmaBullet
   m_TagString: FX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

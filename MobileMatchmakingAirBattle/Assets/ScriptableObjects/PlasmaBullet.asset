@@ -18,3 +18,4 @@ MonoBehaviour:
   _flare: {fileID: 3282161168906855871, guid: a61879471a60b904d8323ff55107dad1, type: 3}
   _shell: {fileID: 5166246081700196553, guid: 5e1d3b1c5fcf69846a9e8e0bbaabdbca, type: 3}
   _type: 1
+  _clip: {fileID: 8300000, guid: 7f46121997d8d1c4cb1018d12c8f529c, type: 3}

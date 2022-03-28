@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7306345739547618384}
   - component: {fileID: 999778576033196947}
   m_Layer: 0
-  m_Name: flare_gold_big
+  m_Name: DefaultFlare
   m_TagString: FX
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

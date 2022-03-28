@@ -24,4 +24,5 @@ MonoBehaviour:
     _gunsCount: 1
     _gamePrice: 0
     _settings:
-      _color: {r: 0, g: 0.83921576, b: 0.12941177, a: 1}
+      _color: {r: 0.92549026, g: 0.76470596, b: 0, a: 1}
+      _bulletType: 1

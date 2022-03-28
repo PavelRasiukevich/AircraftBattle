@@ -1,4 +1,5 @@
 using System;
+using Assets.Scripts.Audio;
 using Assets.Scripts.Interfaces;
 using Assets.Scripts.Utils;
 using Core;
@@ -15,7 +16,7 @@ namespace Assets.Scripts.GameObjectComponents
     {
         public event Action Died;
 
-        [SerializeField] private GameObject _effect;
+        [SerializeField] private SoundEffect _effect;
 
         public PhotonView PhotonView { get; set; }
 
@@ -47,36 +48,42 @@ namespace Assets.Scripts.GameObjectComponents
         {
             if (!PhotonView.IsMine) return;
 
-            DataModel.CurrentHp -= (int) values[0];
+            DataModel.CurrentHp -= (int)values[0];
 
             if (DataModel.CurrentHp <= 0)
             {
-                Player player = (Player) values[1];
+                Player player = (Player)values[1];
                 player.AddValueToProperty(Const.Properties.Frags, 1);
                 if (PhotonView.Owner.Equals(player)) User.Statistic.Frags++;
                 Die(true);
             }
             else
                 EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
+
+            AudioController.Instance.PlaySound(SoundName.Impact.ToString(), gameObject);
+
+            Destroy(GetComponent<AudioSource>());
         }
 
         [PunRPC]
         private void RPC_AddHealth(object[] values)
         {
             if (!PhotonView.IsMine) return;
-            DataModel.CurrentHp += (int) values[0];
+            DataModel.CurrentHp += (int)values[0];
             EventBus.InvokeEvent<IBattleScreenEvents>(x => x.RefreshHealthUI(DataModel));
         }
 
         [PunRPC]
         private void CreateDestroyEffect()
         {
+
             if (!PhotonView.IsMine) return;
 
             Instantiate(_effect,
                 PhotonView.GetComponent<Transform>().position,
                 PhotonView.GetComponent<Transform>().rotation
             );
+
         }
     }
 }

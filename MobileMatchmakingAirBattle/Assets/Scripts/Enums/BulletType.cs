@@ -2,8 +2,8 @@ namespace Enums
 {
     public enum BulletType
     {
-        Default = 0,
-        Plasma = 1,
-        Freezer = 2
+        DefaultBullet = 0,
+        PlasmaBullet = 1,
+        FreezerBullet = 2
     }
 }
