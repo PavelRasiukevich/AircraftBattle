@@ -39,7 +39,7 @@ namespace UI.Buttons.WeaponButton
         {
             if (_selected != null)
                 _selected.gameObject.SetActive(
-                    GameDataManager.Inst.CurrentShopPlane.Settings.BulletType.Equals(_bulletType));
+                    GameDataManager.Inst.ShopPLane.Settings.BulletType.Equals(_bulletType));
         }
     }
 }

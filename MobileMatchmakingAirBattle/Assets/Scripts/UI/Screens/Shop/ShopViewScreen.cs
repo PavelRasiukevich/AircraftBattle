@@ -1,4 +1,3 @@
-using System.Globalization;
 using Assets.Scripts.Core;
 using Core.Base;
 using Enums;
@@ -17,20 +16,16 @@ namespace UI.Screens.Shop
         [SerializeField] private TMP_Text _hp;
         [SerializeField] private TMP_Text _speed;
         [SerializeField] private TMP_Text _mobility;
-        [SerializeField] private TMP_Text _firePower;
-        [SerializeField] private TMP_Text _gunsCount;
 
         #region UNITY
 
         private void OnEnable()
         {
-            _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
-            _name.text = GameDataManager.Inst.CurrentShopPlane.DisplayName;
-            _hp.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Hp.ToString();
-            _speed.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.MoveSpeed.ToString();
-            _mobility.text = GameDataManager.Inst.CurrentShopPlane.PlanePrefab.Data.Speed.RotationSpeed.ToString();
-            _firePower.text = GameDataManager.Inst.CurrentShopPlane.FirePower.ToString(CultureInfo.InvariantCulture);
-            _gunsCount.text = GameDataManager.Inst.CurrentShopPlane.GunsCount.ToString();
+            _shopViewModel.Load(GameDataManager.Inst.ShopPLane);
+            _name.text = GameDataManager.Inst.ShopPLane.DisplayName;
+            _hp.text = GameDataManager.Inst.ShopPLane.PlanePrefab.Data.Hp.ToString();
+            _speed.text = GameDataManager.Inst.ShopPLane.PlanePrefab.Data.Speed.MoveSpeed.ToString();
+            _mobility.text = GameDataManager.Inst.ShopPLane.PlanePrefab.Data.Speed.RotationSpeed.ToString();
         }
 
         #endregion
@@ -39,23 +34,22 @@ namespace UI.Screens.Shop
 
         public void ColorOnClick(Color color)
         {
-            GameDataManager.Inst.CurrentShopPlane.Settings.Color = color;
-            _shopViewModel.Load(GameDataManager.Inst.CurrentShopPlane);
+            GameDataManager.Inst.ShopPLane.Settings.Color = color;
+            _shopViewModel.Load(GameDataManager.Inst.ShopPLane);
         }
 
         public void WeaponOnClick(BulletType bulletType)
         {
-            GameDataManager.Inst.CurrentShopPlane.Settings.BulletType = bulletType;
+            GameDataManager.Inst.ShopPLane.Settings.BulletType = bulletType;
         }
 
         public void GoOnClick()
         {
-            GameDataManager.Inst.Save(GameDataManager.Inst.CurrentShopPlane);
-            GameDataManager.Inst.SelectPlane(GameDataManager.Inst.CurrentShopPlane.ID);
+            GameDataManager.Inst.Save(GameDataManager.Inst.ShopPLane);
             ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
         }
 
-        public void Exit() => ScreenHolder.SetCurrentScreen(ScreenType.Shop).ShowScreen();
+        public void Exit() => ScreenHolder.SetCurrentScreen(ScreenType.MainMenu).ShowScreen();
 
         #endregion
     }

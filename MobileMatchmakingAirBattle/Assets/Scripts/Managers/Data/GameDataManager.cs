@@ -1,7 +1,4 @@
-﻿using Core;
-using Core.Base;
-using Interfaces.EventBus;
-using Managers.Data.ScriptableObjects;
+﻿using Core.Base;
 using TO;
 using UnityEngine;
 
@@ -9,15 +6,11 @@ namespace Managers.Data
 {
     public class GameDataManager : BaseInstance<GameDataManager>
     {
-        [SerializeField] private PlanesDataScriptableObject _planes;
+        [SerializeField] private PlaneInfo _plane;
+        public PlaneInfo CurrentPlane => _plane;
 
-        public PlanesDataScriptableObject Planes => _planes;
-
-        private PlaneInfo _currentPlane;
-        public PlaneInfo CurrentPlane => _currentPlane;
-
-        private PlaneInfo _currentShopPlane;
-        public PlaneInfo CurrentShopPlane => _currentShopPlane;
+        private PlaneInfo _shopPLane;
+        public PlaneInfo ShopPLane => _shopPLane;
 
         #region Unity
 
@@ -29,45 +22,21 @@ namespace Managers.Data
 
         private void Start()
         {
-            SelectPlane(Planes.PlaneList[0].ID);
-            SelectShopPlane(Planes.PlaneList[0].ID);
+            _plane.LoadSettings();
+            _shopPLane = _plane;
         }
 
         #endregion
 
         #region PUBLIC
 
-        public void SelectPlane(int id)
-        {
-            int currId = id == 0 ? Planes.PlaneList[0].ID : id;
-            _currentPlane = GetPlane(currId);
-            EventBus.InvokeEvent<IShopScreenEvents>(h => h.Refresh());
-        }
-
-        public void SelectShopPlane(int id) =>
-            _currentShopPlane = GetPlane(id);
-
         public void Save(PlaneInfo planeInfo)
         {
             planeInfo.SaveSettings();
-            if (planeInfo.ID == _currentPlane.ID)
-                _currentPlane = planeInfo;
-            if (planeInfo.ID == _currentShopPlane.ID)
-                _currentShopPlane = planeInfo;
+            _plane = planeInfo;
+            _shopPLane = planeInfo;
         }
 
         #endregion
-
-        #region PRIVATE
-
-        private PlaneInfo GetPlane(int id)
-        {
-            Planes.GetPlaneBy(id, out var plane);
-            plane.LoadSettings();
-            return plane;
-        }
-
-        #endregion
-
     }
 }

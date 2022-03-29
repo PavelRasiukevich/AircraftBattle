@@ -38,7 +38,7 @@ namespace UI.Buttons.ColorButton
         {
             if (_selected != null)
                 _selected.gameObject.SetActive(
-                    GameDataManager.Inst.CurrentShopPlane.Settings.Color.Equals(_planeColor));
+                    GameDataManager.Inst.CurrentPlane.Settings.Color.Equals(_planeColor));
         }
     }
 }

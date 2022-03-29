@@ -2,19 +2,16 @@ using Assets.Scripts.Core;
 using Core;
 using Core.Base;
 using Enums;
-using Managers.Data;
 using Managers.External;
 using Managers.Network.Launcher;
 using UI.Screens.MainMenu.Elements;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace UI.Screens.MainMenu
 {
     public class MainMenuScreen : BaseScreen
     {
         [SerializeField] private PlayerPanel _playerPanel;
-        [SerializeField] private Image _planeImage;
         public override ScreenType Type => ScreenType.MainMenu;
 
         #region UNITY
@@ -22,7 +19,6 @@ namespace UI.Screens.MainMenu
         private void OnEnable()
         {
             _playerPanel.Config();
-            _planeImage.sprite = GameDataManager.Inst.CurrentPlane.Icon;
         }
 
         #endregion
@@ -39,7 +35,7 @@ namespace UI.Screens.MainMenu
 
         public void SwitchToOptionsScreen() => ScreenHolder.SetCurrentScreen(ScreenType.Options).ShowScreen();
 
-        public void SwitchToShopScreen() => ScreenHolder.SetCurrentScreen(ScreenType.Shop).ShowScreen();
+        public void SwitchToShopScreen() => ScreenHolder.SetCurrentScreen(ScreenType.ShopView).ShowScreen();
 
         public void MatchingOnClick()
         {
