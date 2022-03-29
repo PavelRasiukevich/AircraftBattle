@@ -55,6 +55,7 @@ namespace Managers.External
                 case AuthenticationType.Google:
                     PopupHolder.CurrentPopup(PopupType.Loading).Show();
                     GooglePlay.Authenticate.SignIn();
+                    User.Common.Name = Social.localUser.userName;
                     break;
             }
         }
